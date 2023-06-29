@@ -2,7 +2,7 @@
   :version "0.1.0"
   :author "Marcus Kammer"
   :license ""
-  :depends-on ()
+  :depends-on (:spinneret)
   :components ((:module "src"
                 :components
                 ((:file "main"))))
