@@ -1,6 +1,9 @@
 (in-package :cl-sbt)
 
 (defmacro btn ((&key (type nil) (size nil)) &body body)
+  "https://getbootstrap.com/docs/5.3/components/buttons/
+Use Bootstrap’s custom button styles for actions in forms, dialogs,
+and more with support for multiple sizes, states, and more."
   `(spinneret:with-html
      (:button :type "button"
               :class (concatenate 'string "btn"
