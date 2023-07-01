@@ -6,6 +6,7 @@
   :components ((:module "src"
                 :components
                 ((:file "main")
+                 (:file "badges")
                  (:file "buttons")
                  (:file "accordion")
                  (:file "alerts"))))
