@@ -5,7 +5,10 @@
   :depends-on (:spinneret)
   :components ((:module "src"
                 :components
-                ((:file "main"))))
+                ((:file "main")
+                 (:file "buttons")
+                 (:file "accordion")
+                 (:file "alerts"))))
   :description ""
   :in-order-to ((test-op (test-op "cl-sbt/tests"))))
 

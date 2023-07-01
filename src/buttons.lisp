@@ -1,6 +1,6 @@
 (in-package :cl-sbt)
 
-(defmacro sbt-btn ((&key (type nil) (size nil)) &body body)
+(defmacro btn ((&key (type nil) (size nil)) &body body)
   `(spinneret:with-html
      (:button :type "button"
               :class (concatenate 'string "btn"
@@ -8,56 +8,56 @@
                                   (if ,size (format nil " btn-~a" ,size)))
               ,@body)))
 
-(defmacro sbt-btn-primary (&body body)
-  `(sbt-btn (:type "primary") ,@body))
+(defmacro btn-primary (&body body)
+  `(btn (:type "primary") ,@body))
 
-(defmacro sbt-btn-secondary (&body body)
-  `(sbt-btn (:type "secondary") ,@body))
+(defmacro btn-secondary (&body body)
+  `(btn (:type "secondary") ,@body))
 
-(defmacro sbt-btn-success (&body body)
-  `(sbt-btn (:type "success") ,@body))
+(defmacro btn-success (&body body)
+  `(btn (:type "success") ,@body))
 
-(defmacro sbt-btn-danger (&body body)
-  `(sbt-btn (:type "danger") ,@body))
+(defmacro btn-danger (&body body)
+  `(btn (:type "danger") ,@body))
 
-(defmacro sbt-btn-warning (&body body)
-  `(sbt-btn (:type "warning") ,@body))
+(defmacro btn-warning (&body body)
+  `(btn (:type "warning") ,@body))
 
-(defmacro sbt-btn-info (&body body)
-  `(sbt-btn (:type "info") ,@body))
+(defmacro btn-info (&body body)
+  `(btn (:type "info") ,@body))
 
-(defmacro sbt-btn-light (&body body)
-  `(sbt-btn (:type "light") ,@body))
+(defmacro btn-light (&body body)
+  `(btn (:type "light") ,@body))
 
-(defmacro sbt-btn-dark (&body body)
-  `(sbt-btn (:type "dark") ,@body))
+(defmacro btn-dark (&body body)
+  `(btn (:type "dark") ,@body))
 
-(defmacro sbt-btn-link (&body body)
-  `(sbt-btn (:type "link") ,@body))
+(defmacro btn-link (&body body)
+  `(btn (:type "link") ,@body))
 
-(defmacro sbt-btn-outline-primary (&body body)
-  `(sbt-btn (:type "outline-primary") ,@body))
+(defmacro btn-outline-primary (&body body)
+  `(btn (:type "outline-primary") ,@body))
 
-(defmacro sbt-btn-outline-secondary (&body body)
-  `(sbt-btn (:type "outline-secondary") ,@body))
+(defmacro btn-outline-secondary (&body body)
+  `(btn (:type "outline-secondary") ,@body))
 
-(defmacro sbt-btn-outline-success (&body body)
-  `(sbt-btn (:type "outline-success") ,@body))
+(defmacro btn-outline-success (&body body)
+  `(btn (:type "outline-success") ,@body))
 
-(defmacro sbt-btn-outline-danger (&body body)
-  `(sbt-btn (:type "outline-danger") ,@body))
+(defmacro btn-outline-danger (&body body)
+  `(btn (:type "outline-danger") ,@body))
 
-(defmacro sbt-btn-outline-warning (&body body)
-  `(sbt-btn (:type "outline-warning") ,@body))
+(defmacro btn-outline-warning (&body body)
+  `(btn (:type "outline-warning") ,@body))
 
-(defmacro sbt-btn-outline-info (&body body)
-  `(sbt-btn (:type "outline-info") ,@body))
+(defmacro btn-outline-info (&body body)
+  `(btn (:type "outline-info") ,@body))
 
-(defmacro sbt-btn-outline-light (&body body)
-  `(sbt-btn (:type "outline-light") ,@body))
+(defmacro btn-outline-light (&body body)
+  `(btn (:type "outline-light") ,@body))
 
-(defmacro sbt-btn-outline-dark (&body body)
-  `(sbt-btn (:type "outline-dark") ,@body))
+(defmacro btn-outline-dark (&body body)
+  `(btn (:type "outline-dark") ,@body))
 
-(defmacro sbt-btn-outline-link (&body body)
-  `(sbt-btn (:type "outline-link") ,@body))
+(defmacro btn-outline-link (&body body)
+  `(btn (:type "outline-link") ,@body))

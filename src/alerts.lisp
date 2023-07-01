@@ -1,6 +1,6 @@
 (in-package :cl-sbt)
 
-(defmacro sbt-alert ((&key (type nil) (dismissible nil)) &body body)
+(defmacro alert ((&key (type nil) (dismissible nil)) &body body)
   `(spinneret:with-html
        (:div :class ,(if dismissible
                          (format nil "alert alert-~a alert-dismissible" type)
@@ -10,26 +10,26 @@
                                       (:span :aria-hidden "true" "&times;")))
                          ,@body)))
 
-(defmacro sbt-alert-primary (&body body)
-  `(sbt-alert (:type "primary") ,@body))
+(defmacro alert-primary (&body body)
+  `(alert (:type "primary") ,@body))
 
-(defmacro sbt-alert-secondary (&body body)
-  `(sbt-alert (:type "secondary") ,@body))
+(defmacro alert-secondary (&body body)
+  `(alert (:type "secondary") ,@body))
 
-(defmacro sbt-alert-success (&body body)
-  `(sbt-alert (:type "success") ,@body))
+(defmacro alert-success (&body body)
+  `(alert (:type "success") ,@body))
 
-(defmacro sbt-alert-danger (&body body)
-  `(sbt-alert (:type "danger") ,@body))
+(defmacro alert-danger (&body body)
+  `(alert (:type "danger") ,@body))
 
-(defmacro sbt-alert-warning (&body body)
-  `(sbt-alert (:type "warning") ,@body))
+(defmacro alert-warning (&body body)
+  `(alert (:type "warning") ,@body))
 
-(defmacro sbt-alert-info (&body body)
-  `(sbt-alert (:type "info") ,@body))
+(defmacro alert-info (&body body)
+  `(alert (:type "info") ,@body))
 
-(defmacro sbt-alert-ligth (&body body)
-  `(sbt-alert (:type "light") ,@body))
+(defmacro alert-light (&body body)
+  `(alert (:type "light") ,@body))
 
-(defmacro sbt-alert-dark (&body body)
-  `(sbt-alert (:type "dark") ,@body))
+(defmacro alert-dark (&body body)
+  `(alert (:type "dark") ,@body))
