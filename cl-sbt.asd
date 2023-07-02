@@ -9,7 +9,8 @@
                  (:file "badges")
                  (:file "buttons")
                  (:file "accordion")
-                 (:file "alerts"))))
+                 (:file "alerts")
+                 (:file "dropdowns"))))
   :description ""
   :in-order-to ((test-op (test-op "cl-sbt/tests"))))
 
