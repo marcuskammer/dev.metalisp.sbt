@@ -11,7 +11,9 @@
                  (:file "accordion")
                  (:file "alerts")
                  (:file "dropdowns")
-                 (:file "tables"))))
+                 (:file "tables")
+                 (:file "page")
+                 (:file "headers"))))
   :description ""
   :in-order-to ((test-op (test-op "cl-sbt/tests"))))
 
