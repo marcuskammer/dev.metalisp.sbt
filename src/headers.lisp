@@ -68,10 +68,10 @@
 ;;   (header-about about))
 
 (defun show-header-navheader-contact (contacts)
-  (header-contact (dolist (contact contacts)
-                    (:li (:a :href (rest contact)
-                             :class "text-white"
-                             (first contact))))))
+  (header-navheader-contact (dolist (contact contacts)
+                              (:li (:a :href (rest contact)
+                                       :class "text-white"
+                                       (first contact))))))
 
 (defun show-header-navheader (about contacts)
   (header-navheader (header-navheader-about about)
