@@ -6,14 +6,14 @@
   :components ((:module "src"
                 :components
                 ((:file "main")
-                 (:file "badges")
-                 (:file "buttons")
-                 (:file "accordion")
-                 (:file "alerts")
-                 (:file "dropdowns")
-                 (:file "tables")
+                 (:file "component/badge")
+                 (:file "component/button")
+                 (:file "component/accordion")
+                 (:file "component/alert")
+                 (:file "component/dropdown")
+                 (:file "component/table")
                  (:file "page")
-                 (:file "headers"))))
+                 (:file "component/header"))))
   :description ""
   :in-order-to ((test-op (test-op "cl-sbt/tests"))))
 

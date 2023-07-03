@@ -76,3 +76,7 @@
 (defun show-header-navheader (about contacts)
   (header-navheader (header-navheader-about about)
     (show-header-navheader-contact contacts)))
+
+(defmacro header (&body body)
+  `(spinneret:with-html
+     (:header ,@body)))
