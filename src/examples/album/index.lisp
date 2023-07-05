@@ -1,6 +1,7 @@
 (in-package :cl-sbt)
 
 (load "src/examples/album/_navbar.lisp")
+(load "src/examples/album/_main.lisp")
 
 (defvar contact-examples
   '(("Follow on Twitter" . "foo")
@@ -14,7 +15,13 @@
   `(spinneret:with-html
      (:header ,@body)))
 
-(defun show-album-page ()
-  (with-page (:title "foo")
+(defmacro footer (&body body)
+  `(spinneret:with-html
+     (:footer ,@body)))
+
+(defun show-album-page (title)
+  (with-page (:title title)
     (header (show-navbar-header about-example contact-examples)
-      (show-navbar "brand" "#" "foo"))))
+      (show-navbar "brand" "#" "foo"))
+    (main "foo")
+    (footer "bar")))
