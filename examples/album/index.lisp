@@ -1,9 +1,10 @@
-(defpackage sbt-album)
+(defpackage cl-sbt-album
+  (:use :cl))
 
-(in-package :sbt-album)
+(in-package :cl-sbt-album)
 
-(load "src/examples/album/_navbar.lisp")
-(load "src/examples/album/_main.lisp")
+(load "examples/album/_navbar.lisp")
+(load "examples/album/_main.lisp")
 
 (defvar contact-examples
   '(("Follow on Twitter" . "foo")
@@ -22,7 +23,7 @@
      (:footer ,@body)))
 
 (defun show-album-page (title)
-  (with-page (:title title)
+  (cl-sbt:with-page (:title title)
     (header (show-navbar-header about-example contact-examples)
       (show-navbar "brand" "#" "foo"))
     (main "foo")

@@ -1,6 +1,6 @@
-(in-package :sbt-album)
+(in-package :cl-sbt-album)
 
-(load "src/examples/album/_card.lisp")
+(load "examples/album/_card.lisp")
 
 (defmacro main (&body body)
   `(spinneret:with-html

@@ -1,4 +1,4 @@
-(in-package :sbt-album)
+(in-package :cl-sbt-album)
 
 (defmacro card (&body body)
   `(spinneret:with-html

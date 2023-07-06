@@ -15,15 +15,20 @@
                  (:file "alert")
                  (:file "dropdown")
                  (:file "table")
-                 (:file "header")))
-               (:module "src/examples/album"
+                 (:file "header"))))
+  :description ""
+  :in-order-to ((test-op (test-op "cl-sbt/tests"))))
+
+(defsystem "cl-sbt/examples"
+  :author "Marcus Kammer"
+  :license "MIT"
+  :depends-on ("cl-sbt")
+  :components ((:module "examples/album"
                 :components
                 ((:file "index")
                  (:file "_card")
                  (:file "_main")
-                 (:file "_navbar"))))
-  :description ""
-  :in-order-to ((test-op (test-op "cl-sbt/tests"))))
+                 (:file "_navbar")))))
 
 (defsystem "cl-sbt/tests"
   :author "Marcus Kammer"
