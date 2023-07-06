@@ -1,4 +1,4 @@
-(in-package :cl-sbt)
+(in-package :sbt-album)
 
 (defmacro navbar-header-about (&body body)
   `(spinneret:with-html

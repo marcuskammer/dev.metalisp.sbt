@@ -6,14 +6,22 @@
   :components ((:module "src"
                 :components
                 ((:file "main")
-                 (:file "component/badge")
-                 (:file "component/button")
-                 (:file "component/accordion")
-                 (:file "component/alert")
-                 (:file "component/dropdown")
-                 (:file "component/table")
-                 (:file "page")
-                 (:file "component/header"))))
+                 (:file "page")))
+               (:module "src/component"
+                :components
+                ((:file "badge")
+                 (:file "button")
+                 (:file "accordion")
+                 (:file "alert")
+                 (:file "dropdown")
+                 (:file "table")
+                 (:file "header")))
+               (:module "src/examples/album"
+                :components
+                ((:file "index")
+                 (:file "_card")
+                 (:file "_main")
+                 (:file "_navbar"))))
   :description ""
   :in-order-to ((test-op (test-op "cl-sbt/tests"))))
 

@@ -1,4 +1,6 @@
-(in-package :cl-sbt)
+(defpackage sbt-album)
+
+(in-package :sbt-album)
 
 (load "src/examples/album/_navbar.lisp")
 (load "src/examples/album/_main.lisp")
