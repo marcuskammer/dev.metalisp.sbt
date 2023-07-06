@@ -15,16 +15,14 @@
                                 ,headline)
                            (:p :class "lead text-body-secondary"
                                ,@body)
-                           (:p
-                            (:a :class "btn btn-primary my-2"
-                                ,cta-1)
-                            (:a :class "btn btn-secondary my-2"
-                                ,cta-2)))))))
+                           (:p (:a :class "btn btn-primary my-2"
+                                   ,cta-1)
+                               (:a :class "btn btn-secondary my-2"
+                                   ,cta-2)))))))
 
 (defmacro album (&body body)
   `(spinneret:with-html
      (:div :class "album py-5 bg-body-tertiary"
            (:div :class "container"
                  (:div :class "row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"
-                       (:div :class "col"
-                             ,@body))))))
+                       ,@body)))))
