@@ -26,9 +26,11 @@
   :components ((:module "examples/album"
                 :components
                 ((:file "index")
-                 (:file "_card")
+                 (:file "_header")
                  (:file "_main")
-                 (:file "_navbar")))))
+                 (:file "_footer")
+                 (:file "_navbar")
+                 (:file "_card")))))
 
 (defsystem "cl-sbt/tests"
   :author "Marcus Kammer"

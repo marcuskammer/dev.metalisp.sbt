@@ -1,7 +1,5 @@
 (in-package :cl-sbt-album)
 
-(load "examples/album/_card.lisp")
-
 (defmacro main (&body body)
   `(spinneret:with-html
      (:main ,@body)))
@@ -20,9 +18,21 @@
                                (:a :class "btn btn-secondary my-2"
                                    ,cta-2)))))))
 
+(defmacro card (&body body)
+  `(spinneret:with-html
+     (:div :class "col"
+           (:div :class "card shadow-sm"
+                 (:div :class "card-body"
+                       (:p :class "card-text"
+                           ,@body))))))
+
 (defmacro album (&body body)
   `(spinneret:with-html
      (:div :class "album py-5 bg-body-tertiary"
            (:div :class "container"
                  (:div :class "row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"
                        ,@body)))))
+
+(defun show-album ()
+  (album (dolist (card-text '("foo" "bar" "hello" "world"))
+           (card card-text))))
