@@ -15,6 +15,7 @@
                  (:file "alert")
                  (:file "dropdown")
                  (:file "table")
+                 (:file "card")
                  (:file "nav-tab")
                  (:file "header"))))
   :description ""
