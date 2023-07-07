@@ -8,11 +8,24 @@
 
 (in-package :cl-sbt)
 
-(defmacro card ((&key (img-src nil) (btn-txt nil)) &body body)
+(defmacro card-title (&body body)
+  `(spinneret:with-html
+     (:h5 :class "card-title" ,@body)))
+
+(defmacro card-subtitle (&body body)
+  `(spinneret:with-html
+     (:h6 :class "card-subtitle mb-2 text-body-secondary" ,@body)))
+
+(defmacro card-text (&body body)
+  `(spinneret:with-html
+     (:p :class "card-text" ,@body)))
+
+(defmacro card-link (&body body)
+  `(spinneret:with-html
+     (:a :href "#" :class "card-link" ,@body)))
+
+(defmacro card ((&key (img-src nil)) &body body)
   `(spinneret:with-html
      (:div :class "card"
            ,(when img-src `(:img :class "card-img-top" :src ,img-src))
-           (:div :class "card-body"
-                 (:p :class "card-text"
-                     ,@body)
-                 ,(when btn-txt `(btn-primary ,btn-txt))))))
+           (:div :class "card-body" ,@body))))
