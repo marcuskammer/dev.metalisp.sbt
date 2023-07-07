@@ -1,19 +1,45 @@
-(in-package :cl-sbt)
+;; https://getbootstrap.com/docs/5.3/components/navs-tabs/
 
-(defun tabpanel-class (active fade)
-  (concatenate 'string "tab-pane "  (if fade " fade " nil) (if active " in active " nil)))
+;; Navigation available in Bootstrap share general markup and styles, from the
+;; base .nav class to the active and disabled states. Swap modifier classes to
+;; switch between each style.
+
+;; The base .nav component is built with flexbox and provide a strong foundation
+;; for building all types of navigation components. It includes some style
+;; overrides (for working with lists), some link padding for larger hit areas, and
+;; basic disabled styling.
+
+(in-package :cl-sbt)
 
 (defmacro nav-item (title active url)
   `(spinneret:with-html
-     (:li :role "presentation"
-          :class ,(if active "active" "")
-	  (:a :href (format nil "#~a" ,url)
-              :data-toggle "tab" ,title))))
+     (:li :class "nav-item"
+	  (:a :class ,(if active "nav-link active" "nav-link")
+              :href (format nil "#~a" ,url)
+              ,title))))
 
-(defmacro nav ((&key (tabs nil)) &rest rest)
+(defmacro nav ((&key (style nil)) &rest rest)
   `(spinneret:with-html
-     (:ul :class "nav"
-          :role "tablist"
+     (:ul :class ,(if style (concatenate 'string "nav " style) "nav")
 	  ,@(loop for tab in rest
-		  collect (destructuring-bind (&key title active id content) tab
-			    `(tab-nav  ,title  ,active  ,id))))))
+	          collect (destructuring-bind (&key title active url) tab
+	        	    `(nav-item  ,title  ,active  ,url))))))
+
+;;
+;; For testing purposes
+;;
+(defmacro show-nav-fn (name style)
+  "Generate a function of NAME and STYLE to test the different bootstrap
+navigation styles"
+  `(defun ,name ()
+     (nav (:style ,style)
+          (:title "Active" :active t :url "#")
+          (:title "Link" :url "#")
+          (:title "Link" :url "#"))))
+
+(show-nav-fn show-nav-ha "justify-content-center")
+(show-nav-fn show-nav-ra "justify-content-end")
+(show-nav-fn show-nav-va "flex-column")
+(show-nav-fn show-nav-tabs "nav-tabs")
+(show-nav-fn show-nav-pills "nav-pills")
+(show-nav-fn show-nav-underline "nav-underline")
