@@ -15,6 +15,7 @@
                  (:file "alert")
                  (:file "dropdown")
                  (:file "table")
+                 (:file "navbar")
                  (:file "header"))))
   :description ""
   :in-order-to ((test-op (test-op "cl-sbt/tests"))))
