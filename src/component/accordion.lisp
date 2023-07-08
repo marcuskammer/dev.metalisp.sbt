@@ -1,3 +1,5 @@
+;; https://getbootstrap.com/docs/5.3/components/accordion/
+
 (in-package :cl-sbt)
 
 (defmacro accordion-header (target title)
