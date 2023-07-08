@@ -2,7 +2,7 @@
 
 (in-package :cl-sbt)
 
-(defmacro accordion-header (target title)
+(defmacro accordion-header (target name)
   `(spinneret:with-html
      (:h2 :class "accordion-header"
           (:button :class "accordion-button"
@@ -11,7 +11,7 @@
                    :data-bs-target (format nil "#~a" ,target)
                    :aria-expanded "true"
                    :aria-controls "collapseOne"
-                   ,title))))
+                   ,name))))
 
 (defmacro accordion-item (&body body)
   `(spinneret:with-html
@@ -23,5 +23,5 @@
      (:div :class "accordion"
            :id ,id
            ,@(loop for item in rest
-                   collect (destructuring-bind (&key id title) item
-                             `(accordion-item (accordion-header ,id ,title)))))))
+                   collect (destructuring-bind (&key target name) item
+                             `(accordion-item (accordion-header ,target ,name)))))))

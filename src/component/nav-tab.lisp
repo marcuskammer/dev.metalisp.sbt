@@ -11,19 +11,19 @@
 
 (in-package :cl-sbt)
 
-(defmacro nav-item (title active url)
+(defmacro nav-item (name active url)
   `(spinneret:with-html
      (:li :class "nav-item"
 	  (:a :class ,(if active "nav-link active" "nav-link")
               :href (format nil "#~a" ,url)
-              ,title))))
+              ,name))))
 
 (defmacro nav ((&key (style nil)) &rest rest)
   `(spinneret:with-html
      (:ul :class ,(if style (concatenate 'string "nav " style) "nav")
 	  ,@(loop for tab in rest
-	          collect (destructuring-bind (&key title active url) tab
-	        	    `(nav-item  ,title  ,active  ,url))))))
+	          collect (destructuring-bind (&key name active url) tab
+	        	    `(nav-item ,name ,active ,url))))))
 
 ;; ;;
 ;; ;; For testing purposes
