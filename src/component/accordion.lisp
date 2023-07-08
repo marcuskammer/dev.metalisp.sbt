@@ -1,19 +1,23 @@
 (in-package :cl-sbt)
 
-(defmacro accordion-item ()
-    `(spinneret:with-html
-       (:div :class "accordion-item"
-             (:h2 :class "accordion-header"
+(defmacro accordion-header (&body body)
+  `(spinneret:with-html
+       (:h2 :class "accordion-header"
                   (:button :class "accordion-button"
                            :type "button"
                            :data-bs-toggle="collapse"
                            :data-bs-target="#collapseOne"
                            :aria-expanded="true"
                            :aria-controls="collapseOne"
-                           "Accordion Item #1")))))
+                           ,@body))))
 
-(defmacro accordion ()
+(defmacro accordion-item (&body body)
+    `(spinneret:with-html
+       (:div :class "accordion-item"
+             ,@body)))
+
+(defmacro accordion ((&key (id nil)) &body body)
     `(spinneret:with-html
        (:div :class "accordion"
-             :id "accordionExample"
-             (sbt-accordion-item))))
+             :id ,id
+             ,@body)))
