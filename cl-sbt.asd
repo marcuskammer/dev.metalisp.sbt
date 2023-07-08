@@ -5,19 +5,21 @@
   :depends-on (:spinneret)
   :components ((:module "src"
                 :components
-                ((:file "main")
-                 (:file "page")))
+                        ((:file "main")
+                         (:file "page")))
                (:module "src/component"
                 :components
-                ((:file "badge")
-                 (:file "button")
-                 (:file "accordion")
-                 (:file "alert")
-                 (:file "dropdown")
-                 (:file "table")
-                 (:file "card")
-                 (:file "nav-tab")
-                 (:file "header"))))
+                        ((:file "accordion")
+                         (:file "alert")
+                         (:file "badge")
+                         (:file "button")
+                         (:file "card")
+                         (:file "dropdown")
+                         (:file "header")
+                         (:file "list-group")
+                         (:file "nav-tab")
+                         (:file "pagination")
+                         (:file "table"))))
   :description ""
   :in-order-to ((test-op (test-op "cl-sbt/tests"))))
 
@@ -27,12 +29,12 @@
   :depends-on ("cl-sbt")
   :components ((:module "examples/album"
                 :components
-                ((:file "index")
-                 (:file "_header")
-                 (:file "_main")
-                 (:file "_footer")
-                 (:file "_navbar")
-                 (:file "_card")))))
+                        ((:file "index")
+                         (:file "_header")
+                         (:file "_main")
+                         (:file "_footer")
+                         (:file "_navbar")
+                         (:file "_card")))))
 
 (defsystem "cl-sbt/tests"
   :author "Marcus Kammer"
@@ -41,6 +43,6 @@
                "rove")
   :components ((:module "tests"
                 :components
-                ((:file "main"))))
+                        ((:file "main"))))
   :description "Test system for cl-sbt"
   :perform (test-op (op c) (symbol-call :rove :run c)))
