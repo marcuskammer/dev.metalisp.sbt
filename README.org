@@ -1,6 +1,16 @@
-* Cl-Sbt 
+* Cl-Sbt
+
+Common Lisp Spinneret Bootstrap Templates
 
 ** Usage
+
+#+begin_src bash
+  git clone https://git.sr.ht/~marcuskammer/cl-sbt ~/quicklisp/local-projects/cl-sbt/
+#+end_src
+
+#+begin_src lisp
+  (ql:quickload :cl-sbt)
+#+end_src
 
 ** Installation
 
