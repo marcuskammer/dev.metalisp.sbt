@@ -25,21 +25,21 @@
 	          collect (destructuring-bind (&key title active url) tab
 	        	    `(nav-item  ,title  ,active  ,url))))))
 
-;;
-;; For testing purposes
-;;
-(defmacro show-nav-fn (name style)
-  "Generate a function of NAME and STYLE to test the different bootstrap
-navigation styles"
-  `(defun ,name ()
-     (nav (:style ,style)
-          (:title "Active" :active t :url "#")
-          (:title "Link" :url "#")
-          (:title "Link" :url "#"))))
+;; ;;
+;; ;; For testing purposes
+;; ;;
+;; (defmacro show-nav-fn (name style)
+;;   "Generate a function of NAME and STYLE to test the different bootstrap
+;; navigation styles"
+;;   `(defun ,name ()
+;;      (nav (:style ,style)
+;;           (:title "Active" :active t :url "#")
+;;           (:title "Link" :url "#")
+;;           (:title "Link" :url "#"))))
 
-(show-nav-fn show-nav-ha "justify-content-center")
-(show-nav-fn show-nav-ra "justify-content-end")
-(show-nav-fn show-nav-va "flex-column")
-(show-nav-fn show-nav-tabs "nav-tabs")
-(show-nav-fn show-nav-pills "nav-pills")
-(show-nav-fn show-nav-underline "nav-underline")
+;; (show-nav-fn show-nav-ha "justify-content-center")
+;; (show-nav-fn show-nav-ra "justify-content-end")
+;; (show-nav-fn show-nav-va "flex-column")
+;; (show-nav-fn show-nav-tabs "nav-tabs")
+;; (show-nav-fn show-nav-pills "nav-pills")
+;; (show-nav-fn show-nav-underline "nav-underline")
