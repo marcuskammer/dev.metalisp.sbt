@@ -1,10 +1,10 @@
 ;; https://getbootstrap.com/docs/5.3/components/badge/
 
+;; TODO Write a macro which defines every possible badge macro
+
 (in-package :cl-sbt)
 
 (defmacro badge ((&key (classes nil)) &body body)
-  "https://getbootstrap.com/docs/5.3/components/badge/
-Documentation and examples for badges, our small count and labeling component."
   `(spinneret:with-html
      (:span :class (concatenate 'string "badge " ,classes)
             ,@body)))
