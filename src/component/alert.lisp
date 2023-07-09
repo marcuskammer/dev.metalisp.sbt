@@ -18,9 +18,8 @@
   `(spinneret:with-html
      (:div :role "alert"
            :class (concatenate 'string (format nil "alert alert-~a" ,type)
-                                (when ,dismissible " alert-dismissible"))
-           ,(when dismissible
-              `(alert-btn))
+                               (if (null ,dismissible) nil " alert-dismissible"))
+           ,(if (null dismissible) nil `(alert-btn))
            ,@body)))
 
 (defmacro alert-primary (&body body)
