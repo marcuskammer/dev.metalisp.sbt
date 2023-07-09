@@ -43,7 +43,7 @@
 (defmacro card ((&key (img-src nil)) &body body)
   `(spinneret:with-html
      (:div :class "card"
-           ,(when img-src `(:img :class "card-img-top" :src ,img-src))
+           ,(if (null img-src) nil `(:img :class "card-img-top" :src ,img-src))
            (:div :class "card-body" ,@body))))
 
 (defmacro card-* (&body body)
