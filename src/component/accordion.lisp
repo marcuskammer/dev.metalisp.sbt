@@ -9,14 +9,14 @@
                    :type "button"
                    :data-bs-toggle "collapse"
                    :data-bs-target (format nil "#~a" ,target)
-                   :aria-expanded ,(if show "true" "false")
+                   :aria-expanded ,(if (null show) "false" "true")
                    :aria-controls (format nil "#~a" ,target)
                    ,name))))
 
 (defmacro accordion-collapse (parent id show &body body)
   `(spinneret:with-html
      (:div :id ,id
-           :class ,(concatenate 'string "accordion-collapse collapse" (when show " show"))
+           :class ,(concatenate 'string "accordion-collapse collapse" (if (null show) nil " show"))
            :data-bs-parent (format nil "#~a" ,parent)
            (:div :class "accordion-body"
                  ,@body))))
