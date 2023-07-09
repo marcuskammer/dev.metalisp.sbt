@@ -23,10 +23,36 @@
      ,@(loop for item in names
              for symbol = (intern (concatenate 'string "BTN-" (symbol-name item)))
              for item-name = (format nil "~a" item)
-             collect `(defmacro ,symbol (&body body)
-                        `(btn (:type ,(string ',item-name)) ,@body)))))
+             collect `(defmacro ,symbol (&body body) `(btn (:type ,(string ',item-name)) ,@body)))))
 
 (define-btns (primary secondary success danger warning info light dark link))
+
+;; (defmacro btn-primary (&body body)
+;;   `(btn (:type "primary") ,@body))
+
+;; (defmacro btn-secondary (&body body)
+;;   `(btn (:type "secondary") ,@body))
+
+;; (defmacro btn-success (&body body)
+;;   `(btn (:type "success") ,@body))
+
+;; (defmacro btn-danger (&body body)
+;;   `(btn (:type "danger") ,@body))
+
+;; (defmacro btn-warning (&body body)
+;;   `(btn (:type "warning") ,@body))
+
+;; (defmacro btn-info (&body body)
+;;   `(btn (:type "info") ,@body))
+
+;; (defmacro btn-light (&body body)
+;;   `(btn (:type "light") ,@body))
+
+;; (defmacro btn-dark (&body body)
+;;   `(btn (:type "dark") ,@body))
+
+;; (defmacro btn-link (&body body)
+;;   `(btn (:type "link") ,@body))
 
 ;; (defmacro btn-primary-lg (&body body)
 ;;   `(btn (:type "primary" :size "lg") ,@body))
