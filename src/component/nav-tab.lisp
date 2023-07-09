@@ -14,13 +14,13 @@
 (defmacro nav-item (name active url)
   `(spinneret:with-html
      (:li :class "nav-item"
-	  (:a :class ,(if active "nav-link active" "nav-link")
+	  (:a :class ,(if (null active) nil "nav-link active" "nav-link")
               :href (format nil "#~a" ,url)
               ,name))))
 
 (defmacro nav ((&key (style nil)) &rest rest)
   `(spinneret:with-html
-     (:ul :class ,(if style (concatenate 'string "nav " style) "nav")
+     (:ul :class ,(if (null style) nil (concatenate 'string "nav " style) "nav")
 	  ,@(loop for tab in rest
 	          collect (destructuring-bind (&key name active url) tab
 	        	    `(nav-item ,name ,active ,url))))))
