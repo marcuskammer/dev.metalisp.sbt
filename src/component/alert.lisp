@@ -17,8 +17,8 @@
 (defmacro alert ((&key (type nil) (dismissible nil)) &body body)
   `(spinneret:with-html
      (:div :role "alert"
-           :class ,(concatenate 'string (format nil "alert alert-~a" type)
-                                (when dismissible " alert-dismissible"))
+           :class (concatenate 'string (format nil "alert alert-~a" ,type)
+                                (when ,dismissible " alert-dismissible"))
            ,(when dismissible
               `(alert-btn))
            ,@body)))
