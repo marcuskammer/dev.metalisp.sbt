@@ -17,6 +17,7 @@
                          (:file "dropdown")
                          (:file "header")
                          (:file "list-group")
+                         (:file "navbar")
                          (:file "nav-tab")
                          (:file "pagination")
                          (:file "table"))))
