@@ -22,8 +22,16 @@
   `(progn
      ,@(loop for item in names
              for symbol = (intern (concatenate 'string "BTN-" (symbol-name item)))
+             for symbol-lg = (intern (concatenate 'string "BTN-" (symbol-name item) "-LG"))
+             for symbol-sm = (intern (concatenate 'string "BTN-" (symbol-name item) "-SM"))
              for item-name = (format nil "~a" item)
-             collect `(defmacro ,symbol (&body body) `(btn (:type ,(string ',item-name)) ,@body)))))
+             collect `(progn
+                        (defmacro ,symbol (&body body)
+                          `(btn (:type ,(string ',item-name)) ,@body))
+                        (defmacro ,symbol-lg (&body body)
+                          `(btn (:type ,(string ',item-name) :size "lg") ,@body))
+                        (defmacro ,symbol-sm (&body body)
+                          `(btn (:type ,(string ',item-name) :size "sm") ,@body))))))
 
 (define-btns (primary secondary success danger warning info light dark link))
 
