@@ -1,28 +1,28 @@
 
 # Table of Contents
 
-1.  [Cl-Sbt](#org625f6f0)
-    1.  [Usage](#org905a16a)
-        1.  [Defining a Card](#orgca7c75b)
-        2.  [Defining a Dropdown](#org9888757)
-    2.  [Installation](#orgb5d14a1)
-    3.  [Author](#org0e6a662)
-    4.  [Copyright](#orge69a71c)
+1.  [Cl-Sbt](#org6b7b2d5)
+    1.  [Usage](#org73362c7)
+        1.  [Defining a Card](#org5fffccc)
+        2.  [Defining a Dropdown](#orgfcfa498)
+    2.  [Installation](#org1a9e1bc)
+    3.  [Author](#orgfe8f77a)
+    4.  [Copyright](#orga9219ed)
 
 
-<a id="org625f6f0"></a>
+<a id="org6b7b2d5"></a>
 
 # Cl-Sbt
 
 Common Lisp Spinneret Bootstrap Templates
 
 
-<a id="org905a16a"></a>
+<a id="org73362c7"></a>
 
 ## Usage
 
 
-<a id="orgca7c75b"></a>
+<a id="org5fffccc"></a>
 
 ### Defining a Card
 
@@ -35,8 +35,19 @@ The following code demonstrates how to define a card using the card macro.
         (cl-sbt-card:text "Some quick example text to build on the card title and make up the bulk of the card's content.")
         (cl-sbt-card:link (:href "#") "Card link")))
 
+<div class=card>
+ <div class=card-body>
+  <h5 class=card-title>Card title</h5>
+  <h6
+      class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+  <p class=card-text>Some quick example text to build on the card title and make up
+   the bulk of the card&#39;s content.
+  <a class=card-link href=#>Card link</a>
+ </div>
+</div>
 
-<a id="org9888757"></a>
+
+<a id="orgfcfa498"></a>
 
 ### Defining a Dropdown
 
@@ -49,8 +60,19 @@ macro.
         (cl-sbt-dropdown:item "Another action")
         (cl-sbt-dropdown:item "Something else here")))
 
+<div class=dropdown>
+ <button class="btn btn-secondary dropdown-toggle"
+         type=button data-bs-toggle=dropdown
+         aria-expanded=false>Dropdown button</button>
+ <ul class=dropdown-menu>
+  <li><a class=dropdown-item href=#>Action</a>
+  <li><a class=dropdown-item href=#>Another action</a>
+  <li><a class=dropdown-item href=#>Something else here</a>
+ </ul>
+</div>
 
-<a id="orgb5d14a1"></a>
+
+<a id="org1a9e1bc"></a>
 
 ## Installation
 
@@ -59,14 +81,14 @@ macro.
     (ql:quickload :cl-sbt)
 
 
-<a id="org0e6a662"></a>
+<a id="orgfe8f77a"></a>
 
 ## Author
 
 -   Marcus Kammer (marcus.kammer@mailbox.org)
 
 
-<a id="orge69a71c"></a>
+<a id="orga9219ed"></a>
 
 ## Copyright
 
