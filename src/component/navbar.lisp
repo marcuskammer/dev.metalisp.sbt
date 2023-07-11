@@ -25,9 +25,18 @@
 ;; Form Support: You can include form elements directly in your Navbar, allowing
 ;; users to input data directly from the navigation bar.
 
-(in-package :cl-sbt)
+(defpackage cl-sbt-navbar
+  (:use :cl)
+  (:export
+   :navbar
+   :brand
+   :nav
+   :text
+   :brand-logo))
 
-(defmacro navbar-brand-logo ((&key (src "#") (alt "Logo") (width 30) (height 24) (classes "d-inline-block align-text-top")))
+(in-package cl-sbt-navbar)
+
+(defmacro brand-logo ((&key (src "#") (alt "Logo") (width 30) (height 24) (classes "d-inline-block align-text-top")))
   "This macro generates the HTML code for a Bootstrap navbar brand logo.
 
 The NAVBAR-BRAND-LOGO macro takes the following keyword arguments:
@@ -47,7 +56,7 @@ The generated HTML code includes an <img> element with the specified parameters.
            :height ,height
            :class ,classes)))
 
-(defmacro navbar-brand ((&key (logo-src nil)) &body body)
+(defmacro brand ((&key (logo-src nil)) &body body)
   "This macro generates the HTML code for a Bootstrap navbar brand.
 
 The NAVBAR-BRAND macro takes the following keyword arguments:
@@ -64,7 +73,7 @@ The generated HTML code includes an <a> element with the CSS class 'navbar-brand
          ,(if (null logo-src) nil `(navbar-brand-logo ,logo-src))
          ,@body)))
 
-(defmacro navbar-nav (&body body)
+(defmacro nav (&body body)
   "This macro generates the HTML code for a Bootstrap navbar navigation.
 
 The NAVBAR-NAV macro takes an arbitrary number of body expressions, which are included in the generated HTML code.
@@ -76,7 +85,7 @@ The generated HTML code includes a <div> element with the CSS class 'collapse na
            :id "navbarNav"
            ,@body)))
 
-(defmacro navbar-text (&body body)
+(defmacro text (&body body)
   "This macro generates the HTML code for a Bootstrap navbar text.
 
 The NAVBAR-TEXT macro takes an arbitrary number of body expressions, which are included in the generated HTML code.
