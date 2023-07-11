@@ -9,7 +9,7 @@
 
 (in-package :cl-sbt-list-group)
 
-(defmacro list-group-item (&body body)
+(defmacro item (&body body)
   "This macro generates a Bootstrap list group item.
 
   BODY: The contents of the list group item."
@@ -26,4 +26,4 @@
      (:ul :class "list-group list-group-flush"
           ,@(loop for item in rest
 	          collect (destructuring-bind (&key content) item
-	        	    `(list-group-item ,content))))))
+	        	    `(item ,content))))))
