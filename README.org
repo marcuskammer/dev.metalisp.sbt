@@ -18,7 +18,7 @@ The following code demonstrates how to define a card using the card macro.
 #+end_src
 
 #+RESULTS:
-#+begin_export html
+#+begin_example
 <div class=card>
  <div class=card-body>
   <h5 class=card-title>Card title</h5>
@@ -29,7 +29,31 @@ The following code demonstrates how to define a card using the card macro.
   <a class=card-link href=#>Card link</a>
  </div>
 </div>
-#+end_export
+#+end_example
+
+#+begin_src lisp :results output :exports both
+  (cl-sbt-card:card-with-img (:img-src "test.jpg")
+    (cl-sbt-card:title "Card title")
+    (cl-sbt-card:subtitle "Card subtitle")
+    (cl-sbt-card:text "Some quick example text to build on the card title and make up the bulk of the card's content.")
+    (cl-sbt-card:link (:href "#") "Card link"))
+#+end_src
+
+#+RESULTS:
+#+begin_example
+<div class=card>
+ <img class=card-img-top src=test.jpg
+      alt="Card Image">
+ <div class=card-body>
+  <h5 class=card-title>Card title</h5>
+  <h6
+      class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+  <p class=card-text>Some quick example text to build on the card title and make up
+   the bulk of the card&#39;s content.
+  <a class=card-link href=#>Card link</a>
+ </div>
+</div>
+#+end_example
 
 *** Defining a Dropdown
 
