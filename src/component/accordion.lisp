@@ -33,7 +33,6 @@
 (defmacro header (target name show)
   "This macro generates a Bootstrap header for an accordion item.
 
-  Args:
   TARGET: (optional) The id of the collapse this header controls. Defaults to 'collapseOne'.
 
   NAME: (optional) The text that will be displayed on this header. Defaults to 'Heading'.
@@ -84,8 +83,7 @@
 (defmacro accordion ((&key (id "accordionExample")) &rest rest)
   "This macro generates an accordion-style collapsible list with Bootstrap.
 
-   Parameters:
-   - ID: Specifies a unique identifier for the accordion. Defaults to 'accordionExample'.
+   ID: Specifies a unique identifier for the accordion. Defaults to 'accordionExample'.
 
    REST: Specifies a list of accordion items. Each item is a plist with the following keys:
    - :target: Specifies a unique identifier for the accordion item.
