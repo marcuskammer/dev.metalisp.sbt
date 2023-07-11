@@ -1,28 +1,28 @@
 
 # Table of Contents
 
-1.  [Cl-Sbt](#org7a9437e)
-    1.  [Usage](#org67fcfd6)
-        1.  [Defining a Card](#orgfff33bb)
-        2.  [Defining a Dropdown](#org47a446a)
-    2.  [Installation](#org1e8bd31)
-    3.  [Author](#org0c80530)
-    4.  [Copyright](#orgc97df71)
+1.  [Cl-Sbt](#orge21ad75)
+    1.  [Usage](#org8607bc4)
+        1.  [Defining a Card](#org68a0ecb)
+        2.  [Defining a Dropdown](#org01301e2)
+    2.  [Installation](#orgad68576)
+    3.  [Author](#org941d120)
+    4.  [Copyright](#orgd118731)
 
 
-<a id="org7a9437e"></a>
+<a id="orge21ad75"></a>
 
 # Cl-Sbt
 
 Common Lisp Spinneret Bootstrap Templates
 
 
-<a id="org67fcfd6"></a>
+<a id="org8607bc4"></a>
 
 ## Usage
 
 
-<a id="orgfff33bb"></a>
+<a id="org68a0ecb"></a>
 
 ### Defining a Card
 
@@ -46,6 +46,8 @@ The following code demonstrates how to define a card using the card macro.
      </div>
     </div>
 
+The following code demonstrates how to define a card using the card-with-img macro.
+
     (cl-sbt-card:card-with-img (:img-src "test.jpg")
       (cl-sbt-card:title "Card title")
       (cl-sbt-card:subtitle "Card subtitle")
@@ -66,7 +68,7 @@ The following code demonstrates how to define a card using the card macro.
     </div>
 
 
-<a id="org47a446a"></a>
+<a id="org01301e2"></a>
 
 ### Defining a Dropdown
 
@@ -91,7 +93,7 @@ macro.
     </div>
 
 
-<a id="org1e8bd31"></a>
+<a id="orgad68576"></a>
 
 ## Installation
 
@@ -100,14 +102,14 @@ macro.
     (ql:quickload :cl-sbt)
 
 
-<a id="org0c80530"></a>
+<a id="org941d120"></a>
 
 ## Author
 
 -   Marcus Kammer (marcus.kammer@mailbox.org)
 
 
-<a id="orgc97df71"></a>
+<a id="orgd118731"></a>
 
 ## Copyright
 

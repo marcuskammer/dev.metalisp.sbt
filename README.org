@@ -31,6 +31,8 @@ The following code demonstrates how to define a card using the card macro.
 </div>
 #+end_example
 
+The following code demonstrates how to define a card using the card-with-img macro.
+
 #+begin_src lisp :results output :exports both
   (cl-sbt-card:card-with-img (:img-src "test.jpg")
     (cl-sbt-card:title "Card title")
