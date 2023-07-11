@@ -12,7 +12,8 @@
 ;; Flexible: Dropdowns can contain a wide variety of elements, not just links. For
 ;; example, you could include form elements or other complex sets of content.
 
-;; Customizable: The appearance and behavior of the dropdown can be customized with Bootstrap's built-in classes.
+;; Customizable: The appearance and behavior of the dropdown can be customized
+;; with Bootstrap's built-in classes.
 
 ;; In terms of structure, a Bootstrap dropdown typically consists of a button with
 ;; data-bs-toggle="dropdown" attribute to enable the dropdown functionality, and a
