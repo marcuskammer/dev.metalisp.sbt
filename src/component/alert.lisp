@@ -41,11 +41,11 @@
               :data-bs-dismiss "alert"
               :aria-label "Close")))
 
-(defmacro alert ((&key (type nil) (dismissible nil)) &body body)
+(defmacro alert ((&key (type "primary") (dismissible nil)) &body body)
   "This macro generates a Bootstrap alert component.
 
    Parameters:
-   - TYPE: Specifies the alert type. Can be 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', or 'dark'.
+   - TYPE: Specifies the alert type. Can be 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', or 'dark'. Defaults to 'primary'.
    - DISMISSIBLE: Specifies whether the alert is dismissible. If true, the alert includes a close button.
    - BODY: Specifies the content of the alert."
 
