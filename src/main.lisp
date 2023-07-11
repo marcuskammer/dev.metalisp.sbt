@@ -1,6 +1,6 @@
 (defpackage cl-sbt
   (:use :cl)
-  (:export :badge :badge-pill-primary :badge-pill-secondary :badge-pill-success :badge-pill-danger :badge-pill-warning :badge-pill-info :badge-pill-light :badge-pill-dark :btn :btn-primary :btn-secondary :btn-success :btn-danger :btn-warning :btn-info :btn-light :btn-dark :btn-link :btn-outline-primary :btn-outline-secondary :btn-outline-success :btn-outline-danger :btn-outline-warning :btn-outline-info :btn-outline-light :btn-outline-dark :btn-outline-link :container :col-md :col-xs :col-sm :col-lg :icon :nav :nav-item :pagination :pagination-with-icons :row :table :table-striped :table-bordered :table-hover :table-condensed :well :with-page))
+  (:export :badge :badge-pill-primary :badge-pill-secondary :badge-pill-success :badge-pill-danger :badge-pill-warning :badge-pill-info :badge-pill-light :badge-pill-dark :container :col-md :col-xs :col-sm :col-lg :icon :nav :nav-item :pagination :pagination-with-icons :row :table :table-striped :table-bordered :table-hover :table-condensed :well :with-page))
 
 (in-package :cl-sbt)
 

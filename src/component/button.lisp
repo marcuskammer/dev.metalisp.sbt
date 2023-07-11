@@ -7,9 +7,20 @@
 ;; content alignment. By default, .btn controls have a transparent border and
 ;; background color, and lack any explicit focus and hover styles.
 
-(in-package :cl-sbt)
+(defpackage cl-sbt-buttons
+  (:use :cl)
+  (:export
+   :btn))
+
+(in-package :cl-sbt-buttons)
 
 (defmacro btn ((&key (type nil) (size nil)) &body body)
+  "This macro generates a Bootstrap button.
+
+   TYPE: (optional) The type of the button (like 'primary', 'secondary', 'success', etc.).
+   SIZE: (optional) The size of the button ('lg' for large, 'sm' for small).
+   BODY: The contents of the button."
+
   `(spinneret:with-html
      (:button :type "button"
               :class (string-downcase (concatenate 'string
@@ -19,6 +30,10 @@
               ,@body)))
 
 (defmacro define-btns (names)
+  "This macro generates specific button macros based on the provided names.
+
+   NAMES: A list of button type names. For each name in this list, three macros will be generated: a standard button, a large button, and a small button."
+
   `(progn
      ,@(loop for item in names
              for symbol = (intern (concatenate 'string "BTN-" (symbol-name item)))
