@@ -8,7 +8,7 @@ Common Lisp Spinneret Bootstrap Templates
 
 The following code demonstrates how to define a card using the card macro.
 
-#+begin_src lisp :results output html :exports both
+#+begin_src lisp :results output :exports both
   (cl-sbt-card:card
     (cl-sbt-card:body
       (cl-sbt-card:title "Card title")
@@ -36,7 +36,7 @@ The following code demonstrates how to define a card using the card macro.
 The following code demonstrates how to define a dropdown using the dropdown
 macro.
 
-#+begin_src lisp :results output html :exports both
+#+begin_src lisp :results output :exports both
   (cl-sbt-dropdown:dropdown (:title "Dropdown button")
     (cl-sbt-dropdown:menu
       (cl-sbt-dropdown:item "Action")
@@ -45,7 +45,7 @@ macro.
 #+end_src
 
 #+RESULTS:
-#+begin_export html
+#+begin_example
 <div class=dropdown>
  <button class="btn btn-secondary dropdown-toggle"
          type=button data-bs-toggle=dropdown
@@ -56,7 +56,7 @@ macro.
   <li><a class=dropdown-item href=#>Something else here</a>
  </ul>
 </div>
-#+end_export
+#+end_example
 
 ** Installation
 
