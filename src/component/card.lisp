@@ -1,10 +1,33 @@
 ;; https://getbootstrap.com/docs/5.3/components/card/
 
-;; A card is a flexible and extensible content container. It includes options for
-;; headers and footers, a wide variety of content, contextual background colors,
-;; and powerful display options. If you’re familiar with Bootstrap 3, cards
-;; replace our old panels, wells, and thumbnails. Similar functionality to those
-;; components is available as modifier classes for cards.
+;; A Bootstrap Card is a flexible and extensible content container that includes
+;; multiple options for headers and footers, a variety of content, contextual
+;; background colors, and powerful display options. Introduced in Bootstrap 4,
+;; cards are designed to replace old components such as panels, wells, and
+;; thumbnails.
+
+;; Cards are made up of multiple parts and can include:
+
+;; Card Title: Serves as the header for the card and is typically used to include
+;; the name or the main purpose of the card.
+
+;; Card Subtitle: Usually follows the title and provides additional context or
+;; information.
+
+;; Card Text: This is the main content area for the card. It can include text,
+;; links, buttons, and more.
+
+;; Card Image: An optional image can be included at the top of a card.
+
+;; Card Link: This is typically a call to action or a way to direct the user to
+;; more information.
+
+;; Card Header and Card Footer: These optional sections can be added to the top or
+;; bottom of a card.
+
+;; In terms of design, cards provide built-in Bootstrap styles, such as borders
+;; and flexbox, along with optional headers and footers. They offer a lot of
+;; flexibility and can be used in a wide range of designs and layouts.
 
 (defpackage cl-sbt-card
   (:use :cl)
