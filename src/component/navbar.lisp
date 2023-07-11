@@ -34,7 +34,7 @@
    :text
    :brand-logo))
 
-(in-package cl-sbt-navbar)
+(in-package :cl-sbt-navbar)
 
 (defmacro brand-logo ((&key (src "#") (alt "Logo") (width 30) (height 24) (classes "d-inline-block align-text-top")))
   "This macro generates the HTML code for a Bootstrap navbar brand logo.
