@@ -7,12 +7,39 @@
 ;; content alignment. By default, .btn controls have a transparent border and
 ;; background color, and lack any explicit focus and hover styles.
 
-(defpackage cl-sbt-buttons
+(defpackage cl-sbt-btn
   (:use :cl)
   (:export
-   :btn))
+   :btn
+   :btn-primary
+   :btn-secondary
+   :btn-success
+   :btn-danger
+   :btn-warning
+   :btn-info
+   :btn-light
+   :btn-dark
+   :btn-link
+   :btn-primary-lg
+   :btn-secondary-lg
+   :btn-success-lg
+   :btn-danger-lg
+   :btn-warning-lg
+   :btn-info-lg
+   :btn-light-lg
+   :btn-dark-lg
+   :btn-link-lg
+   :btn-primary-sm
+   :btn-secondary-sm
+   :btn-success-sm
+   :btn-danger-sm
+   :btn-warning-sm
+   :btn-info-sm
+   :btn-light-sm
+   :btn-dark-sm
+   :btn-link-sm))
 
-(in-package :cl-sbt-buttons)
+(in-package :cl-sbt-btn)
 
 (defmacro btn ((&key (type nil) (size nil)) &body body)
   "This macro generates a Bootstrap button.
@@ -23,10 +50,10 @@
 
   `(spinneret:with-html
      (:button :type "button"
-              :class (string-downcase (concatenate 'string
-                                                   "btn"
-                                                   (if (null ,type) nil (format nil " btn-~a" ,type))
-                                                   (if (null ,size) nil (format nil " btn-~a" ,size))))
+              :class  (concatenate 'string
+                                   "btn"
+                                   (if (null ,type) nil (format nil " btn-~a" ,type))
+                                   (if (null ,size) nil (format nil " btn-~a" ,size)))
               ,@body)))
 
 (defmacro define-btns (names)
@@ -39,7 +66,7 @@
              for symbol = (intern (concatenate 'string "BTN-" (symbol-name item)))
              for symbol-lg = (intern (concatenate 'string "BTN-" (symbol-name item) "-LG"))
              for symbol-sm = (intern (concatenate 'string "BTN-" (symbol-name item) "-SM"))
-             for item-name = (format nil "~a" item)
+             for item-name = (string-downcase (format nil "~a" item))
              collect `(progn
                         (defmacro ,symbol (&body body)
                           `(btn (:type ,(string ',item-name)) ,@body))
