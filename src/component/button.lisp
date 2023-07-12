@@ -1,11 +1,30 @@
 ;; https://getbootstrap.com/docs/5.3/components/buttons/
 
-;; Use Bootstrap’s custom button styles for actions in forms, dialogs, and more
-;; with support for multiple sizes, states, and more.
+;; The Bootstrap button component is a versatile and customizable interface
+;; element used in numerous contexts across web applications. These buttons are
+;; often utilized for various actions and functionalities such as form
+;; submissions, toggling visibility of content, triggering modals, and initiating
+;; other interactive behaviors.
 
-;; Bootstrap has a base .btn class that sets up basic styles such as padding and
-;; content alignment. By default, .btn controls have a transparent border and
-;; background color, and lack any explicit focus and hover styles.
+;; A Bootstrap button is typically defined by an HTML button element or an a
+;; element styled with Bootstrap's pre-defined CSS classes.
+
+;; Here are some key features of the Bootstrap button component:
+
+;; Button styles: Bootstrap includes several built-in button styles that indicate
+;; different types of actions, including 'primary', 'secondary', 'success',
+;; 'danger', 'warning', 'info', 'light', 'dark', and 'link'. These styles control
+;; the color of the button.
+
+;; Button sizes: Bootstrap buttons can be resized using the 'btn-lg' or 'btn-sm'
+;; classes for larger and smaller buttons, respectively. There's also a
+;; 'btn-block' class that makes a button take up the full width of its parent
+;; container.
+
+;; Button states: Buttons can also have different states like 'active' and 'disabled'.
+
+;; Outline buttons: Bootstrap also provides 'outline' button styles which have
+;; transparent backgrounds and a colored border and text.
 
 (defpackage cl-sbt-btn
   (:use :cl)
@@ -59,10 +78,10 @@
 
   `(spinneret:with-html
      (:button :type "button"
-              :class  (concatenate 'string
-                                   "btn"
-                                   (if (null ,type) nil (format nil " btn-~a" ,type))
-                                   (if (null ,size) nil (format nil " btn-~a" ,size)))
+              :class (concatenate 'string
+                                  "btn"
+                                  (if (null ,type) nil (format nil " btn-~a" ,type))
+                                  (if (null ,size) nil (format nil " btn-~a" ,size)))
               ,@body)))
 
 (defmacro define-btns (names)
@@ -88,84 +107,3 @@
                           `(btn (:type ,(string ',item-name)) ,@body))))))
 
 (define-btns (primary secondary success danger warning info light dark link))
-
-;; (defmacro btn-primary (&body body)
-;;   `(btn (:type "primary") ,@body))
-
-;; (defmacro btn-secondary (&body body)
-;;   `(btn (:type "secondary") ,@body))
-
-;; (defmacro btn-success (&body body)
-;;   `(btn (:type "success") ,@body))
-
-;; (defmacro btn-danger (&body body)
-;;   `(btn (:type "danger") ,@body))
-
-;; (defmacro btn-warning (&body body)
-;;   `(btn (:type "warning") ,@body))
-
-;; (defmacro btn-info (&body body)
-;;   `(btn (:type "info") ,@body))
-
-;; (defmacro btn-light (&body body)
-;;   `(btn (:type "light") ,@body))
-
-;; (defmacro btn-dark (&body body)
-;;   `(btn (:type "dark") ,@body))
-
-;; (defmacro btn-link (&body body)
-;;   `(btn (:type "link") ,@body))
-
-;; (defmacro btn-primary-lg (&body body)
-;;   `(btn (:type "primary" :size "lg") ,@body))
-
-;; (defmacro btn-secondary-lg (&body body)
-;;   `(btn (:type "secondary" :size "lg") ,@body))
-
-;; (defmacro btn-success-lg (&body body)
-;;   `(btn (:type "success" :size "lg") ,@body))
-
-;; (defmacro btn-danger-lg (&body body)
-;;   `(btn (:type "danger" :size "lg") ,@body))
-
-;; (defmacro btn-warning-lg (&body body)
-;;   `(btn (:type "warning" :size "lg") ,@body))
-
-;; (defmacro btn-info-lg (&body body)
-;;   `(btn (:type "info" :size "lg") ,@body))
-
-;; (defmacro btn-light-lg (&body body)
-;;   `(btn (:type "light" :size "lg") ,@body))
-
-;; (defmacro btn-dark-lg (&body body)
-;;   `(btn (:type "dark" :size "lg") ,@body))
-
-;; (defmacro btn-link-lg (&body body)
-;;   `(btn (:type "link" :size "lg") ,@body))
-
-;; (defmacro btn-outline-primary (&body body)
-;;   `(btn (:type "outline-primary") ,@body))
-
-;; (defmacro btn-outline-secondary (&body body)
-;;   `(btn (:type "outline-secondary") ,@body))
-
-;; (defmacro btn-outline-success (&body body)
-;;   `(btn (:type "outline-success") ,@body))
-
-;; (defmacro btn-outline-danger (&body body)
-;;   `(btn (:type "outline-danger") ,@body))
-
-;; (defmacro btn-outline-warning (&body body)
-;;   `(btn (:type "outline-warning") ,@body))
-
-;; (defmacro btn-outline-info (&body body)
-;;   `(btn (:type "outline-info") ,@body))
-
-;; (defmacro btn-outline-light (&body body)
-;;   `(btn (:type "outline-light") ,@body))
-
-;; (defmacro btn-outline-dark (&body body)
-;;   `(btn (:type "outline-dark") ,@body))
-
-;; (defmacro btn-outline-link (&body body)
-;;   `(btn (:type "outline-link") ,@body))
