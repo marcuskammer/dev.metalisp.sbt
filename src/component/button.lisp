@@ -65,11 +65,29 @@
    :btn-outline-info
    :btn-outline-light
    :btn-outline-dark
-   :btn-outline-link))
+   :btn-outline-link
+   :btn-outline-primary-lg
+   :btn-outline-secondary-lg
+   :btn-outline-success-lg
+   :btn-outline-danger-lg
+   :btn-outline-warning-lg
+   :btn-outline-info-lg
+   :btn-outline-light-lg
+   :btn-outline-dark-lg
+   :btn-outline-link-lg
+   :btn-outline-primary-sm
+   :btn-outline-secondary-sm
+   :btn-outline-success-sm
+   :btn-outline-danger-sm
+   :btn-outline-warning-sm
+   :btn-outline-info-sm
+   :btn-outline-light-sm
+   :btn-outline-dark-sm
+   :btn-outline-link-sm))
 
 (in-package :cl-sbt-btn)
 
-(defmacro btn ((&key (type nil) (size nil)) &body body)
+(defmacro btn ((&key (type "primary") (size "")) &body body)
   "This macro generates a Bootstrap button.
 
    TYPE: (optional) The type of the button (like 'primary', 'secondary', 'success', etc.).
@@ -80,9 +98,25 @@
      (:button :type "button"
               :class (concatenate 'string
                                   "btn"
-                                  (if (null ,type) nil (format nil " btn-~a" ,type))
-                                  (if (null ,size) nil (format nil " btn-~a" ,size)))
+                                  (format nil " btn-~a" ,type)
+                                  (if (string-equal ,size "") nil (format nil " btn~a" ,size)))
               ,@body)))
+
+(defmacro define-btn (type &optional (outline nil) (size nil))
+  "This macro defines a new macro for creating a Bootstrap button of a specific type, size, and outline style.
+
+   TYPE: The type of the button (like 'primary', 'secondary', 'success', etc.).
+   OUTLINE: (optional) Whether the button should be of the outline style.
+   SIZE: (optional) The size of the button ('lg' for large, 'sm' for small).
+
+   The newly defined macro, when called, will generate HTML for a Bootstrap button of the specified type and size."
+
+  (let* ((size-name (if (null size) "" (format nil "-~a" size)))
+         (outline-name (if (null outline) "" "outline-"))
+         (type-name (concatenate 'string outline-name type))
+         (macro-name (intern (string-upcase (concatenate 'string "BTN-" outline-name type size-name)))))
+    `(defmacro ,macro-name (&body body)
+       `(btn (:type ,(string ',type-name) :size ,(string ',size-name)) ,@body))))
 
 (defmacro define-btns (names)
   "This macro generates specific button macros based on the provided names.
@@ -91,19 +125,13 @@
 
   `(progn
      ,@(loop for item in names
-             for symbol = (intern (concatenate 'string "BTN-" (symbol-name item)))
-             for symbol-lg = (intern (concatenate 'string "BTN-" (symbol-name item) "-LG"))
-             for symbol-sm = (intern (concatenate 'string "BTN-" (symbol-name item) "-SM"))
-             for symbol-outline = (intern (concatenate 'string "BTN-OUTLINE-" (symbol-name item) "-SM"))
-             for item-name = (string-downcase (format nil "~a" item))
+             for type-name = (string-downcase (string item))
              collect `(progn
-                        (defmacro ,symbol (&body body)
-                          `(btn (:type ,(string ',item-name)) ,@body))
-                        (defmacro ,symbol-lg (&body body)
-                          `(btn (:type ,(string ',item-name) :size "lg") ,@body))
-                        (defmacro ,symbol-sm (&body body)
-                          `(btn (:type ,(string ',item-name) :size "sm") ,@body))
-                        (defmacro ,symbol-outline (&body body)
-                          `(btn (:type ,(string ',item-name)) ,@body))))))
+                        (define-btn ,type-name)
+                        (define-btn ,type-name t)
+                        (define-btn ,type-name nil "lg")
+                        (define-btn ,type-name nil "sm")
+                        (define-btn ,type-name t "lg")
+                        (define-btn ,type-name t "sm")))))
 
 (define-btns (primary secondary success danger warning info light dark link))
