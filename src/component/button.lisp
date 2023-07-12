@@ -37,7 +37,16 @@
    :btn-info-sm
    :btn-light-sm
    :btn-dark-sm
-   :btn-link-sm))
+   :btn-link-sm
+   :btn-outline-primary
+   :btn-outline-secondary
+   :btn-outline-success
+   :btn-outline-danger
+   :btn-outline-warning
+   :btn-outline-info
+   :btn-outline-light
+   :btn-outline-dark
+   :btn-outline-link))
 
 (in-package :cl-sbt-btn)
 
@@ -66,6 +75,7 @@
              for symbol = (intern (concatenate 'string "BTN-" (symbol-name item)))
              for symbol-lg = (intern (concatenate 'string "BTN-" (symbol-name item) "-LG"))
              for symbol-sm = (intern (concatenate 'string "BTN-" (symbol-name item) "-SM"))
+             for symbol-outline = (intern (concatenate 'string "BTN-OUTLINE-" (symbol-name item) "-SM"))
              for item-name = (string-downcase (format nil "~a" item))
              collect `(progn
                         (defmacro ,symbol (&body body)
@@ -73,7 +83,9 @@
                         (defmacro ,symbol-lg (&body body)
                           `(btn (:type ,(string ',item-name) :size "lg") ,@body))
                         (defmacro ,symbol-sm (&body body)
-                          `(btn (:type ,(string ',item-name) :size "sm") ,@body))))))
+                          `(btn (:type ,(string ',item-name) :size "sm") ,@body))
+                        (defmacro ,symbol-outline (&body body)
+                          `(btn (:type ,(string ',item-name)) ,@body))))))
 
 (define-btns (primary secondary success danger warning info light dark link))
 
