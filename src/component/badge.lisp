@@ -32,66 +32,64 @@
 (defpackage cl-sbt-badge
   (:use :cl)
   (:export
-   :badge))
+   :badge
+   :badge-primary
+   :badge-secondary
+   :badge-success
+   :badge-danger
+   :badge-warning
+   :badge-info
+   :badge-light
+   :badge-dark
+   :badge-link
+   :badge-pill-primary
+   :badge-pill-secondary
+   :badge-pill-success
+   :badge-pill-danger
+   :badge-pill-warning
+   :badge-pill-info
+   :badge-pill-light
+   :badge-pill-dark
+   :badge-pill-link))
 
 (in-package :cl-sbt-badge)
 
 (defmacro badge ((&key (type "primary") (classes "")) &body body)
   "This macro generates a Bootstrap badge.
 
-   Parameters:
-   - TYPE: (optional) The type of the badge (like 'primary', 'secondary', 'success', etc.). Defaults to 'primary'.
-   - CLASSES: (optional) Any additional CSS classes that should be added to the badge.
-   - BODY: The contents of the badge."
+   TYPE: (optional) The type of the badge (like 'primary', 'secondary', 'success', etc.). Defaults to 'primary'.
+   CLASSES: (optional) Any additional CSS classes that should be added to the badge.
+   BODY: The contents of the badge."
 
   `(spinneret:with-html
      (:span :class (format nil "badge text-bg-~a ~a" ,type ,classes)
             ,@body)))
 
-;; (defmacro badge-primary (&body body)
-;;   `(badge (:classes "text-bg-primary") ,@body))
+(defmacro define-badge (type &optional (classes "") (pill nil))
+  "This macro defines a new macro for creating a Bootstrap badge of a specific type.
 
-;; (defmacro badge-secondary (&body body)
-;;   `(badge (:classes "text-bg-secondary") ,@body))
+   TYPE: The type of the badge (like 'primary', 'secondary', 'success', etc.).
+   CLASSES: (optional) Any additional CSS classes that should be added to the badge.
+   PILL: (optional) If true, the badge will have 'rounded-pill' style.
 
-;; (defmacro badge-success (&body body)
-;;   `(badge (:classes "text-bg-success") ,@body))
+   The newly defined macro, when called, will generate HTML for a Bootstrap
+   badge of the specified type."
 
-;; (defmacro badge-danger (&body body)
-;;   `(badge (:classes "text-bg-danger") ,@body))
+  (let* ((macro-name (intern (string-upcase (concatenate 'string "BADGE-" (if (null pill) "" "PILL-") type)))))
+    `(defmacro ,macro-name (&body body)
+       `(badge (:type ,,type :classes ,,classes) ,@body))))
 
-;; (defmacro badge-warning (&body body)
-;;   `(badge (:classes "text-bg-warning") ,@body))
+(defmacro define-badges (names)
+  "This macro generates specific badge macros based on the provided names.
 
-;; (defmacro badge-info (&body body)
-;;   `(badge (:classes "text-bg-info") ,@body))
+   NAMES: A list of badge type names. For each name in this list, a macro will
+   be generated: a badge of the specified type."
 
-;; (defmacro badge-light (&body body)
-;;   `(badge (:classes "text-bg-light") ,@body))
+  `(progn
+     ,@(loop for item in names
+             for type-name = (string-downcase (string item))
+             collect `(progn
+                        (define-badge ,type-name)
+                        (define-badge ,type-name "rounded-pill" t)))))
 
-;; (defmacro badge-dark (&body body)
-;;   `(badge (:classes "text-bg-dark") ,@body))
-
-;; (defmacro badge-pill-primary (&body body)
-;;   `(badge (:classes "rounded-pill text-bg-primary") ,@body))
-
-;; (defmacro badge-pill-secondary (&body body)
-;;   `(badge (:classes "rounded-pill text-bg-secondary") ,@body))
-
-;; (defmacro badge-pill-success (&body body)
-;;   `(badge (:classes "rounded-pill text-bg-success") ,@body))
-
-;; (defmacro badge-pill-danger (&body body)
-;;   `(badge (:classes "rounded-pill text-bg-danger") ,@body))
-
-;; (defmacro badge-pill-warning (&body body)
-;;   `(badge (:classes "rounded-pill text-bg-warning") ,@body))
-
-;; (defmacro badge-pill-info (&body body)
-;;   `(badge (:classes "rounded-pill text-bg-info") ,@body))
-
-;; (defmacro badge-pill-light (&body body)
-;;   `(badge (:classes "rounded-pill text-bg-light") ,@body))
-
-;; (defmacro badge-pill-dark (&body body)
-;;   `(badge (:classes "rounded-pill text-bg-dark") ,@body))
+(define-badges (primary secondary success danger warning info light dark link))
