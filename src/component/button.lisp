@@ -3,25 +3,26 @@
 ;; The Bootstrap button component is a versatile and customizable interface
 ;; element used in numerous contexts across web applications. These buttons are
 ;; often utilized for various actions and functionalities such as form
-;; submissions, toggling visibility of content, triggering modals, and initiating
-;; other interactive behaviors.
+;; submissions, toggling visibility of content, triggering modals, and
+;; initiating other interactive behaviors.
 
 ;; A Bootstrap button is typically defined by an HTML button element or an a
 ;; element styled with Bootstrap's pre-defined CSS classes.
 
 ;; Here are some key features of the Bootstrap button component:
 
-;; Button styles: Bootstrap includes several built-in button styles that indicate
-;; different types of actions, including 'primary', 'secondary', 'success',
-;; 'danger', 'warning', 'info', 'light', 'dark', and 'link'. These styles control
-;; the color of the button.
+;; Button styles: Bootstrap includes several built-in button styles that
+;; indicate different types of actions, including 'primary', 'secondary',
+;; 'success', 'danger', 'warning', 'info', 'light', 'dark', and 'link'. These
+;; styles control the color of the button.
 
-;; Button sizes: Bootstrap buttons can be resized using the 'btn-lg' or 'btn-sm'
-;; classes for larger and smaller buttons, respectively. There's also a
-;; 'btn-block' class that makes a button take up the full width of its parent
+;; Button sizes: Bootstrap buttons can be resized using the 'btn-lg' or
+;; 'btn-sm' classes for larger and smaller buttons, respectively. There's also
+;; a 'btn-block' class that makes a button take up the full width of its parent
 ;; container.
 
-;; Button states: Buttons can also have different states like 'active' and 'disabled'.
+;; Button states: Buttons can also have different states like 'active' and
+;; 'disabled'.
 
 ;; Outline buttons: Bootstrap also provides 'outline' button styles which have
 ;; transparent backgrounds and a colored border and text.
@@ -109,7 +110,8 @@
    OUTLINE: (optional) Whether the button should be of the outline style.
    SIZE: (optional) The size of the button ('lg' for large, 'sm' for small).
 
-   The newly defined macro, when called, will generate HTML for a Bootstrap button of the specified type and size."
+   The newly defined macro, when called, will generate HTML for a Bootstrap
+   button of the specified type and size."
 
   (let* ((size-name (if (null size) "" (format nil "-~a" size)))
          (outline-name (if (null outline) "" "outline-"))
@@ -121,11 +123,16 @@
 (defmacro define-btns (names)
   "This macro generates a suite of button-creating macros for each provided button type.
 
-   NAMES: A list of button type names. Each name should be a string representing a Bootstrap button type (like 'primary', 'secondary', 'success', etc.).
+   NAMES: A list of button type names. Each name should be a string
+   representing a Bootstrap button type (like 'primary', 'secondary',
+   'success', etc.).
 
-   For each type name in NAMES, this macro defines six new macros: a standard button, an outline button, a large button, a small button, a large outline button, and a small outline button.
+   For each type name in NAMES, this macro defines six new macros: a standard
+   button, an outline button, a large button, a small button, a large outline
+   button, and a small outline button.
 
-   The newly defined macros, when called, will generate HTML for a Bootstrap button of the corresponding type, size, and outline style."
+   The newly defined macros, when called, will generate HTML for a Bootstrap
+   button of the corresponding type, size, and outline style."
 
   `(progn
      ,@(loop for item in names
