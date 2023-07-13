@@ -59,7 +59,10 @@
 
    TYPE: (optional) The type of the badge (like 'primary', 'secondary', 'success', etc.). Defaults to 'primary'.
    CLASSES: (optional) Any additional CSS classes that should be added to the badge.
-   BODY: The contents of the badge."
+   BODY: The contents of the badge.
+
+   Example usage:
+   (badge (:type \"success\" :classes \"mx-2\") \"New\")"
 
   `(spinneret:with-html
      (:span :class (format nil "badge text-bg-~a ~a" ,type ,classes)

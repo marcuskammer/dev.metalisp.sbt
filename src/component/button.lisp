@@ -93,7 +93,10 @@
 
    TYPE: (optional) The type of the button (like 'primary', 'secondary', 'success', etc.).
    SIZE: (optional) The size of the button ('lg' for large, 'sm' for small).
-   BODY: The contents of the button."
+   BODY: The contents of the button.
+
+   Example usage:
+   (btn (:type \"danger\" :size \"lg\") \"Delete\")"
 
   `(spinneret:with-html
      (:button :type "button"

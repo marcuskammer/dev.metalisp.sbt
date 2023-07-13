@@ -62,7 +62,14 @@
 
    TYPE: Specifies the alert type. Can be 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', or 'dark'. Defaults to 'primary'.
    DISMISSIBLE: Specifies whether the alert is dismissible. If true, the alert includes a close button.
-   BODY: Specifies the content of the alert."
+   BODY: Specifies the content of the alert.
+
+   Example usage:
+   To create a basic alert of type 'danger':
+   (alert (:type \"danger\") \"This is a dangerous alert. Be careful!\")
+
+   To create a dismissible alert of type 'success':
+   (alert (:type \"success\" :dismissible t) \"Congratulations! You've successfully created a dismissible alert.\")"
 
   `(spinneret:with-html
      (:div :role "alert"
