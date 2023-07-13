@@ -61,7 +61,9 @@
   "This macro generates a Bootstrap alert component.
 
    TYPE: Specifies the alert type. Can be 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', or 'dark'. Defaults to 'primary'.
+
    DISMISSIBLE: Specifies whether the alert is dismissible. If true, the alert includes a close button.
+
    BODY: Specifies the content of the alert.
 
    Example usage:
@@ -82,6 +84,7 @@
   "This macro defines a new macro for creating a Bootstrap alert of a specific type.
 
    TYPE: The type of the alert (like 'primary', 'secondary', 'success', etc.).
+
    DISMISSIBLE: (optional) Whether the alert should be dismissible.
 
    The newly defined macro, when called, will generate HTML for a Bootstrap

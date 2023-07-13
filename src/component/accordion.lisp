@@ -33,12 +33,15 @@
 (defmacro header (target name show)
   "This macro generates a Bootstrap header for an accordion item.
 
-  TARGET: (optional) The id of the collapse this header controls. Defaults to 'collapseOne'.
+   TARGET: (optional) The id of the collapse this header controls. Defaults to 'collapseOne'.
 
-  NAME: (optional) The text that will be displayed on this header. Defaults to 'Heading'.
+   NAME: (optional) The text that will be displayed on this header. Defaults to 'Heading'.
 
-  SHOW: (optional) A boolean indicating whether the collapse controlled by this header should be shown when
-        the accordion first loads. If true, the 'aria-expanded' attribute will be 'true'. Defaults to NIL."
+   SHOW: (optional) A boolean indicating whether the collapse controlled by this header should be shown when
+         the accordion first loads. If true, the 'aria-expanded' attribute will be 'true'. Defaults to NIL.
+
+   Example:
+     (header \"collapseOne\" \"Heading\" t)"
 
   `(spinneret:with-html
      (:h2 :class "accordion-header"
@@ -53,14 +56,17 @@
 (defmacro collapse (parent id show &body body)
   "This macro generates a Bootstrap collapse for an accordion item.
 
-  PARENT: The id of the parent element that contains the collapse.
+   PARENT: The id of the parent element that contains the collapse.
 
-  ID: The unique id for this collapse.
+   ID: The unique id for this collapse.
 
-  SHOW: A boolean indicating whether the collapse should be shown when the accordion first loads.
-        If true, 'show' will be added to the classes of the collapse.
+   SHOW: A boolean indicating whether the collapse should be shown when the accordion first loads.
+         If true, 'show' will be added to the classes of the collapse.
 
-  BODY: The contents of the collapse."
+   BODY: The contents of the collapse.
+
+   Example:
+     (collapse \"accordionExample\" \"collapseOne\" t \"Some content\")"
 
   `(spinneret:with-html
      (:div :id ,id
@@ -72,9 +78,12 @@
 (defmacro item (&body body)
   "This macro generates a Bootstrap accordion item.
 
-  BODY: The contents of the accordion item.
+   BODY: The contents of the accordion item.
 
-  The macro creates a <div> element with the class 'accordion-item' and inserts the BODY as its child elements."
+   The macro creates a <div> element with the class 'accordion-item' and inserts the BODY as its child elements.
+
+   Example:
+     (item (header \"collapseOne\" \"Heading\" t) (collapse \"accordionExample\" \"collapseOne\" t \"Some content\"))"
 
   `(spinneret:with-html
      (:div :class "accordion-item"
@@ -89,7 +98,13 @@
    - :target: Specifies a unique identifier for the accordion item.
    - :name: Specifies the name of the accordion item.
    - :show: Specifies whether the accordion item should be displayed by default.
-   - :content: Specifies the content of the accordion item."
+   - :content: Specifies the content of the accordion item.
+
+   Example:
+    (accordion (:id \"accordionExample\")
+               (:target \"collapseOne\" :name \"Accordion Item #1\" :show t :content \"This is the first item's accordion body.\")
+               (:target \"collapseTwo\" :name \"Accordion Item #2\" :content \"This is the second item's accordion body.\")
+               (:target \"collapseThree\" :name \"Accordion Item #3\" :content \"This is the second item's accordion body.\"))"
 
   `(spinneret:with-html
      (:div :class "accordion"
