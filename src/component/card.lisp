@@ -53,7 +53,7 @@
      (title \"My Title\")"
 
   `(spinneret:with-html
-     (:h5 :class "card-title" ,@body)))
+       (:h5 :class "card-title" ,@body)))
 
 (defmacro subtitle (&body body)
   "This macro generates a Bootstrap card subtitle.
@@ -64,7 +64,7 @@
      (subtitle \"My Subtitle\")"
 
   `(spinneret:with-html
-     (:h6 :class "card-subtitle mb-2 text-body-secondary" ,@body)))
+       (:h6 :class "card-subtitle mb-2 text-body-secondary" ,@body)))
 
 (defmacro text (&body body)
   "This macro generates a Bootstrap card text.
@@ -75,7 +75,7 @@
      (text \"Some card text here\")"
 
   `(spinneret:with-html
-     (:p :class "card-text" ,@body)))
+       (:p :class "card-text" ,@body)))
 
 (defmacro link ((&key (href "#")) &body body)
   "This macro generates a Bootstrap card link.
@@ -88,7 +88,7 @@
      (link (:href \"https://example.com\") \"Example link\")"
 
   `(spinneret:with-html
-     (:a :href ,href :class "card-link" ,@body)))
+       (:a :href ,href :class "card-link" ,@body)))
 
 (defmacro header (&body body)
   "This macro generates a Bootstrap card header.
@@ -99,7 +99,7 @@
      (header \"My Card Header\")"
 
   `(spinneret:with-html
-     (:div :class "header" ,@body)))
+       (:div :class "header" ,@body)))
 
 (defmacro img ((&key (src "#") (alt "Card Image")))
   "This macro generates a Bootstrap card image.
@@ -112,9 +112,9 @@
      (img (:src \"https://example.com/image.jpg\" :alt \"An example image\"))"
 
   `(spinneret:with-html
-     (:img :src ,src
-           :alt ,alt
-           :class "card-img-top")))
+       (:img :src ,src
+             :alt ,alt
+             :class "card-img-top")))
 
 (defmacro body (&body body)
   "This macro generates a Bootstrap card body.
@@ -125,7 +125,7 @@
      (body (title \"My Title\") (text \"Some card text here\"))"
 
   `(spinneret:with-html
-     (:div :class "card-body" ,@body)))
+       (:div :class "card-body" ,@body)))
 
 (defmacro card-with-img ((&key (img-src nil)) &body body)
   "This macro generates a Bootstrap card with an image.
@@ -138,9 +138,9 @@
     (card-with-img (:img-src \"https://example.com/image.jpg\") (title \"My Title\") (text \"Some card text here\"))"
 
   `(spinneret:with-html
-     (:div :class "card"
-           ,(if (null img-src) nil `(img (:src ,img-src)))
-           (:div :class "card-body" ,@body))))
+       (:div :class "card"
+             ,(if (null img-src) nil `(img (:src ,img-src)))
+             (:div :class "card-body" ,@body))))
 
 (defmacro card (&body body)
   "This macro generates a Bootstrap card.
@@ -151,7 +151,7 @@
      (card (title \"My Title\") (text \"Some card text here\"))"
 
   `(spinneret:with-html
-     (:div :class "card" ,@body)))
+       (:div :class "card" ,@body)))
 
 (defmacro card-group ((&key (id "cardGroupExample")) &rest rest)
   "This macro generates a group of Bootstrap cards.
@@ -171,14 +171,14 @@
                 (:img-src \"...\" :title \"Card #3\" :text \"Some quick example text.\" :link (:href \"#\" :label \"Go somewhere\")))"
 
   `(spinneret:with-html
-     (:div :class "card-group"
-           :id ,id
-           ,@(loop for item in rest
-                   collect (destructuring-bind (&key img-src title text (link (link-href "#") link-label)) item
-                             `(card (img (:src ,img-src))
-                                    (body (title ,title)
-                                          (text ,text)
-                                          (link (:href ,link-href) ,link-label))))))))
+       (:div :class "card-group"
+             :id ,id
+             ,@(loop for item in rest
+                     collect (destructuring-bind (&key img-src title text (link (link-href "#") link-label)) item
+                               `(card (img (:src ,img-src))
+                                      (body (title ,title)
+                                            (text ,text)
+                                            (link (:href ,link-href) ,link-label))))))))
 
 ;; Kitchen sink
 ;; Mix and match multiple content types to create the card you need, or throw
@@ -187,10 +187,10 @@
 
 (defun card-kitchen-sink ()
   (card (img (:src "..."))
-    (body (card-title "Card title")
-      (card-text "Some quick example text to build on the card title and make up the bulk of the card's content."))
-    (cl-sbt-list-group (:content "An item")
-                       (:content "A second item")
-                       (:content "A third item"))
-    (body (card-link "Card Link")
-      (card-link "Another Link"))))
+        (body (card-title "Card title")
+              (card-text "Some quick example text to build on the card title and make up the bulk of the card's content."))
+        (cl-sbt-list-group (:content "An item")
+                           (:content "A second item")
+                           (:content "A third item"))
+        (body (card-link "Card Link")
+              (card-link "Another Link"))))
