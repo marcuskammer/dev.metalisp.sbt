@@ -58,7 +58,9 @@
   "This macro generates a Bootstrap badge.
 
    TYPE: (optional) The type of the badge (like 'primary', 'secondary', 'success', etc.). Defaults to 'primary'.
+
    CLASSES: (optional) Any additional CSS classes that should be added to the badge.
+
    BODY: The contents of the badge.
 
    Example usage:
@@ -72,7 +74,9 @@
   "This macro defines a new macro for creating a Bootstrap badge of a specific type.
 
    TYPE: The type of the badge (like 'primary', 'secondary', 'success', etc.).
+
    CLASSES: (optional) Any additional CSS classes that should be added to the badge.
+
    PILL: (optional) If true, the badge will have 'rounded-pill' style.
 
    The newly defined macro, when called, will generate HTML for a Bootstrap
