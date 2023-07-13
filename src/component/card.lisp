@@ -153,6 +153,33 @@
   `(spinneret:with-html
      (:div :class "card" ,@body)))
 
+(defmacro card-group ((&key (id "cardGroupExample")) &rest rest)
+  "This macro generates a group of Bootstrap cards.
+
+   ID: Specifies a unique identifier for the card group. Defaults to 'cardGroupExample'.
+
+   REST: Specifies a list of card items. Each item is a plist with the following keys:
+   - :img-src: Specifies the URL of the image.
+   - :title: Specifies the title of the card.
+   - :text: Specifies the text of the card.
+   - :link: Specifies a link with a URL and label.
+
+   Example:
+    (card-group (:id \"cardGroupExample\")
+                (:img-src \"...\" :title \"Card #1\" :text \"Some quick example text.\" :link (:href \"#\" :label \"Go somewhere\"))
+                (:img-src \"...\" :title \"Card #2\" :text \"Some quick example text.\" :link (:href \"#\" :label \"Go somewhere\"))
+                (:img-src \"...\" :title \"Card #3\" :text \"Some quick example text.\" :link (:href \"#\" :label \"Go somewhere\")))"
+
+  `(spinneret:with-html
+     (:div :class "card-group"
+           :id ,id
+           ,@(loop for item in rest
+                   collect (destructuring-bind (&key img-src title text (link (link-href "#") link-label)) item
+                             `(card (img (:src ,img-src))
+                                    (body (title ,title)
+                                          (text ,text)
+                                          (link (:href ,link-href) ,link-label))))))))
+
 ;; Kitchen sink
 ;; Mix and match multiple content types to create the card you need, or throw
 ;; everything in there. Shown below are image styles, blocks, text styles, and a
