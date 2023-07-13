@@ -119,9 +119,13 @@
        `(btn (:type ,(string ',type-name) :size ,(string ',size-name)) ,@body))))
 
 (defmacro define-btns (names)
-  "This macro generates specific button macros based on the provided names.
+  "This macro generates a suite of button-creating macros for each provided button type.
 
-   NAMES: A list of button type names. For each name in this list, three macros will be generated: a standard button, a large button, and a small button."
+   NAMES: A list of button type names. Each name should be a string representing a Bootstrap button type (like 'primary', 'secondary', 'success', etc.).
+
+   For each type name in NAMES, this macro defines six new macros: a standard button, an outline button, a large button, a small button, a large outline button, and a small outline button.
+
+   The newly defined macros, when called, will generate HTML for a Bootstrap button of the corresponding type, size, and outline style."
 
   `(progn
      ,@(loop for item in names
@@ -129,9 +133,9 @@
              collect `(progn
                         (define-btn ,type-name)
                         (define-btn ,type-name t)
-                        (define-btn ,type-name nil "lg")
-                        (define-btn ,type-name nil "sm")
                         (define-btn ,type-name t "lg")
-                        (define-btn ,type-name t "sm")))))
+                        (define-btn ,type-name t "sm")
+                        (define-btn ,type-name nil "lg")
+                        (define-btn ,type-name nil "sm")))))
 
 (define-btns (primary secondary success danger warning info light dark link))
