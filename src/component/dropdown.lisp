@@ -1,3 +1,5 @@
+;; https://getbootstrap.com/docs/5.3/components/dropdowns/
+
 ;; The Bootstrap Dropdown component is a toggleable, contextual menu for
 ;; displaying lists of links and more. It's made interactive with the inclusion of
 ;; JavaScript, which allows it to convert a button into a dropdown menu.
@@ -32,15 +34,28 @@
 (in-package :cl-sbt-dropdown)
 
 (defmacro menu (&body body)
+  "This macro generates a Bootstrap dropdown menu.
+
+   BODY: The contents of the menu, which should typically be created using the `item` macro."
+
   `(spinneret:with-html
      (:ul :class "dropdown-menu"
           ,@body)))
 
 (defmacro item (&body body)
+  "This macro generates a Bootstrap dropdown item.
+
+   BODY: The text for the dropdown item."
+
   `(spinneret:with-html
      (:li (:a :class "dropdown-item" :href "#" ,@body))))
 
 (defmacro dropdown ((&key (title "")) &body body)
+  "This macro generates a Bootstrap dropdown component.
+
+   TITLE: The text for the dropdown button.
+   BODY: The contents of the dropdown, which should be created using the `menu` macro."
+
   `(spinneret:with-html
      (:div :class "dropdown"
            (:button :class "btn btn-secondary dropdown-toggle"
