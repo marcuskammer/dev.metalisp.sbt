@@ -92,7 +92,9 @@
   "This macro generates a Bootstrap button.
 
    TYPE: (optional) The type of the button (like 'primary', 'secondary', 'success', etc.).
+
    SIZE: (optional) The size of the button ('lg' for large, 'sm' for small).
+
    BODY: The contents of the button.
 
    Example usage:
@@ -110,7 +112,9 @@
   "This macro defines a new macro for creating a Bootstrap button of a specific type, size, and outline style.
 
    TYPE: The type of the button (like 'primary', 'secondary', 'success', etc.).
+
    OUTLINE: (optional) Whether the button should be of the outline style.
+
    SIZE: (optional) The size of the button ('lg' for large, 'sm' for small).
 
    The newly defined macro, when called, will generate HTML for a Bootstrap
