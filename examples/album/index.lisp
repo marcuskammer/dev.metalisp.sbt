@@ -1,6 +1,14 @@
 (defpackage cl-sbt-album
   (:use :cl)
-  (:export :show-album-page :header :footer :main :hero :album :navbar :show-navbar))
+  (:export
+   :show-album-page
+   :header
+   :footer
+   :main
+   :hero
+   :album
+   :navbar
+   :show-navbar))
 
 (in-package :cl-sbt-album)
 
