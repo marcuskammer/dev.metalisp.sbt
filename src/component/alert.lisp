@@ -28,7 +28,23 @@
   (:use :cl)
   (:export
    :btn
-   :alert))
+   :alert
+   :alert-primary
+   :alert-secondary
+   :alert-success
+   :alert-danger
+   :alert-warning
+   :alert-info
+   :alert-light
+   :alert-dark
+   :alert-dismiss-primary
+   :alert-dismiss-secondary
+   :alert-dismiss-success
+   :alert-dismiss-danger
+   :alert-dismiss-warning
+   :alert-dismiss-info
+   :alert-dismiss-light
+   :alert-dismiss-dark))
 
 (in-package :cl-sbt-alert)
 
@@ -44,10 +60,9 @@
 (defmacro alert ((&key (type "primary") (dismissible nil)) &body body)
   "This macro generates a Bootstrap alert component.
 
-   Parameters:
-   - TYPE: Specifies the alert type. Can be 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', or 'dark'. Defaults to 'primary'.
-   - DISMISSIBLE: Specifies whether the alert is dismissible. If true, the alert includes a close button.
-   - BODY: Specifies the content of the alert."
+   TYPE: Specifies the alert type. Can be 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', or 'dark'. Defaults to 'primary'.
+   DISMISSIBLE: Specifies whether the alert is dismissible. If true, the alert includes a close button.
+   BODY: Specifies the content of the alert."
 
   `(spinneret:with-html
      (:div :role "alert"
@@ -56,50 +71,31 @@
            ,(if (null dismissible) nil `(btn))
            ,@body)))
 
-;; (defmacro alert-primary (&body body)
-;;   `(alert (:type "primary") ,@body))
+(defmacro define-alert (type &optional (dismissible nil))
+  "This macro defines a new macro for creating a Bootstrap alert of a specific type.
 
-;; (defmacro alert-secondary (&body body)
-;;   `(alert (:type "secondary") ,@body))
+   TYPE: The type of the alert (like 'primary', 'secondary', 'success', etc.).
+   DISMISSIBLE: (optional) Whether the alert should be dismissible.
 
-;; (defmacro alert-success (&body body)
-;;   `(alert (:type "success") ,@body))
+   The newly defined macro, when called, will generate HTML for a Bootstrap
+   alert of the specified type and dismissibility."
 
-;; (defmacro alert-danger (&body body)
-;;   `(alert (:type "danger") ,@body))
+  (let* ((macro-name (intern (string-upcase (concatenate 'string "ALERT-" (if (null dismissible) "" "DISMISS-") type)))))
+    `(defmacro ,macro-name (&body body)
+       `(alert (:type ,,type :dismissible ,,dismissible) ,@body))))
 
-;; (defmacro alert-warning (&body body)
-;;   `(alert (:type "warning") ,@body))
+(defmacro define-alerts (names)
+  "This macro generates specific alert macros based on the provided names.
 
-;; (defmacro alert-info (&body body)
-;;   `(alert (:type "info") ,@body))
+   NAMES: A list of alert type names. For each name in this list, a macro will
+   be generated: a non-dismissible alert and a dismissible alert of the
+   specified type."
 
-;; (defmacro alert-light (&body body)
-;;   `(alert (:type "light") ,@body))
+  `(progn
+     ,@(loop for item in names
+             for type-name = (string-downcase (string item))
+             collect `(progn
+                        (define-alert ,type-name)
+                        (define-alert ,type-name t)))))
 
-;; (defmacro alert-dark (&body body)
-;;   `(alert (:type "dark") ,@body))
-
-;; (defmacro alert-primary-dismiss (&body body)
-;;   `(alert (:type "primary" :dismissible t) ,@body))
-
-;; (defmacro alert-secondary-dismiss (&body body)
-;;   `(alert (:type "secondary" :dismissible t) ,@body))
-
-;; (defmacro alert-success-dismiss (&body body)
-;;   `(alert (:type "success" :dismissible t) ,@body))
-
-;; (defmacro alert-danger-dismiss (&body body)
-;;   `(alert (:type "danger" :dismissible t) ,@body))
-
-;; (defmacro alert-warning-dismiss (&body body)
-;;   `(alert (:type "warning" :dismissible t) ,@body))
-
-;; (defmacro alert-info-dismiss (&body body)
-;;   `(alert (:type "info" :dismissible t) ,@body))
-
-;; (defmacro alert-light-dismiss (&body body)
-;;   `(alert (:type "light" :dismissible t) ,@body))
-
-;; (defmacro alert-dark-dismiss (&body body)
-;;   `(alert (:type "dark" :dismissible t) ,@body))
+(define-alerts (primary secondary success danger warning info light dark))
