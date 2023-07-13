@@ -118,7 +118,7 @@
          (type-name (concatenate 'string outline-name type))
          (macro-name (intern (string-upcase (concatenate 'string "BTN-" outline-name type size-name)))))
     `(defmacro ,macro-name (&body body)
-       `(btn (:type ,(string ',type-name) :size ,(string ',size-name)) ,@body))))
+       `(btn (:type ,,type-name :size ,,size-name) ,@body))))
 
 (defmacro define-btns (names)
   "This macro generates a suite of button-creating macros for each provided button type.
