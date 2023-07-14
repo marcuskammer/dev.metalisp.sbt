@@ -41,24 +41,27 @@
 
 (in-package :cl-sbt-spinner)
 
-(defmacro spinner ((&key (type "border") (color "primary")))
+(defmacro spinner ((&key (type "border") (color "primary") (size nil)))
   "This macro generates a Bootstrap spinner with a specified color.
 
 TYPE: Specifies the spinner style. Can be 'border' or 'grow'. Defaults to 'border'.
 COLOR: Specifies the spinner color. Can be 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', or 'link'. Defaults to 'primary'."
   `(spinneret:with-html
-     (:div :class (format nil "spinner-~a text-~a" ,type ,color)
+     (:div :class ,(if (null size)
+                       (format nil "spinner-~a text-~a" type color)
+                       (format nil "spinner-~a spinner-~a-~a text-~a" type type size color))
            :role "status"
            (:span :class "visually-hidden" "Loading..."))))
 
-(defmacro define-spinner (type color)
+(defmacro define-spinner (type color size)
   "This macro defines a new spinner macro with a specified style and color.
 
 TYPE: Specifies the style of the spinner. It can be 'border' or 'grow'.
 COLOR: Specifies the color of the spinner."
-  (let ((macro-name (intern (string-upcase (concatenate 'string "SPINNER-" type "-" color)))))
+  (let* ((size-name (if (null size) "" (format nil "-~a" size)))
+         (macro-name (intern (string-upcase (concatenate 'string "SPINNER-" type "-" color size-name)))))
     `(defmacro ,macro-name ()
-       `(spinner (:type ,,type :color ,,color)))))
+       `(spinner (:type ,,type :color ,,color :size ,,size)))))
 
 (defmacro define-spinners (names)
   "This macro defines a set of new spinner macros.
@@ -68,7 +71,9 @@ NAMES: A list of colors to use for the spinners."
      ,@(loop for item in names
              for color = (string-downcase (string item))
              collect `(progn
-                        (define-spinner "border" ,color)
-                        (define-spinner "grow" ,color)))))
+                        (define-spinner "border" ,color nil)
+                        (define-spinner "grow" ,color nil)
+                        (define-spinner "border" ,color "sm")
+                        (define-spinner "grow" ,color "sm")))))
 
 (define-spinners (primary secondary success danger warning info light dark))
