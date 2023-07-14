@@ -57,15 +57,12 @@
 (defmacro badge ((&key (type "primary") (classes "")) &body body)
   "This macro generates a Bootstrap badge.
 
-   TYPE: (optional) The type of the badge (like 'primary', 'secondary', 'success', etc.). Defaults to 'primary'.
+TYPE: (optional) The type of the badge (like 'primary', 'secondary', 'success', etc.). Defaults to 'primary'.
+CLASSES: (optional) Any additional CSS classes that should be added to the badge.
+BODY: The contents of the badge.
 
-   CLASSES: (optional) Any additional CSS classes that should be added to the badge.
-
-   BODY: The contents of the badge.
-
-   Example usage:
-   (badge (:type \"success\" :classes \"mx-2\") \"New\")"
-
+Example usage:
+(badge (:type \"success\" :classes \"mx-2\") \"New\")"
   `(spinneret:with-html
      (:span :class (format nil "badge text-bg-~a ~a" ,type ,classes)
             ,@body)))
@@ -73,15 +70,12 @@
 (defmacro define-badge (type &optional (classes "") (pill nil))
   "This macro defines a new macro for creating a Bootstrap badge of a specific type.
 
-   TYPE: The type of the badge (like 'primary', 'secondary', 'success', etc.).
+TYPE: The type of the badge (like 'primary', 'secondary', 'success', etc.).
+CLASSES: (optional) Any additional CSS classes that should be added to the badge.
+PILL: (optional) If true, the badge will have 'rounded-pill' style.
 
-   CLASSES: (optional) Any additional CSS classes that should be added to the badge.
-
-   PILL: (optional) If true, the badge will have 'rounded-pill' style.
-
-   The newly defined macro, when called, will generate HTML for a Bootstrap
-   badge of the specified type."
-
+The newly defined macro, when called, will generate HTML for a Bootstrap
+badge of the specified type."
   (let* ((macro-name (intern (string-upcase (concatenate 'string "BADGE-" (if (null pill) "" "PILL-") type)))))
     `(defmacro ,macro-name (&body body)
        `(badge (:type ,,type :classes ,,classes) ,@body))))
@@ -89,9 +83,8 @@
 (defmacro define-badges (names)
   "This macro generates specific badge macros based on the provided names.
 
-   NAMES: A list of badge type names. For each name in this list, a macro will
-   be generated: a badge of the specified type."
-
+NAMES: A list of badge type names. For each name in this list, a macro will
+be generated: a badge of the specified type."
   `(progn
      ,@(loop for item in names
              for type-name = (string-downcase (string item))

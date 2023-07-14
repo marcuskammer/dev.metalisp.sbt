@@ -91,15 +91,12 @@
 (defmacro btn ((&key (type "primary") (size "")) &body body)
   "This macro generates a Bootstrap button.
 
-   TYPE: (optional) The type of the button (like 'primary', 'secondary', 'success', etc.).
+TYPE: (optional) The type of the button (like 'primary', 'secondary', 'success', etc.).
+SIZE: (optional) The size of the button ('lg' for large, 'sm' for small).
+BODY: The contents of the button.
 
-   SIZE: (optional) The size of the button ('lg' for large, 'sm' for small).
-
-   BODY: The contents of the button.
-
-   Example usage:
-   (btn (:type \"danger\" :size \"lg\") \"Delete\")"
-
+Example usage:
+(btn (:type \"danger\" :size \"lg\") \"Delete\")"
   `(spinneret:with-html
      (:button :type "button"
               :class (concatenate 'string
@@ -111,15 +108,12 @@
 (defmacro define-btn (type &optional (outline nil) (size nil))
   "This macro defines a new macro for creating a Bootstrap button of a specific type, size, and outline style.
 
-   TYPE: The type of the button (like 'primary', 'secondary', 'success', etc.).
+TYPE: The type of the button (like 'primary', 'secondary', 'success', etc.).
+OUTLINE: (optional) Whether the button should be of the outline style.
+SIZE: (optional) The size of the button ('lg' for large, 'sm' for small).
 
-   OUTLINE: (optional) Whether the button should be of the outline style.
-
-   SIZE: (optional) The size of the button ('lg' for large, 'sm' for small).
-
-   The newly defined macro, when called, will generate HTML for a Bootstrap
-   button of the specified type and size."
-
+The newly defined macro, when called, will generate HTML for a Bootstrap
+button of the specified type and size."
   (let* ((size-name (if (null size) "" (format nil "-~a" size)))
          (outline-name (if (null outline) "" "outline-"))
          (type-name (concatenate 'string outline-name type))
@@ -130,17 +124,16 @@
 (defmacro define-btns (names)
   "This macro generates a suite of button-creating macros for each provided button type.
 
-   NAMES: A list of button type names. Each name should be a string
-   representing a Bootstrap button type (like 'primary', 'secondary',
-   'success', etc.).
+NAMES: A list of button type names. Each name should be a string
+representing a Bootstrap button type (like 'primary', 'secondary',
+'success', etc.).
 
-   For each type name in NAMES, this macro defines six new macros: a standard
-   button, an outline button, a large button, a small button, a large outline
-   button, and a small outline button.
+For each type name in NAMES, this macro defines six new macros: a standard
+button, an outline button, a large button, a small button, a large outline
+button, and a small outline button.
 
-   The newly defined macros, when called, will generate HTML for a Bootstrap
-   button of the corresponding type, size, and outline style."
-
+The newly defined macros, when called, will generate HTML for a Bootstrap
+button of the corresponding type, size, and outline style."
   `(progn
      ,@(loop for item in names
              for type-name = (string-downcase (string item))

@@ -37,18 +37,16 @@
 (in-package :cl-sbt-navbar)
 
 (defmacro brand-logo ((&key (src "#") (alt "Logo") (width 30) (height 24) (classes "d-inline-block align-text-top")))
-  "This macro generates the HTML code for a Bootstrap navbar brand logo.
+  "This macro generates a brand logo for a Bootstrap navbar.
 
-The NAVBAR-BRAND-LOGO macro takes the following keyword arguments:
+SRC: Specifies the URL of the logo image. Defaults to '#'.
+ALT: Specifies the alt text for the logo. Defaults to 'Logo'.
+WIDTH: Specifies the width of the logo. Defaults to 30.
+HEIGHT: Specifies the height of the logo. Defaults to 24.
+CLASSES: Specifies additional CSS classes for the logo. Defaults to 'd-inline-block align-text-top'.
 
-  - :src - a string specifying the source URL of the logo image.
-  - :alt - a string specifying the alternative text for the logo image. Default is 'Logo'.
-  - :width - an integer specifying the width of the logo image. Default is 30.
-  - :height - an integer specifying the height of the logo image. Default is 24.
-  - :classes - a string specifying the CSS classes for the logo image. Default is 'd-inline-block align-text-top'.
-
-The generated HTML code includes an <img> element with the specified parameters."
-
+Example:
+ (brand-logo (:src \"logo.png\" :alt \"My Website Logo\" :width 50 :height 40))"
   `(spinneret:with-html
      (:img :src ,src
            :alt ,alt
@@ -57,16 +55,13 @@ The generated HTML code includes an <img> element with the specified parameters.
            :class ,classes)))
 
 (defmacro brand ((&key (logo-src nil)) &body body)
-  "This macro generates the HTML code for a Bootstrap navbar brand.
+  "This macro generates a brand component for a Bootstrap navbar.
 
-The NAVBAR-BRAND macro takes the following keyword arguments:
+LOGO-SRC: Specifies the URL of the logo image. If not provided, no logo will be displayed.
+BODY: Specifies the text or other content to be displayed in the brand component.
 
-  - :logo-src - a string specifying the source URL of the logo image. If provided, a call to the `navbar-brand-logo` macro is included to add a logo to the navbar brand.
-
-The macro also takes an arbitrary number of body expressions, which are included in the generated HTML code.
-
-The generated HTML code includes an <a> element with the CSS class 'navbar-brand'. If a logo source is provided, an <img> element for the logo is also included in the <a> element."
-
+Example:
+ (brand (:logo-src \"logo.png\") \"My Website\")"
   `(spinneret:with-html
      (:a :class "navbar-brand"
          :href "#"
@@ -74,37 +69,39 @@ The generated HTML code includes an <a> element with the CSS class 'navbar-brand
          ,@body)))
 
 (defmacro nav (&body body)
-  "This macro generates the HTML code for a Bootstrap navbar navigation.
+  "This macro generates a navigation component for a Bootstrap navbar.
 
-The NAVBAR-NAV macro takes an arbitrary number of body expressions, which are included in the generated HTML code.
+BODY: Specifies the content to be displayed in the navigation component.
 
-The generated HTML code includes a <div> element with the CSS class 'collapse navbar-collaps' and id 'navbarNav'."
-
+Example:
+  (nav \"Home\" \"About\" \"Contact\")"
   `(spinneret:with-html
      (:div :class "collapse navbar-collaps"
            :id "navbarNav"
            ,@body)))
 
 (defmacro text (&body body)
-  "This macro generates the HTML code for a Bootstrap navbar text.
+  "This macro generates a text component for a Bootstrap navbar.
 
-The NAVBAR-TEXT macro takes an arbitrary number of body expressions, which are included in the generated HTML code.
+BODY: Specifies the text to be displayed in the text component.
 
-The generated HTML code includes a <span> element with the CSS class 'navbar-text'."
-
+Example:
+ (text \"Welcome to my website!\")"
   `(spinneret:with-html
      (:span :class "navbar-text"
             ,@body)))
 
 (defmacro navbar ((&key (fluid t) (classes "")) &body body)
-  "This macro generates the HTML code for a Bootstrap navigation bar.
-The NAVBAR macro takes two optional keyword arguments:
+  "This macro generates a Bootstrap navbar.
 
-  - :fluid (default is t). If non-nil, the generated HTML will use 'container-fluid', otherwise 'container' is used.
-  - :classes (default is empty string). If provided, this should be a string of additional CSS classes that will be added to the 'navbar' class of the nav element.
+FLUID: Specifies whether the navbar should be full width. Defaults to true.
+CLASSES: Specifies additional CSS classes for the navbar.
+BODY: Specifies the content to be displayed in the navbar.
 
-The body of the NAVBAR macro will be included inside the 'container' or 'container-fluid' div."
-
+Example:
+ (navbar (:fluid t :classes \"navbar-light bg-light\")
+   (brand \"My Website\")
+   (nav \"Home\" \"About\" \"Contact\"))"
   `(spinneret:with-html
      (:nav :class (format nil "navbar ~a" ,classes)
            (:div :class ,(if fluid
