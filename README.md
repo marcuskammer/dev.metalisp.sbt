@@ -1,28 +1,32 @@
 
 # Table of Contents
 
-1.  [Cl-Sbt](#orge21ad75)
-    1.  [Usage](#org8607bc4)
-        1.  [Defining a Card](#org68a0ecb)
-        2.  [Defining a Dropdown](#org01301e2)
-    2.  [Installation](#orgad68576)
-    3.  [Author](#org941d120)
-    4.  [Copyright](#orgd118731)
+1.  [Cl-Sbt](#org6af45e7)
+    1.  [Usage](#org4b1729c)
+        1.  [Defining a Card](#org8a876fa)
+        2.  [Defining a Dropdown](#orgcb10ca2)
+    2.  [Installation](#org0da4cf2)
+    3.  [Author](#org919d853)
+    4.  [Copyright](#orgc51162e)
 
 
-<a id="orge21ad75"></a>
+<a id="org6af45e7"></a>
 
 # Cl-Sbt
 
-Common Lisp Spinneret Bootstrap Templates
+A Common Lisp library for generating Bootstrap-based HTML markup. It provides
+macros to easily create Bootstrap components such as accordions, alerts,
+badges, buttons, cards, dropdowns, headers, list groups, navbars, nav-tabs,
+pagination, and tables. This library is dependent on the Spinneret library for
+HTML generation.
 
 
-<a id="org8607bc4"></a>
+<a id="org4b1729c"></a>
 
 ## Usage
 
 
-<a id="org68a0ecb"></a>
+<a id="org8a876fa"></a>
 
 ### Defining a Card
 
@@ -68,7 +72,7 @@ The following code demonstrates how to define a card using the card-with-img mac
     </div>
 
 
-<a id="org01301e2"></a>
+<a id="orgcb10ca2"></a>
 
 ### Defining a Dropdown
 
@@ -93,7 +97,7 @@ macro.
     </div>
 
 
-<a id="orgad68576"></a>
+<a id="org0da4cf2"></a>
 
 ## Installation
 
@@ -102,14 +106,14 @@ macro.
     (ql:quickload :cl-sbt)
 
 
-<a id="org941d120"></a>
+<a id="org919d853"></a>
 
 ## Author
 
 -   Marcus Kammer (marcus.kammer@mailbox.org)
 
 
-<a id="orgd118731"></a>
+<a id="orgc51162e"></a>
 
 ## Copyright
 

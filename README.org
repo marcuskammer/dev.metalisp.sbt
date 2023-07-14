@@ -1,6 +1,10 @@
 * Cl-Sbt
 
-Common Lisp Spinneret Bootstrap Templates
+A Common Lisp library for generating Bootstrap-based HTML markup. It provides
+macros to easily create Bootstrap components such as accordions, alerts,
+badges, buttons, cards, dropdowns, headers, list groups, navbars, nav-tabs,
+pagination, and tables. This library is dependent on the Spinneret library for
+HTML generation.
 
 ** Usage
 
@@ -96,7 +100,7 @@ macro.
 
 ** Author
 
-+ Marcus Kammer (marcus.kammer@mailbox.org)
+- Marcus Kammer (marcus.kammer@mailbox.org)
 
 ** Copyright
 
