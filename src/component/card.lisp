@@ -40,7 +40,8 @@
    :img
    :body
    :card-with-img
-   :card))
+   :card
+   :card-group))
 
 (in-package :cl-sbt-card)
 
@@ -160,10 +161,10 @@ Example:
        (:div :class "card-group"
              :id ,id
              ,@(loop for item in rest
-                     collect (destructuring-bind (&key img-src title text (link (link-href "#") link-label)) item
+                     collect (destructuring-bind (&key img-src body-title body-text link-href link-label) item
                                `(card (img (:src ,img-src))
-                                      (body (title ,title)
-                                            (text ,text)
+                                      (body (title ,bdy-title)
+                                            (text ,body-text)
                                             (link (:href ,link-href) ,link-label))))))))
 
 ;; Kitchen sink
