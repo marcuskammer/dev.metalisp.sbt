@@ -8,20 +8,55 @@ badges, buttons, cards, dropdowns, headers, list groups, navbars, nav-tabs,
 pagination, and tables. This library is dependent on the Spinneret library for
 HTML generation.
 
-The following components are available and are packages:
+The following components are available as packages:
 
--   accordion
--   alert
--   badge
--   button
--   card
--   dropdown
--   list group
--   navbar
--   nav / tab
--   pagination
--   table
--   spinner
+-   **accordion:** This package provides macros for generating Bootstrap Accordion
+    components. Accordions are collapsible lists of items, each of which can be
+    &ldquo;expanded&rdquo; or &ldquo;collapsed&rdquo; to reveal or hide content.
+
+-   **alert:** This package offers macros for creating Bootstrap Alert components.
+    Alerts are used to provide user feedback, usually in response to user
+    interactions, such as form validation or actions.
+
+-   **badge:** This package provides macros for creating Bootstrap Badge
+    components. Badges are small status descriptors for UI elements. They can be
+    used to add additional information to an element, such as a count.
+
+-   **button:** This package provides macros for creating Bootstrap Button
+    components. Buttons are used for actions, like submitting forms or initiating
+    actions.
+
+-   **card:** This package provides macros for creating Bootstrap Card components.
+    Cards are flexible and extensible containers for displaying content in a
+    structured format.
+
+-   **dropdown:** This package provides macros for creating Bootstrap Dropdown
+    components. Dropdowns are toggleable, contextual overlays for displaying
+    lists of links and actions in a dropdown format.
+
+-   **list group:** This package provides macros for generating Bootstrap List
+    Group components. List groups are flexible and powerful components for
+    displaying not only simple lists of elements, but complex ones with custom
+    content.
+
+-   **navbar:** This package provides macros for creating Bootstrap Navbar
+    components. Navbars are responsive meta components that serve as navigation
+    headers for your application or site.
+
+-   **nav / tab:** This package provides macros for creating Bootstrap Nav
+    components. Navs are navigation components that can be styled in different
+    ways and can contain links, text, or any other kind of content.
+
+-   **pagination:** This package provides macros for creating Bootstrap Pagination
+    components. Pagination is used to let the user navigate through a set of
+    discrete pages.
+
+-   **table:** This package provides macros for generating Bootstrap Table
+    components. Tables are used to present data in a tabular format.
+
+-   **spinner:** This package provides macros for creating Bootstrap Spinner
+    components. Spinners are used to indicate a loading state of a page or a
+    section.
 
 
 ## Usage
