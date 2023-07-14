@@ -15,7 +15,6 @@
                          (:file "button")
                          (:file "card")
                          (:file "dropdown")
-                         (:file "header")
                          (:file "list-group")
                          (:file "navbar")
                          (:file "nav-tab")
