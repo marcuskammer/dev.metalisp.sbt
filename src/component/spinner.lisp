@@ -12,13 +12,32 @@
 
 ;; Bootstrap allows customization of spinners through CSS classes. You can
 ;; change the color of the spinner to 'primary', 'secondary', 'success',
-;; 'danger', 'warning', 'info', 'light', 'dark', or 'link'. You can also
-;; control the size of the spinner through size classes.
+;; 'danger', 'warning', 'info', 'light', 'dark'. You can also control the size
+;; of the spinner through size classes.
 
 (defpackage cl-sbt-spinner
   (:use :cl)
   (:export
-   :spinner))
+   :spinner
+   :spinner-border-primary
+   :spinner-border-secondary
+   :spinner-border-success
+   :spinner-border-danger
+   :spinner-border-warning
+   :spinner-border-info
+   :spinner-border-warning
+   :spinner-border-light
+   :spinner-border-dark
+   :spinner-grow-primary
+   :spinner-grow-secondary
+   :spinner-grow-success
+   :spinner-grow-danger
+   :spinner-grow-warning
+   :spinner-grow-info
+   :spinner-grow-warning
+   :spinner-grow-light
+   :spinner-grow-dark)
+  (:documentation "This package provides a set of macros to generate Bootstrap Spinner components. Bootstrap Spinners are versatile components used to indicate a loading state in a variety of scenarios. They can be displayed when the user initiates an action that requires some time to process, such as submitting a form or loading data. Spinners are available in two styles: Border and Grow. The Border style is a rotating border, while the Grow style is a shape that continuously grows and shrinks. Through these macros, the color of the spinner can be specified as 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'."))
 
 (in-package :cl-sbt-spinner)
 
@@ -52,4 +71,4 @@ NAMES: A list of colors to use for the spinners."
                         (define-spinner "border" ,color)
                         (define-spinner "grow" ,color)))))
 
-(define-spinners (primary secondary success danger warning info light dark link))
+(define-spinners (primary secondary success danger warning info light dark))
