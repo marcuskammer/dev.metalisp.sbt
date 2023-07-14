@@ -1,6 +1,6 @@
 
 
-# Cl-Sbt
+# cl-sbt
 
 A Common Lisp library for generating Bootstrap-based HTML markup. It provides
 macros to easily create Bootstrap components such as accordions, alerts,
