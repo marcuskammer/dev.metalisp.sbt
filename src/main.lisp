@@ -1,6 +1,14 @@
 (defpackage cl-sbt
   (:use :cl)
-  (:export :badge :badge-pill-primary :badge-pill-secondary :badge-pill-success :badge-pill-danger :badge-pill-warning :badge-pill-info :badge-pill-light :badge-pill-dark :container :col-md :col-xs :col-sm :col-lg :icon :nav :nav-item :pagination :pagination-with-icons :row :table :table-striped :table-bordered :table-hover :table-condensed :well :with-page))
+  (:export
+   :container
+   :col-md
+   :col-xs
+   :col-sm
+   :col-lg
+   :icon
+   :well
+   :with-page))
 
 (in-package :cl-sbt)
 
