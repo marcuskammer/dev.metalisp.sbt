@@ -39,9 +39,10 @@ This will create an active pagination item with the number '1'."
               :href ,url
               ,@body))))
 
-(defmacro pagination (&rest rest)
+(defmacro pagination ((&optional (size nil)) &rest rest)
   "This macro generates a Bootstrap pagination navigation bar.
 
+SIZE: Specifies the size of the pagination bar. Can be 'lg' for large, 'sm' for small, or nil for default size.
 REST: A list of pagination items. Each item is a plist with the following keys:
 - :name: Specifies the name of the item.
 - :url: Specifies the URL to which the item should link.
@@ -52,10 +53,16 @@ Example usage:
             (:name \"2\" :url \"#\" :active nil)
             (:name \"3\" :url \"#\" :active nil))
 
+To create a small-sized pagination:
+(pagination (\"sm\")
+            (:name \"1\" :url \"#\" :active t)
+            (:name \"2\" :url \"#\" :active nil)
+            (:name \"3\" :url \"#\" :active nil))
+
 This will create a pagination bar with three items. The first item will be marked as active."
   `(spinneret:with-html
      (:nav :aria-label "Page navigation"
-           (:ul :class "pagination"
+           (:ul :class ,(concatenate 'string "pagination" (if (null size) nil (format nil " pagination-~a" size)))
                 ,@(loop for item in rest
                         collect (destructuring-bind (&key name url active) item
                                   `(item (:url ,url :active ,active) ,name)))))))
