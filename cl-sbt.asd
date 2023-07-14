@@ -20,7 +20,8 @@
                          (:file "navbar")
                          (:file "nav-tab")
                          (:file "pagination")
-                         (:file "table"))))
+                         (:file "table")
+                         (:file "spinner"))))
   :description "A Common Lisp library for generating Bootstrap-based HTML markup. It provides macros to easily create Bootstrap components such as accordions, alerts, badges, buttons, cards, dropdowns, headers, list groups, navbars, nav-tabs, pagination, and tables. This library is dependent on the Spinneret library for HTML generation."
   :in-order-to ((test-op (test-op "cl-sbt/tests"))))
 
