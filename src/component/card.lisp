@@ -41,7 +41,24 @@
    :body
    :card-with-img
    :card
-   :card-group))
+   :card-group)
+  (:documentation "A Common Lisp package for generating Bootstrap Card components.
+
+Bootstrap's Card component is a flexible and extensible container for content, introduced in Bootstrap 4 as a replacement for panels, wells, and thumbnails. This package provides macros for generating card components, including card title, subtitle, text, link, header, image, and body.
+
+The `title`, `subtitle`, `text`, `link`, and `header` macros generate corresponding elements of a Bootstrap card.
+
+The `img` macro generates a card image element, with an optional source URL and alternative text.
+
+The `body` macro generates the main content area for the card.
+
+The `card-with-img` macro generates a card with an image and body content.
+
+The `card` macro generates a card with body content.
+
+The `card-group` macro generates a group of cards, each with a title, text, and optional image and link.
+
+Example usage can be found in the documentation for each macro."))
 
 (in-package :cl-sbt-card)
 
