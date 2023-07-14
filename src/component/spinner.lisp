@@ -1,3 +1,20 @@
+;; https://getbootstrap.com/docs/5.3/components/spinners/
+
+;; Bootstrap Spinners are versatile components used to indicate a loading state
+;; in a variety of scenarios. They can be displayed when the user initiates an
+;; action that requires some time to process, such as submitting a form or
+;; loading data. They help inform the user that something is happening behind
+;; the scenes.
+
+;; Spinners are available in two styles: Border and Grow. The Border style is a
+;; rotating border, while the Grow style is a shape that continuously grows and
+;; shrinks.
+
+;; Bootstrap allows customization of spinners through CSS classes. You can
+;; change the color of the spinner to 'primary', 'secondary', 'success',
+;; 'danger', 'warning', 'info', 'light', 'dark', or 'link'. You can also
+;; control the size of the spinner through size classes.
+
 (defpackage cl-sbt-spinner
   (:use :cl)
   (:export
