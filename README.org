@@ -1,3 +1,7 @@
+#+author: Marcus Kammer
+#+email: marcus.kammer@mailbox.org
+#+options: toc:nil
+
 * Cl-Sbt
 
 A Common Lisp library for generating Bootstrap-based HTML markup. It provides
@@ -5,6 +9,21 @@ macros to easily create Bootstrap components such as accordions, alerts,
 badges, buttons, cards, dropdowns, headers, list groups, navbars, nav-tabs,
 pagination, and tables. This library is dependent on the Spinneret library for
 HTML generation.
+
+The following components are available and are packages:
+
+- accordion
+- alert
+- badge
+- button
+- card
+- dropdown
+- list group
+- navbar
+- nav / tab
+- pagination
+- table
+- spinner
 
 ** Usage
 

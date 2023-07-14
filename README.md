@@ -1,16 +1,4 @@
 
-# Table of Contents
-
-1.  [Cl-Sbt](#org6af45e7)
-    1.  [Usage](#org4b1729c)
-        1.  [Defining a Card](#org8a876fa)
-        2.  [Defining a Dropdown](#orgcb10ca2)
-    2.  [Installation](#org0da4cf2)
-    3.  [Author](#org919d853)
-    4.  [Copyright](#orgc51162e)
-
-
-<a id="org6af45e7"></a>
 
 # Cl-Sbt
 
@@ -20,13 +8,24 @@ badges, buttons, cards, dropdowns, headers, list groups, navbars, nav-tabs,
 pagination, and tables. This library is dependent on the Spinneret library for
 HTML generation.
 
+The following components are available and are packages:
 
-<a id="org4b1729c"></a>
+-   accordion
+-   alert
+-   badge
+-   button
+-   card
+-   dropdown
+-   list group
+-   navbar
+-   nav / tab
+-   pagination
+-   table
+-   spinner
+
 
 ## Usage
 
-
-<a id="org8a876fa"></a>
 
 ### Defining a Card
 
@@ -72,8 +71,6 @@ The following code demonstrates how to define a card using the card-with-img mac
     </div>
 
 
-<a id="orgcb10ca2"></a>
-
 ### Defining a Dropdown
 
 The following code demonstrates how to define a dropdown using the dropdown
@@ -97,8 +94,6 @@ macro.
     </div>
 
 
-<a id="org0da4cf2"></a>
-
 ## Installation
 
     git clone https://git.sr.ht/~marcuskammer/cl-sbt ~/quicklisp/local-projects/cl-sbt/
@@ -106,14 +101,10 @@ macro.
     (ql:quickload :cl-sbt)
 
 
-<a id="org919d853"></a>
-
 ## Author
 
 -   Marcus Kammer (marcus.kammer@mailbox.org)
 
-
-<a id="orgc51162e"></a>
 
 ## Copyright
 
