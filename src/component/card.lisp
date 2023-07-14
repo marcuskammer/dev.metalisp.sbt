@@ -159,7 +159,7 @@ Example:
   `(spinneret:with-html
        (:div :class "card" ,@body)))
 
-(defmacro card-group ((&key (id "cardGroupExample")) &rest rest)
+(defmacro card-group (&rest rest)
   "This macro generates a group of Bootstrap cards.
 
 ID: Specifies a unique identifier for the card group. Defaults to 'cardGroupExample'.
@@ -176,7 +176,6 @@ Example:
              (:img-src \"...\" :title \"Card #3\" :text \"Some quick example text.\" :link (:href \"#\" :label \"Go somewhere\")))"
   `(spinneret:with-html
        (:div :class "card-group"
-             :id ,id
              ,@(loop for item in rest
                      collect (destructuring-bind (&key img-src body-title body-text link-href link-label) item
                                `(card (img (:src ,img-src))
