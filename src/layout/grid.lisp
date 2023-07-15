@@ -44,29 +44,19 @@
 
 (in-package :cl-sbt-grid)
 
-(defun make-class (name size-offset-pair default-class)
-  "Generates a Bootstrap class string for a particular breakpoint.
+(defun make-container-class (name value default-class)
+  "Generates a Bootstrap container class string for a particular breakpoint.
 
 NAME is the name of the breakpoint (e.g., 'xs', 'sm', 'md', etc.).
+VALUE is non-nil when the container's width is set for the breakpoint.
+DEFAULT-CLASS is a string that represents the default container class.
 
-SIZE-OFFSET-PAIR is either nil, or a list of up to two elements.
-If it is nil, this function will generate a 'container-NAME' class.
-If it is a list, the first element is interpreted as the size, and the
-second element (if present) is interpreted as the offset.
-In this case, the function generates a 'col-NAME-SIZE offset-NAME-OFFSET'
-class string (omitting the offset part if no offset was specified).
+The function generates a ' container-NAME' class string if VALUE is non-nil.
 
-Examples:
-  (make-class 'md nil) ; => \" container-md\"
-  (make-class 'xs '(6)) ; => \" col-xs-6\"
-  (make-class 'sm '(3 1)) ; => \" col-sm-3 offset-sm-1\""
-  (if size-offset-pair
-      (let ((size (first size-offset-pair))
-            (offset (second size-offset-pair)))
-        (concatenate 'string
-                     (if size (format nil " col-~a-~d" name size) "")
-                     (if offset (format nil " offset-~a-~d" name offset) "")))
-      (format nil " ~a-~a" default-class name)))
+Example:
+  (make-container-class \"md\" t \"container\") ; => \" container-md\""
+  (if value (format nil " ~a-~a" default-class name)
+      ""))
 
 (defmacro container ((&key
                         (fluid nil)
@@ -91,22 +81,19 @@ containing the text 'Hello, world!'."
      (:div :class
            ,(concatenate 'string
                          (if (null fluid) "container" "container-fluid")
-                         (if (null xs) "" (make-class "xs" nil "container"))
-                         (if (null sm) "" (make-class "sm" nil "container"))
-                         (if (null md) "" (make-class "md" nil "container"))
-                         (if (null lg) "" (make-class "lg" nil "container"))
-                         (if (null xl) "" (make-class "xl" nil "container"))
-                         (if (null xxl) "" (make-class "xxl" nil "container")))
+                         (make-container-class "xs" xs "container")
+                         (make-container-class "sm" sm "container")
+                         (make-container-class "md" md "container")
+                         (make-container-class "lg" lg "container")
+                         (make-container-class "xl" xl "container")
+                         (make-container-class "xxl" xxl "container"))
            ,@body)))
 
 (defun make-row-class (name value)
   "Generates a Bootstrap row class string for a particular breakpoint or a general column setting.
 
-NAME is the name of the breakpoint (e.g., 'xs', 'sm', 'md', etc.), or 'cols'
-for a general setting.
-
-VALUE is an integer that specifies the number of equal-width columns at the
-given breakpoint or in general.
+NAME is the name of the breakpoint (e.g., 'xs', 'sm', 'md', etc.), or 'cols' for a general setting.
+VALUE is an integer that specifies the number of equal-width columns at the given breakpoint or in general.
 
 The function generates a 'row-cols-NAME-VALUE' class string. If NAME is 'cols',
 it omits the NAME part.
@@ -154,17 +141,38 @@ arguments, containing the specified body content."
      (:div :class
            ,(string-downcase
              (concatenate 'string
-                         "row"
-                         (if (null xs) "" (make-row-class "xs" xs))
-                         (if (null sm) "" (make-row-class "sm" sm))
-                         (if (null md) "" (make-row-class "md" md))
-                         (if (null lg) "" (make-row-class "lg" lg))
-                         (if (null xl) "" (make-row-class "xl" xl))
-                         (if (null xxl) "" (make-row-class "xxl" xxl))
-                         (if (null cols) "" (make-row-class "cols" cols))
-                         (if (null align-items) "" (format nil " align-items-~a" align-items))
-                         (if (null justify-content) "" (format nil " justify-content-~a" justify-content))))
+                          "row"
+                          (make-row-class "xs" xs)
+                          (make-row-class "sm" sm)
+                          (make-row-class "md" md)
+                          (make-row-class "lg" lg)
+                          (make-row-class "xl" xl)
+                          (make-row-class "xxl" xxl)
+                          (make-row-class "cols" cols)
+                          (if (null align-items) "" (format nil " align-items-~a" align-items))
+                          (if (null justify-content) "" (format nil " justify-content-~a" justify-content))))
            ,@body)))
+
+
+(defun make-col-class (name size-offset-pair)
+  "Generates a Bootstrap column class string for a particular breakpoint.
+
+NAME is the name of the breakpoint (e.g., 'xs', 'sm', 'md', etc.).
+SIZE-OFFSET-PAIR is a list that contains the size and optional offset for the column at the given breakpoint.
+
+The function generates a ' col-NAME-SIZE offset-NAME-OFFSET' class string. If
+the size or offset is nil, it omits the corresponding part.
+
+Examples:
+  (make-col-class \"md\" '(3 1)) ; => \" col-md-3 offset-md-1\"
+  (make-col-class \"lg\" '(4 nil)) ; => \" col-lg-4\""
+  (if size-offset-pair
+      (let ((size (first size-offset-pair))
+            (offset (second size-offset-pair)))
+        (concatenate 'string
+                     (if size (format nil " col-~a-~d" name size) "")
+                     (if offset (format nil " offset-~a-~d" name offset) "")))
+      ""))
 
 (defmacro col ((&key
                   (xs nil)
@@ -189,10 +197,10 @@ world!'."
      (:div :class
            ,(concatenate 'string
                          (if (null col) "col" (format nil "col-~d" col))
-                         (if (null xs) "" (make-class "xs" xs "col"))
-                         (if (null sm) "" (make-class "sm" sm "col"))
-                         (if (null md) "" (make-class "md" md "col"))
-                         (if (null lg) "" (make-class "lg" lg "col"))
-                         (if (null xl) "" (make-class "xl" xl "colo"))
-                         (if (null xxl) "" (make-class "xxl" xxl "col")))
+                         (make-col-class "xs" xs)
+                         (make-col-class "sm" sm)
+                         (make-col-class "md" md)
+                         (make-col-class "lg" lg)
+                         (make-col-class "xl" xl)
+                         (make-col-class "xxl" xxl))
            ,@body)))
