@@ -44,7 +44,7 @@
 
 (in-package :cl-sbt-grid)
 
-(defun make-class (name size-offset-pair)
+(defun make-class (name size-offset-pair default-class)
   "Generates a Bootstrap class string for a particular breakpoint.
 
 NAME is the name of the breakpoint (e.g., 'xs', 'sm', 'md', etc.).
@@ -66,7 +66,7 @@ Examples:
         (concatenate 'string
                      (if size (format nil " col-~a-~d" name size) "")
                      (if offset (format nil " offset-~a-~d" name offset) "")))
-      (format nil " container-~a" name)))
+      (format nil " ~a-~a" default-class name)))
 
 (defmacro container ((&key
                         (fluid nil)
@@ -91,12 +91,12 @@ containing the text 'Hello, world!'."
      (:div :class
            ,(concatenate 'string
                          (if (null fluid) "container" "container-fluid")
-                         (if (null xs) "" (make-class "xs" nil))
-                         (if (null sm) "" (make-class "sm" nil))
-                         (if (null md) "" (make-class "md" nil))
-                         (if (null lg) "" (make-class "lg" nil))
-                         (if (null xl) "" (make-class "xl" nil))
-                         (if (null xxl) "" (make-class "xxl" nil)))
+                         (if (null xs) "" (make-class "xs" nil "container"))
+                         (if (null sm) "" (make-class "sm" nil "container"))
+                         (if (null md) "" (make-class "md" nil "container"))
+                         (if (null lg) "" (make-class "lg" nil "container"))
+                         (if (null xl) "" (make-class "xl" nil "container"))
+                         (if (null xxl) "" (make-class "xxl" nil "container")))
            ,@body)))
 
 (defun make-row-class (name value)
@@ -127,7 +127,9 @@ Examples:
                   (lg nil)
                   (xl nil)
                   (xxl nil)
-                  (cols nil)) &body body)
+                  (cols nil)
+                  (align-items nil)
+                  (justify-content nil)) &body body)
   "Generates a Bootstrap row.
 
 XS, SM, MD, LG, XL, XXL: Specify the number of equal-width columns for extra small, small, medium, large, extra large, and extra extra large devices respectively.
@@ -150,7 +152,8 @@ This will generate a row element with Bootstrap classes based on the given
 arguments, containing the specified body content."
   `(spinneret:with-html
      (:div :class
-           ,(concatenate 'string
+           ,(string-downcase
+             (concatenate 'string
                          "row"
                          (if (null xs) "" (make-row-class "xs" xs))
                          (if (null sm) "" (make-row-class "sm" sm))
@@ -158,7 +161,9 @@ arguments, containing the specified body content."
                          (if (null lg) "" (make-row-class "lg" lg))
                          (if (null xl) "" (make-row-class "xl" xl))
                          (if (null xxl) "" (make-row-class "xxl" xxl))
-                         (if (null cols) "" (make-row-class "cols" cols)))
+                         (if (null cols) "" (make-row-class "cols" cols))
+                         (if (null align-items) "" (format nil " align-items-~a" align-items))
+                         (if (null justify-content) "" (format nil " justify-content-~a" justify-content))))
            ,@body)))
 
 (defmacro col ((&key
@@ -184,10 +189,10 @@ world!'."
      (:div :class
            ,(concatenate 'string
                          (if (null col) "col" (format nil "col-~d" col))
-                         (if (null xs) "" (make-class "xs" xs))
-                         (if (null sm) "" (make-class "sm" sm))
-                         (if (null md) "" (make-class "md" md))
-                         (if (null lg) "" (make-class "lg" lg))
-                         (if (null xl) "" (make-class "xl" xl))
-                         (if (null xxl) "" (make-class "xxl" xxl)))
+                         (if (null xs) "" (make-class "xs" xs "col"))
+                         (if (null sm) "" (make-class "sm" sm "col"))
+                         (if (null md) "" (make-class "md" md "col"))
+                         (if (null lg) "" (make-class "lg" lg "col"))
+                         (if (null xl) "" (make-class "xl" xl "colo"))
+                         (if (null xxl) "" (make-class "xxl" xxl "col")))
            ,@body)))
