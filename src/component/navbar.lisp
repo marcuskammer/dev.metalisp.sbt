@@ -32,6 +32,7 @@
    :brand
    :nav
    :text
+   :toggler
    :brand-logo))
 
 (in-package :cl-sbt-navbar)
@@ -90,6 +91,27 @@ Example:
   `(spinneret:with-html
      (:span :class "navbar-text"
             ,@body)))
+
+(defmacro toggler (target)
+  "Generates a Bootstrap navigation bar toggler button.
+
+TARGET: Specifies the ID of the element that will be toggled when the button is clicked.
+
+The button is designed to work with a collapsible navigation bar. It will add
+the Bootstrap classes and data attributes required to make the button
+functional.
+
+Example:
+  (toggler \"myNavbar\")"
+  `(spinneret:with-html
+       (:button :class "navbar-toggler collapsed"
+                :type "button"
+                :data-bs-toggle "collapse"
+                :data-bs-target (format nil "#~a" ,target)
+                :aria-controls ,target
+                :aria-expanded "false"
+                :aria-label "Toggle navigation"
+                (:span :class "navbar-toggler-icon"))))
 
 (defmacro navbar ((&key (fluid t) (classes "")) &body body)
   "This macro generates a Bootstrap navbar.
