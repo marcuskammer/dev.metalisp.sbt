@@ -1,9 +1,13 @@
 (in-package :cl-sbt)
 
 (defmacro with-page ((&key title) &body body)
-  `(spinneret:with-html
+  `(spinneret:with-html-string
      (:doctype)
      (:html
       (:head
-       (:title ,title))
+       (:title ,title)
+       (:link
+           :type "text/css"
+         :rel "stylesheet"
+         :href "public/5.3.0/bootstrap.min.css"))
       (:body ,@body))))
