@@ -31,14 +31,9 @@
   :author "Marcus Kammer"
   :license "MIT"
   :depends-on ("cl-sbt")
-  :components ((:module "examples/album"
+  :components ((:module "examples"
                 :components
-                ((:file "index")
-                 (:file "part/header")
-                 (:file "part/main")
-                 (:file "part/footer")
-                 (:file "part/navbar")
-                 (:file "part/card")))))
+                ((:file "album")))))
 
 (defsystem "cl-sbt/tests"
   :author "Marcus Kammer"
