@@ -72,7 +72,7 @@ FLUID: When non-nil, the container becomes fluid (full width).
 XS, SM, MD, LG, XL, XXL: Specify the size of the container at various breakpoints.
 
 Example:
-  (container (:fluid t :sm 10)
+  (container (:fluid t :sm t)
     (col (:md (6 nil)) \"Hello, world!\"))
 
 This will generate a fluid container with a medium-sized column inside it,
