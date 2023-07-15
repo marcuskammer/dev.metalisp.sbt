@@ -181,26 +181,31 @@ Examples:
                   (lg nil)
                   (xl nil)
                   (xxl nil)
-                  (col nil)) &body body)
+                  (col nil)
+                  (align-self nil)) &body body)
   "Generates a Bootstrap column.
 
 COL: Specifies the number of columns the element spans (default 12).
 XS, SM, MD, LG, XL, XXL: List that specify the number of columns the element spans and optional offset at various breakpoints.
+ALIGN-SELF: Specifies the alignment of the column. Possible values are 'start', 'center', 'end'.
 
 Example:
-  (col (:col 6 :md (8 2)) \"Hello, world!\")
+  (col (:col 6 :md (8 2) :align-self center) \"Hello, world!\")
 
 This will generate a column that spans 6 columns by default, 8 medium-sized
-columns with an offset of 2 medium-sized columns, containing the text 'Hello,
-world!'."
+columns with an offset of 2 medium-sized columns, and aligns its content in the
+center. The column contains the text 'Hello, world!'."
+
   `(spinneret:with-html
      (:div :class
-           ,(concatenate 'string
-                         (if (null col) "col" (format nil "col-~d" col))
-                         (make-col-class "xs" xs)
-                         (make-col-class "sm" sm)
-                         (make-col-class "md" md)
-                         (make-col-class "lg" lg)
-                         (make-col-class "xl" xl)
-                         (make-col-class "xxl" xxl))
+           ,(string-downcase
+             (concatenate 'string
+                          (if (null col) "col" (format nil "col-~d" col))
+                          (if (null align-self) "" (format nil " align-self-~a" align-self))
+                          (make-col-class "xs" xs)
+                          (make-col-class "sm" sm)
+                          (make-col-class "md" md)
+                          (make-col-class "lg" lg)
+                          (make-col-class "xl" xl)
+                          (make-col-class "xxl" xxl)))
            ,@body)))
