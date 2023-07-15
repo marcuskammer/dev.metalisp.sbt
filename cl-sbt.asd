@@ -5,22 +5,25 @@
   :depends-on (:spinneret)
   :components ((:module "src"
                 :components
-                        ((:file "main")
-                         (:file "page")))
+                ((:file "main")
+                 (:file "page")))
                (:module "src/component"
                 :components
-                        ((:file "accordion")
-                         (:file "alert")
-                         (:file "badge")
-                         (:file "button")
-                         (:file "card")
-                         (:file "dropdown")
-                         (:file "list-group")
-                         (:file "navbar")
-                         (:file "nav-tab")
-                         (:file "pagination")
-                         (:file "table")
-                         (:file "spinner"))))
+                ((:file "accordion")
+                 (:file "alert")
+                 (:file "badge")
+                 (:file "button")
+                 (:file "card")
+                 (:file "dropdown")
+                 (:file "list-group")
+                 (:file "navbar")
+                 (:file "nav-tab")
+                 (:file "pagination")
+                 (:file "table")
+                 (:file "spinner")))
+               (:module "src/layout"
+                :components
+                ((:file "col"))))
   :description "A Common Lisp library for generating Bootstrap-based HTML markup. It provides macros to easily create Bootstrap components such as accordions, alerts, badges, buttons, cards, dropdowns, headers, list groups, navbars, nav-tabs, pagination, and tables. This library is dependent on the Spinneret library for HTML generation."
   :in-order-to ((test-op (test-op "cl-sbt/tests"))))
 
@@ -30,12 +33,12 @@
   :depends-on ("cl-sbt")
   :components ((:module "examples/album"
                 :components
-                        ((:file "index")
-                         (:file "part/header")
-                         (:file "part/main")
-                         (:file "part/footer")
-                         (:file "part/navbar")
-                         (:file "part/card")))))
+                ((:file "index")
+                 (:file "part/header")
+                 (:file "part/main")
+                 (:file "part/footer")
+                 (:file "part/navbar")
+                 (:file "part/card")))))
 
 (defsystem "cl-sbt/tests"
   :author "Marcus Kammer"
@@ -44,6 +47,6 @@
                "rove")
   :components ((:module "tests"
                 :components
-                        ((:file "main"))))
+                ((:file "main"))))
   :description "Test system for cl-sbt"
   :perform (test-op (op c) (symbol-call :rove :run c)))
