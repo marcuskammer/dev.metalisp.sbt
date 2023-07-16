@@ -7,6 +7,12 @@
                 :components
                 ((:file "main")
                  (:file "page")))
+               (:module "src/utility"
+                :components
+                ((:file "spacing")))
+               (:module "src/layout"
+                :components
+                ((:file "grid")))
                (:module "src/component"
                 :components
                 ((:file "accordion")
@@ -21,9 +27,6 @@
                  (:file "pagination")
                  (:file "table")
                  (:file "spinner")))
-               (:module "src/layout"
-                :components
-                ((:file "grid")))
                (:module "examples"
                 :components
                 ((:file "album"))))
