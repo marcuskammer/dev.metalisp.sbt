@@ -182,30 +182,37 @@ Examples:
                   (xl nil)
                   (xxl nil)
                   (col nil)
-                  (align-self nil)) &body body)
+                  (align-self nil)
+                  (spacing nil)) &body body)
   "Generates a Bootstrap column.
 
-COL: Specifies the number of columns the element spans (default 12).
-XS, SM, MD, LG, XL, XXL: List that specify the number of columns the element spans and optional offset at various breakpoints.
-ALIGN-SELF: Specifies the alignment of the column. Possible values are 'start', 'center', 'end'.
+COL: Specifies the number of columns the element spans.
+
+XS, SM, MD, LG, XL, XXL: List that specify the number of columns the element
+spans and optional offset at various breakpoints.
+
+ALIGN-SELF: Specifies the alignment of the column. Possible values are 'start',
+'center', 'end'.
+
+SPACING: A list specifying the Bootstrap spacing class. The list should contain
+keyword arguments that can be passed to the cl-sbt-spacing:spacing function.
 
 Example:
-  (col (:col 6 :md (8 2) :align-self center) \"Hello, world!\")
-
-This will generate a column that spans 6 columns by default, 8 medium-sized
-columns with an offset of 2 medium-sized columns, and aligns its content in the
-center. The column contains the text 'Hello, world!'."
-
+  (col (:col 6 :md (8 2) :align-self :center) \"Hello, world!\")
+  ; This will generate a column that spans 6 columns by default, 8 medium-sized
+  ; columns with an offset of 2 medium-sized columns, and aligns its content in the
+  ; center. The column contains the text 'Hello, world!'."
   `(spinneret:with-html
      (:div :class
-           ,(string-downcase
-             (concatenate 'string
+             ,(concatenate 'string
                           (if (null col) "col" (format nil "col-~d" col))
-                          (if (null align-self) "" (format nil " align-self-~a" align-self))
+                          (if (null align-self) "" (string-downcase (format nil " align-self-~a " align-self)))
+                          (if (null spacing) ""
+                              (apply #'cl-sbt-spacing:spacing spacing))
                           (make-col-class "xs" xs)
                           (make-col-class "sm" sm)
                           (make-col-class "md" md)
                           (make-col-class "lg" lg)
                           (make-col-class "xl" xl)
                           (make-col-class "xxl" xxl)))
-           ,@body)))
+           ,@body))
