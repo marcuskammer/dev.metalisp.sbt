@@ -65,7 +65,8 @@ Example:
                         (md nil)
                         (lg nil)
                         (xl nil)
-                        (xxl nil)) &body body)
+                        (xxl nil)
+                        (text nil)) &body body)
   "Generates a Bootstrap container.
 
 FLUID: When non-nil, the container becomes fluid (full width).
@@ -86,7 +87,9 @@ containing the text 'Hello, world!'."
                          (make-container-class "md" md "container")
                          (make-container-class "lg" lg "container")
                          (make-container-class "xl" xl "container")
-                         (make-container-class "xxl" xxl "container"))
+                         (make-container-class "xxl" xxl "container")
+                         (if (null text) ""
+                             (apply #'cl-sbt-utility:text text)))
            ,@body)))
 
 (defun make-row-class (name value)
@@ -214,5 +217,5 @@ Example:
                           (make-col-class "xxl" xxl)
                           (if (null align-self) "" (string-downcase (format nil " align-self-~a" align-self)))
                           (if (null spacing) ""
-                              (apply #'cl-sbt-spacing:spacing spacing)))
+                              (apply #'cl-sbt-utility:spacing spacing)))
            ,@body)))
