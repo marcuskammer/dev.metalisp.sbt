@@ -39,13 +39,39 @@
   `(spinneret:with-html
      (:main ,@body)))
 
-(defmacro footer (&body body)
+(defmacro footer ((&key (textbody "secondary") (spacing nil)))
+  "Generates an HTML footer with Bootstrap classes.
+
+TEXTBODY: Specifies the color scheme of the text body, default is 'secondary'.
+
+SPACING: A list specifying the Bootstrap spacing class. The list should contain
+keyword arguments that can be passed to the cl-sbt-spacing:spacing function.
+
+The footer generated contains fixed content, including a 'Back to top' link and
+a short paragraph about Bootstrap.
+
+Example usage:
+  (footer (:textbody \"primary\" :spacing (:property :p :side :y :size 4)))
+  ; This will generate a footer with primary color text and a top/bottom
+  ; padding of size 4."
   `(spinneret:with-html
-     (:footer :class "text-body-secondary py-5"
-       ,@body)))
+     (:footer :class ,(concatenate 'string
+                                   (if textbody (format nil "text-body-~a " textbody) "")
+                                   (if (null spacing) ""
+                                       (apply #'cl-sbt-spacing:spacing spacing)))
+              (container ()
+                (:p :class "float-end mb-1"
+                    (:a :href "#" "Back to top"))
+                (:p :class "mb-1"
+                    "Album example is © Bootstrap, but please download and customize it for yourself!")
+                (:p :class "mb-0"
+                    "New to Bootstrap? "
+                    (:a :href "/" "Visit the homepage")
+                    " or read our "
+                    (:a :href "/docs/5.3/getting-started/introduction/" "getting started guide"))))))
 
 (defmacro album-page (title &body body)
-  `(cl-sbt:with-page (:title title)
+  `(cl-sbt:with-page (:title ,title)
      (header (navbar-header *navbar-header-id*
                (container ()
                  (row ()
@@ -59,7 +85,4 @@
          (brand () "Album")
          (toggler *navbar-header-id*)))
      (main ,@body)
-     (footer (container ()
-               (:p :class "float-end mb-1"
-                   (:a :href "#" "Back to top"))
-               (:p :class "mb-0")))))
+     (footer (:spacing (:property :p :side :y :size 4)))))
