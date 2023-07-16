@@ -62,9 +62,9 @@ Returns a string that can be used as a CSS class for the text."
                    (:end "text-end ")
                    (t "text-start "))
                  (case wrap
-                   (:t "text-wrap")
-                   (:no "text-nowrap")
+                   (:t "text-wrap ")
+                   (:no "text-nowrap ")
                    (t ""))
                  (case tbreak
-                   (:t "text-break")
+                   (:t "text-break ")
                    (t "")))))
