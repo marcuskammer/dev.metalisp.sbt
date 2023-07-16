@@ -2,7 +2,9 @@
   (:use :cl)
   (:export
    :spacing
-   :text)
+   :text
+   :valign
+   :sizing)
   (:documentation "A module for generating Bootstrap utility classes."))
 
 (in-package :cl-sbt-utility)
@@ -67,8 +69,7 @@ Example 3:
 
 Example 4:
   (text :wrap :t)
-  ; This will generate a string 'text-start text-wrap', where 'text-start' is
-  ; the default alignment."
+  ; This will generate a string 'text-wrap'."
   (let ((alignment (cadr (member :alignment args)))
         (wrap (cadr (member :wrap args)))
         (tbreak (cadr (member :break args))))
@@ -85,3 +86,56 @@ Example 4:
                  (case tbreak
                    (:t "text-break ")
                    (t "")))))
+
+(defun valign (&key (align nil))
+  "Generates a Bootstrap vertical align class.
+
+ALIGN: Specifies the alignment, should be :baseline, :top, :middle, :bottom,
+:text-bottom, :text-top or nil (default alignment).
+
+Example 1:
+  (valign (:align :baseline))
+  ; This will generate a string 'align-baseline'
+
+Example 2:
+  (valign (:align :top))
+  ; This will generate a string 'align-top'
+
+Example 3:
+  (valign (:align :middle))
+  ; This will generate a string 'align-middle'"
+  (let ((align-str (if (null align) "" (format nil "align-~a" (string align)))))
+    (string-downcase align-str)))
+
+(defun sizing (&key (direction nil) (size nil))
+  "Generates a Bootstrap sizing class.
+
+DIRECTION: Specifies the direction, should be :width or :height.
+
+SIZE: Specifies the size, should be a number from 0 to 100, :25, :50, :75,
+:100, :auto, or nil (default size).
+
+Example 1:
+  (sizing (:direction :width :size 50))
+  ; This will generate a string 'w-50'
+
+Example 2:
+  (sizing (:direction :height :size :auto))
+  ; This will generate a string 'h-auto'
+
+Example 3:
+  (sizing (:direction :width :size :100))
+  ; This will generate a string 'w-100'
+
+Example 4:
+  (sizing (:direction :height :size 75))
+  ; This will generate a string 'h-75'"
+  (let* ((dir-str (if (null direction) "" (string direction)))
+         (size-str (if (null size) ""
+                     (if (eq size :auto)
+                         "auto"
+                         (if (numberp size)
+                             (format nil "~d" size)
+                             (format nil "~a" size)))))
+         (class-str (concatenate 'string dir-str "-" size-str)))
+    (string-downcase class-str)))
