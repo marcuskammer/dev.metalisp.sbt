@@ -87,22 +87,22 @@ Example 4:
                    (:t "text-break ")
                    (t "")))))
 
-(defun valign (&key (align nil))
+(defun valign (align)
   "Generates a Bootstrap vertical align class.
 
 ALIGN: Specifies the alignment, should be :baseline, :top, :middle, :bottom,
 :text-bottom, :text-top or nil (default alignment).
 
 Example 1:
-  (valign (:align :baseline))
+  (valign :baseline)
   ; This will generate a string 'align-baseline'
 
 Example 2:
-  (valign (:align :top))
+  (valign :top)
   ; This will generate a string 'align-top'
 
 Example 3:
-  (valign (:align :middle))
+  (valign :middle)
   ; This will generate a string 'align-middle'"
   (let ((align-str (if (null align) "" (format nil "align-~a" (string align)))))
     (string-downcase align-str)))
@@ -116,19 +116,19 @@ SIZE: Specifies the size, should be a number from 0 to 100, :25, :50, :75,
 :100, :auto, or nil (default size).
 
 Example 1:
-  (sizing (:direction :width :size 50))
+  (sizing :direction :width :size 50)
   ; This will generate a string 'w-50'
 
 Example 2:
-  (sizing (:direction :height :size :auto))
+  (sizing :direction :height :size :auto)
   ; This will generate a string 'h-auto'
 
 Example 3:
-  (sizing (:direction :width :size :100))
+  (sizing :direction :width :size :100)
   ; This will generate a string 'w-100'
 
 Example 4:
-  (sizing (:direction :height :size 75))
+  (sizing :direction :height :size 75)
   ; This will generate a string 'h-75'"
   (let* ((dir-str (if (null direction) "" (string direction)))
          (size-str (if (null size) ""
