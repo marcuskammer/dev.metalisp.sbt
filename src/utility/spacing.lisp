@@ -64,4 +64,4 @@ Example 4:
         (side-str (if (null side) "" (string side)))
         (size-str (if (null size) "" (if (eq size :auto) "auto" (format nil "~d" size))))
         (breakpoint-str (if (null breakpoint) "" (format nil "~a-" (string breakpoint)))))
-    (string-downcase (concatenate 'string property-str side-str "-" breakpoint-str size-str))))
+    (string-downcase (concatenate 'string " " property-str side-str "-" breakpoint-str size-str))))
