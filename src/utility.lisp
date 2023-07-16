@@ -1,33 +1,11 @@
-;; Bootstrap's spacing utility is a powerful toolset that allows developers to
-;; modify an element's margin and padding with a range of classes. These
-;; classes are built using a consistent scale of spacing variables for
-;; predictable spacing across the application, ensuring a unified look and feel
-;; throughout.
-
-;; The spacing classes follow a simple {property}{sides}-{size} pattern for
-;; defining the space on the widget. 'Property' is either 'm' for margins or
-;; 'p' for padding. 'Sides' refers to the side of the element where the space
-;; should be applied: top (t), bottom (b), left (start/s), right (end/e), x
-;; (horizontal sides), y (vertical sides), or blank (all sides). 'Size'
-;; represents the size of the space, ranging from 0 (no space) to 5 (most
-;; space), or 'auto' for automatic margins.
-
-;; Furthermore, Bootstrap's spacing utility also incorporates responsive
-;; variations, meaning developers can assign spacing values that are specific
-;; to a certain breakpoint, ensuring the design's responsiveness. These classes
-;; follow the {property}{sides}-{breakpoint}-{size} pattern and the breakpoint
-;; can be 'sm', 'md', 'lg', 'xl', 'xxl'.
-
-;; In summary, Bootstrap's spacing utility provides a flexible, responsive, and
-;; coherent system for managing spaces in a web layout, aiding in creating
-;; beautiful and well-structured user interfaces.
-
-(defpackage :cl-sbt-spacing
+(defpackage :cl-sbt-utility
   (:use :cl)
-  (:export :spacing)
-  (:documentation "A module for generating Bootstrap spacing classes."))
+  (:export
+   :spacing
+   :text)
+  (:documentation "A module for generating Bootstrap utility classes."))
 
-(in-package :cl-sbt-spacing)
+(in-package :cl-sbt-utility)
 
 (defun spacing (&key (property nil) (side nil) (size nil) (breakpoint nil))
   "Generates a Bootstrap spacing class.
@@ -65,3 +43,28 @@ Example 4:
         (size-str (if (null size) "" (if (eq size :auto) "auto" (format nil "~d" size))))
         (breakpoint-str (if (null breakpoint) "" (format nil "~a-" (string breakpoint)))))
     (string-downcase (concatenate 'string " " property-str side-str "-" breakpoint-str size-str))))
+
+(defun text (&rest args)
+  "Generates a Bootstrap text class based on provided arguments.
+
+ARGS: A list of keyword arguments specifying the properties of the text. For
+example, (:alignment :center :transform :capitalize) would result in the string
+'text-center text-capitalize'.
+
+Returns a string that can be used as a CSS class for the text."
+  (let ((alignment (cadr (member :alignment args)))
+        (wrap (cadr (member :wrap args)))
+        (tbreak (cadr (member :break args))))
+    (concatenate 'string
+                 (case alignment
+                   (:start "text-start ")
+                   (:center "text-center ")
+                   (:end "text-end ")
+                   (t "text-start "))
+                 (case wrap
+                   (:t "text-wrap")
+                   (:no "text-nowrap")
+                   (t ""))
+                 (case tbreak
+                   (:t "text-break")
+                   (t "")))))

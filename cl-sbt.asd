@@ -6,10 +6,7 @@
   :components ((:module "src"
                 :components
                 ((:file "main")
-                 (:file "page")))
-               (:module "src/utility"
-                :components
-                ((:file "spacing")))
+                 (:file "utility")))
                (:module "src/layout"
                 :components
                 ((:file "grid")))
