@@ -206,13 +206,13 @@ Example:
      (:div :class
              ,(concatenate 'string
                           (if (null col) "col" (format nil "col-~d" col))
-                          (if (null align-self) "" (string-downcase (format nil " align-self-~a " align-self)))
-                          (if (null spacing) ""
-                              (apply #'cl-sbt-spacing:spacing spacing))
                           (make-col-class "xs" xs)
                           (make-col-class "sm" sm)
                           (make-col-class "md" md)
                           (make-col-class "lg" lg)
                           (make-col-class "xl" xl)
-                          (make-col-class "xxl" xxl)))
-           ,@body))
+                          (make-col-class "xxl" xxl)
+                          (if (null align-self) "" (string-downcase (format nil " align-self-~a" align-self)))
+                          (if (null spacing) ""
+                              (apply #'cl-sbt-spacing:spacing spacing)))
+           ,@body)))
