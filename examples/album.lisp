@@ -11,10 +11,11 @@
 
 (defvar *navbar-header-id* "navbarHeader")
 
-(defmacro about (&body body)
+(defmacro about ((&key (textbody "secondary")) &body body)
   `(spinneret:with-html
      (:h4 "About"
-          (:p :class "text-body-secondary"
+          (:p :class ,(concatenate 'string
+                                   (if textbody (format nil "text-body-~a" textbody) ""))
               ,@body))))
 
 (defmacro contact (&rest rest)
