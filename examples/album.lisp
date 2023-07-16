@@ -39,7 +39,7 @@
   `(spinneret:with-html
      (:main ,@body)))
 
-(defmacro footer ((&key (textbody "secondary") (spacing nil)))
+(defmacro footer ((&key (textbody "secondary") (spacing nil)) &body body)
   "Generates an HTML footer with Bootstrap classes.
 
 TEXTBODY: Specifies the color scheme of the text body, default is 'secondary'.
@@ -47,13 +47,18 @@ TEXTBODY: Specifies the color scheme of the text body, default is 'secondary'.
 SPACING: A list specifying the Bootstrap spacing class. The list should contain
 keyword arguments that can be passed to the cl-sbt-spacing:spacing function.
 
+BODY: Optional. Specifies additional HTML content to be added to the footer.
+This can be any valid HTML content that spinneret:with-html can parse.
+
 The footer generated contains fixed content, including a 'Back to top' link and
 a short paragraph about Bootstrap.
 
 Example usage:
-  (footer (:textbody \"primary\" :spacing (:property :p :side :y :size 4)))
+  (footer (:textbody \"primary\" :spacing (:property :p :side :y :size 4))
+          (:p :class \"custom-class\" \"Custom content here\"))
   ; This will generate a footer with primary color text and a top/bottom
-  ; padding of size 4."
+  ; padding of size 4. Additionally, a paragraph with class 'custom-class'
+  ; and text 'Custom content here' will be added to the footer."
   `(spinneret:with-html
      (:footer :class ,(concatenate 'string
                                    (if textbody (format nil "text-body-~a " textbody) "")
@@ -68,7 +73,8 @@ Example usage:
                     "New to Bootstrap? "
                     (:a :href "/" "Visit the homepage")
                     " or read our "
-                    (:a :href "/docs/5.3/getting-started/introduction/" "getting started guide"))))))
+                    (:a :href "/docs/5.3/getting-started/introduction/" "getting started guide"))
+                ,@body))))
 
 (defmacro album-page (title &body body)
   `(cl-sbt:with-page (:title ,title)
