@@ -2,7 +2,7 @@
   (:use :cl)
   (:import-from :cl-sbt-grid :container :row :col)
   (:import-from :cl-sbt-navbar :navbar :brand :toggler)
-  (:import-from :cl-sbt :write-string-to-file)
+  (:import-from :cl-sbt :write-string-to-file :with-page)
   (:import-from :spinneret :with-html-string)
   (:export
    :show-album-page))
@@ -28,15 +28,31 @@
                                       :href ,url
                                       ,label)))))))
 
-(defmacro navbar-header (id &body body)
-  `(spinneret:with-html
-     (:div :id ,id
-           :class "collapse"
-           ,@body)))
-
 (defmacro header (&body body)
+  "Generates an HTML header for the album page.
+
+This macro generates a header with a navigation bar and some predefined
+content, including an 'About' section with a description of the album and a
+'Contact' section with some dummy contact links.
+
+Additional content can be added to the header by passing it as BODY arguments
+to the macro. The BODY content will be included in the header after the
+predefined content."
   `(spinneret:with-html
-     (:header ,@body)))
+     (:header (:div :id ,*navbar-header-id*
+                    :class "collapse"
+                    (container ()
+                      (row ()
+                        (col (:sm (8 nil) :md (7 nil) :spacing (:property :p :side :y :size 4))
+                          (about "Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information."))
+                        (col (:sm (8 nil) :md (nil 1))
+                          (contact (:url "#" :label "Follow on Twitter")
+                                   (:url "#" :label "Like on Facebook")
+                                   (:url "#" :label "Email me"))))))
+       (navbar (:fluid nil)
+         (brand () "Album")
+         (toggler ,*navbar-header-id*))
+       ,@body)))
 
 (defmacro main (&body body)
   `(spinneret:with-html
@@ -80,18 +96,7 @@ Example usage:
                 ,@body))))
 
 (defmacro album-page (title &body body)
-  `(cl-sbt:with-page (:title ,title)
-     (header (navbar-header *navbar-header-id*
-               (container ()
-                 (row ()
-                   (col (:sm (8 nil) :md (7 nil))
-                     (about "Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information."))
-                   (col (:sm (8 nil) :md (nil 1))
-                     (contact (:url "#" :label "Follow on Twitter")
-                              (:url "#" :label "Like on Facebook")
-                              (:url "#" :label "Email me"))))))
-       (navbar (:fluid nil)
-         (brand () "Album")
-         (toggler *navbar-header-id*)))
+  `(with-page (:title ,title)
+     (header)
      (main ,@body)
-     (footer (:spacing (:property :p :side :y :size 4)))))
+     (footer (:spacing (:property :p :side :y :size 5)))))
