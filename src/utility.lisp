@@ -51,16 +51,33 @@ ARGS: A list of keyword arguments specifying the properties of the text. For
 example, (:alignment :center :transform :capitalize) would result in the string
 'text-center text-capitalize'.
 
-Returns a string that can be used as a CSS class for the text."
+Returns a string that can be used as a CSS class for the text.
+
+Example 1:
+  (text :alignment :start :wrap :t :break :t)
+  ; This will generate a string 'text-start text-wrap text-break'
+
+Example 2:
+  (text :alignment :center :wrap :no)
+  ; This will generate a string 'text-center text-nowrap'
+
+Example 3:
+  (text :alignment :end)
+  ; This will generate a string 'text-end'
+
+Example 4:
+  (text :wrap :t)
+  ; This will generate a string 'text-start text-wrap', where 'text-start' is
+  ; the default alignment."
   (let ((alignment (cadr (member :alignment args)))
         (wrap (cadr (member :wrap args)))
         (tbreak (cadr (member :break args))))
-    (concatenate 'string
+    (concatenate 'string " "
                  (case alignment
                    (:start "text-start ")
                    (:center "text-center ")
                    (:end "text-end ")
-                   (t "text-start "))
+                   (t ""))
                  (case wrap
                    (:t "text-wrap ")
                    (:no "text-nowrap ")
