@@ -96,8 +96,35 @@ Examples:
                      (if offset (format nil " offset-~a-~d" name offset) "")))
       ""))
 
+
 (defun breakpoint-class (&key (kind :con) (xs nil) (sm nil) (md nil) (lg nil) (xl nil) (xxl nil))
-  (let ((xs-str (cond
+  "Generates Bootstrap class string for different kinds of elements across breakpoints.
+
+The KIND argument specifies the type of element for which the classes are generated.
+It can be :con for container, :row for row, or :col for column.
+
+XS, SM, MD, LG, XL, XXL arguments represent the Bootstrap breakpoints.
+They can be used to specify specific classes for each breakpoint.
+The value of these arguments depends on the KIND of element:
+  - For :con, they should be non-nil if the container's width is set for the corresponding breakpoint.
+  - For :row, they should be an integer representing the number of equal-width columns at the corresponding breakpoint.
+  - For :col, they should be a list that contains the size and optional offset for the column at the corresponding breakpoint.
+
+The function generates the corresponding Bootstrap classes for the given breakpoints and KIND.
+
+Examples:
+  (breakpoint-class :kind :con :md t)
+  ; will generate a string for a medium container.
+
+  (breakpoint-class :kind :row :sm 2 :md 3)
+  ; will generate a string for a row with 2 columns on small devices and 3 columns on medium devices.
+
+  (breakpoint-class :kind :col :lg '(4 1))
+  ; will generate a string for a column that spans 4 out of 12 grid units and is offset by 1 on large devices.
+
+  (breakpoint-class :kind :con :xs t :sm t :md t :lg t :xl t :xxl t)
+  ; will generate a string for a fluid container that spans all breakpoints."
+    (let ((xs-str (cond
                   ((eq kind :con) (make-container-class "xs" xs "container"))
                   ((eq kind :row) (make-row-class "xs" xs))
                   ((eq kind :col) (make-col-class "xs" xs))))
