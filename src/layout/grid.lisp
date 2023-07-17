@@ -236,20 +236,31 @@ arguments, containing the specified body content."
 
 COL: Specifies the number of columns the element spans.
 
-XS, SM, MD, LG, XL, XXL: List that specify the number of columns the element
-spans and optional offset at various breakpoints.
+BREAKPOINT: List that specifies the number of columns the element spans and
+optional offset at various breakpoints. It should be :xs, :sm, :md, :lg, :xl,
+or :xxl.
 
-ALIGN-SELF: Specifies the alignment of the column. Possible values are 'start',
-'center', 'end'.
+ALIGN-SELF: Specifies the alignment of the column. Possible values are :start, :center, :end.
 
 SPACING: A list specifying the Bootstrap spacing class. The list should contain
-keyword arguments that can be passed to the cl-sbt-spacing:spacing function.
+keyword arguments that can be passed to the cl-sbt/utility:spacing function.
 
-Example:
-  (col (:col 6 :md (8 2) :align-self :center) \"Hello, world!\")
-  ; This will generate a column that spans 6 columns by default, 8 medium-sized
-  ; columns with an offset of 2 medium-sized columns, and aligns its content in the
-  ; center. The column contains the text 'Hello, world!'."
+Examples:
+  (col (:col 6) \"Hello, world!\")
+  ; This will generate a column that spans 6 columns by default, containing the
+  ; text 'Hello, world!'.
+
+  (col (:breakpoint (:md (8 2))) \"Hello, world!\")
+  ; This will generate a column that spans 8 medium-sized columns with an
+  ; offset of 2 medium-sized columns, containing the text 'Hello, world!'.
+
+  (col (:align-self :center) \"Hello, world!\")
+  ; This will generate a column that aligns its content in the center,
+  ; containing the text 'Hello, world!'.
+
+  (col (:spacing (:property :p :size 2)) \"Hello, world!\")
+  ; This will generate a column that has a padding of 2 units on all sides,
+  ; containing the text 'Hello, world!'."
   `(spinneret:with-html
      (:div :class
            ,(concatenate 'string
