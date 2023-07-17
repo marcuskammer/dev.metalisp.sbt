@@ -234,7 +234,7 @@ Example 4:
         (breakpoint-str (if (null breakpoint) "" (format nil "~a-" breakpoint))))
     (string-downcase (concatenate 'string " " property-str side-str "-" breakpoint-str size-str))))
 
-(defun text (&key (alignment nil) (transform nil) (weight nil) (monospace nil))
+(defun text (&key (alignment nil) (transform nil) (weight nil) (wrap nil) (monospace nil))
   "Generates a Bootstrap text utility class.
 
 ALIGNMENT: Specifies the text alignment. Should be 'start', 'end', 'center'.
@@ -265,8 +265,14 @@ Example 4:
   (let ((alignment-str (if (null alignment) "" (format nil "text-~a " alignment)))
         (transform-str (if (null transform) "" (format nil "text-~a " transform)))
         (weight-str (if (null weight) "" (format nil "fw-~a " weight)))
+        (wrap-str (if (null wrap) "" (format nil "text-~a" wrap)))
         (monospace-str (if (null monospace) "" "font-monospace")))
-    (string-downcase (concatenate 'string alignment-str transform-str weight-str monospace-str))))
+    (string-downcase (concatenate 'string
+                                  alignment-str
+                                  transform-str
+                                  weight-str
+                                  wrap-str
+                                  monospace-str))))
 
 (defun valign (&key (align null))
   "Generates a Bootstrap vertical align class.
