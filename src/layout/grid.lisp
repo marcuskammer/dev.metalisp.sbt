@@ -58,40 +58,6 @@ Example:
   (if value (format nil " ~a-~a" default-class name)
       ""))
 
-(defmacro container ((&key
-                        (fluid nil)
-                        (xs nil)
-                        (sm nil)
-                        (md nil)
-                        (lg nil)
-                        (xl nil)
-                        (xxl nil)
-                        (text nil)) &body body)
-  "Generates a Bootstrap container.
-
-FLUID: When non-nil, the container becomes fluid (full width).
-XS, SM, MD, LG, XL, XXL: Specify the size of the container at various breakpoints.
-
-Example:
-  (container (:fluid t :sm t)
-    (col (:md (6 nil)) \"Hello, world!\"))
-
-This will generate a fluid container with a medium-sized column inside it,
-containing the text 'Hello, world!'."
-  `(spinneret:with-html
-     (:div :class
-           ,(concatenate 'string
-                         (if (null fluid) "container" "container-fluid")
-                         (make-container-class "xs" xs "container")
-                         (make-container-class "sm" sm "container")
-                         (make-container-class "md" md "container")
-                         (make-container-class "lg" lg "container")
-                         (make-container-class "xl" xl "container")
-                         (make-container-class "xxl" xxl "container")
-                         (if (null text) ""
-                             (apply #'cl-sbt/utility:text text)))
-           ,@body)))
-
 (defun make-row-class (name value)
   "Generates a Bootstrap row class string for a particular breakpoint or a general column setting.
 
@@ -110,16 +76,76 @@ Examples:
           (format nil " row-cols-~a-~d" name value))
       ""))
 
-(defmacro row ((&key
-                  (xs nil)
-                  (sm nil)
-                  (md nil)
-                  (lg nil)
-                  (xl nil)
-                  (xxl nil)
-                  (cols nil)
-                  (align-items nil)
-                  (justify-content nil)) &body body)
+(defun make-col-class (name size-offset-pair)
+  "Generates a Bootstrap column class string for a particular breakpoint.
+
+NAME is the name of the breakpoint (e.g., 'xs', 'sm', 'md', etc.).
+SIZE-OFFSET-PAIR is a list that contains the size and optional offset for the column at the given breakpoint.
+
+The function generates a ' col-NAME-SIZE offset-NAME-OFFSET' class string. If
+the size or offset is nil, it omits the corresponding part.
+
+Examples:
+  (make-col-class \"md\" '(3 1)) ; => \" col-md-3 offset-md-1\"
+  (make-col-class \"lg\" '(4 nil)) ; => \" col-lg-4\""
+  (if size-offset-pair
+      (let ((size (first size-offset-pair))
+            (offset (second size-offset-pair)))
+        (concatenate 'string
+                     (if size (format nil " col-~a-~d" name size) "")
+                     (if offset (format nil " offset-~a-~d" name offset) "")))
+      ""))
+
+(defun breakpoint-class (&key (kind "container") (xs nil) (sm nil) (md nil) (lg nil) (xl nil) (xxl nil))
+  (let ((xs-str (cond
+                  ((eq kind :container) (make-container-class "xs" xs "container"))
+                  ((eq kind :row) (make-row-class "xs" xs))
+                  ((eq kind :col) (make-col-class "xs" xs))))
+        (sm-str (cond
+                  ((eq kind :container) (make-container-class "sm" sm "container"))
+                  ((eq kind :row) (make-row-class "sm" sm))
+                  ((eq kind :col) (make-col-class "sm" sm))))
+        (md-str (cond
+                  ((eq kind :container) (make-container-class "md" md "container"))
+                  ((eq kind :row) (make-row-class "md" md))
+                  ((eq kind :col) (make-col-class "md" md))))
+        (lg-str (cond
+                  ((eq kind :container) (make-container-class "lg" lg "container"))
+                  ((eq kind :row) (make-row-class "lg" lg))
+                  ((eq kind :col) (make-col-class "lg" lg))))
+        (xl-str (cond
+                  ((eq kind :container) (make-container-class "xl" xl "container"))
+                  ((eq kind :row) (make-row-class "xl" xl))
+                  ((eq kind :col) (make-col-class "xl" xl))))
+        (xxl-str (cond
+                   ((eq kind :container) (make-container-class "xxl" xxl "container"))
+                   ((eq kind :row) (make-row-class "xxl" xxl))
+                   ((eq kind :col) (make-col-class "xxl" xxl)))))
+    (concatenate 'string xs-str sm-str md-str lg-str xl-str xxl-str)))
+
+(defmacro container ((&key (fluid nil) (breakpoint nil) (text nil)) &body body)
+  "Generates a Bootstrap container.
+
+FLUID: When non-nil, the container becomes fluid (full width).
+XS, SM, MD, LG, XL, XXL: Specify the size of the container at various breakpoints.
+
+Example:
+  (container (:fluid t :sm t)
+    (col (:md (6 nil)) \"Hello, world!\"))
+
+This will generate a fluid container with a medium-sized column inside it,
+containing the text 'Hello, world!'."
+  `(spinneret:with-html
+     (:div :class
+           ,(concatenate 'string
+                         (if (null fluid) "container" "container-fluid")
+                         (if (null breakpoint) ""
+                             (apply #'breakpoint-class breakpoint))
+                         (if (null text) ""
+                             (apply #'cl-sbt/utility:text text)))
+           ,@body)))
+
+(defmacro row ((&key (breakpoint nil) (cols nil) (align-items nil) (justify-content nil)) &body body)
   "Generates a Bootstrap row.
 
 XS, SM, MD, LG, XL, XXL: Specify the number of equal-width columns for extra small, small, medium, large, extra large, and extra extra large devices respectively.
@@ -145,48 +171,14 @@ arguments, containing the specified body content."
            ,(string-downcase
              (concatenate 'string
                           "row"
-                          (make-row-class "xs" xs)
-                          (make-row-class "sm" sm)
-                          (make-row-class "md" md)
-                          (make-row-class "lg" lg)
-                          (make-row-class "xl" xl)
-                          (make-row-class "xxl" xxl)
+                          (if (null breakpoint) ""
+                              (apply #'breakpoint-class breakpoint))
                           (make-row-class "cols" cols)
                           (if (null align-items) "" (format nil " align-items-~a" align-items))
                           (if (null justify-content) "" (format nil " justify-content-~a" justify-content))))
            ,@body)))
 
-
-(defun make-col-class (name size-offset-pair)
-  "Generates a Bootstrap column class string for a particular breakpoint.
-
-NAME is the name of the breakpoint (e.g., 'xs', 'sm', 'md', etc.).
-SIZE-OFFSET-PAIR is a list that contains the size and optional offset for the column at the given breakpoint.
-
-The function generates a ' col-NAME-SIZE offset-NAME-OFFSET' class string. If
-the size or offset is nil, it omits the corresponding part.
-
-Examples:
-  (make-col-class \"md\" '(3 1)) ; => \" col-md-3 offset-md-1\"
-  (make-col-class \"lg\" '(4 nil)) ; => \" col-lg-4\""
-  (if size-offset-pair
-      (let ((size (first size-offset-pair))
-            (offset (second size-offset-pair)))
-        (concatenate 'string
-                     (if size (format nil " col-~a-~d" name size) "")
-                     (if offset (format nil " offset-~a-~d" name offset) "")))
-      ""))
-
-(defmacro col ((&key
-                  (xs nil)
-                  (sm nil)
-                  (md nil)
-                  (lg nil)
-                  (xl nil)
-                  (xxl nil)
-                  (col nil)
-                  (align-self nil)
-                  (spacing nil)) &body body)
+(defmacro col ((&key (breakpoint nil) (col nil) (align-self nil) (spacing nil)) &body body)
   "Generates a Bootstrap column.
 
 COL: Specifies the number of columns the element spans.
@@ -207,15 +199,11 @@ Example:
   ; center. The column contains the text 'Hello, world!'."
   `(spinneret:with-html
      (:div :class
-             ,(concatenate 'string
-                          (if (null col) "col" (format nil "col-~d" col))
-                          (make-col-class "xs" xs)
-                          (make-col-class "sm" sm)
-                          (make-col-class "md" md)
-                          (make-col-class "lg" lg)
-                          (make-col-class "xl" xl)
-                          (make-col-class "xxl" xxl)
-                          (if (null align-self) "" (string-downcase (format nil " align-self-~a" align-self)))
-                          (if (null spacing) ""
-                              (apply #'cl-sbt/utility:spacing spacing)))
+           ,(concatenate 'string
+                         (if (null col) "col" (format nil "col-~d" col))
+                         (if (null breakpoint) ""
+                             (apply #'breakpoint-class breakpoint))
+                         (if (null align-self) "" (string-downcase (format nil " align-self-~a" align-self)))
+                         (if (null spacing) ""
+                             (apply #'cl-sbt/utility:spacing spacing)))
            ,@body)))
