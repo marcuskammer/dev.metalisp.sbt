@@ -96,7 +96,6 @@ Examples:
                      (if offset (format nil " offset-~a-~d" name offset) "")))
       ""))
 
-
 (defun breakpoint-class (&key (kind :con) (xs nil) (sm nil) (md nil) (lg nil) (xl nil) (xxl nil))
   "Generates Bootstrap class string for different kinds of elements across breakpoints.
 
