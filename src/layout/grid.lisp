@@ -48,20 +48,22 @@
   "Generates a Bootstrap container class string for a particular breakpoint.
 
 NAME is the name of the breakpoint (e.g., 'xs', 'sm', 'md', etc.).
+
 VALUE is non-nil when the container's width is set for the breakpoint.
+
 DEFAULT-CLASS is a string that represents the default container class.
 
 The function generates a ' container-NAME' class string if VALUE is non-nil.
 
 Example:
   (make-container-class \"md\" t \"container\") ; => \" container-md\""
-  (if value (format nil " ~a-~a" default-class name)
-      ""))
+  (if value (format nil " ~a-~a " default-class name) ""))
 
 (defun make-row-class (name value)
   "Generates a Bootstrap row class string for a particular breakpoint or a general column setting.
 
 NAME is the name of the breakpoint (e.g., 'xs', 'sm', 'md', etc.), or 'cols' for a general setting.
+
 VALUE is an integer that specifies the number of equal-width columns at the given breakpoint or in general.
 
 The function generates a 'row-cols-NAME-VALUE' class string. If NAME is 'cols',
@@ -80,6 +82,7 @@ Examples:
   "Generates a Bootstrap column class string for a particular breakpoint.
 
 NAME is the name of the breakpoint (e.g., 'xs', 'sm', 'md', etc.).
+
 SIZE-OFFSET-PAIR is a list that contains the size and optional offset for the column at the given breakpoint.
 
 The function generates a ' col-NAME-SIZE offset-NAME-OFFSET' class string. If
@@ -149,18 +152,29 @@ Examples:
                    ((eq kind :col) (make-col-class "xxl" xxl)))))
     (concatenate 'string xs-str sm-str md-str lg-str xl-str xxl-str)))
 
-(defmacro container ((&key (fluid nil) (breakpoint nil) (text nil)) &body body)
+(defmacro con ((&key (fluid nil) (breakpoint nil) (text nil)) &body body)
   "Generates a Bootstrap container.
 
 FLUID: When non-nil, the container becomes fluid (full width).
-XS, SM, MD, LG, XL, XXL: Specify the size of the container at various breakpoints.
 
-Example:
-  (container (:fluid t :sm t)
-    (col (:md (6 nil)) \"Hello, world!\"))
+BREAKPOINT: Specifies the size of the container at various breakpoints, should be :sm, :md, :lg, :xl, or :xxl.
 
-This will generate a fluid container with a medium-sized column inside it,
-containing the text 'Hello, world!'."
+TEXT: A keyword list that applies text utilities.
+
+Examples:
+  (con (:fluid t) \"Hello, world!\")
+  ; This will generate a full width (fluid) container with the text 'Hello, world!'.
+
+  (con (:breakpoint (:md t)) \"Welcome to the site!\")
+  ; This will generate a container that is medium-sized at the defined
+  ; breakpoint, containing the text 'Welcome to the site!'.
+
+  (con (:text (:alignment :center)) \"Center-aligned text!\")
+  ; This will generate a container with center-aligned text.
+
+  (con (:fluid t :breakpoint (:sm t) :text (:weight :bold)) \"Bold text in a small fluid container!\")
+  ; This will generate a full width (fluid) container that is small at the
+  ; defined breakpoint, containing bold text."
   `(spinneret:with-html
      (:div :class
            ,(concatenate 'string
@@ -174,21 +188,34 @@ containing the text 'Hello, world!'."
 (defmacro row ((&key (breakpoint nil) (cols nil) (align-items nil) (justify-content nil)) &body body)
   "Generates a Bootstrap row.
 
-XS, SM, MD, LG, XL, XXL: Specify the number of equal-width columns for extra small, small, medium, large, extra large, and extra extra large devices respectively.
-COLS: Specifies the number of columns irrespective of the viewport or breakpoint size.
+BREAKPOINT: Specifies the number of equal-width columns at various
+breakpoints. It should be :xs, :sm, :md, :lg, :xl, or :xxl.
+
+COLS: Specifies the number of columns irrespective of the viewport or
+breakpoint size.
+
+ALIGN-ITEMS: Specifies the vertical alignment of columns. It can be :start,
+:center, :end, :stretch, or :baseline.
+
+JUSTIFY-CONTENT: Specifies the horizontal alignment of columns. It can be
+:start, :center, :end, :around, or :between.
 
 Examples:
-  (row (:xs 2) \"Hello, world!\")
+  (row (:breakpoint (:xs 2)) \"Hello, world!\")
   ; Creates a row with two equal-width columns for extra small devices,
   ; containing the text 'Hello, world!'
 
-  (row (:sm 4 :md 3 :lg 2) \"Hello, world!\")
+  (row (:breakpoint (:sm 4 :md 3 :lg 2)) \"Hello, world!\")
   ; Creates a row with four equal-width columns for small devices, three for
   ; medium devices, and two for large devices, containing the text 'Hello, world!'
 
   (row (:cols 3) \"Hello, world!\")
   ; Creates a row with three equal-width columns irrespective of the viewport
   ; or breakpoint size, containing the text 'Hello, world!'
+
+  (row (:align-items :center :justify-content :between) \"Hello, world!\")
+  ; Creates a row with centered items that are evenly distributed in the
+  ; horizontal direction, containing the text 'Hello, world!'
 
 This will generate a row element with Bootstrap classes based on the given
 arguments, containing the specified body content."
