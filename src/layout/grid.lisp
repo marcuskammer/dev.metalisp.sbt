@@ -96,29 +96,29 @@ Examples:
                      (if offset (format nil " offset-~a-~d" name offset) "")))
       ""))
 
-(defun breakpoint-class (&key (kind "container") (xs nil) (sm nil) (md nil) (lg nil) (xl nil) (xxl nil))
+(defun breakpoint-class (&key (kind :con) (xs nil) (sm nil) (md nil) (lg nil) (xl nil) (xxl nil))
   (let ((xs-str (cond
-                  ((eq kind :container) (make-container-class "xs" xs "container"))
+                  ((eq kind :con) (make-container-class "xs" xs "container"))
                   ((eq kind :row) (make-row-class "xs" xs))
                   ((eq kind :col) (make-col-class "xs" xs))))
         (sm-str (cond
-                  ((eq kind :container) (make-container-class "sm" sm "container"))
+                  ((eq kind :con) (make-container-class "sm" sm "container"))
                   ((eq kind :row) (make-row-class "sm" sm))
                   ((eq kind :col) (make-col-class "sm" sm))))
         (md-str (cond
-                  ((eq kind :container) (make-container-class "md" md "container"))
+                  ((eq kind :con) (make-container-class "md" md "container"))
                   ((eq kind :row) (make-row-class "md" md))
                   ((eq kind :col) (make-col-class "md" md))))
         (lg-str (cond
-                  ((eq kind :container) (make-container-class "lg" lg "container"))
+                  ((eq kind :con) (make-container-class "lg" lg "container"))
                   ((eq kind :row) (make-row-class "lg" lg))
                   ((eq kind :col) (make-col-class "lg" lg))))
         (xl-str (cond
-                  ((eq kind :container) (make-container-class "xl" xl "container"))
+                  ((eq kind :con) (make-container-class "xl" xl "container"))
                   ((eq kind :row) (make-row-class "xl" xl))
                   ((eq kind :col) (make-col-class "xl" xl))))
         (xxl-str (cond
-                   ((eq kind :container) (make-container-class "xxl" xxl "container"))
+                   ((eq kind :con) (make-container-class "xxl" xxl "container"))
                    ((eq kind :row) (make-row-class "xxl" xxl))
                    ((eq kind :col) (make-col-class "xxl" xxl)))))
     (concatenate 'string xs-str sm-str md-str lg-str xl-str xxl-str)))
