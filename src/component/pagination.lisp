@@ -15,13 +15,13 @@
 ;; You can also include "Previous" and "Next" buttons to help users navigate
 ;; through the pages.
 
-(defpackage cl-sbt-pagination
+(defpackage cl-sbt/pagination
   (:use :cl)
   (:export
    :item
    :pagination))
 
-(in-package :cl-sbt-pagination)
+(in-package :cl-sbt/pagination)
 
 (defmacro item ((&key (url "#") (active nil)) &body body)
   "This macro generates a Bootstrap pagination item.

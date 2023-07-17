@@ -24,7 +24,7 @@
 ;;   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 ;; </div>
 
-(defpackage cl-sbt-alert
+(defpackage cl-sbt/alert
   (:use :cl)
   (:export
    :btn
@@ -46,7 +46,7 @@
    :alert-dismiss-light
    :alert-dismiss-dark))
 
-(in-package :cl-sbt-alert)
+(in-package :cl-sbt/alert)
 
 (defmacro btn ()
   "This macro generates the close button used in a Bootstrap alert when it is set to be dismissible."

@@ -1,9 +1,9 @@
-(defpackage cl-sbt-tbl
+(defpackage cl-sbt/tbl
   (:use :cl)
   (:export
    :table))
 
-(in-package :cl-sbt-tbl)
+(in-package :cl-sbt/tbl)
 
 (defmacro table (&body body)
   `(spinneret:with-html

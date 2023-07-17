@@ -20,7 +20,7 @@
 ;; information, but you want to keep the interface uncluttered by hiding content
 ;; that isn't immediately necessary.
 
-(defpackage cl-sbt-accordion
+(defpackage cl-sbt/accordion
   (:use :cl)
   (:export
    :header
@@ -28,7 +28,7 @@
    :item
    :accordion))
 
-(in-package :cl-sbt-accordion)
+(in-package :cl-sbt/accordion)
 
 (defmacro header (target name show)
   "This macro generates a Bootstrap header for an accordion item.

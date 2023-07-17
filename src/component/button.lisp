@@ -27,7 +27,7 @@
 ;; Outline buttons: Bootstrap also provides 'outline' button styles which have
 ;; transparent backgrounds and a colored border and text.
 
-(defpackage cl-sbt-btn
+(defpackage cl-sbt/btn
   (:use :cl)
   (:export
    :btn
@@ -86,7 +86,7 @@
    :btn-outline-dark-sm
    :btn-outline-link-sm))
 
-(in-package :cl-sbt-btn)
+(in-package :cl-sbt/btn)
 
 (defmacro btn ((&key (type "primary") (size "")) &body body)
   "This macro generates a Bootstrap button.

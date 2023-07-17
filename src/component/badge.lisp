@@ -29,7 +29,7 @@
 ;; contextual information to your web pages. It's fully responsive, easy to
 ;; use, and customizable to fit your needs.
 
-(defpackage cl-sbt-badge
+(defpackage cl-sbt/badge
   (:use :cl)
   (:export
    :badge
@@ -52,7 +52,7 @@
    :badge-pill-dark
    :badge-pill-link))
 
-(in-package :cl-sbt-badge)
+(in-package :cl-sbt/badge)
 
 (defmacro badge ((&key (type "primary") (classes "")) &body body)
   "This macro generates a Bootstrap badge.

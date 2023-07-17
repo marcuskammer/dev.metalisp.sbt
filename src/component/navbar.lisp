@@ -25,7 +25,7 @@
 ;; Form Support: You can include form elements directly in your Navbar, allowing
 ;; users to input data directly from the navigation bar.
 
-(defpackage cl-sbt-navbar
+(defpackage cl-sbt/navbar
   (:use :cl)
   (:export
    :navbar
@@ -35,7 +35,7 @@
    :toggler
    :brand-logo))
 
-(in-package :cl-sbt-navbar)
+(in-package :cl-sbt/navbar)
 
 (defmacro brand-logo ((&key (src "#") (alt "Logo") (width 30) (height 24) (classes "d-inline-block align-text-top")))
   "This macro generates a brand logo for a Bootstrap navbar.

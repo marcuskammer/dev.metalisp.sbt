@@ -35,14 +35,14 @@
 ;; richness. From mobile to desktop, the grid system will scale up
 ;; appropriately to ensure your designs are fully responsive.
 
-(defpackage cl-sbt-grid
+(defpackage cl-sbt/grid
   (:use :cl)
   (:export
    :container
    :row
    :col))
 
-(in-package :cl-sbt-grid)
+(in-package :cl-sbt/grid)
 
 (defun make-container-class (name value default-class)
   "Generates a Bootstrap container class string for a particular breakpoint.
