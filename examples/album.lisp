@@ -73,9 +73,10 @@ predefined content."
                     :class "collapse"
                     (container ()
                       (row ()
-                        (col (:sm (8 nil) :md (7 nil) :spacing (:property :p :side :y :size 4))
+                        (col (:breakpoint (:kind :col :sm (8 nil) :md (7 nil))
+                              :spacing (:property :p :side :y :size 4))
                           (about () "Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information."))
-                        (col (:sm (8 nil) :md (nil 1))
+                        (col (:breakpoint (:kind :col :sm (8 nil) :md (nil 1)))
                           (contact (:url "#" :label "Follow on Twitter")
                                    (:url "#" :label "Like on Facebook")
                                    (:url "#" :label "Email me"))))))
