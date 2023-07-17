@@ -1,6 +1,6 @@
-(defpackage cl-sbt-album
+(defpackage cl-sbt/album
   (:use :cl)
-  (:import-from :cl-sbt/grid :container :row :col)
+  (:import-from :cl-sbt/grid :con :row :col)
   (:import-from :cl-sbt/navbar :navbar :brand :toggler)
   (:import-from :cl-sbt :write-string-to-file :with-page)
   (:import-from :spinneret :with-html-string)
@@ -15,7 +15,7 @@
   (:documentation "The `cl-sbt-album` package provides macros for building an
   album-style website page using Bootstrap and Spinneret."))
 
-(in-package :cl-sbt-album)
+(in-package :cl-sbt/album)
 
 (defvar *navbar-header-id* "navbarHeader")
 
@@ -71,7 +71,7 @@ predefined content."
   `(spinneret:with-html
      (:header (:div :id ,*navbar-header-id*
                     :class "collapse"
-                    (container ()
+                    (con ()
                       (row ()
                         (col (:breakpoint (:kind :col :sm (8 nil) :md (7 nil))
                               :spacing (:property :p :side :y :size 4))
@@ -85,13 +85,14 @@ predefined content."
          (toggler ,*navbar-header-id*))
        ,@body)))
 
-(defmacro footer ((&key (textbody "secondary") (spacing nil)) &body body)
+(defmacro footer ((&key (color nil) (spacing nil)) &body body)
   "Generates an HTML footer with Bootstrap classes.
 
-TEXTBODY: Specifies the color scheme of the text body, default is 'secondary'.
+COLOR: Specifies the color scheme of the footer. It's a list containing keyword
+arguments that can be passed to the cl-sbt/utility:color function.
 
 SPACING: A list specifying the Bootstrap spacing class. The list should contain
-keyword arguments that can be passed to the cl-sbt-spacing:spacing function.
+keyword arguments that can be passed to the cl-sbt/utility:spacing function.
 
 BODY: Optional. Specifies additional HTML content to be added to the footer.
 This can be any valid HTML content that spinneret:with-html can parse.
@@ -100,17 +101,19 @@ The footer generated contains fixed content, including a 'Back to top' link and
 a short paragraph about Bootstrap.
 
 Example usage:
-  (footer (:textbody \"primary\" :spacing (:property :p :side :y :size 4))
+  (footer (:color (:text :primary :background :light)
+          :spacing (:property :p :side :y :size 4))
           (:p :class \"custom-class\" \"Custom content here\"))
-  ; This will generate a footer with primary color text and a top/bottom
-  ; padding of size 4. Additionally, a paragraph with class 'custom-class'
-  ; and text 'Custom content here' will be added to the footer."
+  ; This will generate a footer with primary color text and light background
+  ; with a top/bottom padding of size 4. Additionally, a paragraph with class
+  ; 'custom-class' and text 'Custom content here' will be added to the footer."
   `(spinneret:with-html
      (:footer :class ,(concatenate 'string
-                                   (if textbody (format nil "text-body-~a " textbody) "")
+                                   (if (null color) ""
+                                       (apply #'cl-sbt/utility:color color))
                                    (if (null spacing) ""
                                        (apply #'cl-sbt/utility:spacing spacing)))
-              (container ()
+              (con ()
                 (:p :class "float-end mb-1"
                     (:a :href "#" "Back to top"))
                 (:p :class "mb-1"
@@ -126,4 +129,4 @@ Example usage:
   `(with-page (:title ,title)
      (header)
      (:main ,@body)
-     (footer (:spacing (:property :p :side :y :size 5)))))
+     (footer (:color (:text "body-secondary") :spacing (:property :p :side :y :size 5)))))
