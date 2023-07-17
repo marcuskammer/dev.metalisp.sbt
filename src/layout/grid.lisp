@@ -57,7 +57,7 @@ The function generates a ' container-NAME' class string if VALUE is non-nil.
 
 Example:
   (make-container-class \"md\" t \"container\") ; => \" container-md\""
-  (if value (format nil " ~a-~a " default-class name) ""))
+  (if value (format nil "~a-~a " default-class name) ""))
 
 (defun make-row-class (name value)
   "Generates a Bootstrap row class string for a particular breakpoint or a general column setting.
@@ -178,7 +178,7 @@ Examples:
   `(spinneret:with-html
      (:div :class
            ,(concatenate 'string
-                         (if (null fluid) "container" "container-fluid")
+                         (if (null fluid) "container " "container-fluid ")
                          (if (null breakpoint) ""
                              (apply #'breakpoint-class breakpoint))
                          (if (null text) ""
