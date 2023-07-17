@@ -124,7 +124,7 @@ Examples:
 
   (breakpoint-class :kind :con :xs t :sm t :md t :lg t :xl t :xxl t)
   ; will generate a string for a fluid container that spans all breakpoints."
-    (let ((xs-str (cond
+  (let ((xs-str (cond
                   ((eq kind :con) (make-container-class "xs" xs "container"))
                   ((eq kind :row) (make-row-class "xs" xs))
                   ((eq kind :col) (make-col-class "xs" xs))))
