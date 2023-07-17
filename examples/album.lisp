@@ -108,7 +108,7 @@ Example usage:
      (:footer :class ,(concatenate 'string
                                    (if textbody (format nil "text-body-~a " textbody) "")
                                    (if (null spacing) ""
-                                       (apply #'cl-sbt-utility:spacing spacing)))
+                                       (apply #'cl-sbt/utility:spacing spacing)))
               (container ()
                 (:p :class "float-end mb-1"
                     (:a :href "#" "Back to top"))

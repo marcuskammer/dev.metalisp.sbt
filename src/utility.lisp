@@ -38,7 +38,7 @@
 ;; elements, allowing for easy adjustments to visibility and layout across
 ;; different screen sizes.
 
-(defpackage :cl-sbt-utility
+(defpackage :cl-sbt/utility
   (:use :cl)
   (:export
    :background
@@ -51,7 +51,7 @@
    :valign)
   (:documentation "A module for generating Bootstrap utility classes."))
 
-(in-package :cl-sbt-utility)
+(in-package :cl-sbt/utility)
 
 (defun background (&key (color nil) (gradient nil))
   "Generates a Bootstrap background class.
@@ -265,7 +265,7 @@ Example 4:
   (let ((alignment-str (if (null alignment) "" (format nil "text-~a " alignment)))
         (transform-str (if (null transform) "" (format nil "text-~a " transform)))
         (weight-str (if (null weight) "" (format nil "fw-~a " weight)))
-        (wrap-str (if (null wrap) "" (format nil "text-~a" wrap)))
+        (wrap-str (if (null wrap) "" (format nil "text-~a " wrap)))
         (monospace-str (if (null monospace) "" "font-monospace")))
     (string-downcase (concatenate 'string
                                   alignment-str

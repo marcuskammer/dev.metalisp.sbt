@@ -89,7 +89,7 @@ containing the text 'Hello, world!'."
                          (make-container-class "xl" xl "container")
                          (make-container-class "xxl" xxl "container")
                          (if (null text) ""
-                             (apply #'cl-sbt-utility:text text)))
+                             (apply #'cl-sbt/utility:text text)))
            ,@body)))
 
 (defun make-row-class (name value)
@@ -217,5 +217,5 @@ Example:
                           (make-col-class "xxl" xxl)
                           (if (null align-self) "" (string-downcase (format nil " align-self-~a" align-self)))
                           (if (null spacing) ""
-                              (apply #'cl-sbt-utility:spacing spacing)))
+                              (apply #'cl-sbt/utility:spacing spacing)))
            ,@body)))
