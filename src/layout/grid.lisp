@@ -62,9 +62,11 @@ Example:
 (defun make-row-class (name value)
   "Generates a Bootstrap row class string for a particular breakpoint or a general column setting.
 
-NAME is the name of the breakpoint (e.g., 'xs', 'sm', 'md', etc.), or 'cols' for a general setting.
+NAME is the name of the breakpoint (e.g., 'xs', 'sm', 'md', etc.), or 'cols'
+for a general setting.
 
-VALUE is an integer that specifies the number of equal-width columns at the given breakpoint or in general.
+VALUE is an integer that specifies the number of equal-width columns at the
+given breakpoint or in general.
 
 The function generates a 'row-cols-NAME-VALUE' class string. If NAME is 'cols',
 it omits the NAME part.
