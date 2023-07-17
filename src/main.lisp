@@ -13,7 +13,8 @@
       (:head
        (:title ,title)
        (:link :type "text/css" :rel "stylesheet" :href "public/5.3.0/bootstrap.min.css"))
-      (:body ,@body))))
+      (:body ,@body)
+      (:script :src "public/5.3.0/bootstrap.bundle.min.js"))))
 
 (defun write-string-to-file (filename string)
   (with-open-file (stream filename :direction :output :if-exists :supersede)
