@@ -1,3 +1,34 @@
+;; The Bootstrap example 'Album' demonstrates how to create a responsive,
+;; mobile-first photo album layout using Bootstrap's grid system, cards, and
+;; some other components. Here's a brief overview of its structure:
+
+;; Navigation Bar: At the top, there's a navbar with the site name and some
+;; links. The navbar collapses into a hamburger menu on smaller screens for
+;; better mobile usability.
+
+;; Hero Unit: The main headline or 'Hero unit' is a large callout with some
+;; text and a call-to-action button. It's a marketing section of the page that
+;; offers users a brief overview of the product's main feature.
+
+;; Photo Album: The main content of the page is a photo album. This is
+;; implemented as a responsive grid of card components. Each card contains an
+;; image, some text, and a button. The grid adjusts from a single column on the
+;; smallest screens to multi-column layouts on larger screens.
+
+;; Footer: Finally, there's a footer at the bottom of the page with some links
+;; and copyright information.
+
+;; The Album example is a good demonstration of how Bootstrap can be used to
+;; create a responsive, mobile-first layout with relatively little code. It
+;; shows how to use some of the most common Bootstrap components, like navbars,
+;; cards, and the grid system, and it provides a solid basis for further
+;; customization and extension.
+
+;; It's worth noting that while the layout is quite simple, it can be used as a
+;; starting point for more complex projects. By understanding and working
+;; through this example, one can get a grasp of Bootstrap's conventions and
+;; learn how to use its components effectively.
+
 (defpackage cl-sbt/album
   (:use :cl)
   (:import-from :cl-sbt/grid :con :row :col)
@@ -5,12 +36,11 @@
   (:import-from :cl-sbt :write-string-to-file :with-page)
   (:import-from :spinneret :with-html-string)
   (:export
-   :show-album-page
    :contact
    :about
    :header
-   :main
    :footer
+   :album
    :*navbar-header-id*)
   (:documentation "The `cl-sbt-album` package provides macros for building an
   album-style website page using Bootstrap and Spinneret."))
