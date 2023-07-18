@@ -46,6 +46,9 @@
 
 (defvar *breakpoints* '("xs" "sm" "md" "lg" "xl" "xxl"))
 
+(defun string-clean (str)
+  (string-trim " " (string-downcase str)))
+
 (defun make-con-class (name value default-class)
   "Generates a Bootstrap container class string for a particular breakpoint.
 
@@ -78,8 +81,8 @@ Examples:
   (make-row-class \"cols\" 2) ; => \" row-cols-2\""
   (if value
       (if (string-equal "cols" name)
-          (format nil " row-cols-~d" value)
-          (format nil " row-cols-~a-~d" name value))
+          (format nil "row-cols-~d " value)
+          (format nil "row-cols-~a-~d " name value))
       ""))
 
 (defun make-col-class (name size-offset-pair)
@@ -169,14 +172,14 @@ Examples:
   ; defined breakpoint, containing bold text."
   `(spinneret:with-html
      (:div :class
-           ,(concatenate 'string
+           ,(string-clean (concatenate 'string
                          (if (null fluid) "container " "container-fluid ")
                          (if (null breakpoint) ""
                              (apply #'breakpoint-class breakpoint))
                          (if (null text) ""
                              (apply #'cl-sbt/utility:text text))
                          (if (null spacing) ""
-                             (apply #'cl-sbt/utility:spacing spacing)))
+                             (apply #'cl-sbt/utility:spacing spacing))))
            ,@body)))
 
 (defmacro row ((&key (breakpoint nil) (cols nil) (align-items nil) (justify-content nil) (spacing nil)) &body body)
@@ -215,14 +218,14 @@ This will generate a row element with Bootstrap classes based on the given
 arguments, containing the specified body content."
   `(spinneret:with-html
      (:div :class
-           ,(string-downcase
+           ,(string-clean
              (concatenate 'string
-                          "row"
+                          "row "
                           (if (null breakpoint) ""
                               (apply #'breakpoint-class breakpoint))
                           (make-row-class "cols" cols)
-                          (if (null align-items) "" (format nil " align-items-~a" align-items))
-                          (if (null justify-content) "" (format nil " justify-content-~a" justify-content))
+                          (if (null align-items) "" (format nil "align-items-~a " align-items))
+                          (if (null justify-content) "" (format nil "justify-content-~a " justify-content))
                           (if (null spacing) ""
                               (apply #'cl-sbt/utility:spacing spacing))))
            ,@body)))
@@ -259,11 +262,12 @@ Examples:
   ; containing the text 'Hello, world!'."
   `(spinneret:with-html
      (:div :class
-           ,(concatenate 'string
-                         (if (null col) "col " (format nil "col-~d " col))
-                         (if (null breakpoint) ""
-                             (apply #'breakpoint-class breakpoint))
-                         (if (null align-self) "" (string-downcase (format nil "align-self-~a " align-self)))
-                         (if (null spacing) ""
-                             (apply #'cl-sbt/utility:spacing spacing)))
+           ,(string-clean
+             (concatenate 'string
+                          (if (null col) "col " (format nil "col-~d " col))
+                          (if (null breakpoint) ""
+                              (apply #'breakpoint-class breakpoint))
+                          (if (null align-self) "" (string-downcase (format nil "align-self-~a " align-self)))
+                          (if (null spacing) ""
+                              (apply #'cl-sbt/utility:spacing spacing))))
            ,@body)))
