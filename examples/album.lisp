@@ -145,12 +145,27 @@ Example usage:
          ,@body))))
 
 (defmacro hero (&body body)
+  "Generates an HTML 'Hero' section with the provided content.
+
+BODY: Specifies the HTML content to be included in the 'Hero' section. This can
+be any valid HTML content that spinneret:with-html can parse.
+
+The 'Hero' section is a prominent part of the page, usually used to draw
+attention to the most important content. The content will be wrapped in a
+Bootstrap 'container', and organized in a responsive grid using Bootstrap's
+'row' and 'column' system.
+
+Example usage:
+  (hero (:h1 \"Hello, world!\"
+         :p \"This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.\")
+        (:hr)
+        (:p \"It uses utility classes for typography and spacing to space content out within the larger container.\"))
+  ; This will generate a 'Hero' section with the provided headline, text, and
+  ; horizontal line."
   `(spinneret:with-html
      (con (:spacing (:property :p :size 5))
        (row (:spacing (:property :p :side :lg :size 5))
-         (col (:breakpoint (:kind :col :md (8 nil) :lg (6 nil))
-               :spacing (:property :p :size 5))
-           ,@body)))))
+           ,@body))))
 
 (defmacro page (title &body body)
   `(with-page (:title ,title)
@@ -162,7 +177,8 @@ Example usage:
          (contact (:url "#" :label "Follow on Twitter")
                   (:url "#" :label "Like on Facebook")
                   (:url "#" :label "Email me"))))
-     (:main ,@body)
+     (:main (hero (col (:breakpoint (:kind :col :md (8 nil) :lg (6 nil))
+                        :spacing (:property :p :size 5)))))
      (footer ())))
 
 (defun write-album (&key (lang "de") (style :tree) (fc 120))
