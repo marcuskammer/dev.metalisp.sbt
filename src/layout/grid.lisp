@@ -99,8 +99,8 @@ Examples:
       (let ((size (first size-offset-pair))
             (offset (second size-offset-pair)))
         (concatenate 'string
-                     (if size (format nil " col-~a-~d" name size) "")
-                     (if offset (format nil " offset-~a-~d" name offset) "")))
+                     (if size (format nil "col-~a-~d" name size) "")
+                     (if offset (format nil " offset-~a-~d" name offset) "") " "))
       ""))
 
 (defun breakpoint-class (&key (kind :con) (xs nil) (sm nil) (md nil) (lg nil) (xl nil) (xxl nil))
@@ -260,10 +260,10 @@ Examples:
   `(spinneret:with-html
      (:div :class
            ,(concatenate 'string
-                         (if (null col) "col" (format nil "col-~d" col))
+                         (if (null col) "col " (format nil "col-~d " col))
                          (if (null breakpoint) ""
                              (apply #'breakpoint-class breakpoint))
-                         (if (null align-self) "" (string-downcase (format nil " align-self-~a" align-self)))
+                         (if (null align-self) "" (string-downcase (format nil "align-self-~a " align-self)))
                          (if (null spacing) ""
                              (apply #'cl-sbt/utility:spacing spacing)))
            ,@body)))
