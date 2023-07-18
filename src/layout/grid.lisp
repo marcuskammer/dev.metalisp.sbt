@@ -133,19 +133,16 @@ Examples:
 
   (breakpoint-class :kind :con :xs t :sm t :md t :lg t :xl t :xxl t)
   ; will generate a string for a fluid container that spans all breakpoints."
-  (let ((breakpoint-values (list xs sm md lg xl xxl))
-        (result ""))
-    (dotimes (i (length *breakpoints*))
-      (let ((breakpoint-name (nth i *breakpoints*))
-            (breakpoint-value (nth i breakpoint-values)))
-        (setq result
-              (concatenate 'string
-                           result
-                           (cond
-                             ((eq kind :con) (make-con-class breakpoint-name breakpoint-value "container"))
-                             ((eq kind :row) (make-row-class breakpoint-name breakpoint-value))
-                             ((eq kind :col) (make-col-class breakpoint-name breakpoint-value)))))))
-    result))
+  (let ((breakpoint-values (list xs sm md lg xl xxl)))
+    (apply #'concatenate 'string
+           (loop for i from 0 below (length *breakpoints*)
+                 for breakpoint-name = (nth i *breakpoints*)
+                 for breakpoint-value = (nth i breakpoint-values)
+                 collect
+                 (cond
+                   ((eq kind :con) (make-con-class breakpoint-name breakpoint-value "container"))
+                   ((eq kind :row) (make-row-class breakpoint-name breakpoint-value))
+                   ((eq kind :col) (make-col-class breakpoint-name breakpoint-value)))))))
 
 (defmacro con ((&key (fluid nil) (breakpoint nil) (text nil)) &body body)
   "Generates a Bootstrap container.
