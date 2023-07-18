@@ -44,7 +44,9 @@
 
 (in-package :cl-sbt/grid)
 
-(defun make-container-class (name value default-class)
+(defvar *breakpoints* '("xs" "sm" "md" "lg" "xl" "xxl"))
+
+(defun make-con-class (name value default-class)
   "Generates a Bootstrap container class string for a particular breakpoint.
 
 NAME is the name of the breakpoint (e.g., 'xs', 'sm', 'md', etc.).
@@ -129,27 +131,27 @@ Examples:
   (breakpoint-class :kind :con :xs t :sm t :md t :lg t :xl t :xxl t)
   ; will generate a string for a fluid container that spans all breakpoints."
   (let ((xs-str (cond
-                  ((eq kind :con) (make-container-class "xs" xs "container"))
+                  ((eq kind :con) (make-con-class "xs" xs "container"))
                   ((eq kind :row) (make-row-class "xs" xs))
                   ((eq kind :col) (make-col-class "xs" xs))))
         (sm-str (cond
-                  ((eq kind :con) (make-container-class "sm" sm "container"))
+                  ((eq kind :con) (make-con-class "sm" sm "container"))
                   ((eq kind :row) (make-row-class "sm" sm))
                   ((eq kind :col) (make-col-class "sm" sm))))
         (md-str (cond
-                  ((eq kind :con) (make-container-class "md" md "container"))
+                  ((eq kind :con) (make-con-class "md" md "container"))
                   ((eq kind :row) (make-row-class "md" md))
                   ((eq kind :col) (make-col-class "md" md))))
         (lg-str (cond
-                  ((eq kind :con) (make-container-class "lg" lg "container"))
+                  ((eq kind :con) (make-con-class "lg" lg "container"))
                   ((eq kind :row) (make-row-class "lg" lg))
                   ((eq kind :col) (make-col-class "lg" lg))))
         (xl-str (cond
-                  ((eq kind :con) (make-container-class "xl" xl "container"))
+                  ((eq kind :con) (make-con-class "xl" xl "container"))
                   ((eq kind :row) (make-row-class "xl" xl))
                   ((eq kind :col) (make-col-class "xl" xl))))
         (xxl-str (cond
-                   ((eq kind :con) (make-container-class "xxl" xxl "container"))
+                   ((eq kind :con) (make-con-class "xxl" xxl "container"))
                    ((eq kind :row) (make-row-class "xxl" xxl))
                    ((eq kind :col) (make-col-class "xxl" xxl)))))
     (concatenate 'string xs-str sm-str md-str lg-str xl-str xxl-str)))
