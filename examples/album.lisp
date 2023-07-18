@@ -88,7 +88,7 @@ Example usage:
                                       :href ,url
                                       ,label)))))))
 
-(defmacro header (&body body)
+(defmacro navigation (&body body)
   "Generates an HTML header for the album page.
 
 This macro generates a header with a navigation bar and some predefined
@@ -155,15 +155,15 @@ Example usage:
                     (:a :href "/docs/5.3/getting-started/introduction/" "getting started guide"))
                 ,@body))))
 
-(defmacro with-hero ()
+(defmacro hero (&body body)
   `(spinneret:with-html
      (con (:spacing (:property :p :size 5))
        (row (:spacing (:property :p :side :lg :size 5))
          (col (:breakpoint (:kind :col :md (8 nil) :lg (6 nil))
                :spacing (:property :p :size 5))
-           "foo")))))
+           ,@body)))))
 
-(defmacro album (title &body body)
+(defmacro page (title &body body)
   `(with-page (:title ,title)
      (header)
      (:main ,@body)
@@ -175,4 +175,4 @@ Example usage:
         (spinneret:*html-style* style)
         (spinneret:*fill-column* fc))
     (write-string-to-file "album.html"
-                          (with-html-string (album "Album" (with-hero))))))
+                          (with-html-string (page "Album" (hero))))))
