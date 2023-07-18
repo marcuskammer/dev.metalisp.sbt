@@ -49,10 +49,10 @@
 
 (defvar *navbar-header-id* "navbarHeader")
 
-(defmacro about ((&key (textbody "secondary")) &body body)
+(defmacro about ((&key (color '(:text :body-secondary))) &body body)
   "Generates an HTML 'About' section with the provided content.
 
-TEXTBODY: Specifies the color scheme of the text body. Default is 'secondary'.
+COLOR: Specifies the color scheme of the text.
 
 BODY: Specifies the HTML content to be included in the 'About' section. This
 can be any valid HTML content that spinneret:with-html can parse.
@@ -64,7 +64,7 @@ Example usage:
   `(spinneret:with-html
      (:h4 "About"
           (:p :class ,(concatenate 'string
-                                   (if textbody (format nil "text-body-~a" textbody) ""))
+                                   (if color (apply #'cl-sbt/utility:color color) ""))
               ,@body))))
 
 (defmacro contact (&rest rest)
