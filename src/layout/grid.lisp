@@ -144,7 +144,7 @@ Examples:
                    ((eq kind :row) (make-row-class breakpoint-name breakpoint-value))
                    ((eq kind :col) (make-col-class breakpoint-name breakpoint-value)))))))
 
-(defmacro con ((&key (fluid nil) (breakpoint nil) (text nil)) &body body)
+(defmacro con ((&key (fluid nil) (breakpoint nil) (text nil) (spacing nil)) &body body)
   "Generates a Bootstrap container.
 
 FLUID: When non-nil, the container becomes fluid (full width).
@@ -174,10 +174,12 @@ Examples:
                          (if (null breakpoint) ""
                              (apply #'breakpoint-class breakpoint))
                          (if (null text) ""
-                             (apply #'cl-sbt/utility:text text)))
+                             (apply #'cl-sbt/utility:text text))
+                         (if (null spacing) ""
+                             (apply #'cl-sbt/utility:spacing spacing)))
            ,@body)))
 
-(defmacro row ((&key (breakpoint nil) (cols nil) (align-items nil) (justify-content nil)) &body body)
+(defmacro row ((&key (breakpoint nil) (cols nil) (align-items nil) (justify-content nil) (spacing nil)) &body body)
   "Generates a Bootstrap row.
 
 BREAKPOINT: Specifies the number of equal-width columns at various
@@ -220,7 +222,9 @@ arguments, containing the specified body content."
                               (apply #'breakpoint-class breakpoint))
                           (make-row-class "cols" cols)
                           (if (null align-items) "" (format nil " align-items-~a" align-items))
-                          (if (null justify-content) "" (format nil " justify-content-~a" justify-content))))
+                          (if (null justify-content) "" (format nil " justify-content-~a" justify-content))
+                          (if (null spacing) ""
+                              (apply #'cl-sbt/utility:spacing spacing))))
            ,@body)))
 
 (defmacro col ((&key (breakpoint nil) (col nil) (align-self nil) (spacing nil)) &body body)
