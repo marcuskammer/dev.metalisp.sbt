@@ -130,10 +130,8 @@ Example usage:
   ; 'custom-class' and text 'Custom content here' will be added to the footer."
   `(spinneret:with-html
      (:footer :class ,(concatenate 'string
-                                   (if (null color) ""
-                                       (apply #'cl-sbt/utility:color color))
-                                   (if (null spacing) ""
-                                       (apply #'cl-sbt/utility:spacing spacing)))
+                                   (if color (apply #'cl-sbt/utility:color color) "")
+                                   (if spacing (apply #'cl-sbt/utility:spacing spacing) ""))
        (con ()
          (:p :class "float-end mb-1"
              (:a :href "#" "Back to top"))
