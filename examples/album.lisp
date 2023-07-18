@@ -171,5 +171,5 @@ Example usage:
   (let ((spinneret:*html-lang* lang)
         (spinneret:*html-style* style)
         (spinneret:*fill-column* fc))
-    (write-string-to-file "album.html"
+    (write-string-to-file "~/quicklisp/local-projects/cl-sbt/examples/album.html"
                           (with-html-string (page "Album" (hero))))))
