@@ -38,7 +38,7 @@
 (defpackage cl-sbt/grid
   (:use :cl)
   (:export
-   :container
+   :con
    :row
    :col))
 
