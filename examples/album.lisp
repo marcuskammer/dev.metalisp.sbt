@@ -125,8 +125,24 @@ Example usage:
                     (:a :href "/docs/5.3/getting-started/introduction/" "getting started guide"))
                 ,@body))))
 
-(defmacro album-page (title &body body)
+(defmacro with-hero ()
+  `(spinneret:with-html
+     (con (:spacing (:property :p :size 5))
+       (row (:spacing (:property :p :side :lg :size 5))
+         (col (:breakpoint (:kind :col :md (8 nil) :lg (6 nil))
+               :spacing (:property :p :size 5))
+           "foo")))))
+
+(defmacro album (title &body body)
   `(with-page (:title ,title)
      (header)
      (:main ,@body)
-     (footer (:color (:text "body-secondary") :spacing (:property :p :side :y :size 5)))))
+     (footer (:spacing (:property :p :side :y :size 5)
+              :color (:text "secondary")))))
+
+(defun write-album (&key (lang "de") (style :tree) (fc 120))
+  (let ((spinneret:*html-lang* lang)
+        (spinneret:*html-style* style)
+        (spinneret:*fill-column* fc))
+    (write-string-to-file "album.html"
+                          (with-html-string (album "Album" (with-hero))))))
