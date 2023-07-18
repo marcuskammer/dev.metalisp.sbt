@@ -100,17 +100,10 @@ to the macro. The BODY content will be included in the header after the
 predefined content."
   `(spinneret:with-html
      (:header (collapsible ,*navbar-header-id*
-                (col (:breakpoint (:kind :col :sm (8 nil) :md (7 nil))
-                      :spacing (:property :p :side :y :size 4))
-                  (about () "Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information."))
-                (col (:breakpoint (:kind :col :sm (8 nil) :md (nil 1)))
-                  (contact (:url "#" :label "Follow on Twitter")
-                           (:url "#" :label "Like on Facebook")
-                           (:url "#" :label "Email me"))))
+                ,@body)
        (navbar (:fluid nil)
          (brand () "Album")
-         (toggler ,*navbar-header-id*))
-       ,@body)))
+         (toggler ,*navbar-header-id*)))))
 
 (defmacro footer ((&key (color '(:text :body-secondary))
                      (spacing '(:property :p :size 5))) &body body)
@@ -163,7 +156,14 @@ Example usage:
 
 (defmacro page (title &body body)
   `(with-page (:title ,title)
-     (header)
+     (navigation
+       (col (:breakpoint (:kind :col :sm (8 nil) :md (7 nil))
+             :spacing (:property :p :side :y :size 4))
+         (about () "Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information."))
+       (col (:breakpoint (:kind :col :sm (8 nil) :md (nil 1)))
+         (contact (:url "#" :label "Follow on Twitter")
+                  (:url "#" :label "Like on Facebook")
+                  (:url "#" :label "Email me"))))
      (:main ,@body)
      (footer ())))
 
