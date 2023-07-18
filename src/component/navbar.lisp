@@ -113,6 +113,14 @@ Example:
                 :aria-label "Toggle navigation"
                 (:span :class "navbar-toggler-icon"))))
 
+(defmacro collapsible (id &body body)
+  `(spinneret:with-html
+     (:div :id ,id
+           :class "collapse"
+           (cl-sbt/grid:con ()
+             (cl-sbt/grid:row ()
+               ,@body)))))
+
 (defmacro navbar ((&key (fluid t) (classes "")) &body body)
   "This macro generates a Bootstrap navbar.
 

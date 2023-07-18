@@ -32,7 +32,7 @@
 (defpackage cl-sbt/album
   (:use :cl)
   (:import-from :cl-sbt/grid :con :row :col)
-  (:import-from :cl-sbt/navbar :navbar :brand :toggler)
+  (:import-from :cl-sbt/navbar :navbar :brand :toggler :collapsible)
   (:import-from :cl-sbt :write-string-to-file :with-page)
   (:import-from :spinneret :with-html-string)
   (:export
@@ -99,23 +99,21 @@ Additional content can be added to the header by passing it as BODY arguments
 to the macro. The BODY content will be included in the header after the
 predefined content."
   `(spinneret:with-html
-     (:header (:div :id ,*navbar-header-id*
-                    :class "collapse"
-                    (con ()
-                      (row ()
-                        (col (:breakpoint (:kind :col :sm (8 nil) :md (7 nil))
-                              :spacing (:property :p :side :y :size 4))
-                          (about () "Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information."))
-                        (col (:breakpoint (:kind :col :sm (8 nil) :md (nil 1)))
-                          (contact (:url "#" :label "Follow on Twitter")
-                                   (:url "#" :label "Like on Facebook")
-                                   (:url "#" :label "Email me"))))))
+     (:header (collapsible ,*navbar-header-id*
+                (col (:breakpoint (:kind :col :sm (8 nil) :md (7 nil))
+                      :spacing (:property :p :side :y :size 4))
+                  (about () "Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information."))
+                (col (:breakpoint (:kind :col :sm (8 nil) :md (nil 1)))
+                  (contact (:url "#" :label "Follow on Twitter")
+                           (:url "#" :label "Like on Facebook")
+                           (:url "#" :label "Email me"))))
        (navbar (:fluid nil)
          (brand () "Album")
          (toggler ,*navbar-header-id*))
        ,@body)))
 
-(defmacro footer ((&key (color '(:text :body-secondary)) (spacing '(:property :p :size 5))) &body body)
+(defmacro footer ((&key (color '(:text :body-secondary))
+                     (spacing '(:property :p :size 5))) &body body)
   "Generates an HTML footer with Bootstrap classes.
 
 COLOR: Specifies the color scheme of the footer. It's a list containing keyword
@@ -143,17 +141,17 @@ Example usage:
                                        (apply #'cl-sbt/utility:color color))
                                    (if (null spacing) ""
                                        (apply #'cl-sbt/utility:spacing spacing)))
-              (con ()
-                (:p :class "float-end mb-1"
-                    (:a :href "#" "Back to top"))
-                (:p :class "mb-1"
-                    "Album example is © Bootstrap, but please download and customize it for yourself!")
-                (:p :class "mb-0"
-                    "New to Bootstrap? "
-                    (:a :href "/" "Visit the homepage")
-                    " or read our "
-                    (:a :href "/docs/5.3/getting-started/introduction/" "getting started guide"))
-                ,@body))))
+       (con ()
+         (:p :class "float-end mb-1"
+             (:a :href "#" "Back to top"))
+         (:p :class "mb-1"
+             "Album example is © Bootstrap, but please download and customize it for yourself!")
+         (:p :class "mb-0"
+             "New to Bootstrap? "
+             (:a :href "/" "Visit the homepage")
+             " or read our "
+             (:a :href "/docs/5.3/getting-started/introduction/" "getting started guide"))
+         ,@body))))
 
 (defmacro hero (&body body)
   `(spinneret:with-html
