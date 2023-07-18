@@ -182,7 +182,7 @@ Examples:
                              (apply #'cl-sbt/utility:spacing spacing))))
            ,@body)))
 
-(defmacro row ((&key (breakpoint nil) (cols nil) (align-items nil) (justify-content nil) (spacing nil)) &body body)
+(defmacro row ((&key (cols nil) (breakpoint nil) (align-items nil) (justify-content nil) (spacing nil)) &body body)
   "Generates a Bootstrap row.
 
 BREAKPOINT: Specifies the number of equal-width columns at various
@@ -221,16 +221,17 @@ arguments, containing the specified body content."
            ,(string-clean
              (concatenate 'string
                           "row "
+                          (if (null cols) "" (format nil "cols-~d " cols))
                           (if (null breakpoint) ""
                               (apply #'breakpoint-class breakpoint))
-                          (make-row-class "cols" cols)
+                          ;(make-row-class "cols" cols)
                           (if (null align-items) "" (format nil "align-items-~a " align-items))
                           (if (null justify-content) "" (format nil "justify-content-~a " justify-content))
                           (if (null spacing) ""
                               (apply #'cl-sbt/utility:spacing spacing))))
            ,@body)))
 
-(defmacro col ((&key (breakpoint nil) (col nil) (align-self nil) (spacing nil)) &body body)
+(defmacro col ((&key (col nil) (breakpoint nil) (align-self nil) (spacing nil)) &body body)
   "Generates a Bootstrap column.
 
 COL: Specifies the number of columns the element spans.
