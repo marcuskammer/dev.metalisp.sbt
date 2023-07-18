@@ -168,7 +168,7 @@ Example usage:
      (header)
      (:main ,@body)
      (footer (:spacing (:property :p :side :y :size 5)
-              :color (:text "secondary")))))
+              :color (:text "body-secondary")))))
 
 (defun write-album (&key (lang "de") (style :tree) (fc 120))
   (let ((spinneret:*html-lang* lang)
