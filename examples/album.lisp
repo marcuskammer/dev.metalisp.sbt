@@ -178,7 +178,12 @@ Example usage:
                   (:url "#" :label "Like on Facebook")
                   (:url "#" :label "Email me"))))
      (:main (hero (col (:breakpoint (:kind :col :md (8 nil) :lg (6 nil))
-                        :spacing (:property :p :size 5)))))
+                        :spacing (:property :p :size 5))
+                    (:h1 :class "fw-light")
+                    (:p :class "lead text-body-secondary"
+                        "Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.")
+                    (:p (cl-sbt/btn:btn-primary "Main call to action")
+                        (cl-sbt/btn:btn-secondary "Secondary action")))))
      (footer ())))
 
 (defun write-album (&key (lang "de") (style :tree) (fc 120))
@@ -186,4 +191,4 @@ Example usage:
         (spinneret:*html-style* style)
         (spinneret:*fill-column* fc))
     (write-string-to-file "~/quicklisp/local-projects/cl-sbt/examples/album.html"
-                          (with-html-string (page "Album" (hero))))))
+                          (with-html-string (page "Album")))))
