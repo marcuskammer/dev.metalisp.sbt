@@ -115,7 +115,7 @@ predefined content."
          (toggler ,*navbar-header-id*))
        ,@body)))
 
-(defmacro footer ((&key (color nil) (spacing nil)) &body body)
+(defmacro footer ((&key (color '(:text :body-secondary)) (spacing '(:property :p :size 5))) &body body)
   "Generates an HTML footer with Bootstrap classes.
 
 COLOR: Specifies the color scheme of the footer. It's a list containing keyword
@@ -167,8 +167,7 @@ Example usage:
   `(with-page (:title ,title)
      (header)
      (:main ,@body)
-     (footer (:spacing (:property :p :side :y :size 5)
-              :color (:text "body-secondary")))))
+     (footer ())))
 
 (defun write-album (&key (lang "de") (style :tree) (fc 120))
   (let ((spinneret:*html-lang* lang)
