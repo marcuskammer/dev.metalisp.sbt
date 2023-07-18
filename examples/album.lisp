@@ -84,7 +84,7 @@ Example usage:
      (:ul :class "list-unstyled"
           ,@(loop for item in rest
                   collect (destructuring-bind (&key url label) item
-                            `(:li (:a :class "text-white"
+                            `(:li (:a :class ,(cl-sbt/utility:color :text :white)
                                       :href ,url
                                       ,label)))))))
 
