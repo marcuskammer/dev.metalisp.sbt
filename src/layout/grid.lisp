@@ -267,7 +267,7 @@ Examples:
                           (if (null col) "col " (format nil "col-~d " col))
                           (if (null breakpoint) ""
                               (apply #'breakpoint-class breakpoint))
-                          (if (null align-self) "" (string-downcase (format nil "align-self-~a " align-self)))
+                          (if (null align-self) "" (format nil "align-self-~a " align-self))
                           (if (null spacing) ""
                               (apply #'cl-sbt/utility:spacing spacing))))
            ,@body)))
