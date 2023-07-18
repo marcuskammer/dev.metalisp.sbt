@@ -112,9 +112,12 @@ It can be :con for container, :row for row, or :col for column.
 XS, SM, MD, LG, XL, XXL arguments represent the Bootstrap breakpoints.
 They can be used to specify specific classes for each breakpoint.
 The value of these arguments depends on the KIND of element:
-  - For :con, they should be non-nil if the container's width is set for the corresponding breakpoint.
-  - For :row, they should be an integer representing the number of equal-width columns at the corresponding breakpoint.
-  - For :col, they should be a list that contains the size and optional offset for the column at the corresponding breakpoint.
+  - For :con, they should be non-nil if the container's width is set for the corresponding
+    breakpoint.
+  - For :row, they should be an integer representing the number of equal-width columns at the
+    corresponding breakpoint.
+  - For :col, they should be a list that contains the size and optional offset for the column
+    at the corresponding breakpoint.
 
 The function generates the corresponding Bootstrap classes for the given breakpoints and KIND.
 
