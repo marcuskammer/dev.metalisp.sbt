@@ -167,7 +167,7 @@ Example usage:
        (row (:spacing (:property :p :side :lg :size 5))
            ,@body))))
 
-(defmacro page (title &body body)
+(defmacro page (title)
   `(with-page (:title ,title)
      (navigation
        (col (:breakpoint (:kind :col :sm (8 nil) :md (7 nil))
