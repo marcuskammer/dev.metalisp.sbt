@@ -99,11 +99,11 @@ Additional content can be added to the header by passing it as BODY arguments
 to the macro. The BODY content will be included in the header after the
 predefined content."
   `(spinneret:with-html
-     (:header (collapsible ,*navbar-header-id*
+     (:header (collapsible *navbar-header-id*
                 ,@body)
        (navbar (:fluid nil)
          (brand () "Album")
-         (toggler ,*navbar-header-id*)))))
+         (toggler *navbar-header-id*)))))
 
 (defmacro footer ((&key (color '(:text :body-secondary))
                      (spacing '(:property :p :size 5))) &body body)
