@@ -165,7 +165,9 @@ Example usage:
   `(spinneret:with-html
      (con (:spacing (:property :p :size 5))
        (row (:spacing (:property :p :side :lg :size 5))
-           ,@body))))
+         (col (:breakpoint (:kind :col :md (8 nil) :lg (6 nil))
+               :spacing (:property :p :size 5))
+           ,@body)))))
 
 (defmacro page (title)
   `(with-page (:title ,title)
@@ -177,13 +179,11 @@ Example usage:
          (contact (:url "#" :label "Follow on Twitter")
                   (:url "#" :label "Like on Facebook")
                   (:url "#" :label "Email me"))))
-     (:main (hero (col (:breakpoint (:kind :col :md (8 nil) :lg (6 nil))
-                        :spacing (:property :p :size 5))
-                    (:h1 :class "fw-light")
-                    (:p :class "lead text-body-secondary"
-                        "Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.")
-                    (:p (cl-sbt/btn:btn-primary "Main call to action")
-                        (cl-sbt/btn:btn-secondary "Secondary action")))))
+     (:main (hero (:h1 :class "fw-light")
+              (:p :class "lead text-body-secondary"
+                  "Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.")
+              (:p (cl-sbt/btn:btn-primary "Main call to action")
+                  (cl-sbt/btn:btn-secondary "Secondary action"))))
      (footer ())))
 
 (defun write-album (&key (lang "de") (style :tree) (fc 120))
