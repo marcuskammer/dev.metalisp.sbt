@@ -33,6 +33,7 @@
   (:use :cl)
   (:import-from :cl-sbt/grid :con :row :col)
   (:import-from :cl-sbt/navbar :navbar :brand :toggler :collapsible)
+  (:import-from :cl-sbt/utility :color)
   (:import-from :cl-sbt :write-string-to-file :with-page)
   (:import-from :spinneret :with-html-string)
   (:export
@@ -41,6 +42,8 @@
    :header
    :footer
    :album
+   :page
+   :write-page
    :*navbar-header-id*)
   (:documentation "The `cl-sbt-album` package provides macros for building an
   album-style website page using Bootstrap and Spinneret."))
