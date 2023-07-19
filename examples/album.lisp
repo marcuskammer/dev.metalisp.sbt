@@ -169,6 +169,11 @@ Example usage:
                :spacing (:property :p :size 5))
            ,@body)))))
 
+(defmacro lead-p ((&key (color '(:text "body-secondary"))) &body body)
+  `(spinneret:with-html
+              (:p :class ,(format nil "lead ~a" (if color (apply #'color color)))
+                  ,@body)))
+
 (defmacro page (title)
   `(with-page (:title ,title)
      (navigation
@@ -180,13 +185,12 @@ Example usage:
                   (:url "#" :label "Like on Facebook")
                   (:url "#" :label "Email me"))))
      (:main (hero (:h1 :class "fw-light")
-              (:p :class "lead text-body-secondary"
-                  "Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.")
+              (lead-p () "Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.")
               (:p (cl-sbt/btn:btn-primary "Main call to action")
                   (cl-sbt/btn:btn-secondary "Secondary action"))))
      (footer ())))
 
-(defun write-album (&key (lang "de") (style :tree) (fc 120))
+(defun write-page (&key (lang "de") (style :tree) (fc 120))
   (let ((spinneret:*html-lang* lang)
         (spinneret:*html-style* style)
         (spinneret:*fill-column* fc))
