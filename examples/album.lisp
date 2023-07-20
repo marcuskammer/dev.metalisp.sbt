@@ -147,35 +147,16 @@ Example usage:
              (:a :href "/docs/5.3/getting-started/introduction/" "getting started guide"))
          ,@body))))
 
-;; (defmacro hero ((&key hero-title lead cta-pri cta-sec))
-;;   "Generates an HTML 'Hero' section with the provided content.
-
-;; BODY: Specifies the HTML content to be included in the 'Hero' section. This can
-;; be any valid HTML content that spinneret:with-html can parse.
-
-;; The 'Hero' section is a prominent part of the page, usually used to draw
-;; attention to the most important content. The content will be wrapped in a
-;; Bootstrap 'container', and organized in a responsive grid using Bootstrap's
-;; 'row' and 'column' system.
-
-;; Example usage:
-;;   (hero (:h1 \"Hello, world!\"
-;;          :p \"This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.\")
-;;         (:hr)
-;;         (:p \"It uses utility classes for typography and spacing to space content out within the larger container.\"))
-;;   ; This will generate a 'Hero' section with the provided headline, text, and
-;;   ; horizontal line."
-;;   `(spinneret:with-html
-;;      (con (:spacing (:property :p :size 5))
-;;        (row (:spacing (:property :p :side :lg :size 5))
-;;          (col (:breakpoint (:kind :col :md (8 nil) :lg (6 nil))
-;;                :spacing (:property :p :size 5))
-;;            (:h1 :class "fw-light" ,hero-title)
-;;            (lead-p () ,lead)
-;;            (:p (btn-primary ,cta-pri)
-;;                (btn-secondary ,cta-sec)))))))
-
 (defmacro hero (&rest rest)
+  "Generates a Bootstrap hero unit.
+
+REST: A list of key-value pairs. The keys can be:
+  :title - The title of the hero unit.
+  :lead - The leading text of the hero unit.
+  :cta - The text for the call to action button.
+
+This macro generates a hero unit with the given title, leading text, and call
+to action button. The generated hero unit uses Bootstrap classes for styling."
   `(spinneret:with-html
      ,@(destructuring-bind (&key title lead cta) rest
          `(progn
