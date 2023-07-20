@@ -113,13 +113,17 @@ predefined content."
   "Generates an HTML footer with Bootstrap classes.
 
 COLOR: Specifies the color scheme of the footer. It's a list containing keyword
-arguments that can be passed to the cl-sbt/utility:color function.
+arguments that can be passed to the cl-sbt/utility:color function. Default is
+'(:text :body-secondary), setting the text color to secondary.
 
 SPACING: A list specifying the Bootstrap spacing class. The list should contain
 keyword arguments that can be passed to the cl-sbt/utility:spacing function.
+Default is '(:property :p :size 5), setting the padding size to 5.
 
-BODY: Optional. Specifies additional HTML content to be added to the footer.
-This can be any valid HTML content that spinneret:with-html can parse.
+REST: A list of key-value pairs. A recognized key is :copyright which
+sets the copyright notice in the footer. If not provided, it defaults to nil.
+Specifies additional HTML content to be added to the footer. This can be any
+valid HTML content that spinneret:with-html can parse.
 
 The footer generated contains fixed content, including a 'Back to top' link and
 a short paragraph about Bootstrap.
@@ -127,10 +131,12 @@ a short paragraph about Bootstrap.
 Example usage:
   (footer (:color (:text :primary :background :light)
           :spacing (:property :p :side :y :size 4))
+          :copyright \"Copyright 2023\"
           (:p :class \"custom-class\" \"Custom content here\"))
   ; This will generate a footer with primary color text and light background
-  ; with a top/bottom padding of size 4. Additionally, a paragraph with class
-  ; 'custom-class' and text 'Custom content here' will be added to the footer."
+  ; with a top/bottom padding of size 4. A copyright notice is set. Additionally,
+  ; a paragraph with class 'custom-class' and text 'Custom content here' will
+  ; be added to the footer."
   `(spinneret:with-html
      (:footer :class ,(concatenate 'string
                                    (if color (apply #'cl-sbt/utility:color color) "")
