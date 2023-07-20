@@ -113,19 +113,22 @@ Example:
                 :aria-label "Toggle navigation"
                 (:span :class "navbar-toggler-icon"))))
 
-(defmacro collapsible (id &body body)
+(defmacro collapsible (id (&key (color nil)) &body body)
   `(spinneret:with-html
      (:div :id ,id
-           :class "collapse"
+           :class ,(concatenate 'string
+                                "collapse "
+                                (if (null color) ""
+                                    (apply #'cl-sbt/utility:color color)))
            (cl-sbt/grid:con ()
              (cl-sbt/grid:row ()
                ,@body)))))
 
-(defmacro navbar ((&key (fluid t) (classes "")) &body body)
+(defmacro navbar ((&key (fluid t) (dark nil)) &body body)
   "This macro generates a Bootstrap navbar.
 
 FLUID: Specifies whether the navbar should be full width. Defaults to true.
-CLASSES: Specifies additional CSS classes for the navbar.
+DARK: Specifies additional CSS classes for the navbar.
 BODY: Specifies the content to be displayed in the navbar.
 
 Example:
@@ -133,8 +136,10 @@ Example:
    (brand \"My Website\")
    (nav \"Home\" \"About\" \"Contact\"))"
   `(spinneret:with-html
-     (:nav :class (format nil "navbar ~a" ,classes)
-           (:div :class ,(if fluid
-                             "container-fluid"
-                             "container")
-                 ,@body))))
+     (:nav :class ,(concatenate 'string "navbar " (if (null dark)
+                                                        "bg-light"
+                                                        "navbar-dark bg-dark"))
+       (:div :class ,(if fluid
+                         "container-fluid"
+                         "container")
+             ,@body))))

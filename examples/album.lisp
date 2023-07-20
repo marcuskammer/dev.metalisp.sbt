@@ -103,9 +103,10 @@ Additional content can be added to the header by passing it as BODY arguments
 to the macro. The BODY content will be included in the header after the
 predefined content."
   `(spinneret:with-html
-     (:header (collapsible *navbar-header-id*
-                ,@body)
-       (navbar (:fluid nil)
+     (:header :data-bs-theme "dark"
+       (collapsible *navbar-header-id* (:color (:text "bg-dark"))
+         ,@body)
+       (navbar (:fluid nil :dark t)
          (brand () "Album")
          (toggler *navbar-header-id*)))))
 
@@ -131,8 +132,7 @@ a short paragraph about Bootstrap.
 Example usage:
   (footer (:color (:text :primary :background :light)
           :spacing (:property :p :side :y :size 4))
-          :copyright \"Copyright 2023\"
-          (:p :class \"custom-class\" \"Custom content here\"))
+          :copyright \"Copyright 2023\")
   ; This will generate a footer with primary color text and light background
   ; with a top/bottom padding of size 4. A copyright notice is set. Additionally,
   ; a paragraph with class 'custom-class' and text 'Custom content here' will
@@ -166,9 +166,12 @@ This macro generates a hero unit with the given title, leading text, and call
 to action button. The generated hero unit uses Bootstrap classes for styling."
   `(spinneret:with-html
      ,@(destructuring-bind (&key title lead cta) rest
-         `((:h1 :class "fw-light" ,title)
-           (lead-p () ,lead)
-           (:p (btn-primary ,cta))))))
+         `((con nil
+             (row nil
+               (col nil
+                 (:h1 :class "fw-light" ,title)
+                 (lead-p () ,lead)
+                 (:p (btn-primary ,cta)))))))))
 
 (defmacro lead-p ((&key (color '(:text "body-secondary"))) &body body)
   `(spinneret:with-html
