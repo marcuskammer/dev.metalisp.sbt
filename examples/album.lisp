@@ -193,9 +193,11 @@ Example usage:
                   (cl-sbt/btn:btn-secondary "Secondary action"))))
      (footer ())))
 
-(defun write-page (&key (lang "de") (style :tree) (fc 120))
+(defun write-page (filepath &key (lang "de") (style :tree) (fc 120))
   (let ((spinneret:*html-lang* lang)
         (spinneret:*html-style* style)
         (spinneret:*fill-column* fc))
-    (write-string-to-file "~/quicklisp/local-projects/cl-sbt/examples/album.html"
+    (write-string-to-file filepath
                           (with-html-string (page "Album")))))
+
+; (cl-sbt/album:write-page "~/quicklisp/local-projects/cl-sbt/public/examples/album.html")
