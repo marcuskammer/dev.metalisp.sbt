@@ -147,30 +147,41 @@ Example usage:
              (:a :href "/docs/5.3/getting-started/introduction/" "getting started guide"))
          ,@body))))
 
-(defmacro hero (&body body)
-  "Generates an HTML 'Hero' section with the provided content.
+;; (defmacro hero ((&key hero-title lead cta-pri cta-sec))
+;;   "Generates an HTML 'Hero' section with the provided content.
 
-BODY: Specifies the HTML content to be included in the 'Hero' section. This can
-be any valid HTML content that spinneret:with-html can parse.
+;; BODY: Specifies the HTML content to be included in the 'Hero' section. This can
+;; be any valid HTML content that spinneret:with-html can parse.
 
-The 'Hero' section is a prominent part of the page, usually used to draw
-attention to the most important content. The content will be wrapped in a
-Bootstrap 'container', and organized in a responsive grid using Bootstrap's
-'row' and 'column' system.
+;; The 'Hero' section is a prominent part of the page, usually used to draw
+;; attention to the most important content. The content will be wrapped in a
+;; Bootstrap 'container', and organized in a responsive grid using Bootstrap's
+;; 'row' and 'column' system.
 
-Example usage:
-  (hero (:h1 \"Hello, world!\"
-         :p \"This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.\")
-        (:hr)
-        (:p \"It uses utility classes for typography and spacing to space content out within the larger container.\"))
-  ; This will generate a 'Hero' section with the provided headline, text, and
-  ; horizontal line."
+;; Example usage:
+;;   (hero (:h1 \"Hello, world!\"
+;;          :p \"This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.\")
+;;         (:hr)
+;;         (:p \"It uses utility classes for typography and spacing to space content out within the larger container.\"))
+;;   ; This will generate a 'Hero' section with the provided headline, text, and
+;;   ; horizontal line."
+;;   `(spinneret:with-html
+;;      (con (:spacing (:property :p :size 5))
+;;        (row (:spacing (:property :p :side :lg :size 5))
+;;          (col (:breakpoint (:kind :col :md (8 nil) :lg (6 nil))
+;;                :spacing (:property :p :size 5))
+;;            (:h1 :class "fw-light" ,hero-title)
+;;            (lead-p () ,lead)
+;;            (:p (btn-primary ,cta-pri)
+;;                (btn-secondary ,cta-sec)))))))
+
+(defmacro hero (&rest rest)
   `(spinneret:with-html
-     (con (:spacing (:property :p :size 5))
-       (row (:spacing (:property :p :side :lg :size 5))
-         (col (:breakpoint (:kind :col :md (8 nil) :lg (6 nil))
-               :spacing (:property :p :size 5))
-           ,@body)))))
+     ,@(destructuring-bind (&key title lead cta) rest
+         `(progn
+            (:h1 :class "fw-light" ,title)
+            (lead-p () ,lead)
+            (:p (btn-primary ,cta))))))
 
 (defmacro lead-p ((&key (color '(:text "body-secondary"))) &body body)
   `(spinneret:with-html
@@ -183,14 +194,16 @@ Example usage:
        (col (:breakpoint (:kind :col :sm (8 nil) :md (7 nil))
              :spacing (:property :p :side :y :size 4))
          (about () "Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information."))
+
        (col (:breakpoint (:kind :col :sm (4 nil) :md (nil 1)))
          (contact (:url "#" :label "Follow on Twitter")
                   (:url "#" :label "Like on Facebook")
                   (:url "#" :label "Email me"))))
-     (:main (hero (:h1 :class "fw-light")
-              (lead-p () "Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.")
-              (:p (cl-sbt/btn:btn-primary "Main call to action")
-                  (cl-sbt/btn:btn-secondary "Secondary action"))))
+
+     (hero :title "Album example"
+           :lead "Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely."
+           :cta "Main call to action")
+
      (footer ())))
 
 (defun write-page (filepath &key (lang "de") (style :tree) (fc 120))
