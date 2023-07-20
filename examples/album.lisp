@@ -32,6 +32,7 @@
 (defpackage cl-sbt/album
   (:use :cl)
   (:import-from :cl-sbt/grid :con :row :col)
+  (:import-from :cl-sbt/btn :btn-primary)
   (:import-from :cl-sbt/navbar :navbar :brand :toggler :collapsible)
   (:import-from :cl-sbt/utility :color)
   (:import-from :cl-sbt :write-string-to-file :with-page)
