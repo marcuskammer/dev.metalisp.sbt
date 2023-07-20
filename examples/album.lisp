@@ -142,7 +142,7 @@ Example usage:
                                    (if color (apply #'cl-sbt/utility:color color) "")
                                    (if spacing (apply #'cl-sbt/utility:spacing spacing) ""))
               (con nil
-                ,@(destructuring-bind (&key copyright) rest
+                ,@(destructuring-bind (&key copyright content) rest
                     `((:p :class "float-end mb-1"
                           (:a :href "#" "Back to top"))
                       (:p :class "mb-1"
@@ -151,7 +151,8 @@ Example usage:
                           "New to Bootstrap? "
                           (:a :href "/" "Visit the homepage")
                           " or read our "
-                          (:a :href "/docs/5.3/getting-started/introduction/" "getting started guide"))))))))
+                          (:a :href "/docs/5.3/getting-started/introduction/" "getting started guide"))
+                      ,content))))))
 
 (defmacro hero (&rest rest)
   "Generates a Bootstrap hero unit.
