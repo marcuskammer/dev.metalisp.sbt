@@ -65,10 +65,10 @@ Example usage:
   ; This will generate an 'About' section with secondary color text and the
   ; provided content."
   `(spinneret:with-html
-     (:h4 "About"
-          (:p :class ,(concatenate 'string
-                                   (if color (apply #'cl-sbt/utility:color color) ""))
-              ,@body))))
+     (:h4 "About")
+     (:p :class ,(concatenate 'string
+                              (if color (apply #'cl-sbt/utility:color color) ""))
+         ,@body)))
 
 (defmacro contact (&rest rest)
   "Generates an HTML 'Contact' section with the provided links.
@@ -178,12 +178,12 @@ Example usage:
                   ,@body)))
 
 (defmacro page (title)
-  `(with-page (:title ,title)
+  `(with-page (:cdn t :title ,title)
      (navigation
        (col (:breakpoint (:kind :col :sm (8 nil) :md (7 nil))
              :spacing (:property :p :side :y :size 4))
          (about () "Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information."))
-       (col (:breakpoint (:kind :col :sm (8 nil) :md (nil 1)))
+       (col (:breakpoint (:kind :col :sm (4 nil) :md (nil 1)))
          (contact (:url "#" :label "Follow on Twitter")
                   (:url "#" :label "Like on Facebook")
                   (:url "#" :label "Email me"))))
