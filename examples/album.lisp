@@ -177,8 +177,8 @@ Example usage:
               (:p :class ,(format nil "lead ~a" (if color (apply #'color color)))
                   ,@body)))
 
-(defmacro page (title)
-  `(with-page (:cdn t :title ,title)
+(defmacro page (title cdn)
+  `(with-page (:cdn ,cdn :title ,title)
      (navigation
        (col (:breakpoint (:kind :col :sm (8 nil) :md (7 nil))
              :spacing (:property :p :side :y :size 4))
@@ -198,6 +198,6 @@ Example usage:
         (spinneret:*html-style* style)
         (spinneret:*fill-column* fc))
     (write-string-to-file filepath
-                          (with-html-string (page "Album")))))
+                          (with-html-string (page "Album" t)))))
 
 ; (cl-sbt/album:write-page "~/quicklisp/local-projects/cl-sbt/public/examples/album.html")
