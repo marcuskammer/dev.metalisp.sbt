@@ -109,8 +109,7 @@ predefined content."
          (brand () "Album")
          (toggler *navbar-header-id*)))))
 
-(defmacro footer ((&key (color '(:text :body-secondary))
-                     (spacing '(:property :p :size 5))) &body body)
+(defmacro footer ((&key (color '(:text :body-secondary)) (spacing '(:property :p :size 5))) &rest rest)
   "Generates an HTML footer with Bootstrap classes.
 
 COLOR: Specifies the color scheme of the footer. It's a list containing keyword
@@ -136,17 +135,17 @@ Example usage:
      (:footer :class ,(concatenate 'string
                                    (if color (apply #'cl-sbt/utility:color color) "")
                                    (if spacing (apply #'cl-sbt/utility:spacing spacing) ""))
-       (con ()
-         (:p :class "float-end mb-1"
-             (:a :href "#" "Back to top"))
-         (:p :class "mb-1"
-             "Album example is © Bootstrap, but please download and customize it for yourself!")
-         (:p :class "mb-0"
-             "New to Bootstrap? "
-             (:a :href "/" "Visit the homepage")
-             " or read our "
-             (:a :href "/docs/5.3/getting-started/introduction/" "getting started guide"))
-         ,@body))))
+              (con nil
+                ,@(destructuring-bind (&key copyright) rest
+                    `((:p :class "float-end mb-1"
+                          (:a :href "#" "Back to top"))
+                      (:p :class "mb-1"
+                          ,copyright)
+                      (:p :class "mb-0"
+                          "New to Bootstrap? "
+                          (:a :href "/" "Visit the homepage")
+                          " or read our "
+                          (:a :href "/docs/5.3/getting-started/introduction/" "getting started guide"))))))))
 
 (defmacro hero (&rest rest)
   "Generates a Bootstrap hero unit.
@@ -160,10 +159,9 @@ This macro generates a hero unit with the given title, leading text, and call
 to action button. The generated hero unit uses Bootstrap classes for styling."
   `(spinneret:with-html
      ,@(destructuring-bind (&key title lead cta) rest
-         `(progn
-            (:h1 :class "fw-light" ,title)
-            (lead-p () ,lead)
-            (:p (btn-primary ,cta))))))
+         `((:h1 :class "fw-light" ,title)
+           (lead-p () ,lead)
+           (:p (btn-primary ,cta))))))
 
 (defmacro lead-p ((&key (color '(:text "body-secondary"))) &body body)
   `(spinneret:with-html
@@ -171,11 +169,40 @@ to action button. The generated hero unit uses Bootstrap classes for styling."
                   ,@body)))
 
 (defmacro page (title cdn)
+  "Generates a complete HTML page using Bootstrap components.
+
+TITLE: The title of the page.
+
+CDN: The Content Delivery Network (CDN) link for Bootstrap.
+
+This macro generates a page that includes a navigation bar with an 'about'
+section and a 'contact' section, a main section with a hero unit, a leading
+paragraph, and a 'call to action' button, and a footer with copyright info.
+
+Example usage:
+  (page \"My Page Title\" t)
+  ; This will generate an HTML page with the title 'My Page Title', and the
+  ; Bootstrap CSS will be loaded from the provided CDN link.
+
+The 'about' section of the navigation bar contains a paragraph of text. The
+'contact' section includes links to Twitter, Facebook, and an email address.
+
+The hero unit in the main section includes a title, a lead paragraph, and a
+'call to action' button.
+
+The footer contains a copyright notice.
+
+All of these components are customizable by providing different arguments
+to the respective component macros."
   `(with-page (:cdn ,cdn :title ,title)
      (navigation
        (col (:breakpoint (:kind :col :sm (8 nil) :md (7 nil))
              :spacing (:property :p :side :y :size 4))
-         (about () "Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information."))
+         (about (:color (:text "body-secondary"))
+           "Add some information about the album below, the author, or any
+           other background context. Make it a few sentences long so folks can
+           pick up some informative tidbits. Then, link them off to some social
+           networking sites or contact information."))
 
        (col (:breakpoint (:kind :col :sm (4 nil) :md (nil 1)))
          (contact (:url "#" :label "Follow on Twitter")
@@ -183,10 +210,13 @@ to action button. The generated hero unit uses Bootstrap classes for styling."
                   (:url "#" :label "Email me"))))
 
      (:main (hero :title "Album example"
-                  :lead "Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely."
+                  :lead "Something short and leading about the collection
+                  below—its contents, the creator, etc. Make it short and
+                  sweet, but not too short so folks don’t simply skip over it
+                  entirely."
                   :cta "Main call to action"))
 
-     (footer ())))
+     (footer nil :copyright "Album example is © Bootstrap, but please download and customize it for yourself!")))
 
 (defun write-page (filepath &key (lang "de") (style :tree) (fc 120))
   (let ((spinneret:*html-lang* lang)
@@ -195,4 +225,4 @@ to action button. The generated hero unit uses Bootstrap classes for styling."
     (write-string-to-file filepath
                           (with-html-string (page "Album" t)))))
 
-; (cl-sbt/album:write-page "~/quicklisp/local-projects/cl-sbt/public/examples/album.html")
+(cl-sbt/album:write-page "~/quicklisp/local-projects/cl-sbt/public/examples/album.html")
