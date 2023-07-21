@@ -63,8 +63,8 @@ COLOR: Specifies the color, should be :primary, :secondary, :success,
 :danger, :warning, :info, :light, :dark, :body, :muted, :white, :transparent,
 or nil (default color).
 
-GRADIENT: Specifies if the background should have a gradient, should be :t or :nil.
-If :t, it will add a 'bg-gradient' to the class string.
+GRADIENT: Specifies if the background should have a gradient, should be :t or
+:nil. If :t, it will add a 'bg-gradient' to the class string.
 
 Example 1:
   (background :color :primary)
@@ -145,7 +145,8 @@ Example 4:
 
 DIRECTION: Specifies the direction, should be :x, :y, or nil (both directions).
 
-VALUE: Specifies the overflow value, should be :auto, :hidden, :visible, :scroll, or nil (default value).
+VALUE: Specifies the overflow value, should be :auto, :hidden, :visible,
+:scroll, or nil (default value).
 
 Example 1:
   (overflow :direction :x :value :auto)
@@ -279,7 +280,8 @@ Example 6:
 
 Example 7:
   (text :alignment :center :transform :uppercase :weight :bolder :wrap :nowrap :monospace t)
-  ; This will generate a string 'text-center text-uppercase fw-bolder text-nowrap font-monospace '"
+  ; This will generate a string 'text-center text-uppercase fw-bolder
+  ; text-nowrap font-monospace '"
   (let ((alignment-str (if (null alignment) "" (format nil "text-~a " alignment)))
         (transform-str (if (null transform) "" (format nil "text-~a " transform)))
         (weight-str (if (null weight) "" (format nil "fw-~a " weight)))
