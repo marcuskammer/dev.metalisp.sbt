@@ -53,6 +53,9 @@
 
 (in-package :cl-sbt/utility)
 
+(defun string-clean (str)
+  (string-trim " " (string-downcase str)))
+
 (defun background (&key (color nil) (gradient nil))
   "Generates a Bootstrap background class.
 
@@ -80,7 +83,7 @@ Example 4:
   ; This will generate a string 'bg-dark bg-gradient'"
   (let ((color-str (if (null color) "" (format nil "bg-~a" color)))
         (gradient-str (if (eq gradient :t) " bg-gradient" "")))
-    (string-downcase (concatenate 'string color-str gradient-str " "))))
+    (string-clean (concatenate 'string color-str gradient-str))))
 
 (defun color (&key (text nil) (background nil))
   "Generates a Bootstrap color class.
@@ -108,9 +111,9 @@ Example 3:
 Example 4:
   (color :text :white :background :primary)
   ; This will generate a string 'text-white bg-primary'"
-  (string-downcase (concatenate 'string
-                                (if (null text) "" (format nil "text-~a" text))
-                                (if (null background) "" (format nil " bg-~a" background)) " ")))
+  (string-clean (concatenate 'string
+                             (if (null text) "" (format nil "text-~a" text))
+                             (if (null background) "" (format nil " bg-~a" background)))))
 
 (defun opacity (&key (level nil))
   "Generates a Bootstrap opacity class.
@@ -135,7 +138,7 @@ Example 4:
   (let ((level-str (if (null level) "" (if (eq level :auto)
                                            "opacity-auto"
                                            (format nil "opacity-~d" level)))))
-    (string-downcase (concatenate 'string level-str " "))))
+    (string-clean (concatenate 'string level-str))))
 
 (defun overflow (&key (direction nil) (value nil))
   "Generates a Bootstrap overflow class.
@@ -159,10 +162,9 @@ Example 3:
 Example 4:
   (overflow :direction :x :value :scroll)
   ; This will generate a string 'overflow-x-scroll'"
-  (let* ((dir-str (if (null direction) "" (format nil "-~a" direction)))
-         (value-str (if (null value) "" (string value)))
-         (class-str (concatenate 'string "overflow" dir-str "-" value-str " ")))
-    (string-downcase class-str)))
+  (let* ((dir-str (if (null direction) "" (format nil "overflow-~a" direction)))
+         (value-str (if (null value) "" (format nil "-~a" value))))
+    (string-clean (concatenate 'string dir-str value-str))))
 
 (defun sizing (&key (direction nil) (size nil))
   "Generates a Bootstrap sizing class.
@@ -194,7 +196,7 @@ Example 4:
                            (if (numberp size)
                                (format nil "~d" size)
                                (format nil "~a" size))))))
-    (string-downcase (concatenate 'string dir-str size-str " "))))
+    (string-clean (concatenate 'string dir-str size-str))))
 
 (defun spacing (&key (property nil) (side nil) (size nil) (breakpoint nil))
   "Generates a Bootstrap spacing class.
@@ -231,7 +233,7 @@ Example 4:
         (side-str (if (null side) "" (format nil "~a" side)))
         (size-str (if (null size) "" (if (eq size :auto) "auto" (format nil "~d" size))))
         (breakpoint-str (if (null breakpoint) "" (format nil "~a" breakpoint))))
-    (string-downcase
+    (string-clean
      (concatenate 'string
                   property-str
                   side-str
@@ -283,14 +285,14 @@ Example 7:
         (weight-str (if (null weight) "" (format nil "fw-~a " weight)))
         (wrap-str (if (null wrap) "" (format nil "text-~a " wrap)))
         (monospace-str (if (null monospace) "" "font-monospace")))
-    (string-downcase (concatenate 'string
-                                  alignment-str
-                                  transform-str
-                                  weight-str
-                                  wrap-str
-                                  monospace-str " "))))
+    (string-clean (concatenate 'string
+                               alignment-str
+                               transform-str
+                               weight-str
+                               wrap-str
+                               monospace-str))))
 
-(defun valign (&key (align null))
+(defun valign (&key (align nil))
   "Generates a Bootstrap vertical align class.
 
 ALIGN: Specifies the alignment, should be :baseline, :top, :middle, :bottom,
@@ -308,4 +310,4 @@ Example 3:
   (valign :align :middle)
   ; This will generate a string 'align-middle'"
   (let ((align-str (if (null align) "" (format nil "align-~a" align))))
-    (string-downcase align-str " ")))
+    (string-clean align-str)))
