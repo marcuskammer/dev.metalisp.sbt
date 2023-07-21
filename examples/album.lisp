@@ -138,8 +138,8 @@ Example usage:
   ; be added to the footer."
   `(spinneret:with-html
      (:footer :class ,(concatenate 'string
-                                   (if color (apply #'cl-sbt/utility:color color) "")
-                                   (if spacing (apply #'cl-sbt/utility:spacing spacing) ""))
+                                   (apply #'cl-sbt/utility:color color)
+                                   (apply #'cl-sbt/utility:spacing spacing))
               (con nil
                 ,@(destructuring-bind (&key copyright content) rest
                     `((:p :class "float-end mb-1"
@@ -174,8 +174,10 @@ to action button. The generated hero unit uses Bootstrap classes for styling."
 
 (defmacro lead-p ((&key (color '(:text "body-secondary"))) &body body)
   `(spinneret:with-html
-              (:p :class ,(format nil "lead ~a" (if color (apply #'color color)))
-                  ,@body)))
+     (:p :class ,(concatenate 'string
+                              "lead "
+                              (apply #'color color))
+         ,@body)))
 
 (defmacro page (title cdn)
   "Generates a complete HTML page using Bootstrap components.
