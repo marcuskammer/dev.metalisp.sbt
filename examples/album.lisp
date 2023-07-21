@@ -67,8 +67,7 @@ Example usage:
   ; provided content."
   `(spinneret:with-html
      (:h4 "About")
-     (:p :class ,(concatenate 'string
-                              (if color (apply #'cl-sbt/utility:color color) ""))
+     (:p :class ,(apply #'cl-sbt/utility:color color)
          ,@body)))
 
 (defmacro contact (&rest rest)
