@@ -138,7 +138,7 @@ Example usage:
   ; be added to the footer."
   `(spinneret:with-html
      (:footer :class ,(concatenate 'string
-                                   (apply #'cl-sbt/utility:color color)
+                                   (apply #'cl-sbt/utility:color color) " "
                                    (apply #'cl-sbt/utility:spacing spacing))
               (con nil
                 ,@(destructuring-bind (&key copyright content) rest
