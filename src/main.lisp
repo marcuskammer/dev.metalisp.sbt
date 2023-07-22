@@ -6,6 +6,7 @@
 
 (in-package :cl-sbt)
 
+(setq spinneret:*fill-column* 120)
 (defparameter *cdn-css* "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
 (defparameter *cdn-js* "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js")
 
