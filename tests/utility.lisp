@@ -43,15 +43,15 @@
 
 (deftest test-color-background
   (testing "Generates correct color class for background"
-    (ok (string= (color :background :primary) "bg-primary"))
-    (ok (string= (color :background :danger) "bg-danger"))
-    (ok (string= (color :background :light) "bg-light"))
-    (ok (string= (color :background :dark) "bg-dark"))))
+    (ok (string= (color :background '(:color :primary)) "bg-primary"))
+    (ok (string= (color :background '(:color :danger)) "bg-danger"))
+    (ok (string= (color :background '(:color :light)) "bg-light"))
+    (ok (string= (color :background '(:color :dark)) "bg-dark"))))
 
 (deftest test-color-text-background
   (testing "Generates correct color class for text and background"
-    (ok (string= (color :text :info :background :dark) "text-info bg-dark"))
-    (ok (string= (color :text :white :background :primary) "text-white bg-primary"))))
+    (ok (string= (color :text :info :background '(:color :dark)) "text-info bg-dark"))
+    (ok (string= (color :text :white :background '(:color :primary)) "text-white bg-primary"))))
 
 (deftest test-color-no-arguments
   (testing "Generates correct color class with no arguments"
