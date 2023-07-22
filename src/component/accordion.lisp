@@ -33,11 +33,11 @@
 (defmacro header (target name show)
   "This macro generates a Bootstrap header for an accordion item.
 
-   TARGET: (optional) The id of the collapse this header controls. Defaults to 'collapseOne'.
+   TARGET: The id of the collapse this header controls. Defaults to 'collapseOne'.
 
-   NAME: (optional) The text that will be displayed on this header. Defaults to 'Heading'.
+   NAME: The text that will be displayed on this header. Defaults to 'Heading'.
 
-   SHOW: (optional) A boolean indicating whether the collapse controlled by this header should be shown when
+   SHOW: A boolean indicating whether the collapse controlled by this header should be shown when
          the accordion first loads. If true, the 'aria-expanded' attribute will be 'true'. Defaults to NIL.
 
    Example:
