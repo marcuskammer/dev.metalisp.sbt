@@ -38,6 +38,7 @@
   :components ((:module "tests"
                 :components
                 ((:file "main")
-                 (:file "grid"))))
+                 (:file "grid")
+                 (:file "utility"))))
   :description "Test system for cl-sbt"
   :perform (test-op (op c) (symbol-call :rove :run c)))
