@@ -163,8 +163,14 @@ Example 3:
 Example 4:
   (overflow :direction :x :value :scroll)
   ; This will generate a string 'overflow-x-scroll'"
-  (let* ((dir-str (if (null direction) "" (format nil "overflow-~a" direction)))
-         (value-str (if (null value) "" (format nil "-~a" value))))
+  (let* ((dir-str (if (null direction)
+                      ""
+                      (format nil "overflow-~a" direction)))
+         (value-str (if (null value)
+                        ""
+                        (if (string= dir-str "")
+                            (format nil "overflow-~a" value)
+                            (format nil "-~a" value)))))
     (string-clean (concatenate 'string dir-str value-str))))
 
 (defun sizing (&key (direction nil) (size nil))
