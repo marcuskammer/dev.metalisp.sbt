@@ -49,20 +49,18 @@
 (defun string-clean (str)
   (string-trim " " (string-downcase str)))
 
-(defun make-con-class (name value default-class)
+(defun make-con-class (name value)
   "Generates a Bootstrap container class string for a particular breakpoint.
 
 NAME is the name of the breakpoint (e.g., 'xs', 'sm', 'md', etc.).
 
-VALUE is non-nil when the container's width is set for the breakpoint.
-
-DEFAULT-CLASS is a string that represents the default container class.
-
 The function generates a ' container-NAME' class string if VALUE is non-nil.
 
 Example:
-  (make-container-class \"md\" t \"container\") ; => \" container-md\""
-  (if value (format nil "~a-~a " default-class name) ""))
+  (make-container-class \"md\" t) ; => \" container-md\""
+  (if value
+      (format nil "container-~a " name)
+      ""))
 
 (defun make-row-class (name value)
   "Generates a Bootstrap row class string for a particular breakpoint or a general column setting.
@@ -98,13 +96,19 @@ the size or offset is nil, it omits the corresponding part.
 Examples:
   (make-col-class \"md\" '(3 1)) ; => \" col-md-3 offset-md-1\"
   (make-col-class \"lg\" '(4 nil)) ; => \" col-lg-4\""
-  (if size-offset-pair
-      (let ((size (first size-offset-pair))
-            (offset (second size-offset-pair)))
-        (concatenate 'string
-                     (if size (format nil "col-~a-~d" name size) "")
-                     (if offset (format nil " offset-~a-~d" name offset) "") " "))
-      ""))
+  (let* ((size (first size-offset-pair))
+         (offset (second size-offset-pair))
+         (size-string (if size
+                          (if (string= name "")
+                              (format nil "col-~d " size)
+                              (format nil "col-~a-~d " name size))
+                          ""))
+         (offset-string (if offset
+                            (if (string= name "")
+                                (format nil "offset-~d " offset)
+                                (format nil "offset-~a-~d " name offset))
+                            "")))
+    (concatenate 'string size-string offset-string)))
 
 (defun breakpoint-class (&key (kind :con) (xs nil) (sm nil) (md nil) (lg nil) (xl nil) (xxl nil))
   "Generates Bootstrap class string for different kinds of elements across breakpoints.
@@ -137,15 +141,16 @@ Examples:
   (breakpoint-class :kind :con :xs t :sm t :md t :lg t :xl t :xxl t)
   ; will generate a string for a fluid container that spans all breakpoints."
   (let ((breakpoint-values (list xs sm md lg xl xxl)))
-    (apply #'concatenate 'string
-           (loop for i from 0 below (length *breakpoints*)
-                 for breakpoint-name = (nth i *breakpoints*)
-                 for breakpoint-value = (nth i breakpoint-values)
-                 collect
-                 (cond
-                   ((eq kind :con) (make-con-class breakpoint-name breakpoint-value "container"))
-                   ((eq kind :row) (make-row-class breakpoint-name breakpoint-value))
-                   ((eq kind :col) (make-col-class breakpoint-name breakpoint-value)))))))
+    (string-clean
+     (apply #'concatenate 'string
+            (loop for i from 0 below (length *breakpoints*)
+                  for breakpoint-name = (nth i *breakpoints*)
+                  for breakpoint-value = (nth i breakpoint-values)
+                  collect
+                  (cond
+                    ((eq kind :con) (make-con-class breakpoint-name breakpoint-value))
+                    ((eq kind :row) (make-row-class breakpoint-name breakpoint-value))
+                    ((eq kind :col) (make-col-class breakpoint-name breakpoint-value))))))))
 
 (defmacro con ((&key (fluid nil) (breakpoint nil) (text nil) (spacing nil)) &body body)
   "Generates a Bootstrap container.
@@ -175,21 +180,21 @@ Examples:
            ,(string-clean (concatenate 'string
                          (if (null fluid) "container " "container-fluid ")
                          (if (null breakpoint) ""
-                             (apply #'breakpoint-class breakpoint))
+                             (format nil "~a " (apply #'breakpoint-class breakpoint)))
                          (if (null text) ""
-                             (apply #'cl-sbt/utility:text text))
+                             (format nil "~a " (apply #'cl-sbt/utility:text text)))
                          (if (null spacing) ""
                              (apply #'cl-sbt/utility:spacing spacing))))
            ,@body)))
 
-(defmacro row ((&key (cols nil) (breakpoint nil) (align-items nil) (justify-content nil) (spacing nil)) &body body)
+(defmacro row ((&key (cols nil) (breakpoint nil) (alignitems nil) (justifycontent nil) (spacing nil)) &body body)
   "Generates a Bootstrap row.
-
-BREAKPOINT: Specifies the number of equal-width columns at various
-breakpoints. It should be :xs, :sm, :md, :lg, :xl, or :xxl.
 
 COLS: Specifies the number of columns irrespective of the viewport or
 breakpoint size.
+
+BREAKPOINT: Specifies the number of equal-width columns at various
+breakpoints. It should be :xs, :sm, :md, :lg, :xl, or :xxl.
 
 ALIGN-ITEMS: Specifies the vertical alignment of columns. It can be :start,
 :center, :end, :stretch, or :baseline.
@@ -198,11 +203,11 @@ JUSTIFY-CONTENT: Specifies the horizontal alignment of columns. It can be
 :start, :center, :end, :around, or :between.
 
 Examples:
-  (row (:breakpoint (:xs 2)) \"Hello, world!\")
+  (row (:breakpoint (:kind :row :xs 2)) \"Hello, world!\")
   ; Creates a row with two equal-width columns for extra small devices,
   ; containing the text 'Hello, world!'
 
-  (row (:breakpoint (:sm 4 :md 3 :lg 2)) \"Hello, world!\")
+  (row (:breakpoint (:kind :row :sm 4 :md 3 :lg 2)) \"Hello, world!\")
   ; Creates a row with four equal-width columns for small devices, three for
   ; medium devices, and two for large devices, containing the text 'Hello, world!'
 
@@ -210,7 +215,7 @@ Examples:
   ; Creates a row with three equal-width columns irrespective of the viewport
   ; or breakpoint size, containing the text 'Hello, world!'
 
-  (row (:align-items :center :justify-content :between) \"Hello, world!\")
+  (row (:alignitems :center :justifycontent :between) \"Hello, world!\")
   ; Creates a row with centered items that are evenly distributed in the
   ; horizontal direction, containing the text 'Hello, world!'
 
@@ -221,17 +226,16 @@ arguments, containing the specified body content."
            ,(string-clean
              (concatenate 'string
                           "row "
-                          (if (null cols) "" (format nil "cols-~d " cols))
+                          (if (null cols) "" (make-row-class "cols" cols))
                           (if (null breakpoint) ""
                               (apply #'breakpoint-class breakpoint))
-                          ;(make-row-class "cols" cols)
-                          (if (null align-items) "" (format nil "align-items-~a " align-items))
-                          (if (null justify-content) "" (format nil "justify-content-~a " justify-content))
+                          (if (null alignitems) "" (format nil "align-items-~a " alignitems))
+                          (if (null justifycontent) "" (format nil "justify-content-~a " justifycontent))
                           (if (null spacing) ""
                               (apply #'cl-sbt/utility:spacing spacing))))
            ,@body)))
 
-(defmacro col ((&key (col nil) (breakpoint nil) (align-self nil) (spacing nil)) &body body)
+(defmacro col ((&key (default nil) (breakpoint nil) (alignself nil) (spacing nil)) &body body)
   "Generates a Bootstrap column.
 
 COL: Specifies the number of columns the element spans.
@@ -254,7 +258,7 @@ Examples:
   ; This will generate a column that spans 8 medium-sized columns with an
   ; offset of 2 medium-sized columns, containing the text 'Hello, world!'.
 
-  (col (:align-self :center) \"Hello, world!\")
+  (col (:alignself :center) \"Hello, world!\")
   ; This will generate a column that aligns its content in the center,
   ; containing the text 'Hello, world!'.
 
@@ -265,10 +269,10 @@ Examples:
      (:div :class
            ,(string-clean
              (concatenate 'string
-                          (if (null col) "col " (format nil "col-~d " col))
+                          (if (null default) "col " (format nil "col-~d " default))
                           (if (null breakpoint) ""
                               (apply #'breakpoint-class breakpoint))
-                          (if (null align-self) "" (format nil "align-self-~a " align-self))
+                          (if (null alignself) "" (format nil "align-self-~a " alignself))
                           (if (null spacing) ""
                               (apply #'cl-sbt/utility:spacing spacing))))
            ,@body)))
