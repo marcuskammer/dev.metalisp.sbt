@@ -101,19 +101,19 @@ Example 1:
   ; This will generate a string 'text-primary'
 
 Example 2:
-  (color :background :danger)
+  (color :background '(:color :danger))
   ; This will generate a string 'bg-danger'
 
 Example 3:
-  (color :text :info :background :dark)
+  (color :text :info :background '(:color :dark))
   ; This will generate a string 'text-info bg-dark'
 
 Example 4:
-  (color :text :white :background :primary)
+  (color :text :white :background '(:color :primary))
   ; This will generate a string 'text-white bg-primary'"
   (string-clean (concatenate 'string
-                             (if (null text) "" (format nil "text-~a" text))
-                             (if (null background) "" (format nil " bg-~a" background)))))
+                             (if (null text) "" (format nil "text-~a " text))
+                             (if (null background) "" (apply #'background background)))))
 
 (defun opacity (&key (level nil))
   "Generates a Bootstrap opacity class.
