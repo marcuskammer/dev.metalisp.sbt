@@ -5,7 +5,8 @@
    :rove)
   (:import-from
    :cl-sbt/accordion
-   :header))
+   :header
+   :collapse))
 
 (in-package :cl-sbt/tests/accordion)
 
@@ -18,3 +19,12 @@
          data-bs-target=#collapseOne aria-expanded=true
          aria-controls=#collapseOne>Heading</button>
 </h2>")))))
+
+(deftest test-collapse
+  (let ((result (spinneret:with-html-string  (collapse "accordionExample" "collapseOne" t))))
+    (testing "Generates correct HTML for accordion collapse"
+      (ok (string= result
+"<div class=\"accordion-collapse collapse show\" id=collapseOne
+     data-bs-parent=#accordionExample>
+ <div class=accordion-body></div>
+</div>")))))
