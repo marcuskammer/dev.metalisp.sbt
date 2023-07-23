@@ -173,26 +173,28 @@ Example 4:
 (defun overflow (&key (direction nil) (value nil))
   "Generates a Bootstrap overflow class.
 
-DIRECTION: Specifies the direction, should be :x, :y, or nil (both directions).
+DIRECTION: Specifies the direction, should be 'x', 'y', or nil (both directions).
 
-VALUE: Specifies the overflow value, should be :auto, :hidden, :visible,
-:scroll, or nil (default value).
+VALUE: Specifies the overflow value, should be 'auto', 'hidden', 'visible',
+'scroll', or nil (default value).
 
 Example 1:
-  (overflow :direction :x :value :auto)
+  (overflow :direction \"x\" :value \"auto\")
   ; This will generate a string 'overflow-x-auto'
 
 Example 2:
-  (overflow :direction :y :value :hidden)
+  (overflow :direction \"y\" :value \"hidden\")
   ; This will generate a string 'overflow-y-hidden'
 
 Example 3:
-  (overflow :value :visible)
+  (overflow :value \"visible\")
   ; This will generate a string 'overflow-visible'
 
 Example 4:
-  (overflow :direction :x :value :scroll)
+  (overflow :direction \"x\" :value \"scroll\")
   ; This will generate a string 'overflow-x-scroll'"
+  (assert (or (stringp direction)
+              (stringp value)) nil "Direction or value should be set as string")
   (let* ((dir-str (if (null direction)
                       ""
                       (format nil "overflow-~a" direction)))

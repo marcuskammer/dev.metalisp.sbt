@@ -100,26 +100,28 @@
 
 (deftest test-overflow-direction-value
   (testing "Generates correct overflow class for direction and value"
-    (ok (string= (overflow :direction :x :value :auto) "overflow-x-auto"))
-    (ok (string= (overflow :direction :y :value :hidden) "overflow-y-hidden"))
-    (ok (string= (overflow :direction :x :value :visible) "overflow-x-visible"))
-    (ok (string= (overflow :direction :y :value :scroll) "overflow-y-scroll"))))
+    (ok (string= (overflow :direction "x" :value "auto") "overflow-x-auto"))
+    (ok (string= (overflow :direction "y" :value "hidden") "overflow-y-hidden"))
+    (ok (string= (overflow :direction "x" :value "visible") "overflow-x-visible"))
+    (ok (string= (overflow :direction "y" :value "scroll") "overflow-y-scroll"))))
 
 (deftest test-overflow-direction
   (testing "Generates correct overflow class for direction only"
-    (ok (string= (overflow :direction :x) "overflow-x"))
-    (ok (string= (overflow :direction :y) "overflow-y"))))
+    (ok (string= (overflow :direction "x") "overflow-x"))
+    (ok (string= (overflow :direction "y") "overflow-y"))))
 
 (deftest test-overflow-value
   (testing "Generates correct overflow class for value only"
-    (ok (string= (overflow :value :auto) "overflow-auto"))
-    (ok (string= (overflow :value :hidden) "overflow-hidden"))
-    (ok (string= (overflow :value :visible) "overflow-visible"))
-    (ok (string= (overflow :value :scroll) "overflow-scroll"))))
+    (ok (string= (overflow :value "auto") "overflow-auto"))
+    (ok (string= (overflow :value "hidden") "overflow-hidden"))
+    (ok (string= (overflow :value "visible") "overflow-visible"))
+    (ok (string= (overflow :value "scroll") "overflow-scroll"))))
 
 (deftest test-overflow-no-arguments
-  (testing "Generates correct overflow class with no arguments"
-    (ok (string= (overflow) ""))))
+  (testing "Asserts error is signaled for invalid opacity levels"
+    (ok (signals (overflow)))
+    (ok (signals (overflow :direction :invalid)))
+    (ok (signals (overflow :value :invalid)))))
 
 (deftest test-sizing-direction-size
   (testing "Generates correct sizing class for direction and size"
