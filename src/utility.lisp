@@ -53,39 +53,39 @@
 
 (in-package :cl-sbt/utility)
 
-(defparameter *colors* '(:primary :secondary :success :danger :warning :info :light :dark :body :muted :white :transparent))
+(defparameter *colors* '("primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "body" "muted" "white" "transparent"))
 
 (defun string-clean (str)
   (string-trim " " (string-downcase str)))
 
-(defun background (&key (color :primary) (gradient nil))
+(defun background (&key (color "primary") (gradient nil))
   "Generates a Bootstrap background class.
 
-COLOR: Specifies the color, should be :primary, :secondary, :success,
-:danger, :warning, :info, :light, :dark, :body, :muted, :white, :transparent,
+COLOR: Specifies the color, should be 'primary', 'secondary', 'success',
+'danger', 'warning', 'info', 'light', 'dark', 'body', 'muted', 'white', 'transparent',
 or nil (default color).
 
-GRADIENT: Specifies if the background should have a gradient, should be :t or
-:nil. If :t, it will add a 'bg-gradient' to the class string.
+GRADIENT: Specifies if the background should have a gradient, should be t or
+nil. If t, it will add a 'bg-gradient' to the class string.
 
 Example 1:
-  (background :color :primary)
+  (background :color \"primary\")
   ; This will generate a string 'bg-primary'
 
 Example 2:
-  (background :color :danger :gradient :t)
+  (background :color \"danger\" :gradient t)
   ; This will generate a string 'bg-danger bg-gradient'
 
 Example 3:
-  (background :color :light)
+  (background :color \"light\")
   ; This will generate a string 'bg-light'
 
 Example 4:
-  (background :color :dark :gradient :t)
+  (background :color \"dark\" :gradient t)
   ; This will generate a string 'bg-dark bg-gradient'"
-  (assert (member color *colors*) nil "Color can't be nil")
+  (assert (member color *colors* :test #'string=) nil "Color can't be nil")
   (let ((color-str (format nil "bg-~a" color))
-        (gradient-str (if (eq gradient :t) " bg-gradient" "")))
+        (gradient-str (if (null gradient) "" " bg-gradient")))
     (string-clean (concatenate 'string color-str gradient-str))))
 
 (defun color (&key (text nil) (background nil) (emphasis nil) (body nil))

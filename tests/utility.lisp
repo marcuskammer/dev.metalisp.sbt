@@ -18,17 +18,17 @@
 
 (deftest test-background-color
   (testing "Generates correct background class with color"
-    (ok (string= (background :color :primary) "bg-primary"))
-    (ok (string= (background :color :danger) "bg-danger"))
-    (ok (string= (background :color :light) "bg-light"))
-    (ok (string= (background :color :dark) "bg-dark"))))
+    (ok (string= (background :color "primary") "bg-primary"))
+    (ok (string= (background :color "danger") "bg-danger"))
+    (ok (string= (background :color "light") "bg-light"))
+    (ok (string= (background :color "dark") "bg-dark"))))
 
 (deftest test-background-gradient
   (testing "Generates correct background class with gradient"
-    (ok (string= (background :color :primary :gradient :t) "bg-primary bg-gradient"))
-    (ok (string= (background :color :danger :gradient :t) "bg-danger bg-gradient"))
-    (ok (string= (background :color :light :gradient :t) "bg-light bg-gradient"))
-    (ok (string= (background :color :dark :gradient :t) "bg-dark bg-gradient"))))
+    (ok (string= (background :color "primary" :gradient t) "bg-primary bg-gradient"))
+    (ok (string= (background :color "danger" :gradient t) "bg-danger bg-gradient"))
+    (ok (string= (background :color "light" :gradient t) "bg-light bg-gradient"))
+    (ok (string= (background :color "dark" :gradient t) "bg-dark bg-gradient"))))
 
 (deftest test-background-no-arguments
   (testing "Generates correct background class with no arguments"
