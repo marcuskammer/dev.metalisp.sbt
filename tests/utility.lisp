@@ -25,7 +25,8 @@
 
 (deftest test-background-gradient
   (testing "Generates correct background class with gradient"
-    (ok (string= (background :color "primary" :gradient t) "bg-primary bg-gradient"))
+    (ok (string= (background :color "primary" :gradient t)
+                 "bg-primary bg-gradient"))
     (ok (string= (background :color "danger" :gradient t) "bg-danger bg-gradient"))
     (ok (string= (background :color "light" :gradient t) "bg-light bg-gradient"))
     (ok (string= (background :color "dark" :gradient t) "bg-dark bg-gradient"))))
@@ -40,10 +41,10 @@
 
 (deftest test-color-text
   (testing "Generates correct color class for text"
-    (ok (string= (color :text :primary) "text-primary"))
-    (ok (string= (color :text :danger) "text-danger"))
-    (ok (string= (color :text :light) "text-light"))
-    (ok (string= (color :text :dark) "text-dark"))))
+    (ok (string= (color :text "primary") "text-primary"))
+    (ok (string= (color :text "danger") "text-danger"))
+    (ok (string= (color :text "light") "text-light"))
+    (ok (string= (color :text "dark") "text-dark"))))
 
 (deftest test-color-background
   (testing "Generates correct color class for background"
@@ -54,21 +55,23 @@
 
 (deftest test-color-text-background
   (testing "Generates correct color class for text and background"
-    (ok (string= (color :text :info :background '(:color "dark")) "text-info bg-dark"))
-    (ok (string= (color :text :white :background '(:color "primary")) "text-white bg-primary"))))
+    (ok (string= (color :text "info" :background '(:color "dark"))
+                 "text-info bg-dark"))
+    (ok (string= (color :text "white" :background '(:color "primary"))
+                 "text-white bg-primary"))))
 
 (deftest test-color-no-arguments
   (testing "Generates correct color class with no arguments"
     (ok (string= (color) ""))))
 
 (deftest test-color-text-emphasis
-  (ok (string= (color :text :primary :emphasis t) "text-primary-emphasis"))
-  (ok (string= (color :text :secondary :emphasis t) "text-secondary-emphasis")))
+  (ok (string= (color :text "primary" :emphasis t) "text-primary-emphasis"))
+  (ok (string= (color :text "secondary" :emphasis t) "text-secondary-emphasis")))
 
 (deftest test-color-body
   (ok (string= (color :body t) "text-body"))
-  (ok (string= (color :body :secondary) "text-body-secondary"))
-  (ok (string= (color :body :tertiary) "text-body-tertiary")))
+  (ok (string= (color :body "secondary") "text-body-secondary"))
+  (ok (string= (color :body "tertiary") "text-body-tertiary")))
 
 (deftest test-color-body-emphasis
   (ok (string= (color :body t :emphasis t) "text-body-emphasis")))
@@ -137,8 +140,10 @@
 
 (deftest test-spacing-all-arguments
   (testing "Generates correct spacing class with all arguments"
-    (ok (string= (spacing :property :m :side :t :size 3 :breakpoint :md) "mt-md-3"))
-    (ok (string= (spacing :property :p :side :b :size 2 :breakpoint :lg) "pb-lg-2"))))
+    (ok (string= (spacing :property :m :side :t :size 3 :breakpoint :md)
+                 "mt-md-3"))
+    (ok (string= (spacing :property :p :side :b :size 2 :breakpoint :lg)
+                 "pb-lg-2"))))
 
 (deftest test-spacing-some-arguments
   (testing "Generates correct spacing class with some arguments"
@@ -173,9 +178,12 @@
     (ok (string= (text :alignment :start) "text-start"))
     (ok (string= (text :transform :uppercase) "text-uppercase"))
     (ok (string= (text :weight :bold :monospace t) "fw-bold font-monospace"))
-    (ok (string= (text :alignment :center :transform :lowercase) "text-center text-lowercase"))
-    (ok (string= (text :alignment :end :weight :light :monospace t) "text-end fw-light font-monospace"))
-    (ok (string= (text :transform :capitalize :wrap :wrap) "text-capitalize text-wrap"))))
+    (ok (string= (text :alignment :center :transform :lowercase)
+                 "text-center text-lowercase"))
+    (ok (string= (text :alignment :end :weight :light :monospace t)
+                 "text-end fw-light font-monospace"))
+    (ok (string= (text :transform :capitalize :wrap :wrap)
+                 "text-capitalize text-wrap"))))
 
 (deftest test-text-single-argument
   (testing "Generates correct text utility class with a single argument"

@@ -133,7 +133,7 @@ Example 7:
   (let* ((text-str (if (null text) "" (format nil "text-~a" text)))
          (background-str (if (null background) "" (apply #'background background)))
          (emphasis-str (if (null emphasis) "" "-emphasis"))
-         (body-str (if (null body) "" (if (keywordp body)
+         (body-str (if (null body) "" (if (stringp body)
                                           (format nil "text-body-~a" body)
                                           "text-body"))))
     (string-clean (concatenate 'string
