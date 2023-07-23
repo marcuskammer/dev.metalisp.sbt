@@ -53,10 +53,12 @@
 
 (in-package :cl-sbt/utility)
 
+(defparameter *colors* '(:primary :secondary :success :danger :warning :info :light :dark :body :muted :white :transparent))
+
 (defun string-clean (str)
   (string-trim " " (string-downcase str)))
 
-(defun background (&key (color nil) (gradient nil))
+(defun background (&key (color :primary) (gradient nil))
   "Generates a Bootstrap background class.
 
 COLOR: Specifies the color, should be :primary, :secondary, :success,
@@ -81,20 +83,25 @@ Example 3:
 Example 4:
   (background :color :dark :gradient :t)
   ; This will generate a string 'bg-dark bg-gradient'"
-  (let ((color-str (if (null color) "" (format nil "bg-~a" color)))
+  (assert (member color *colors*) nil "Color can't be nil")
+  (let ((color-str (format nil "bg-~a" color))
         (gradient-str (if (eq gradient :t) " bg-gradient" "")))
     (string-clean (concatenate 'string color-str gradient-str))))
 
-(defun color (&key (text nil) (background nil))
+(defun color (&key (text nil) (background nil) (emphasis nil) (body nil))
   "Generates a Bootstrap color class.
 
-TEXT: Specifies the color of the text. Should be 'primary', 'secondary',
-'success', 'danger', 'warning', 'info', 'light', 'dark', 'white', 'body',
-'muted', 'black-50', 'white-50', 'reset'.
+TEXT: Specifies the color of the text. Should be :primary, :secondary,
+:success, :danger, :warning, :info, :light, :dark, :white, :body,
+:muted, :reset
 
-BACKGROUND: Specifies the color of the background. Should be 'primary',
-'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'white',
-'transparent'.
+BACKGROUND: Specifies the color of the background. Should be :primary,
+:secondary, :success, :danger, :warning, :info, :light, :dark, :white,
+:transparent.
+
+EMPHASIS: Specifies whether the color should be emphasized or not.
+
+BODY: Specifies whether the color of the text should be body color.
 
 Example 1:
   (color :text :primary)
@@ -110,10 +117,31 @@ Example 3:
 
 Example 4:
   (color :text :white :background '(:color :primary))
-  ; This will generate a string 'text-white bg-primary'"
-  (string-clean (concatenate 'string
-                             (if (null text) "" (format nil "text-~a " text))
-                             (if (null background) "" (apply #'background background)))))
+  ; This will generate a string 'text-white bg-primary'
+
+Example 5:
+  (color :text :primary :emphasis t)
+  ; This will generate a string 'text-primary-emphasis'
+
+Example 6:
+  (color :body :secondary)
+  ; This will generate a string 'text-body-secondary'
+
+Example 7:
+  (color :body t :emphasis t)
+  ; This will generate a string 'text-body-emphasis'"
+  (let* ((text-str (if (null text) "" (format nil "text-~a" text)))
+         (background-str (if (null background) "" (apply #'background background)))
+         (emphasis-str (if (null emphasis) "" "-emphasis"))
+         (body-str (if (null body) "" (if (keywordp body)
+                                          (format nil "text-body-~a" body)
+                                          (format nil "text-body" body)))))
+    (string-clean (concatenate 'string
+                               body-str
+                               text-str
+                               emphasis-str
+                               (when background " ")
+                               background-str))))
 
 (defun opacity (&key (level nil))
   "Generates a Bootstrap opacity class.
