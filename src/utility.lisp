@@ -135,7 +135,7 @@ Example 7:
          (emphasis-str (if (null emphasis) "" "-emphasis"))
          (body-str (if (null body) "" (if (keywordp body)
                                           (format nil "text-body-~a" body)
-                                          (format nil "text-body" body)))))
+                                          "text-body"))))
     (string-clean (concatenate 'string
                                body-str
                                text-str
