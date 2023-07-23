@@ -32,7 +32,11 @@
 
 (deftest test-background-no-arguments
   (testing "Generates correct background class with no arguments"
-    (ok (string= (background) ""))))
+    (ok (string= (background) "bg-primary"))))
+
+(deftest test-background-color-nil
+  (testing "Generates correct background class with no arguments"
+    (ok (signals (background :color nil)))))
 
 (deftest test-color-text
   (testing "Generates correct color class for text"
@@ -56,6 +60,18 @@
 (deftest test-color-no-arguments
   (testing "Generates correct color class with no arguments"
     (ok (string= (color) ""))))
+
+(deftest test-color-text-emphasis
+  (ok (string= (color :text :primary :emphasis t) "text-primary-emphasis"))
+  (ok (string= (color :text :secondary :emphasis t) "text-secondary-emphasis")))
+
+(deftest test-color-body
+  (ok (string= (color :body t) "text-body"))
+  (ok (string= (color :body :secondary) "text-body-secondary"))
+  (ok (string= (color :body :tertiary) "text-body-tertiary")))
+
+(deftest test-color-body-emphasis
+  (ok (string= (color :body t :emphasis t) "text-body-emphasis")))
 
 (deftest test-opacity-level
   (testing "Generates correct opacity class for level"
