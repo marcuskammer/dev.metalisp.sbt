@@ -86,7 +86,7 @@
 
 (deftest test-opacity-auto
   (testing "Generates correct opacity class for auto"
-    (ok (string= (opacity :level :auto) "opacity-auto"))))
+    (ok (string= (opacity :level "auto") "opacity-auto"))))
 
 (deftest test-opacity-no-arguments
   (testing "Generates correct opacity class with no arguments"

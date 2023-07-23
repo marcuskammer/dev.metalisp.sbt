@@ -163,9 +163,11 @@ Example 3:
 Example 4:
   (opacity :level :auto)
   ; This will generate a string 'opacity-auto'"
-  (let ((level-str (if (null level) "" (if (eq level :auto)
-                                           "opacity-auto"
-                                           (format nil "opacity-~d" level)))))
+  (let ((level-str (if (null level)
+                       ""
+                       (if (equal level "auto")
+                           "opacity-auto"
+                           (format nil "opacity-~d" level)))))
     (string-clean (concatenate 'string level-str))))
 
 (defun overflow (&key (direction nil) (value nil))
