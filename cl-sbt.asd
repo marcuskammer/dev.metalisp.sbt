@@ -38,8 +38,12 @@
   :components ((:module "tests"
                 :components
                 ((:file "main")
-                 (:file "grid")
-                 (:file "utility")
-                 (:file "accordion"))))
+                 (:file "utility")))
+               (:module "tests/layout"
+                :components
+                ((:file "grid")))
+               (:module "tests/component"
+                :components
+                ((:file "accordion"))))
   :description "Test system for cl-sbt"
   :perform (test-op (op c) (symbol-call :rove :run c)))
