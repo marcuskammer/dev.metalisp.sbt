@@ -131,14 +131,21 @@
 
 (deftest test-spacing-single-argument
   (testing "Generates correct spacing class with a single argument"
-    (ok (string= (spacing :property :m) "m"))
-    (ok (string= (spacing :side :t) "t"))
-    (ok (string= (spacing :size 3) "3"))
-    (ok (string= (spacing :breakpoint :md) "md"))))
+    (ok (signals (spacing :property :m)))
+    (ok (signals (spacing :side :t)))
+    (ok (signals (spacing :size 3)))
+    (ok (signals (spacing :breakpoint :md)))))
 
 (deftest test-spacing-no-arguments
   (testing "Generates correct spacing class with no arguments"
-    (ok (string= (spacing) ""))))
+    (ok (signals (spacing)))))
+
+(deftest test-spacing-invalid-arguments
+  (testing "Generates correct spacing class with invalid arguments"
+    (ok (signals (spacing :property :invalid :side :t :size 3 :breakpoint :md)))
+    (ok (signals (spacing :property :m :side :invalid :size 3 :breakpoint :md)))
+    (ok (signals (spacing :property :m :side :t :size -1 :breakpoint :md)))
+    (ok (signals (spacing :property :m :side :t :size 3 :breakpoint :invalid)))))
 
 (deftest test-text-all-arguments
   (testing "Generates correct text utility class with all arguments"

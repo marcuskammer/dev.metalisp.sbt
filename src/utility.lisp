@@ -236,16 +236,22 @@ Example 4:
   (spacing :property :p :side :x :size 5)
   ; This will generate a string 'px-5', which sets horizontal padding of size 5
   ; for all breakpoints."
-  (let ((property-str (if (null property) "" (format nil "~a" property)))
+  (assert (and property size) nil "Property and Size needed")
+  (assert (member property '(:m :p)) nil "Property should be :m or :p")
+  (assert (or (and (numberp size) (>= size 0))
+              (eq size :auto)) nil "Size should be greater than or equal to 0 or :auto")
+  (when side (assert (member side '(:t :b :s :e :x :y))))
+  (when breakpoint (assert (member breakpoint '(:xs :sm :md :lg :xl :xxl)) nil "Breakpoint should be :xs, :sm, :md, :lg, :xl, xxl"))
+  (let ((property-str (format nil "~a" property))
         (side-str (if (null side) "" (format nil "~a" side)))
-        (size-str (if (null size) "" (if (eq size :auto) "auto" (format nil "~d" size))))
+        (size-str (if (eq size :auto) "auto" (format nil "~d" size)))
         (breakpoint-str (if (null breakpoint) "" (format nil "~a" breakpoint))))
     (string-clean
      (concatenate 'string
                   property-str
                   side-str
                   (if breakpoint "-" "") breakpoint-str
-                  (if size "-" "") size-str))))
+                  "-" size-str))))
 
 (defun text (&key (alignment nil) (transform nil) (weight nil) (wrap nil) (monospace nil))
   "Generates a Bootstrap text utility class.
