@@ -90,7 +90,13 @@
 
 (deftest test-opacity-no-arguments
   (testing "Generates correct opacity class with no arguments"
-    (ok (string= (opacity) ""))))
+    (ok (signals (opacity)))))
+
+(deftest test-opacity-invalid-arguments
+  (testing "Asserts error is signaled for invalid opacity levels"
+    (ok (signals (opacity :level :invalid)))
+    (ok (signals (opacity :level "invalid")))
+    (ok (signals (opacity :level -100)))))
 
 (deftest test-overflow-direction-value
   (testing "Generates correct overflow class for direction and value"

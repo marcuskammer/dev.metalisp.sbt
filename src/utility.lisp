@@ -146,7 +146,7 @@ Example 7:
 (defun opacity (&key (level nil))
   "Generates a Bootstrap opacity class.
 
-LEVEL: Specifies the opacity level, should be a number from 0 to 100, or :auto.
+LEVEL: Specifies the opacity level, should be a number from 0 to 100, or 'auto'.
 
 Example 1:
   (opacity :level 25)
@@ -161,13 +161,13 @@ Example 3:
   ; This will generate a string 'opacity-75'
 
 Example 4:
-  (opacity :level :auto)
+  (opacity :level \"auto\")
   ; This will generate a string 'opacity-auto'"
-  (let ((level-str (if (null level)
-                       ""
-                       (if (equal level "auto")
-                           "opacity-auto"
-                           (format nil "opacity-~d" level)))))
+  (assert (or (equal level "auto")
+              (>= level 0)) nil "Level should be 'auto' or positive number")
+  (let ((level-str (if (equal level "auto")
+                       "opacity-auto"
+                       (format nil "opacity-~d" level))))
     (string-clean (concatenate 'string level-str))))
 
 (defun overflow (&key (direction nil) (value nil))
