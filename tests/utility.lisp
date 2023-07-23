@@ -125,22 +125,22 @@
 
 (deftest test-sizing-direction-size
   (testing "Generates correct sizing class for direction and size"
-    (ok (string= (sizing :direction :w :size 50) "w-50"))
-    (ok (string= (sizing :direction :h :size :auto) "h-auto"))
-    (ok (string= (sizing :direction :w :size :100) "w-100"))
-    (ok (string= (sizing :direction :h :size 75) "h-75"))))
+    (ok (string= (sizing :direction "w" :size 50) "w-50"))
+    (ok (string= (sizing :direction "h" :size "auto") "h-auto"))
+    (ok (string= (sizing :direction "w" :size 100) "w-100"))
+    (ok (string= (sizing :direction "h" :size 75) "h-75"))))
 
 (deftest test-sizing-direction
   (testing "Generates correct sizing class for direction only"
-    (ok (string= (sizing :direction :w) "w-"))
-    (ok (string= (sizing :direction :h) "h-"))))
+    (ok (signals (sizing :direction "w")))
+    (ok (signals (sizing :direction "h")))))
 
 (deftest test-sizing-size
   (testing "Generates correct sizing class for size only"
-    (ok (string= (sizing :size 50) "50"))
-    (ok (string= (sizing :size :auto) "auto"))
-    (ok (string= (sizing :size :100) "100"))
-    (ok (string= (sizing :size 75) "75"))))
+    (ok (signals (sizing :size 50)))
+    (ok (signals (sizing :size "auto")))
+    (ok (signals (sizing :size 100)))
+    (ok (signals (sizing :size 75)))))
 
 (deftest test-sizing-no-arguments
   (testing "Generates correct sizing class with no arguments"
