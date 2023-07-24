@@ -144,7 +144,7 @@
 
 (deftest test-sizing-no-arguments
   (testing "Generates correct sizing class with no arguments"
-    (ok (string= (sizing) ""))))
+    (ok (signals (sizing)))))
 
 (deftest test-spacing-all-arguments
   (testing "Generates correct spacing class with all arguments"

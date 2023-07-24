@@ -212,27 +212,29 @@ SIZE: Specifies the size, should be a number from 0 to 100, :25, :50, :75,
 :100, :auto, or nil (default size).
 
 Example 1:
-  (sizing :direction :w :size 50)
+  (sizing :direction \"w\" :size 50)
   ; This will generate a string 'w-50'
 
 Example 2:
-  (sizing :direction :h :size :auto)
+  (sizing :direction \"h\" :size \"auto\")
   ; This will generate a string 'h-auto'
 
 Example 3:
-  (sizing :direction :w :size :100)
+  (sizing :direction \"w\" :size 100)
   ; This will generate a string 'w-100'
 
 Example 4:
-  (sizing :direction :h :size 75)
+  (sizing :direction \"h\" :size 75)
   ; This will generate a string 'h-75'"
-  (let* ((dir-str (if (null direction) "" (format nil "~a-" direction)))
-         (size-str (if (null size) ""
-                       (if (eq size :auto)
-                           "auto"
-                           (if (numberp size)
-                               (format nil "~d" size)
-                               (format nil "~a" size))))))
+  (assert (and (member direction '("w" "h") :test #'string=)
+               (or (equal size "auto") (>= size 0)))
+          nil "DIRECTION and SIZE can't be nil")
+  (let* ((dir-str (format nil "~a-" direction))
+         (size-str (if (equal size "auto")
+                       "auto"
+                       (if (numberp size)
+                           (format nil "~d" size)
+                           (format nil "~a" size)))))
     (string-clean (concatenate 'string dir-str size-str))))
 
 (defun spacing (&key (property nil) (side nil) (size nil) (breakpoint nil))
@@ -269,7 +271,7 @@ Example 4:
   (assert (and property size) nil "Property and Size needed")
   (assert (member property '(:m :p)) nil "Property should be :m or :p")
   (assert (or (and (numberp size) (>= size 0))
-              (eq size :auto)) nil "Size should be greater than or equal to 0 or :auto")
+              (equal size "auto")) nil "Size should be greater than or equal to 0 or :auto")
   (when side (assert (member side '(:t :b :s :e :x :y))))
   (when breakpoint (assert (member breakpoint '(:xs :sm :md :lg :xl :xxl)) nil "Breakpoint should be :xs, :sm, :md, :lg, :xl, xxl"))
   (let ((property-str (format nil "~a" property))
