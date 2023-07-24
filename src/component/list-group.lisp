@@ -1,4 +1,4 @@
-;;https://getbootstrap.com/docs/5.3/components/list-group/
+;; https://getbootstrap.com/docs/5.3/components/list-group/
 
 ;; Bootstrap's List Group component is a flexible and versatile component used
 ;; for displaying a series of content which can be a mix of various types, like
@@ -17,14 +17,14 @@
 ;; of emails with the number of unread messages, a list of tasks with their
 ;; completion status, and so on.
 
-(defpackage cl-sbt-list-group
+(defpackage cl-sbt/list-group
   (:use :cl)
   (:export
    :item
    :list-group)
-(:documentation "A Common Lisp package for generating Bootstrap List Group components. This package provides macros for generating Bootstrap List Group components, a versatile element used to display a series of content in a list format. The `item` macro creates a Bootstrap list group item, which can contain any series of forms. The `list-group` macro generates a Bootstrap list group, which is a collection of list group items. Bootstrap's List Group components are highly customizable and can be used in a wide range of scenarios. They can be displayed as plain text or clickable elements, support adding badges, and can be styled with different contextual classes."))
+(:documentation "A Common Lisp package for generating Bootstrap List Group components."))
 
-(in-package :cl-sbt-list-group)
+(in-package :cl-sbt/list-group)
 
 (defmacro item (&body body)
   "This macro generates a Bootstrap list group item.
