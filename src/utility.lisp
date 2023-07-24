@@ -175,8 +175,7 @@ Example 4:
 
 DIRECTION: Specifies the direction, should be 'x', 'y', or nil (both directions).
 
-VALUE: Specifies the overflow value, should be 'auto', 'hidden', 'visible',
-'scroll', or nil (default value).
+VALUE: Specifies the overflow value, should be 'auto', 'hidden', 'visible', 'scroll'.
 
 Example 1:
   (overflow :direction \"x\" :value \"auto\")
@@ -193,16 +192,15 @@ Example 3:
 Example 4:
   (overflow :direction \"x\" :value \"scroll\")
   ; This will generate a string 'overflow-x-scroll'"
-  (assert (or (stringp direction)
-              (stringp value)) nil "Direction or value should be set as string")
+  (assert (member value '("auto" "hidden" "visible" "scroll") :test #'string=)
+          nil
+          "Direction or value should be set as string")
   (let* ((dir-str (if (null direction)
                       ""
                       (format nil "overflow-~a" direction)))
-         (value-str (if (null value)
-                        ""
-                        (if (string= dir-str "")
-                            (format nil "overflow-~a" value)
-                            (format nil "-~a" value)))))
+         (value-str (if (string= dir-str "")
+                        (format nil "overflow-~a" value)
+                        (format nil "-~a" value))))
     (string-clean (concatenate 'string dir-str value-str))))
 
 (defun sizing (&key (direction nil) (size nil))
