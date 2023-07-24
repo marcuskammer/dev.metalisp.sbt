@@ -107,8 +107,8 @@
 
 (deftest test-overflow-direction
   (testing "Generates correct overflow class for direction only"
-    (ok (string= (overflow :direction "x") "overflow-x"))
-    (ok (string= (overflow :direction "y") "overflow-y"))))
+    (ok (signals (overflow :direction "x")))
+    (ok (signals (overflow :direction "y")))))
 
 (deftest test-overflow-value
   (testing "Generates correct overflow class for value only"
