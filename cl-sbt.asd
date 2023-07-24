@@ -32,7 +32,7 @@
 
 (defsystem "cl-sbt/tests"
   :author "Marcus Kammer"
-  :license ""
+  :license "MIT"
   :depends-on ("cl-sbt"
                "rove")
   :components ((:module "tests"
