@@ -27,9 +27,12 @@
   (testing "Generates correct background class with gradient"
     (ok (string= (background :color "primary" :gradient t)
                  "bg-primary bg-gradient"))
-    (ok (string= (background :color "danger" :gradient t) "bg-danger bg-gradient"))
-    (ok (string= (background :color "light" :gradient t) "bg-light bg-gradient"))
-    (ok (string= (background :color "dark" :gradient t) "bg-dark bg-gradient"))))
+    (ok (string= (background :color "danger" :gradient t)
+                 "bg-danger bg-gradient"))
+    (ok (string= (background :color "light" :gradient t)
+                 "bg-light bg-gradient"))
+    (ok (string= (background :color "dark" :gradient t)
+                 "bg-dark bg-gradient"))))
 
 (deftest test-background-no-arguments
   (testing "Generates correct background class with no arguments"
@@ -148,22 +151,22 @@
 
 (deftest test-spacing-all-arguments
   (testing "Generates correct spacing class with all arguments"
-    (ok (string= (spacing :property :m :side :t :size 3 :breakpoint :md)
+    (ok (string= (spacing :property "m" :side "t" :size 3 :breakpoint "md")
                  "mt-md-3"))
-    (ok (string= (spacing :property :p :side :b :size 2 :breakpoint :lg)
+    (ok (string= (spacing :property "p" :side "b" :size 2 :breakpoint "lg")
                  "pb-lg-2"))))
 
 (deftest test-spacing-some-arguments
   (testing "Generates correct spacing class with some arguments"
-    (ok (string= (spacing :property :m :size :auto) "m-auto"))
-    (ok (string= (spacing :property :p :side :x :size 5) "px-5"))))
+    (ok (string= (spacing :property "m" :size "auto") "m-auto"))
+    (ok (string= (spacing :property "p" :side "x" :size 5) "px-5"))))
 
 (deftest test-spacing-single-argument
   (testing "Generates correct spacing class with a single argument"
-    (ok (signals (spacing :property :m)))
-    (ok (signals (spacing :side :t)))
+    (ok (signals (spacing :property "m")))
+    (ok (signals (spacing :side "t")))
     (ok (signals (spacing :size 3)))
-    (ok (signals (spacing :breakpoint :md)))))
+    (ok (signals (spacing :breakpoint "md")))))
 
 (deftest test-spacing-no-arguments
   (testing "Generates correct spacing class with no arguments"
