@@ -129,16 +129,16 @@ The value of these arguments depends on the KIND of element:
 The function generates the corresponding Bootstrap classes for the given breakpoints and KIND.
 
 Examples:
-  (breakpoint-class :kind :con :md t)
+  (breakpoint-class :kind \"con\" :md t)
   ; will generate a string for a medium container.
 
-  (breakpoint-class :kind :row :sm 2 :md 3)
+  (breakpoint-class :kind \"row\" :sm 2 :md 3)
   ; will generate a string for a row with 2 columns on small devices and 3 columns on medium devices.
 
-  (breakpoint-class :kind :col :lg '(4 1))
+  (breakpoint-class :kind \"col\" :lg '(4 1))
   ; will generate a string for a column that spans 4 out of 12 grid units and is offset by 1 on large devices.
 
-  (breakpoint-class :kind :con :xs t :sm t :md t :lg t :xl t :xxl t)
+  (breakpoint-class :kind \"con\" :xs t :sm t :md t :lg t :xl t :xxl t)
   ; will generate a string for a fluid container that spans all breakpoints."
   (assert (and kind
                (or xs sm md lg xl xxl)))
