@@ -159,35 +159,37 @@ Examples:
 
 FLUID: When non-nil, the container becomes fluid (full width).
 
-BREAKPOINT: Specifies the size of the container at various breakpoints, should be :sm, :md, :lg, :xl, or :xxl.
+BREAKPOINT: Specifies the size of the container at various breakpoints, should
+be 'sm', 'md', 'lg', 'xl', or 'xxl'.
 
 TEXT: A keyword list that applies text utilities.
 
-Examples:
+Example 1:
   (con (:fluid t) \"Hello, world!\")
   ; This will generate a full width (fluid) container with the text 'Hello, world!'.
 
+Example 2:
   (con (:breakpoint (:md t)) \"Welcome to the site!\")
   ; This will generate a container that is medium-sized at the defined
   ; breakpoint, containing the text 'Welcome to the site!'.
 
-  (con (:text (:alignment :center)) \"Center-aligned text!\")
+Example 3:
+  (con (:text (:alignment \"center\")) \"Center-aligned text!\")
   ; This will generate a container with center-aligned text.
 
-  (con (:fluid t :breakpoint (:sm t) :text (:weight :bold)) \"Bold text in a small fluid container!\")
+Example 4:
+  (con (:fluid t :breakpoint (:sm t) :text (:weight \"bold\")) \"Bold text in a small fluid container!\")
   ; This will generate a full width (fluid) container that is small at the
   ; defined breakpoint, containing bold text."
-  `(spinneret:with-html
-     (:div :class
-           ,(string-clean (concatenate 'string
-                         (if (null fluid) "container " "container-fluid ")
-                         (if (null breakpoint) ""
-                             (format nil "~a " (apply #'breakpoint-class breakpoint)))
-                         (if (null text) ""
-                             (format nil "~a " (apply #'cl-sbt/utility:text text)))
-                         (if (null spacing) ""
-                             (apply #'cl-sbt/utility:spacing spacing))))
-           ,@body)))
+  (let ((fluid-str (if (null fluid) "container " "container-fluid "))
+        (breakpoint-str (if (null breakpoint) "" (format nil "~a " (apply #'breakpoint-class breakpoint))))
+        (text-str (if (null text) "" (format nil "~a " (apply #'cl-sbt/utility:text text))))
+        (spacing-str (if (null spacing) "" (apply #'cl-sbt/utility:spacing spacing))))
+    `(spinneret:with-html
+       (:comment "START CONTAINER")
+       (:div :class ,(string-clean (concatenate 'string fluid-str breakpoint-str text-str spacing-str))
+             ,@body)
+       (:comment "END CONTAINER"))))
 
 (defmacro row ((&key (cols nil) (breakpoint nil) (alignitems nil) (justifycontent nil) (spacing nil)) &body body)
   "Generates a Bootstrap row.
