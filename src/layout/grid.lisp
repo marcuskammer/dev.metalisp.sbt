@@ -110,7 +110,7 @@ Examples:
                             "")))
     (concatenate 'string size-string offset-string)))
 
-(defun breakpoint-class (&key (kind :con) (xs nil) (sm nil) (md nil) (lg nil) (xl nil) (xxl nil))
+(defun breakpoint-class (&key (kind "con") (xs nil) (sm nil) (md nil) (lg nil) (xl nil) (xxl nil))
   "Generates Bootstrap class string for different kinds of elements across breakpoints.
 
 The KIND argument specifies the type of element for which the classes are generated.
@@ -140,6 +140,8 @@ Examples:
 
   (breakpoint-class :kind :con :xs t :sm t :md t :lg t :xl t :xxl t)
   ; will generate a string for a fluid container that spans all breakpoints."
+  (assert (and kind
+               (or xs sm md lg xl xxl)))
   (let ((breakpoint-values (list xs sm md lg xl xxl)))
     (string-clean
      (apply #'concatenate 'string
@@ -148,9 +150,9 @@ Examples:
                   for breakpoint-value = (nth i breakpoint-values)
                   collect
                   (cond
-                    ((eq kind :con) (make-con-class breakpoint-name breakpoint-value))
-                    ((eq kind :row) (make-row-class breakpoint-name breakpoint-value))
-                    ((eq kind :col) (make-col-class breakpoint-name breakpoint-value))))))))
+                    ((equal kind "con") (make-con-class breakpoint-name breakpoint-value))
+                    ((equal kind "row") (make-row-class breakpoint-name breakpoint-value))
+                    ((equal kind "col") (make-col-class breakpoint-name breakpoint-value))))))))
 
 (defmacro con ((&key (fluid nil) (breakpoint nil) (text nil) (spacing nil)) &body body)
   "Generates a Bootstrap container.

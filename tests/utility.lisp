@@ -181,7 +181,12 @@
 
 (deftest test-text-all-arguments
   (testing "Generates correct text utility class with all arguments"
-    (ok (string= (text :alignment "center" :transform "uppercase" :weight "bolder" :wrap "nowrap" :monospace t)
+    (ok (string= (text
+                   :alignment "center"
+                   :transform "uppercase"
+                   :weight "bolder"
+                   :wrap "nowrap"
+                   :monospace t)
                  "text-center text-uppercase fw-bolder text-nowrap font-monospace"))))
 
 (deftest test-text-some-arguments

@@ -77,23 +77,27 @@
 
 (deftest test-breakpoint-class-con
   (testing "Generates correct class for container"
-    (ok (string= (breakpoint-class :kind :con :md t) "container-md"))))
+    (ok (string= (breakpoint-class :kind "con" :md t) "container-md"))))
 
 (deftest test-breakpoint-class-row
   (testing "Generates correct class for row"
-    (ok (string= (breakpoint-class :kind :row :sm 2 :md 3) "row-cols-sm-2 row-cols-md-3"))))
+    (ok (string= (breakpoint-class :kind "row" :sm 2 :md 3) "row-cols-sm-2 row-cols-md-3"))))
 
 (deftest test-breakpoint-class-col
   (testing "Generates correct class for column"
-    (ok (string= (breakpoint-class :kind :col :lg '(4 1)) "col-lg-4 offset-lg-1"))))
+    (ok (string= (breakpoint-class :kind "col" :lg '(4 1)) "col-lg-4 offset-lg-1"))))
 
 (deftest test-breakpoint-class-con-fluid
   (testing "Generates correct class for fluid container"
-    (ok (string= (breakpoint-class :kind :con :xs t :sm t :md t :lg t :xl t :xxl t) "container-xs container-sm container-md container-lg container-xl container-xxl"))))
+    (ok (string= (breakpoint-class :kind "con" :xs t :sm t :md t :lg t :xl t :xxl t) "container-xs container-sm container-md container-lg container-xl container-xxl"))))
 
 (deftest test-breakpoint-class-col-no-offset
   (testing "Generates correct class for column with no offset"
-    (ok (string= (breakpoint-class :kind :col :md '(3)) "col-md-3"))))
+    (ok (string= (breakpoint-class :kind "col" :md '(3)) "col-md-3"))))
+
+(deftest test-breakpoint-class-no-arguments
+  (testing "Asserts error is signaled for no arguments"
+    (ok (signals (breakpoint-class)))))
 
 (deftest test-con-fluid
   (let ((result (spinneret:with-html-string (con (:fluid t)))))
@@ -101,7 +105,7 @@
       (ok (string= result "<div class=container-fluid></div>")))))
 
 (deftest test-con-breakpoint
-  (let ((result (spinneret:with-html-string (con (:breakpoint (:kind :con :md t))))))
+  (let ((result (spinneret:with-html-string (con (:breakpoint (:kind "con" :md t))))))
     (testing "Generates correct HTML for container with breakpoint"
       (ok (string= result "<div class=\"container container-md\"></div>")))))
 
@@ -111,7 +115,7 @@
       (ok (string= result "<div class=\"container text-center\"></div>")))))
 
 (deftest test-con-fluid-breakpoint-text
-  (let ((result (spinneret:with-html-string (con (:fluid t :breakpoint (:kind :con :sm t) :text (:weight "bold"))))))
+  (let ((result (spinneret:with-html-string (con (:fluid t :breakpoint (:kind "con" :sm t) :text (:weight "bold"))))))
     (testing "Generates correct HTML for fluid container with breakpoint and text utilities"
       (ok (string= result "<div class=\"container-fluid container-sm fw-bold\"></div>")))))
 
@@ -126,7 +130,7 @@
       (ok (string= result "<div class=\"row row-cols-2\"></div>")))))
 
 (deftest test-row-breakpoint
-  (let ((result (spinneret:with-html-string (cl-sbt/grid:row (:breakpoint (:kind :row :sm 2))))))
+  (let ((result (spinneret:with-html-string (cl-sbt/grid:row (:breakpoint (:kind "row" :sm 2))))))
     (testing "Generates correct HTML when breakpoint is provided"
       (ok (string= result "<div class=\"row row-cols-sm-2\"></div>")))))
 
@@ -156,7 +160,7 @@
       (ok (string= result "<div class=row></div>")))))
 
 (deftest test-col-breakpoint
-  (let ((result (spinneret:with-html-string (col (:breakpoint (:kind :col :md (8 2)))))))
+  (let ((result (spinneret:with-html-string (col (:breakpoint (:kind "col" :md (8 2)))))))
     (testing "Generates correct HTML for column with breakpoint"
       (ok (string= result "<div class=\"col col-md-8 offset-md-2\"></div>")))))
 
