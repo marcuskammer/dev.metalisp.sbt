@@ -109,7 +109,7 @@ predefined content."
          (brand () "Album")
          (toggler *navbar-header-id*)))))
 
-(defmacro footer ((&key (color '(:body :secondary)) (spacing '(:property :p :size 5))) &rest rest)
+(defmacro footer ((&key (color '(:body "secondary")) (spacing '(:property "p" :size 5))) &rest rest)
   "Generates an HTML footer with Bootstrap classes.
 
 COLOR: Specifies the color scheme of the footer. It's a list containing keyword
@@ -208,7 +208,7 @@ to the respective component macros."
   `(with-page (:cdn ,cdn :title ,title)
      (navigation
        (col (:breakpoint (:kind :col :sm (8 nil) :md (7 nil))
-             :spacing (:property :p :side :y :size 4))
+             :spacing (:property "p" :side "y" :size 4))
          (about ()
            "Add some information about the album below, the author, or any
            other background context. Make it a few sentences long so folks can
