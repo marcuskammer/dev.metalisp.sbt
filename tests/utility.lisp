@@ -181,32 +181,32 @@
 
 (deftest test-text-all-arguments
   (testing "Generates correct text utility class with all arguments"
-    (ok (string= (text :alignment :center :transform :uppercase :weight :bolder :wrap :nowrap :monospace t)
+    (ok (string= (text :alignment "center" :transform "uppercase" :weight "bolder" :wrap "nowrap" :monospace t)
                  "text-center text-uppercase fw-bolder text-nowrap font-monospace"))))
 
 (deftest test-text-some-arguments
   (testing "Generates correct text utility class with some arguments"
-    (ok (string= (text :alignment :start) "text-start"))
-    (ok (string= (text :transform :uppercase) "text-uppercase"))
-    (ok (string= (text :weight :bold :monospace t) "fw-bold font-monospace"))
-    (ok (string= (text :alignment :center :transform :lowercase)
+    (ok (string= (text :alignment "start") "text-start"))
+    (ok (string= (text :transform "uppercase") "text-uppercase"))
+    (ok (string= (text :weight "bold" :monospace t) "fw-bold font-monospace"))
+    (ok (string= (text :alignment "center" :transform "lowercase")
                  "text-center text-lowercase"))
-    (ok (string= (text :alignment :end :weight :light :monospace t)
+    (ok (string= (text :alignment "end" :weight "light" :monospace t)
                  "text-end fw-light font-monospace"))
-    (ok (string= (text :transform :capitalize :wrap :wrap)
+    (ok (string= (text :transform "capitalize" :wrap "wrap")
                  "text-capitalize text-wrap"))))
 
 (deftest test-text-single-argument
   (testing "Generates correct text utility class with a single argument"
-    (ok (string= (text :alignment :start) "text-start"))
-    (ok (string= (text :transform :uppercase) "text-uppercase"))
-    (ok (string= (text :weight :bold) "fw-bold"))
-    (ok (string= (text :wrap :wrap) "text-wrap"))
+    (ok (string= (text :alignment "start") "text-start"))
+    (ok (string= (text :transform "uppercase") "text-uppercase"))
+    (ok (string= (text :weight "bold") "fw-bold"))
+    (ok (string= (text :wrap "wrap") "text-wrap"))
     (ok (string= (text :monospace t) "font-monospace"))))
 
 (deftest test-text-no-arguments
   (testing "Generates correct text utility class with no arguments"
-    (ok (string= (text) ""))))
+    (ok (signals (text)))))
 
 (deftest test-valign-all-arguments
   (testing "Generates correct vertical align class with all arguments"

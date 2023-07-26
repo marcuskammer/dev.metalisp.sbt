@@ -141,7 +141,7 @@
       (ok (string= result "<div class=\"row justify-content-between\"></div>")))))
 
 (deftest test-row-spacing
-  (let ((result (spinneret:with-html-string (cl-sbt/grid:row (:spacing (:property :m :size 2))))))
+  (let ((result (spinneret:with-html-string (cl-sbt/grid:row (:spacing (:property "m" :size 2))))))
     (testing "Generates correct HTML when spacing is provided"
       (ok (string= result "<div class=\"row m-2\"></div>")))))
 
@@ -166,7 +166,7 @@
       (ok (string= result "<div class=\"col align-self-center\"></div>")))))
 
 (deftest test-col-spacing
-  (let ((result (spinneret:with-html-string (col (:spacing (:property :p :size 2))))))
+  (let ((result (spinneret:with-html-string (col (:spacing (:property "p" :size 2))))))
     (testing "Generates correct HTML for column with padding on all sides"
       (ok (string= result "<div class=\"col p-2\"></div>")))))
 

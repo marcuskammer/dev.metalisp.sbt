@@ -55,6 +55,10 @@
 
 (defparameter *colors* '("primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "body" "muted" "white" "transparent"))
 
+(defparameter *breakpoints* '("xs" "sm" "md" "lg" "xl" "xxl"))
+
+(defparameter *sides* '("t" "b" "s" "e" "x" "y"))
+
 (defun string-clean (str)
   (string-trim " " (string-downcase str)))
 
@@ -240,50 +244,53 @@ Example 4:
 (defun spacing (&key (property nil) (side nil) (size nil) (breakpoint nil))
   "Generates a Bootstrap spacing class.
 
-PROPERTY: Specifies the property, should be :m (margin) or :p (padding).
+PROPERTY: Specifies the property, should be 'm' (margin) or 'p' (padding).
 
-SIDE: Specifies the side, should be :t (top), :b (bottom), :s (start),
-:e (end), :x (horizontal), :y (vertical), or nil (all sides).
+SIDE: Specifies the side, should be 't' (top), 'b' (bottom), 's' (start),
+'e' (end), 'x' (horizontal), 'y' (vertical), or nil (all sides).
 
-SIZE: Specifies the size, should be a number from 0 to 5, or :auto.
+SIZE: Specifies the size, should be a number from 0 to 5, or 'auto'.
 
-BREAKPOINT: Specifies the breakpoint, should be :xs, :sm, :md, :lg, :xl, or
-:xxl, or nil (all breakpoints).
+BREAKPOINT: Specifies the breakpoint, should be 'xs', 'sm', 'md', 'lg', 'xl',
+or 'xxl', or nil (all breakpoints).
 
 Example 1:
-  (spacing :property :m :side :t :size 3 :breakpoint :md)
+  (spacing :property \"m\" :side \"t\" :size 3 :breakpoint \"md\")
   ; This will generate a string 'mt-md-3'
 
 Example 2:
-  (spacing :property :p :side :b :size 2 :breakpoint :lg)
+  (spacing :property \"p\" :side \"b\" :size 2 :breakpoint \"lg\")
   ; This will generate a string 'pb-lg-2', which represents a large breakpoint
   ; with bottom padding of size 2.
 
 Example 3:
-  (spacing :property :m :size :auto)
+  (spacing :property \"m\" :size \"auto\")
   ; This will generate a string 'm-auto', which sets auto margin on all sides
   ; for all breakpoints.
 
 Example 4:
-  (spacing :property :p :side :x :size 5)
+  (spacing :property \"p\" :side \"x\" :size 5)
   ; This will generate a string 'px-5', which sets horizontal padding of size 5
   ; for all breakpoints."
   (assert (and property size) nil "Property and Size needed")
-  (assert (member property '(:m :p)) nil "Property should be :m or :p")
+  (assert (member property '("m" "p") :test #'string=)
+          nil "Property should be 'm' or 'p'")
   (assert (or (and (numberp size) (>= size 0))
-              (equal size "auto")) nil "Size should be greater than or equal to 0 or :auto")
-  (when side (assert (member side '(:t :b :s :e :x :y))))
-  (when breakpoint (assert (member breakpoint '(:xs :sm :md :lg :xl :xxl)) nil "Breakpoint should be :xs, :sm, :md, :lg, :xl, xxl"))
-  (let ((property-str (format nil "~a" property))
-        (side-str (if (null side) "" (format nil "~a" side)))
-        (size-str (if (eq size :auto) "auto" (format nil "~d" size)))
-        (breakpoint-str (if (null breakpoint) "" (format nil "~a" breakpoint))))
+              (equal size "auto"))
+          nil "Size should be greater than or equal to 0 or 'auto'")
+  (when side (assert (member side *sides* :test #'string=)))
+  (when breakpoint (assert (member breakpoint *breakpoints* :test #'string=)
+                           nil "Breakpoint should be 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'"))
+
+  (let ((side-str (if (null side) "" side))
+        (size-str (if (equal size "auto") "-auto" (format nil "-~d" size)))
+        (breakpoint-str (if (null breakpoint) "" (format nil "-~a" breakpoint))))
     (string-clean
      (concatenate 'string
-                  property-str
+                  property
                   side-str
-                  (if breakpoint "-" "") breakpoint-str
-                  "-" size-str))))
+                  breakpoint-str
+                  size-str))))
 
 (defun text (&key (alignment nil) (transform nil) (weight nil) (wrap nil) (monospace nil))
   "Generates a Bootstrap text utility class.
@@ -299,33 +306,35 @@ WEIGHT: Specifies the text weight. Should be 'bold', 'bolder', 'normal',
 MONOSPACE: If true, sets the font to monospace.
 
 Example 1:
-  (text :alignment :start)
+  (text :alignment \"start\")
   ; This will generate a string 'text-start'
 
 Example 2:
-  (text :transform :uppercase)
+  (text :transform \"uppercase\")
   ; This will generate a string 'text-uppercase'
 
 Example 3:
-  (text :weight :bold :monospace t)
+  (text :weight \"bold\" :monospace t)
   ; This will generate a string 'fw-bold font-monospace'
 
 Example 4:
-  (text :alignment :center :transform :lowercase)
+  (text :alignment \"center\" :transform \"lowercase\")
   ; This will generate a string 'text-center text-lowercase'
 
 Example 5:
-  (text :alignment :end :weight :light :monospace t)
+  (text :alignment \"end\" :weight \"light\" :monospace t)
   ; This will generate a string 'text-end fw-light font-monospace '
 
 Example 6:
-  (text :transform :capitalize :wrap :wrap)
+  (text :transform \"capitalize\" :wrap \"wrap\")
   ; This will generate a string 'text-capitalize text-wrap '
 
 Example 7:
-  (text :alignment :center :transform :uppercase :weight :bolder :wrap :nowrap :monospace t)
+  (text :alignment \"center\" :transform \"uppercase\" :weight \"bolder\" :wrap \"nowrap\" :monospace t)
   ; This will generate a string 'text-center text-uppercase fw-bolder
   ; text-nowrap font-monospace '"
+  (assert (or alignment transform weight wrap monospace)
+          nil "Provide at least one argument")
   (let ((alignment-str (if (null alignment) "" (format nil "text-~a " alignment)))
         (transform-str (if (null transform) "" (format nil "text-~a " transform)))
         (weight-str (if (null weight) "" (format nil "fw-~a " weight)))
