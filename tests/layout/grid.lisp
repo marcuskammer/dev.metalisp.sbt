@@ -125,37 +125,37 @@
       (ok (search "<div class=container></div>" result)))))
 
 (deftest test-row-cols
-  (let ((result (spinneret:with-html-string (cl-sbt/grid:row (:cols 2)))))
+  (let ((result (spinneret:with-html-string (row (:cols 2)))))
     (testing "Generates correct HTML when cols is provided"
       (ok (string= result "<div class=\"row row-cols-2\"></div>")))))
 
 (deftest test-row-breakpoint
-  (let ((result (spinneret:with-html-string (cl-sbt/grid:row (:breakpoint (:kind "row" :sm 2))))))
+  (let ((result (spinneret:with-html-string (row (:breakpoint (:kind "row" :sm 2))))))
     (testing "Generates correct HTML when breakpoint is provided"
       (ok (string= result "<div class=\"row row-cols-sm-2\"></div>")))))
 
 (deftest test-row-align-items
-  (let ((result (spinneret:with-html-string (cl-sbt/grid:row (:alignitems "center")))))
+  (let ((result (spinneret:with-html-string (row (:alignitems "center")))))
     (testing "Generates correct HTML when align-items is provided"
       (ok (string= result "<div class=\"row align-items-center\"></div>")))))
 
 (deftest test-row-justify-content
-  (let ((result (spinneret:with-html-string (cl-sbt/grid:row (:justifycontent "between")))))
+  (let ((result (spinneret:with-html-string (row (:justifycontent "between")))))
     (testing "Generates correct HTML when justify-content is provided"
       (ok (string= result "<div class=\"row justify-content-between\"></div>")))))
 
 (deftest test-row-spacing
-  (let ((result (spinneret:with-html-string (cl-sbt/grid:row (:spacing (:property "m" :size 2))))))
+  (let ((result (spinneret:with-html-string (row (:spacing (:property "m" :size 2))))))
     (testing "Generates correct HTML when spacing is provided"
       (ok (string= result "<div class=\"row m-2\"></div>")))))
 
 (deftest test-row-no-args
-  (let ((result (spinneret:with-html-string (cl-sbt/grid:row ()))))
+  (let ((result (spinneret:with-html-string (row ()))))
     (testing "Generates correct HTML when no arguments are provided"
       (ok (string= result "<div class=row></div>")))))
 
 (deftest test-row-null-cols
-  (let ((result (spinneret:with-html-string (cl-sbt/grid:row (:cols nil)))))
+  (let ((result (spinneret:with-html-string (row (:cols nil)))))
     (testing "Generates correct HTML when row is null"
       (ok (string= result "<div class=row></div>")))))
 

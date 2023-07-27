@@ -44,6 +44,7 @@
                 ((:file "grid")))
                (:module "tests/component"
                 :components
-                ((:file "accordion"))))
+                ((:file "accordion")
+                 (:file "alert"))))
   :description "Test system for cl-sbt"
   :perform (test-op (op c) (symbol-call :rove :run c)))
