@@ -213,6 +213,13 @@
   (testing "Generates correct text utility class with no arguments"
     (ok (signals (text)))))
 
+(deftest test-text-no-arguments
+  (testing "Raises error when supplied with invalid arguments"
+    (ok (signals (text :alignment "foo")))
+    (ok (signals (text :transform "foo")))
+    (ok (signals (text :weight "foo")))
+    (ok (signals (text :wrap "foo")))))
+
 (deftest test-valign-all-arguments
   (testing "Generates correct vertical align class with all arguments"
     (ok (string= (valign :align :baseline) "align-baseline"))
