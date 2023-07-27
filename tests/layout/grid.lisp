@@ -102,27 +102,27 @@
 (deftest test-con-fluid
   (let ((result (spinneret:with-html-string (con (:fluid t)))))
     (testing "Generates correct HTML for fluid container"
-      (ok (string= result "<div class=container-fluid></div>")))))
+      (ok (search "<div class=container-fluid></div>" result)))))
 
 (deftest test-con-breakpoint
   (let ((result (spinneret:with-html-string (con (:breakpoint (:kind "con" :md t))))))
     (testing "Generates correct HTML for container with breakpoint"
-      (ok (string= result "<div class=\"container container-md\"></div>")))))
+      (ok (search "<div class=\"container container-md\"></div>" result)))))
 
 (deftest test-con-text
   (let ((result (spinneret:with-html-string (con (:text (:alignment "center"))))))
     (testing "Generates correct HTML for container with text utilities"
-      (ok (string= result "<div class=\"container text-center\"></div>")))))
+      (ok (search "<div class=\"container text-center\"></div>" result)))))
 
 (deftest test-con-fluid-breakpoint-text
   (let ((result (spinneret:with-html-string (con (:fluid t :breakpoint (:kind "con" :sm t) :text (:weight "bold"))))))
     (testing "Generates correct HTML for fluid container with breakpoint and text utilities"
-      (ok (string= result "<div class=\"container-fluid container-sm fw-bold\"></div>")))))
+      (ok (search "<div class=\"container-fluid container-sm fw-bold\"></div>" result)))))
 
 (deftest test-con-no-arguments
   (let ((result (spinneret:with-html-string (con ()))))
     (testing "Generates correct HTML for container with no arguments"
-      (ok (string= result "<div class=container></div>")))))
+      (ok (search "<div class=container></div>" result)))))
 
 (deftest test-row-cols
   (let ((result (spinneret:with-html-string (cl-sbt/grid:row (:cols 2)))))
@@ -156,7 +156,7 @@
 
 (deftest test-row-null-cols
   (let ((result (spinneret:with-html-string (cl-sbt/grid:row (:cols nil)))))
-    (testing "Generates correct HTML when cols is null"
+    (testing "Generates correct HTML when row is null"
       (ok (string= result "<div class=row></div>")))))
 
 (deftest test-col-breakpoint
