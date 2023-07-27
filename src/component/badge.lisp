@@ -62,7 +62,7 @@ CLASSES: (optional) Any additional CSS classes that should be added to the badge
 BODY: The contents of the badge.
 
 Example usage:
-(badge (:type \"success\" :classes \"mx-2\") \"New\")"
+(badge (:type \"success\" :classes \"rounded-pill\") \"New\")"
   `(spinneret:with-html
      (:span :class (format nil "badge text-bg-~a ~a" ,type ,classes)
             ,@body)))
