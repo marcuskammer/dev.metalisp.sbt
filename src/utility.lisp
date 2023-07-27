@@ -303,38 +303,52 @@ TRANSFORM: Specifies the text transformation. Should be 'lowercase',
 WEIGHT: Specifies the text weight. Should be 'bold', 'bolder', 'normal',
 'light', 'lighter'.
 
+WRAP: Specifies the text wrapping option. Should be 'wrap' or 'nowrap'.
+
 MONOSPACE: If true, sets the font to monospace.
 
 Example 1:
   (text :alignment \"start\")
-  ; This will generate a string 'text-start'
+  ; Generates a string 'text-start'
 
 Example 2:
   (text :transform \"uppercase\")
-  ; This will generate a string 'text-uppercase'
+  ; Generates a string 'text-uppercase'
 
 Example 3:
   (text :weight \"bold\" :monospace t)
-  ; This will generate a string 'fw-bold font-monospace'
+  ; Generates a string 'fw-bold font-monospace'
 
 Example 4:
   (text :alignment \"center\" :transform \"lowercase\")
-  ; This will generate a string 'text-center text-lowercase'
+  ; Generates a string 'text-center text-lowercase'
 
 Example 5:
   (text :alignment \"end\" :weight \"light\" :monospace t)
-  ; This will generate a string 'text-end fw-light font-monospace '
+  ; Generates a string 'text-end fw-light font-monospace '
 
 Example 6:
   (text :transform \"capitalize\" :wrap \"wrap\")
-  ; This will generate a string 'text-capitalize text-wrap '
+  ; Generates a string 'text-capitalize text-wrap '
 
 Example 7:
   (text :alignment \"center\" :transform \"uppercase\" :weight \"bolder\" :wrap \"nowrap\" :monospace t)
-  ; This will generate a string 'text-center text-uppercase fw-bolder
+  ; Generates a string 'text-center text-uppercase fw-bolder
   ; text-nowrap font-monospace '"
   (assert (or alignment transform weight wrap monospace)
           nil "Provide at least one argument")
+  (when alignment
+    (assert (member alignment '("start" "end" "center") :test #'string=)
+            nil "ALIGNMENT should be of 'start', 'end' or 'center'"))
+  (when transform
+    (assert (member transform '("lowercase" "uppercase" "capitalize") :test #'string=)
+            nil "TRANSFORM should be of 'lowercase', 'uppercase' 'capitalize'"))
+  (when weight
+    (assert (member weight '("bold" "bolder" "normal" "light" "lighter") :test #'string=)
+            nil "WEIGHT should be of 'bold', 'bolder', 'normal', 'light', 'lighter'"))
+  (when wrap
+    (assert (member wrap '("wrap" "nowrap") :test #'string=)
+            nil "WRAP should be of 'wrap' or 'nowrap'"))
   (let ((alignment-str (if (null alignment) "" (format nil "text-~a " alignment)))
         (transform-str (if (null transform) "" (format nil "text-~a " transform)))
         (weight-str (if (null weight) "" (format nil "fw-~a " weight)))
