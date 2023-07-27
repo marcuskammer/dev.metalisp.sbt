@@ -54,7 +54,7 @@
 
 (in-package :cl-sbt/badge)
 
-(defmacro badge ((&key (type "primary") (classes "")) &body body)
+(defmacro badge ((&key (type "primary") (classes nil)) &body body)
   "This macro generates a Bootstrap badge.
 
 TYPE: (optional) The type of the badge (like 'primary', 'secondary', 'success', etc.). Defaults to 'primary'.
@@ -64,10 +64,12 @@ BODY: The contents of the badge.
 Example usage:
 (badge (:type \"success\" :classes \"rounded-pill\") \"New\")"
   `(spinneret:with-html
-     (:span :class (format nil "badge text-bg-~a ~a" ,type ,classes)
+     (:span :class ,(concatenate 'string
+                                 (format nil "badge text-bg-~a" type)
+                                 (if (null classes) "" (format nil " ~a" classes)))
             ,@body)))
 
-(defmacro define-badge (type &optional (classes "") (pill nil))
+(defmacro define-badge (type &optional (classes nil) (pill nil))
   "This macro defines a new macro for creating a Bootstrap badge of a specific type.
 
 TYPE: The type of the badge (like 'primary', 'secondary', 'success', etc.).
