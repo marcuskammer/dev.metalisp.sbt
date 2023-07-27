@@ -45,6 +45,7 @@
                (:module "tests/component"
                 :components
                 ((:file "accordion")
-                 (:file "alert"))))
+                 (:file "alert")
+                 (:file "badge"))))
   :description "Test system for cl-sbt"
   :perform (test-op (op c) (symbol-call :rove :run c)))
