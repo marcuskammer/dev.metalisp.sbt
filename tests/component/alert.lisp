@@ -14,7 +14,7 @@
 
 (deftest test-btn-macro
   (testing "Testing btn macro"
-    (let* ((result (spinneret:with-html-string (btn))))
+    (let ((result (spinneret:with-html-string (btn))))
       (ok (search "class=btn-close" result))
       (ok (search "type=button" result))
       (ok (search "data-bs-dismiss=alert" result))
