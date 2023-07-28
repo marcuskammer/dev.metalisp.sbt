@@ -54,33 +54,33 @@
 
 (in-package :cl-sbt/badge)
 
-(defmacro badge ((&key (type "primary") (classes nil)) &body body)
+(defmacro badge ((&key (type "primary") (pill nil)) &body body)
   "This macro generates a Bootstrap badge.
 
 TYPE: (optional) The type of the badge (like 'primary', 'secondary', 'success', etc.). Defaults to 'primary'.
-CLASSES: (optional) Any additional CSS classes that should be added to the badge.
+
 BODY: The contents of the badge.
 
 Example usage:
-(badge (:type \"success\" :classes \"rounded-pill\") \"New\")"
+(badge (:type \"success\" :pill t) \"New\")"
   `(spinneret:with-html
      (:span :class ,(concatenate 'string
                                  (format nil "badge text-bg-~a" type)
-                                 (if (null classes) "" (format nil " ~a" classes)))
+                                 (if (null pill) "" " rounded-pill"))
             ,@body)))
 
-(defmacro define-badge (type &optional (classes nil) (pill nil))
+(defmacro define-badge (type &optional (pill nil))
   "This macro defines a new macro for creating a Bootstrap badge of a specific type.
 
 TYPE: The type of the badge (like 'primary', 'secondary', 'success', etc.).
-CLASSES: (optional) Any additional CSS classes that should be added to the badge.
+
 PILL: (optional) If true, the badge will have 'rounded-pill' style.
 
 The newly defined macro, when called, will generate HTML for a Bootstrap
 badge of the specified type."
   (let* ((macro-name (intern (string-upcase (concatenate 'string "BADGE-" (if (null pill) "" "PILL-") type)))))
     `(defmacro ,macro-name (&body body)
-       `(badge (:type ,,type :classes ,,classes) ,@body))))
+       `(badge (:type ,,type :pill ,,pill) ,@body))))
 
 (defmacro define-badges (names)
   "This macro generates specific badge macros based on the provided names.
@@ -92,6 +92,6 @@ be generated: a badge of the specified type."
              for type-name = (string-downcase (string item))
              collect `(progn
                         (define-badge ,type-name)
-                        (define-badge ,type-name "rounded-pill" t)))))
+                        (define-badge ,type-name t)))))
 
 (define-badges (primary secondary success danger warning info light dark link))
