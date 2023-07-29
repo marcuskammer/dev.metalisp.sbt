@@ -48,6 +48,8 @@
                  (:file "alert")
                  (:file "badge")
                  (:file "button")
-                 (:file "card"))))
+                 (:file "card")
+                 (:file "dropdown")
+                 (:file "list-group"))))
   :description "Test system for cl-sbt"
   :perform (test-op (op c) (symbol-call :rove :run c)))

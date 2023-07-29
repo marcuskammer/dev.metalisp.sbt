@@ -48,7 +48,7 @@ BODY: The text for the dropdown item."
   `(spinneret:with-html
      (:li (:a :class "dropdown-item" :href "#" ,@body))))
 
-(defmacro dropdown ((&key (title "")) &body body)
+(defmacro dropdown ((&key (name "")) &body body)
   "This macro generates a Bootstrap dropdown component.
 
 TITLE: The text for the dropdown button.
@@ -59,5 +59,5 @@ BODY: The contents of the dropdown, which should be created using the `menu` mac
                     :type "button"
                     :data-bs-toggle "dropdown"
                     :aria-expanded "false"
-                    ,title)
+                    ,name)
            ,@body)))
