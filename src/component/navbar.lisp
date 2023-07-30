@@ -33,7 +33,8 @@
    :nav
    :text
    :toggler
-   :brand-logo))
+   :brand-logo
+   :collapsible))
 
 (in-package :cl-sbt/navbar)
 
@@ -55,7 +56,7 @@ Example:
            :height ,height
            :class ,classes)))
 
-(defmacro brand ((&key (logo-src nil)) &body body)
+(defmacro brand ((&key (imgsrc nil)) &body body)
   "This macro generates a brand component for a Bootstrap navbar.
 
 LOGO-SRC: Specifies the URL of the logo image. If not provided, no logo will be displayed.
@@ -66,7 +67,7 @@ Example:
   `(spinneret:with-html
      (:a :class "navbar-brand"
          :href "#"
-         ,(if (null logo-src) nil `(navbar-brand-logo ,logo-src))
+         ,(if (null imgsrc) nil `(brand-logo (:src ,imgsrc)))
          ,@body)))
 
 (defmacro nav (&body body)
@@ -77,7 +78,7 @@ BODY: Specifies the content to be displayed in the navigation component.
 Example:
   (nav \"Home\" \"About\" \"Contact\")"
   `(spinneret:with-html
-     (:div :class "collapse navbar-collaps"
+     (:div :class "collapse navbar-collapse"
            :id "navbarNav"
            ,@body)))
 
@@ -113,13 +114,10 @@ Example:
                 :aria-label "Toggle navigation"
                 (:span :class "navbar-toggler-icon"))))
 
-(defmacro collapsible (id (&key (color nil)) &body body)
+(defmacro collapsible (id color &body body)
   `(spinneret:with-html
      (:div :id ,id
-           :class ,(concatenate 'string
-                                "collapse "
-                                (if (null color) ""
-                                    (apply #'cl-sbt/utility:color color)))
+           :class ,(format nil "collapse ~a" color)
            (cl-sbt/grid:con ()
              (cl-sbt/grid:row ()
                ,@body)))))
