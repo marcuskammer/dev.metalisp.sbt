@@ -50,6 +50,7 @@
                  (:file "button")
                  (:file "card")
                  (:file "dropdown")
-                 (:file "list-group"))))
+                 (:file "list-group")
+                 (:file "navbar"))))
   :description "Test system for cl-sbt"
   :perform (test-op (op c) (symbol-call :rove :run c)))
