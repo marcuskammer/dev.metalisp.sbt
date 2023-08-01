@@ -34,6 +34,7 @@
    :text
    :toggler
    :brand-logo
+   :content
    :collapsible))
 
 (in-package :cl-sbt/navbar)
@@ -56,7 +57,7 @@ Example:
            :height ,height
            :class ,classes)))
 
-(defmacro brand ((&key (imgsrc nil)) &body body)
+(defmacro brand ((&key (logo nil)) &body body)
   "This macro generates a brand component for a Bootstrap navbar.
 
 LOGO-SRC: Specifies the URL of the logo image. If not provided, no logo will be displayed.
@@ -67,10 +68,10 @@ Example:
   `(spinneret:with-html
      (:a :class "navbar-brand"
          :href "#"
-         ,(if (null imgsrc) nil `(brand-logo (:src ,imgsrc)))
+         ,(if (null logo) nil `(brand-logo (:src ,logo)))
          ,@body)))
 
-(defmacro nav (&body body)
+(defmacro nav (&rest rest)
   "This macro generates a navigation component for a Bootstrap navbar.
 
 BODY: Specifies the content to be displayed in the navigation component.
@@ -78,9 +79,13 @@ BODY: Specifies the content to be displayed in the navigation component.
 Example:
   (nav \"Home\" \"About\" \"Contact\")"
   `(spinneret:with-html
-     (:div :class "collapse navbar-collapse"
-           :id "navbarNav"
-           ,@body)))
+     (:ul :class "navbar-nav"
+          ,@(loop for item in rest
+                  collect (destructuring-bind (&key name url (active nil) (disabled nil)) item
+                            `(:li :class "nav-item"
+                                  ,(cond (active `(:a :class "nav-link active" :aria-current "page" :href ,url ,name))
+                                         (disabled `(:a :class "nav-link disabled" :aria-disabled "true" :href ,url ,name))
+                                         (t `(:a :class "nav-link" :href ,url ,name)))))))))
 
 (defmacro text (&body body)
   "This macro generates a text component for a Bootstrap navbar.
@@ -105,14 +110,14 @@ functional.
 Example:
   (toggler \"myNavbar\")"
   `(spinneret:with-html
-       (:button :class "navbar-toggler collapsed"
-                :type "button"
-                :data-bs-toggle "collapse"
-                :data-bs-target (format nil "#~a" ,target)
-                :aria-controls ,target
-                :aria-expanded "false"
-                :aria-label "Toggle navigation"
-                (:span :class "navbar-toggler-icon"))))
+     (:button :class "navbar-toggler collapsed"
+              :type "button"
+              :data-bs-toggle "collapse"
+              :data-bs-target (format nil "#~a" ,target)
+              :aria-controls ,target
+              :aria-expanded "false"
+              :aria-label "Toggle navigation"
+              (:span :class "navbar-toggler-icon"))))
 
 (defmacro collapsible (id color &body body)
   `(spinneret:with-html
@@ -122,22 +127,34 @@ Example:
              (cl-sbt/grid:row ()
                ,@body)))))
 
-(defmacro navbar ((&key (fluid t) (dark nil)) &body body)
+(defmacro content (id &body body)
+  `(spinneret:with-html
+     (:div :class "navbar-collapse collapse"
+           :id ,id
+           ,@body)))
+
+(defmacro navbar ((&key (fluid t) (expand nil)) &body body)
   "This macro generates a Bootstrap navbar.
 
 FLUID: Specifies whether the navbar should be full width. Defaults to true.
-DARK: Specifies additional CSS classes for the navbar.
+
+EXPAND: Specifies the breakpoint at which the navbar will be expanded.
+
 BODY: Specifies the content to be displayed in the navbar.
 
 Example:
- (navbar (:fluid t :classes \"navbar-light bg-light\")
-   (brand \"My Website\")
-   (nav \"Home\" \"About\" \"Contact\"))"
+ (navbar (:fluid t :expand \"lg\")
+   (brand () \"My Website\")
+   (content \"navbarContent\" (nav (:name \"Home\" :url \"#\" :active t)
+                 (:name \"Foo\" :url \"#\")
+                 (:name \"Bar\" :url \"#\" :disabled t))))"
   `(spinneret:with-html
-     (:nav :class ,(concatenate 'string "navbar " (if (null dark)
-                                                        "bg-light"
-                                                        "navbar-dark bg-dark"))
-       (:div :class ,(if fluid
-                         "container-fluid"
-                         "container")
-             ,@body))))
+     (:nav :class ,(concatenate 'string
+                                "navbar "
+                                (if (null expand)
+                                    nil
+                                    (format nil "navbar-expand-~a" expand)))
+           (:div :class ,(if fluid
+                             "container-fluid"
+                             "container")
+                 ,@body))))

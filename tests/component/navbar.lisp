@@ -11,6 +11,7 @@
    :text
    :toggler
    :brand-logo
+   :content
    :collapsible))
 
 (in-package :cl-sbt/tests/navbar)
@@ -24,7 +25,7 @@
     (ok (search "class=logo-class" result))))
 
 (deftest test-brand
-  (let ((result (spinneret:with-html-string (brand (:imgsrc "logo.png") "My Website"))))
+  (let ((result (spinneret:with-html-string (brand (:logo "logo.png") "My Website"))))
     (ok (search "class=navbar-brand" result))
     (ok (search "href=#" result))
     (ok (search "src=logo.png" result))
@@ -35,10 +36,18 @@
     (ok (search "My Website" result))))
 
 (deftest test-nav
-  (let ((result (spinneret:with-html-string (nav "Home" "About" "Contact"))))
-    (ok (search "class=\"collapse navbar-collapse\"" result))
-    (ok (search "id=navbarNav" result))
-    (ok (search "Home" result))))
+  (let ((result (spinneret:with-html-string (nav (:name "Home" :url "#" :active t)
+                                                 (:name "Foo" :url "#")
+                                                 (:name "Bar" :url "#" :disabled t)))))
+    (ok (search "Home" result))
+    (ok (search "Foo" result))
+    (ok (search "Bar" result))
+    (ok (search "class=nav-item" result))
+    (ok (search "class=\"nav-link active\"" result))
+    (ok (search "class=\"nav-link disabled\"" result))
+    (ok (search "class=navbar-nav" result))
+    (ok (search "aria-current=page" result))
+    (ok (search "aria-disabled=true" result))))
 
 (deftest test-text
   (let ((result (spinneret:with-html-string (text "Welcome to my website!"))))
@@ -63,10 +72,14 @@
     (ok (search "class=container" result))
     (ok (search "class=row" result))))
 
-(deftest test-navbar
-  (let ((result (spinneret:with-html-string (navbar (:fluid t :dark t) (brand (:imgsrc "logo.png") "My Website") (nav "Home" "About" "Contact")))))
-    (ok (search "class=\"navbar navbar-dark bg-dark\"" result))
-    (ok (search "class=container-fluid" result))
+(deftest test-navbar-simple
+  (let ((result (spinneret:with-html-string (navbar () (brand () "My Website") (content "navbarContent" (nav (:name "Home" :url "#" :active t) (:name "Foo" :url "#")))))))
+    (ok (search "class=navbar" result))
+    (ok (search "class=container" result))
     (ok (search "class=navbar-brand" result))
-    (ok (search "class=\"collapse navbar-collapse\"" result))
-    (ok (search "id=navbarNav" result))))
+    (ok (search "class=\"navbar-collapse collapse\"" result))
+    (ok (search "id=navbarContent" result))
+    (ok (search "class=nav-link" result))
+    (ok (search "class=nav-item" result))
+    (ok (search "Home" result))
+    (ok (search "class=\"nav-link active\"" result))))
