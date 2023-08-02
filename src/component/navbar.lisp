@@ -27,6 +27,9 @@
 
 (defpackage cl-sbt/navbar
   (:use :cl)
+  (:import-from
+   :cl-sbt/btn
+   :btn-outline-success)
   (:export
    :navbar
    :brand
@@ -35,6 +38,7 @@
    :toggler
    :brand-logo
    :content
+   :form-search
    :collapsible))
 
 (in-package :cl-sbt/navbar)
@@ -127,11 +131,22 @@ Example:
              (cl-sbt/grid:row ()
                ,@body)))))
 
-(defmacro content (id &body body)
+(defmacro form-search ()
+  `(spinneret:with-html
+     (:form :class "d-flex"
+            :role "search"
+            (:input :class "form-control me-2"
+                    :type "search"
+                    :placeholder "Search"
+                    :aria-label "Search")
+            (btn-outline-success "Search"))))
+
+(defmacro content (id (&key (search t)) &body body)
   `(spinneret:with-html
      (:div :class "navbar-collapse collapse"
            :id ,id
-           ,@body)))
+           ,@body
+           ,(if search `(form-search) nil))))
 
 (defmacro navbar ((&key (fluid t) (expand nil)) &body body)
   "This macro generates a Bootstrap navbar.
