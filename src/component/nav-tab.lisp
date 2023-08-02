@@ -45,7 +45,9 @@
   "This macro generates a navigation item for a Bootstrap navigation list.
 
 NAME: Specifies the name of the navigation item.
+
 ACTIVE: Specifies whether the navigation item should be marked as active.
+
 URL: Specifies the URL that the navigation item will link to.
 
 Example:
@@ -60,6 +62,7 @@ Example:
   "This macro generates a Bootstrap navigation list.
 
 STYLE: Specifies the style of the navigation list. If not provided, the default Bootstrap style is used.
+
 REST: Specifies a list of navigation items. Each item is a plist with the following keys:
 - :name: Specifies the name of the navigation item.
 - :active: Specifies whether the navigation item should be marked as active.
