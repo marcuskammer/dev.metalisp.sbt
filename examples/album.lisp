@@ -105,7 +105,7 @@ predefined content."
      (:header :data-bs-theme "dark"
        (collapsible *navbar-header-id* (:color (:text "bg-dark"))
          ,@body)
-       (navbar (:fluid nil :dark t)
+       (navbar (:fluid nil)
          (brand () "Album")
          (toggler *navbar-header-id*)))))
 
