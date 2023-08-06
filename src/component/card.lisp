@@ -80,6 +80,7 @@ Example:
   "This macro generates a Bootstrap card link.
 
 HREF: The URL that the link will point to.
+
 BODY: The contents of the link.
 
 Example:
@@ -101,6 +102,7 @@ Example:
   "This macro generates a Bootstrap card image.
 
 SRC: The URL of the image.
+
 ALT: The alt text for the image.
 
 Example:
@@ -124,6 +126,7 @@ Example:
   "This macro generates a Bootstrap card with an image.
 
 IMG-SRC: The URL of the image.
+
 BODY: The contents of the body.
 
 Example:
@@ -147,6 +150,7 @@ Example:
   "This macro generates a group of Bootstrap cards.
 
 ID: Specifies a unique identifier for the card group. Defaults to 'cardGroupExample'.
+
 REST: Specifies a list of card items. Each item is a plist with the following keys:
 - :img-src: Specifies the URL of the image.
 - :title: Specifies the title of the card.

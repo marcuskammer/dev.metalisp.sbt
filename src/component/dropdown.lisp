@@ -36,7 +36,12 @@
 (defmacro menu (&body body)
   "This macro generates a Bootstrap dropdown menu.
 
-BODY: The contents of the menu, which should typically be created using the `item` macro."
+BODY: The contents of the menu, which should typically be created using the
+`item` macro.
+
+Example:
+  (menu (item \"Option 1\") (item \"Option 2\"))
+  ; This generates a dropdown menu with two options: 'Option 1' and 'Option 2'."
   `(spinneret:with-html
      (:ul :class "dropdown-menu"
           ,@body)))
@@ -44,15 +49,29 @@ BODY: The contents of the menu, which should typically be created using the `ite
 (defmacro item (&body body)
   "This macro generates a Bootstrap dropdown item.
 
-BODY: The text for the dropdown item."
+BODY: The text for the dropdown item.
+
+Example:
+  (item \"Option 1\")
+  ; This generates a dropdown item with the text 'Option 1'."
   `(spinneret:with-html
      (:li (:a :class "dropdown-item" :href "#" ,@body))))
 
 (defmacro dropdown ((&key (name "")) &body body)
   "This macro generates a Bootstrap dropdown component.
 
-TITLE: The text for the dropdown button.
-BODY: The contents of the dropdown, which should be created using the `menu` macro."
+NAME: The text for the dropdown button.
+
+BODY: The contents of the dropdown, which should be created using the `menu`
+macro.
+
+Example:
+  (dropdown (:name \"Choose option\")
+    (menu
+      (item \"Option 1\")
+      (item \"Option 2\")))
+  ; This generates a dropdown button with the text 'Choose option' and a
+  ; dropdown menu with two options."
   `(spinneret:with-html
      (:div :class "dropdown"
            (:button :class "btn btn-secondary dropdown-toggle"

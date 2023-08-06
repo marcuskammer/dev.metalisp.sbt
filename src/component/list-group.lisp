@@ -32,9 +32,9 @@
 BODY: The contents of the list group item. It should be a sequence of forms
 which will be used as the contents of the list group item.
 
-Example usage:
-(item \"This is a list group item\")
-(item (:p \"This is a list group item\"))"
+Example:
+  (item \"This is a list group item\")
+  (item (:p \"This is a list group item\"))"
   `(spinneret:with-html
      (:li :class "list-group-item" ,@body)))
 
@@ -45,8 +45,8 @@ REST: A sequence of items to be included in the list group. Each item is a
 keyword-value pair, where the keyword is ':content' and the value is the
 content of the item.
 
-Example usage:
-(list-group (:content \"First item\") (:content \"Second item\"))"
+Example:
+  (list-group (:content \"First item\") (:content \"Second item\"))"
   `(spinneret:with-html
      (:ul :class "list-group list-group-flush"
           ,@(loop for item in rest

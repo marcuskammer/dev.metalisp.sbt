@@ -61,8 +61,8 @@ TYPE: (optional) The type of the badge (like 'primary', 'secondary', 'success', 
 
 BODY: The contents of the badge.
 
-Example usage:
-(badge (:type \"success\" :pill t) \"New\")"
+Example:
+  (badge (:type \"success\" :pill t) \"New\")"
   `(spinneret:with-html
      (:span :class ,(concatenate 'string
                                  (format nil "badge text-bg-~a" type)
