@@ -107,7 +107,7 @@ Example:
                                   (if (string-equal ,size "") nil (format nil " btn~a" ,size)))
               ,@body)))
 
-(defmacro define-btn (type &optional (outline nil) (size nil))
+(defmacro define-btn (role &optional (outline nil) (size nil))
   "This macro defines a new macro for creating a Bootstrap button of a specific type, size, and outline style.
 
 TYPE: The type of the button (like 'primary', 'secondary', 'success', etc.).
@@ -120,12 +120,12 @@ The newly defined macro, when called, will generate HTML for a Bootstrap
 button of the specified type and size."
   (let* ((size-name (if (null size) "" (format nil "-~a" size)))
          (outline-name (if (null outline) "" "outline-"))
-         (type-name (concatenate 'string outline-name type))
-         (macro-name (intern (string-upcase (concatenate 'string "BTN-" outline-name type size-name)))))
+         (role-name (concatenate 'string outline-name role))
+         (macro-name (intern (string-upcase (concatenate 'string "BTN-" outline-name role size-name)))))
     `(defmacro ,macro-name (&body body)
-       `(btn (:type ,,type-name :size ,,size-name) ,@body))))
+       `(btn (:type ,,role-name :size ,,size-name) ,@body))))
 
-(defmacro define-btns (names)
+(defmacro define-btns (roles)
   "This macro generates a suite of button-creating macros for each provided button type.
 
 NAMES: A list of button type names. Each name should be a string
@@ -139,14 +139,14 @@ button, and a small outline button.
 The newly defined macros, when called, will generate HTML for a Bootstrap
 button of the corresponding type, size, and outline style."
   `(progn
-     ,@(loop for item in names
-             for type-name = (string-downcase (string item))
+     ,@(loop for role in roles
+             for role-name = (string-downcase (string role))
              collect `(progn
-                        (define-btn ,type-name)
-                        (define-btn ,type-name t)
-                        (define-btn ,type-name t "lg")
-                        (define-btn ,type-name t "sm")
-                        (define-btn ,type-name nil "lg")
-                        (define-btn ,type-name nil "sm")))))
+                        (define-btn ,role-name)
+                        (define-btn ,role-name t)
+                        (define-btn ,role-name t "lg")
+                        (define-btn ,role-name t "sm")
+                        (define-btn ,role-name nil "lg")
+                        (define-btn ,role-name nil "sm")))))
 
 (define-btns (primary secondary success danger warning info light dark link))
