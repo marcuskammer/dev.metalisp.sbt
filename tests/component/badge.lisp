@@ -13,7 +13,7 @@
 
 (deftest test-badge-macro
   (testing "Testing badge macro"
-    (let ((result (spinneret:with-html-string (badge (:role "primary")))))
+    (let ((result (spinneret:with-html-string (badge (:color "primary")))))
       (ok (search "class=\"badge text-bg-primary\"" result)))))
 
 (deftest test-badge-primary

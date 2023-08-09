@@ -13,7 +13,7 @@
 
 (deftest test-btn-macro
   (testing "Testing btn macro"
-    (let ((result (spinneret:with-html-string (btn (:type "primary") "foo"))))
+    (let ((result (spinneret:with-html-string (btn (:color "primary") "foo"))))
       (ok (search "class=\"btn btn-primary\"" result)))))
 
 (deftest test-btn-primary
