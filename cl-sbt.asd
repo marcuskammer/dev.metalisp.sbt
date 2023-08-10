@@ -23,7 +23,8 @@
                  (:file "nav-tab")
                  (:file "pagination")
                  (:file "table")
-                 (:file "spinner")))
+                 (:file "spinner")
+                 (:file "form")))
                (:module "examples"
                 :components
                 ((:file "album"))))
@@ -52,6 +53,7 @@
                  (:file "dropdown")
                  (:file "list-group")
                  (:file "navbar")
-                 (:file "nav-tab"))))
+                 (:file "nav-tab")
+                 (:file "form"))))
   :description "Test system for cl-sbt"
   :perform (test-op (op c) (symbol-call :rove :run c)))
