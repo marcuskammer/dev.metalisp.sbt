@@ -78,7 +78,7 @@ PILL: (optional) If true, the badge will have 'rounded-pill' style.
 
 The newly defined macro, when called, will generate HTML for a Bootstrap
 badge of the specified type."
-  (let* ((macro-name (intern (string-upcase (concatenate 'string "BADGE-" (if (null pill) "" "PILL-") color)))))
+  (let ((macro-name (intern (string-upcase (concatenate 'string "BADGE-" (if (null pill) "" "PILL-") color)))))
     `(defmacro ,macro-name (&body body)
        `(badge (:color ,,color :pill ,,pill) ,@body))))
 
