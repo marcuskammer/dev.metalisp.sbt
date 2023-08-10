@@ -2,11 +2,11 @@
   (:use
    :cl)
   (:export
-   :form-ctrl))
+   :ctrl))
 
 (in-package :cl-sbt/form)
 
-(defmacro form-ctrl (&rest rest)
+(defmacro ctrl (&rest rest)
   `(spinneret:with-html
      ,@(loop for item in rest
              collect (destructuring-bind (&key id label type placeholder) item

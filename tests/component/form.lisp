@@ -5,12 +5,12 @@
    :rove)
   (:import-from
    :cl-sbt/form
-   :form-ctrl))
+   :ctrl))
 
 (in-package :cl-sbt/tests/form)
 
 (deftest test-simple-form-control
-  (let ((result (spinneret:with-html-string (form-ctrl (:id "exampleFormControlInput1" :label "Email address" :type "email" :placeholder "name@example.com")))))
+  (let ((result (spinneret:with-html-string (ctrl (:id "exampleFormControlInput1" :label "Email address" :type "email" :placeholder "name@example.com")))))
     (testing "Generates correct HTML for a simple form"
       (ok (search "for=exampleFormControlInput1" result))
       (ok (search "class=form-label" result))
@@ -20,7 +20,7 @@
       (ok (search "placeholder=name@example.com" result)))))
 
 (deftest test-simple-form-control-2
-  (let ((result (spinneret:with-html-string (form-ctrl
+  (let ((result (spinneret:with-html-string (ctrl
                                              (:id "exampleFormControlInput1"
                                               :label "Email address"
                                               :type "email"
