@@ -44,3 +44,21 @@
       (ok (search "placeholder=name@example.com" result))
       (ok (search "for=form1" result))
       (ok (search "Another Form" result)))))
+
+(deftest test-default-select
+  (let ((result (spinneret:with-html-string (select (:option "One" :value 1) (:option "Two" :value 2) (:option "Three" :value 3)))))
+    (testing "Generates correct HTML for select element"
+      (ok (search "class=form-select" result))
+      (ok (search "aria-label=\"Default select example\"" result))
+      (ok (search "option value=1" result))
+      (ok (search "option value=2" result))
+      (ok (search "option value=3" result)))))
+
+(deftest test-size-select
+  (let ((result (spinneret:with-html-string (select (:option "One" :value 1) (:option "Two" :value 2 :size "sm") (:option "Three" :value 3 :size "lg")))))
+    (testing "Generates correct HTML for select element"
+      (ok (search "class=form-select" result))
+      (ok (search "aria-label=\"Default select example\"" result))
+      (ok (search "option value=1" result))
+      (ok (search "option value=2" result))
+      (ok (search "option value=3" result)))))
