@@ -58,14 +58,17 @@
 
 (defmacro select ((&key size) &body body)
   (let ((class-attr (cond
-                     ((null size) "form-select")
-                     ((numberp size) "form-select")
-                     ((string= size "multiple") "form-select")
-                     ((stringp size) (format nil "form-select form-select-~a" size)))))
+                      ((null size) "form-select")
+                      ((numberp size) "form-select")
+                      ((and (stringp size)
+                            (string= size "multiple")) "form-select")
+                      ((stringp size)
+                       (format nil "form-select form-select-~a" size))
+                      (t (error "Invalid size specification: ~a" size)))))
     `(spinneret:with-html
        (:select :class ,class-attr
-                ,@(when (numberp size) `(:size ,size))
-                ,@(when (string= size "multiple") '(:multiple t))
-                :aria-label "Default select example"
-                (:option :selected t "Open this selected menu")
-                ,@body))))
+         ,@(when (numberp size) `(:size ,size))
+         ,@(when (and (stringp size) (string= size "multiple")) (list :multiple t))
+         :aria-label "Default select example"
+         (:option :selected t "Open this selected menu")
+         ,@body))))
