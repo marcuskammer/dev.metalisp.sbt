@@ -6,6 +6,7 @@
   (:import-from
    :cl-sbt/form
    :ctrl
+   :ctrl-col
    :select
    :select-option))
 
@@ -83,3 +84,13 @@
       (ok (search "class=form-select" result))
       (ok (search "size=3" result))
       (ok (search "option value=1" result)))))
+
+(deftest test-simple-form-control-cols
+  (let ((result (spinneret:with-html-string (ctrl-col (:id "exampleFormControlInput1" :label "Email address" :type "email" :placeholder "name@example.com")))))
+    (testing "Generates correct HTML for a simple form using cols"
+      (ok (search "for=exampleFormControlInput1" result))
+      (ok (search "class=col-form-label" result))
+      (ok (search "type=email" result))
+      (ok (search "class=form-control" result))
+      (ok (search "id=exampleFormControlInput1" result))
+      (ok (search "placeholder=name@example.com" result)))))

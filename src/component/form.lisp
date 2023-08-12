@@ -38,12 +38,10 @@
                                             :class "col-form-label"
                                             ,label))
                               (:div :class "col-auto"
-                                    (:label :type ,type
+                                    (:input :class "form-control"
+                                            :type ,type
                                             :id ,id
-                                            :class "form-control"))
-                              (:div :class "col-auto"
-                                    (:span :class "form-text"
-                                           ,text)))))))
+                                            :placeholder ,placeholder)))))))
 
 (defmacro select-option (&rest rest)
   `(spinneret:with-html
