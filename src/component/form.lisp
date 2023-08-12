@@ -3,7 +3,8 @@
    :cl)
   (:export
    :ctrl
-   :ctrl-col))
+   :ctrl-col
+   :select))
 
 (in-package :cl-sbt/form)
 
@@ -47,3 +48,14 @@
                               (:div :class "col-auto"
                                     (:span :class "form-text"
                                            ,text)))))))
+
+(defmacro select ((&key size) &rest rest)
+  `(spinneret:with-html
+     (:select :class ,(concatenate 'string
+                                   "form-select"
+                                   (if size (format nil " form-select-~a" size)))
+       :aria-label "Default select example"
+       (:option :selected "Open this selected menu")
+       ,@(loop for item in rest
+               collect (destructuring-bind (&key content value) item
+                         `(:option :value ,value ,content))))))

@@ -47,7 +47,7 @@
                (ok (search "Another Form" result)))))
 
 (deftest test-select-default
-    (let ((result (spinneret:with-html-string (select (:option "One" :value 1) (:option "Two" :value 2) (:option "Three" :value 3)))))
+    (let ((result (spinneret:with-html-string (select () (:content "One" :value 1) (:content "Two" :value 2) (:content "Three" :value 3)))))
       (testing "Generates correct HTML for select element"
                (ok (search "class=form-select" result))
                (ok (search "aria-label=\"Default select example\"" result))
@@ -56,7 +56,7 @@
                (ok (search "option value=3" result)))))
 
 (deftest test-select-size-lg
-    (let ((result (spinneret:with-html-string (select (:size "lg") (:option "One" :value 1)))))
+    (let ((result (spinneret:with-html-string (select (:size "lg") (:content "One" :value 1)))))
       (testing "Generates correct HTML for select element"
                (ok (search "class=\"form-select form-select-lg\"" result))
                (ok (search "class=form-select" result))
@@ -64,14 +64,14 @@
                (ok (search "option value=1" result)))))
 
 (deftest test-select-size-sm
-    (let ((result (spinneret:with-html-string (select (:size "sm") (:option "One" :value 1)))))
+    (let ((result (spinneret:with-html-string (select (:size "sm") (:content "One" :value 1)))))
       (testing "Generates correct HTML for select element"
                (ok (search "class=\"form-select form-select-sm\"" result))
                (ok (search "aria-label=\"Default select example\"" result))
                (ok (search "option value=1" result)))))
 
 (deftest test-select-size-multiple
-    (let ((result (spinneret:with-html-string (select (:size "multiple") (:option "One" :value 1)))))
+    (let ((result (spinneret:with-html-string (select (:size "multiple") (:content "One" :value 1)))))
       (testing "Generates correct HTML for select element"
                (ok (search "class=form-select" result))
                (ok (search "multiple" result))
@@ -79,7 +79,7 @@
                (ok (search "option value=1" result)))))
 
 (deftest test-select-size-number
-    (let ((result (spinneret:with-html-string (select (:size 3) (:option "One" :value 1)))))
+    (let ((result (spinneret:with-html-string (select (:size 3) (:content "One" :value 1)))))
       (testing "Generates correct HTML for select element"
                (ok (search "class=form-select" result))
                (ok (search "size=3" result))
