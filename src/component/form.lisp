@@ -17,17 +17,12 @@
                               (:label :for ,id
                                       :class "form-label"
                                       ,label)
-                              ,(if describeby
-                                   `(:input :type ,type
-                                            :class "form-control"
-                                            :id ,id
-                                            :placeholder ,placeholder
-                                            :aria-describeby ,describeby)
-                                   `(:input :type ,type
-                                            :class "form-control"
-                                            :id ,id
-                                            :placeholder ,placeholder))
-                              ,(if text
+                              (:input :type ,type
+                                      :class "form-control"
+                                      :id ,id
+                                      :placeholder ,placeholder
+                                      ,@(when (stringp describeby) (list :aria-describeby describeby)))
+                              ,(if (stringp text)
                                    `(:div :id ,describeby
                                           :class "form-text"
                                           ,text)
