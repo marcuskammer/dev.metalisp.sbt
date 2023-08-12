@@ -4,7 +4,8 @@
   (:export
    :ctrl
    :ctrl-col
-   :select))
+   :select
+   :select-option))
 
 (in-package :cl-sbt/form)
 
@@ -49,13 +50,22 @@
                                     (:span :class "form-text"
                                            ,text)))))))
 
-(defmacro select ((&key size) &rest rest)
+(defmacro select-option (&rest rest)
   `(spinneret:with-html
-     (:select :class ,(concatenate 'string
-                                   "form-select"
-                                   (if size (format nil " form-select-~a" size)))
-       :aria-label "Default select example"
-       (:option :selected "Open this selected menu")
-       ,@(loop for item in rest
-               collect (destructuring-bind (&key content value) item
-                         `(:option :value ,value ,content))))))
+     ,@(loop for item in rest
+             collect (destructuring-bind (&key content value) item
+                       `(:option :value ,value ,content)))))
+
+(defmacro select ((&key size) &body body)
+  (let ((class-attr (cond
+                     ((null size) "form-select")
+                     ((numberp size) "form-select")
+                     ((string= size "multiple") "form-select")
+                     ((stringp size) (format nil "form-select form-select-~a" size)))))
+    `(spinneret:with-html
+       (:select :class ,class-attr
+                ,@(when (numberp size) `(:size ,size))
+                ,@(when (string= size "multiple") '(:multiple t))
+                :aria-label "Default select example"
+                (:option :selected t "Open this selected menu")
+                ,@body))))
