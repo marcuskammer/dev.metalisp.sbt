@@ -338,13 +338,16 @@ Example 7:
   (assert (or alignment transform weight wrap monospace)
           nil "Provide at least one argument")
   (when alignment
-    (assert (member alignment '("start" "end" "center") :test #'string=)
+    (assert (member alignment '("start" "end" "center")
+                    :test #'string=)
             nil "ALIGNMENT should be of 'start', 'end' or 'center'"))
   (when transform
-    (assert (member transform '("lowercase" "uppercase" "capitalize") :test #'string=)
+    (assert (member transform '("lowercase" "uppercase" "capitalize")
+                    :test #'string=)
             nil "TRANSFORM should be of 'lowercase', 'uppercase' 'capitalize'"))
   (when weight
-    (assert (member weight '("bold" "bolder" "normal" "light" "lighter") :test #'string=)
+    (assert (member weight '("bold" "bolder" "normal" "light" "lighter")
+                    :test #'string=)
             nil "WEIGHT should be of 'bold', 'bolder', 'normal', 'light', 'lighter'"))
   (when wrap
     (assert (member wrap '("wrap" "nowrap") :test #'string=)
