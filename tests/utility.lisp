@@ -222,13 +222,13 @@
 
 (deftest test-valign-all-arguments
   (testing "Generates correct vertical align class with all arguments"
-    (ok (string= (valign :align :baseline) "align-baseline"))
-    (ok (string= (valign :align :top) "align-top"))
-    (ok (string= (valign :align :middle) "align-middle"))
-    (ok (string= (valign :align :bottom) "align-bottom"))
-    (ok (string= (valign :align :text-bottom) "align-text-bottom"))
-    (ok (string= (valign :align :text-top) "align-text-top"))))
+    (ok (string= (valign "baseline") "align-baseline"))
+    (ok (string= (valign "top") "align-top"))
+    (ok (string= (valign "middle") "align-middle"))
+    (ok (string= (valign "bottom") "align-bottom"))
+    (ok (string= (valign "text-bottom") "align-text-bottom"))
+    (ok (string= (valign "text-top") "align-text-top"))))
 
 (deftest test-valign-no-arguments
   (testing "Generates correct vertical align class with no arguments"
-    (ok (string= (valign) ""))))
+    (ok (signals (valign)))))

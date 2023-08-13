@@ -361,22 +361,22 @@ Example 7:
                                wrap-str
                                monospace-str))))
 
-(defun valign (&key (align nil))
+(defun valign (align)
   "Generates a Bootstrap vertical align class.
 
-ALIGN: Specifies the alignment, should be :baseline, :top, :middle, :bottom,
-:text-bottom, :text-top or nil (default alignment).
+ALIGN: Specifies the alignment, should be 'baseline', 'top', 'middle', 'bottom',
+'text-bottom', 'text-top'.
 
 Example 1:
-  (valign :align :baseline)
+  (valign \"baseline\")
   ; This will generate a string 'align-baseline'
 
 Example 2:
-  (valign :align :top)
+  (valign \"top\")
   ; This will generate a string 'align-top'
 
 Example 3:
-  (valign :align :middle)
+  (valign \"middle\")
   ; This will generate a string 'align-middle'"
   (let ((align-str (if (null align) "" (format nil "align-~a" align))))
     (string-clean align-str)))
