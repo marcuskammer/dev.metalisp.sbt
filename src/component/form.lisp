@@ -99,7 +99,7 @@ BODY: The contents of the select menu, typically options.
 
 Example:
   (select (:size \"sm\")
-           (select-option (:content \"Option 1\" :value \"opt1\")))"
+          (select-option (:content \"Option 1\" :value \"opt1\")))"
   (let ((class-attr (cond
                       ((null size) "form-select")
                       ((numberp size) "form-select")
@@ -114,4 +114,4 @@ Example:
          ,@(when (and (stringp size) (string= size "multiple")) (list :multiple t))
          :aria-label "Default select example"
          (:option :selected t "Open this selected menu")
-         ,@body))))
+         (select-option ,@body)))))
