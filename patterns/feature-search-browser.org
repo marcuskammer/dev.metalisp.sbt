@@ -40,4 +40,5 @@
 
 - Balance between the three elements is pivotal.
 - Design responsiveness is essential for various device compatibility.
-- Enhance engagement with personalized content based on user history or preferences.
+- Enhance engagement with personalized content based on user history or
+  preferences.
