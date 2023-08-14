@@ -48,6 +48,16 @@
       (ok (search "for=form1" result))
       (ok (search "Another Form" result)))))
 
+(deftest test-simple-form-control-cols
+  (let ((result (spinneret:with-html-string (ctrl-col (:id "exampleFormControlInput1" :label "Email address" :type "email" :placeholder "name@example.com")))))
+    (testing "Generates correct HTML for a simple form using cols"
+      (ok (search "for=exampleFormControlInput1" result))
+      (ok (search "class=col-form-label" result))
+      (ok (search "type=email" result))
+      (ok (search "class=form-control" result))
+      (ok (search "id=exampleFormControlInput1" result))
+      (ok (search "placeholder=name@example.com" result)))))
+
 (deftest test-select-default
   (let ((result (spinneret:with-html-string (select () (select-option (:content "One" :value 1) (:content "Two" :value 2) (:content "Three" :value 3))))))
     (testing "Generates correct HTML for select element"
@@ -84,13 +94,3 @@
       (ok (search "class=form-select" result))
       (ok (search "size=3" result))
       (ok (search "option value=1" result)))))
-
-(deftest test-simple-form-control-cols
-  (let ((result (spinneret:with-html-string (ctrl-col (:id "exampleFormControlInput1" :label "Email address" :type "email" :placeholder "name@example.com")))))
-    (testing "Generates correct HTML for a simple form using cols"
-      (ok (search "for=exampleFormControlInput1" result))
-      (ok (search "class=col-form-label" result))
-      (ok (search "type=email" result))
-      (ok (search "class=form-control" result))
-      (ok (search "id=exampleFormControlInput1" result))
-      (ok (search "placeholder=name@example.com" result)))))
