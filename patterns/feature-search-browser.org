@@ -49,3 +49,23 @@
 - Design responsiveness is essential for various device compatibility.
 - Enhance engagement with personalized content based on user history or
   preferences.
+
+* Content centric
+
+#+begin_src lisp
+  (ql:quickload :cl-sbt)
+  (defpackage cl-sbt/fsb/content
+    (:use :cl)
+    (:import-from
+     :cl-sbt/form
+     :ctrl-col))
+  (in-package :cl-sbt/fsb/content)
+
+#+end_src
+
+#+RESULTS:
+| :CL-SBT |
+
+* Commerce centric
+
+* Task centric
