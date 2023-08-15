@@ -94,3 +94,14 @@
       (ok (search "class=form-select" result))
       (ok (search "size=3" result))
       (ok (search "option value=1" result)))))
+
+(deftest test-default-search-form
+  (let ((result (spinneret:with-html-string (search))))
+    (testing "Generates correct HTML for search form"
+      (ok (search "class=\"form-control me-2\"" result))
+      (ok (search "type=search" result))
+      (ok (search "aria-label=Search" result))
+      (ok (search "type=submit" result))
+      (ok (search "class=\"btn btn-outline-success\"" result))
+      (ok (search "<input" result))
+      (ok (search "<button" result)))))

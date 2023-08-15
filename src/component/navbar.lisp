@@ -139,7 +139,7 @@ Example:
                     :type "search"
                     :placeholder "Search"
                     :aria-label "Search")
-            (btn-outline-success "Search"))))
+            (btn-outline-success () "Search"))))
 
 (defmacro content (id (&key (search t)) &body body)
   `(spinneret:with-html
