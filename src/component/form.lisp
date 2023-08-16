@@ -1,11 +1,15 @@
 (defpackage cl-sbt/form
   (:use
    :cl)
+  (:import-from
+   :cl-sbt/btn
+   :btn-outline-success)
   (:export
    :ctrl
    :ctrl-col
    :select
-   :select-option))
+   :select-option
+   :search-form))
 
 (in-package :cl-sbt/form)
 
@@ -115,3 +119,13 @@ Example:
          :aria-label "Default select example"
          (:option :selected t "Open this selected menu")
          (select-option ,@body)))))
+
+(defun search-form ()
+  (spinneret:with-html
+    (:form :class "d-flex"
+           :role "search"
+           (:input :class "form-control me-2"
+                   :type "search"
+                   :placeholder "Search"
+                   :aria-label "Search")
+           (btn-outline-success (:type "submit") "Search"))))

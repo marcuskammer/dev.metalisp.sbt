@@ -8,7 +8,8 @@
    :ctrl
    :ctrl-col
    :select
-   :select-option))
+   :select-option
+   :search-form))
 
 (in-package :cl-sbt/tests/form)
 
@@ -96,7 +97,7 @@
       (ok (search "option value=1" result)))))
 
 (deftest test-default-search-form
-  (let ((result (spinneret:with-html-string (search))))
+  (let ((result (spinneret:with-html-string (search-form))))
     (testing "Generates correct HTML for search form"
       (ok (search "class=\"form-control me-2\"" result))
       (ok (search "type=search" result))
