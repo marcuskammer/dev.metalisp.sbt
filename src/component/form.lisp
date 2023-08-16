@@ -103,15 +103,14 @@ BODY: The contents of the select menu, typically options.
 
 Example:
   (select (:size \"sm\")
-          (select-option (:content \"Option 1\" :value \"opt1\")))"
-  (let ((class-attr (cond
-                      ((null size) "form-select")
-                      ((numberp size) "form-select")
-                      ((and (stringp size)
-                            (string= size "multiple")) "form-select")
-                      ((stringp size)
-                       (format nil "form-select form-select-~a" size))
-                      (t (error "Invalid size specification: ~a" size)))))
+          (:content \"Option 1\" :value \"opt1\"))"
+  (let ((class-attr (cond ((null size) "form-select")
+                          ((numberp size) "form-select")
+                          ((and (stringp size)
+                                (string= size "multiple")) "form-select")
+                          ((stringp size)
+                           (format nil "form-select form-select-~a" size))
+                          (t (error "Invalid size specification: ~a" size)))))
     `(spinneret:with-html
        (:select :class ,class-attr
          ,@(when (numberp size) `(:size ,size))
