@@ -120,6 +120,7 @@ Example:
          (select-option ,@body)))))
 
 (defun search-form ()
+  "Generates a general used search form"
   (spinneret:with-html
     (:form :class "d-flex"
            :role "search"
