@@ -170,7 +170,7 @@ to action button. The generated hero unit uses Bootstrap classes for styling."
                (col nil
                  (:h1 :class "fw-light" ,title)
                  (lead-p () ,lead)
-                 (:p (btn-primary ,cta)))))))))
+                 (:p (btn-primary () ,cta)))))))))
 
 (defmacro lead-p ((&key (color '(:text "body-secondary"))) &body body)
   `(spinneret:with-html
