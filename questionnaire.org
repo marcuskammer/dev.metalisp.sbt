@@ -1,0 +1,51 @@
+#+title: forms test
+#+html_head: <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+#+begin_export html
+<form>
+  <fieldset>
+    <legend>How old are you?</legend>
+    <ol>
+      <li>
+        <input type="radio" id="18" name="age">
+        <label for="18">18-24</label>
+      </li>
+      <li>
+        <input type="radio" id="25" name="age">
+        <label for="25">25-34</label>
+      </li>
+      <li>
+        <input type="radio" id="35" name="age">
+        <label for="35">35-44</label>
+      </li>
+      <li>
+        <input type="radio" id="45" name="age">
+        <label for="45">45-54</label>
+      </li>
+      <li>
+        <input type="radio" id="55" name="age">
+        <label for="55">55+</label>
+      </li>
+  </fieldset>
+  <fieldset>
+    <legend>Gender</legend>
+    <ol>
+      <li>
+        <input type="radio" id="male" name="gender">
+        <label for="male">Male</label>
+      </li>
+      <li>
+        <input type="radio" id="female" name="gender">
+        <label for="female">Female</label>
+      </li>
+      <li>
+        <input type="radio" id="non-binary" name="gender">
+        <label for="non-binary">Non-Binary</label>
+      </li>
+      <li>
+        <input type="radio" id="non" name="gender">
+        <label for="non">Prefer not to say</label>
+      </li>
+  </fieldset>
+</form>
+
+#+end_export
