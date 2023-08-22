@@ -1,51 +1,223 @@
-#+title: forms test
-#+html_head: <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-#+begin_export html
-<form>
-  <fieldset>
-    <legend>How old are you?</legend>
-    <ol>
-      <li>
-        <input type="radio" id="18" name="age">
-        <label for="18">18-24</label>
-      </li>
-      <li>
-        <input type="radio" id="25" name="age">
-        <label for="25">25-34</label>
-      </li>
-      <li>
-        <input type="radio" id="35" name="age">
-        <label for="35">35-44</label>
-      </li>
-      <li>
-        <input type="radio" id="45" name="age">
-        <label for="45">45-54</label>
-      </li>
-      <li>
-        <input type="radio" id="55" name="age">
-        <label for="55">55+</label>
-      </li>
-  </fieldset>
-  <fieldset>
-    <legend>Gender</legend>
-    <ol>
-      <li>
-        <input type="radio" id="male" name="gender">
-        <label for="male">Male</label>
-      </li>
-      <li>
-        <input type="radio" id="female" name="gender">
-        <label for="female">Female</label>
-      </li>
-      <li>
-        <input type="radio" id="non-binary" name="gender">
-        <label for="non-binary">Non-Binary</label>
-      </li>
-      <li>
-        <input type="radio" id="non" name="gender">
-        <label for="non">Prefer not to say</label>
-      </li>
-  </fieldset>
-</form>
+#+name: social-media-questionnaire
+#+begin_src html :tangle questionnaire.html
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Bootstrap demo</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    </head>
+    <body>
+      <h1>Questionnaire Example</h1>
+      <h2>Introduction</h2>
+      <p>Hello and thank you for participating in our customer research
+        questionnaire! Your feedback is incredibly important to us and will help
+        shape the way we enhance our products and services.
 
-#+end_export
+        This questionnaire should take no more than 10-15 minutes of your time. Rest
+        assured, all information will be kept strictly confidential and will only be
+        used for research purposes.
+
+        Let's get started!</p>
+      <form action="" method="post">
+        <fieldset>
+          <legend>How old are you?</legend>
+          <ol>
+            <li>
+              <label class="form-label"><input type="radio" name="age"> 18-24</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="age"> 25-34</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="age"> 35-44</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="age"> 45-54</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="age"> 55+</label>
+            </li>
+          </ol>
+        </fieldset>
+        <fieldset>
+          <legend>Gender</legend>
+          <ol>
+            <li>
+              <label class="form-label"><input type="radio" name="gender"> Male</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="gender"> Female</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="gender"> Non-Binary</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="gender"> Prefer not to say</label>
+            </li>
+          </ol>
+        </fieldset>
+        <fieldset>
+          <legend>How many hours per day, on average, do you spend browsing the internet?</legend>
+          <ol>
+            <li>
+              <label class="form-label"><input type="radio" name="internet"> Less than 1 hour</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="internet"> 1-3 hours</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="internet"> 3-5 hours</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="internet"> 5+ hours</label>
+            </li>
+          </ol>
+        </fieldset>
+        <fieldset>
+          <legend>Which of the following devices do you regularly use to browse the internet? (Select all that apply)</legend>
+          <ol>
+            <li>
+              <label class="form-label"><input type="checkbox" name="devices"> Desktop</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="checkbox" name="devices"> Laptop</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="checkbox" name="devices"> Tablet</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="checkbox" name="devices"> Smartphone</label>
+            </li>
+          </ol>
+        </fieldset>
+        <fieldset>
+          <legend>Which social media platforms do you use regularly? (Select all that apply)</legend>
+          <ol>
+            <li>
+              <label class="form-label"><input type="checkbox" name="socialmedia"> Facebook</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="checkbox" name="socialmedia"> Twitter</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="checkbox" name="socialmedia"> Instagram</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="checkbox" name="socialmedia"> LinkedIn</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="checkbox" name="socialmedia"> TikTok</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="checkbox" name="socialmedia"> Snapchat</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="checkbox" name="socialmedia"> Pinterest</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="checkbox" name="socialmedia"> YouTube</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="checkbox" name="socialmedia"> Xing</label>
+            </li>
+          </ol>
+        </fieldset>
+        <fieldset>
+          <legend>On average, how many hours per day do you spend on social media?</legend>
+          <ol>
+            <li>
+              <label class="form-label"><input type="checkbox" name="socialmediahours"> Less than 1 hour</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="checkbox" name="socialmediahours"> 1-2 hours</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="checkbox" name="socialmediahours"> 2-4 hours</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="checkbox" name="socialmediahours"> 4+ hours</label>
+            </li>
+          </ol>
+        </fieldset>
+        <fieldset>
+          <legend>What are your primary reasons for using social media? (Select up to three)</legend>
+          <ol>
+            <li>
+              <label class="form-label"><input type="checkbox" name="socialmediause"> Keeping in touch with friends and family</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="checkbox" name="socialmediause"> News and current events</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="checkbox" name="socialmediause"> Entertainment (videos, memes, etc.)</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="checkbox" name="socialmediause"> Professional networking</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="checkbox" name="socialmediause"> Learning or educational content</label>
+            </li>
+          </ol>
+        </fieldset>
+        <fieldset>
+          <legend>How often do you share or post content on your social media accounts?</legend>
+          <ol>
+            <li>
+              <label class="form-label"><input type="radio" name="socialmediashare"> Multiple times a day</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="socialmediashare"> Daily</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="socialmediashare"> Weekly</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="socialmediashare"> Monthly</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="socialmediashare"> Rarely</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="socialmediashare"> Never</label>
+            </li>
+          </ol>
+        </fieldset>
+        <fieldset>
+          <legend>Have you ever made a purchase based on a social media advertisement?</legend>
+          <ol>
+            <li>
+              <label class="form-label"><input type="radio" name="socialmediapurchase"> Yes</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="socialmediapurchase"> No</label>
+            </li>
+          </ol>
+        </fieldset>
+        <fieldset>
+          <legend>How often do you use the internet to research products or services before making a purchase?</legend>
+          <ol>
+            <li>
+              <label class="form-label"><input type="radio" name="research"> Always</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="research"> Often</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="research"> Sometimes</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="research"> Rarely</label>
+            </li>
+            <li>
+              <label class="form-label"><input type="radio" name="research"> Never</label>
+            </li>
+          </ol>
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    </body>
+  </html>
+#+end_src
