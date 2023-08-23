@@ -3,13 +3,16 @@
    :cl)
   (:import-from
    :cl-sbt/btn
-   :btn-outline-success)
+   :btn-outline-success
+   :btn-primary)
   (:export
    :ctrl
    :ctrl-col
    :select
    :select-option
-   :search-form))
+   :search-form
+   :question
+   :questionnaire))
 
 (in-package :cl-sbt/form)
 
@@ -129,3 +132,51 @@ Example:
                    :placeholder "Search"
                    :aria-label "Search")
            (btn-outline-success (:type "submit") "Search"))))
+
+(defmacro question (question (&key (name "") (type "")) &rest rest)
+  "This macro generates a fieldset for a question with multiple answers.
+
+QUESTION: The text of the question to be displayed in the legend.
+
+NAME: Specifies the name attribute for the input elements. Defaults to an empty
+string.
+
+TYPE: Specifies the type of input elements. Commonly used value is \"radio\".
+Defaults to an empty string.
+
+REST: A list of strings representing the different answers available for
+selection.
+
+Example:
+  (question \"How old are you?\"
+            (:name \"age\" :type \"radio\") \"18-24\" \"25-34\" \"35-44\")"
+  `(spinneret:with-html
+     (:fieldset (:legend ,question)
+                (:ol ,@(loop for answer in rest
+                             collect `(:li (:label :class "form-label"
+                                                   (:input :type ,type :name ,name) ,answer)))))))
+
+(defmacro questionnaire (action &rest rest)
+  "This macro generates an HTML form composed of multiple questions, each
+   rendered using the `question` macro.
+
+ACTION: Specifies the URL where the form will be submitted. This should be a
+string representing the URL path.
+
+REST: A list of question specifications. Each question is represented as a
+plist containing the keys :question, :name, :type, and :answers, followed by
+the answers themselves.
+
+Example:
+  (questionnaire \"/submit\"
+                 (:question \"How old are you?\" :name \"age\" :type \"radio\" :answers (\"18-24\" \"25-34\" \"35-44\"))
+                 (:question \"What's your favorite color?\" :name \"color\" :type \"radio\" :answers (\"Red\" \"Blue\" \"Green\")))
+
+This will create a form with two questions, each with radio button options, and a Submit button."
+  `(spinneret:with-html
+     (:form :action ,action
+            :method "post"
+            ,@(loop for item in rest
+                    collect (destructuring-bind (&key question name type answers) item
+                              `(question ,question (:name ,name :type ,type) ,@answers)))
+            (btn-primary (:type "submit") "Submit"))))
