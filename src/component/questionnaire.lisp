@@ -26,7 +26,7 @@ Example usage:
   `(spinneret:with-html
      (:li (:label :class "form-label"
                   (:input :type ,type :name ,name)
-                  ,text))))
+                  (format nil " ~a" ,text)))))
 
 (defmacro question (question (&key (group "group") (type "radio")) &rest choices)
   "This macro generates a fieldset for a question with multiple answers.
