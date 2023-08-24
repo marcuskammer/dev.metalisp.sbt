@@ -5,6 +5,7 @@
    :cl-sbt/btn
    :btn-primary)
   (:export
+   :choice
    :question
    :questionnaire))
 
