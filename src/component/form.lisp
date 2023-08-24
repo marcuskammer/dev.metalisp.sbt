@@ -133,13 +133,24 @@ Example:
                    :aria-label "Search")
            (btn-outline-success (:type "submit") "Search"))))
 
-(defmacro answer (text (&key name type))
+(defmacro answer (text name type)
+  "This macro generates a list item for an answer option in a question.
+
+TEXT: The display text of the answer option.
+
+NAME: Specifies the name attribute for the input element. This should align
+with the name specified in the containing question.
+
+TYPE: Specifies the type of input element, such as \"radio\" for radio buttons.
+
+Example usage:
+  (answer \"18-24\" \"age\" \"radio\")"
   `(spinneret:with-html
      (:li (:label :class "form-label"
                   (:input :type ,type :name ,name)
                   ,text))))
 
-(defmacro question (question answers (&key (name "") (type "")))
+(defmacro question (question (&key (group "group") (type "radio")) &rest rest)
   "This macro generates a fieldset for a question with multiple answers.
 
 QUESTION: The text of the question to be displayed in the legend.
@@ -155,11 +166,11 @@ selection.
 
 Example:
   (question \"How old are you?\"
-            (:name \"age\" :type \"radio\") \"18-24\" \"25-34\" \"35-44\")"
+            (:group \"age\" :type \"radio\") \"18-24\" \"25-34\" \"35-44\")"
   `(spinneret:with-html
      (:fieldset (:legend ,question)
-                (:ol ,@(loop for item in answers
-                             collect `(answer ,item (:name ,name :type ,type)))))))
+                (:ol ,@(loop for text in rest
+                             collect `(answer ,text ,group ,type))))))
 
 (defmacro questionnaire (action &body body)
   "This macro generates an HTML form composed of multiple questions, each
@@ -168,18 +179,36 @@ Example:
 ACTION: Specifies the URL where the form will be submitted. This should be a
 string representing the URL path.
 
-REST: A list of question specifications. Each question is represented as a
-plist containing the keys :question, :name, :type, and :answers, followed by
-the answers themselves.
+BODY: A series of calls to the `question` macro to define each question.
 
 Example:
   (questionnaire \"/submit\"
-                 (:question \"How old are you?\" :name \"age\" :type \"radio\" :answers (\"18-24\" \"25-34\" \"35-44\"))
-                 (:question \"What's your favorite color?\" :name \"color\" :type \"radio\" :answers (\"Red\" \"Blue\" \"Green\")))
-
-This will create a form with two questions, each with radio button options, and a Submit button."
+                 (question \"How old are you?\" (:name \"age\" :type \"radio\") \"18-24\" \"25-34\" \"35-44\")
+                 (question \"What's your favorite color?\" (:name \"color\" :type \"radio\") \"Red\" \"Blue\" \"Green\"))"
   `(spinneret:with-html
      (:form :action ,action
             :method "post"
             ,@body
+            (btn-primary (:type "submit") "Submit"))))
+
+(defmacro questionnaire-1 (action &rest questions)
+  "This macro generates an HTML form composed of multiple questions, each
+   rendered using the `question` macro.
+
+ACTION: Specifies the URL where the form will be submitted. This should be a
+string representing the URL path.
+
+QUESTIONS: A series of plists, each representing a question. Each plist should
+contain the keys :question, :name, :type, and :answers.
+
+Example:
+  (questionnaire \"/submit\" (:ask \"How old are you?\" :group \"age\" :type \"radio\" :answers (\"18-24\" \"25-34\" \"35-44\")))
+
+This will create a form with a question and radio button options, and a Submit button."
+  `(spinneret:with-html
+     (:form :action ,action
+            :method "post"
+            ,@(loop for q in questions
+                    collect (destructuring-bind (&key ask group type answers) q
+                              `(question ,ask (:group ,group :type ,type) ,@answers)))
             (btn-primary (:type "submit") "Submit"))))
