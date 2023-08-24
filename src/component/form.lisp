@@ -133,7 +133,7 @@ Example:
                    :aria-label "Search")
            (btn-outline-success (:type "submit") "Search"))))
 
-(defmacro answer (text name type)
+(defmacro choice (text name type)
   "This macro generates a list item for an answer option in a question.
 
 TEXT: The display text of the answer option.
@@ -150,7 +150,7 @@ Example usage:
                   (:input :type ,type :name ,name)
                   ,text))))
 
-(defmacro question (question (&key (group "group") (type "radio")) &rest rest)
+(defmacro question (question (&key (group "group") (type "radio")) &rest choices)
   "This macro generates a fieldset for a question with multiple answers.
 
 QUESTION: The text of the question to be displayed in the legend.
@@ -161,7 +161,7 @@ string.
 TYPE: Specifies the type of input elements. Commonly used value is \"radio\".
 Defaults to an empty string.
 
-REST: A list of strings representing the different answers available for
+CHOICES: A list of strings representing the different answers available for
 selection.
 
 Example:
@@ -169,8 +169,8 @@ Example:
             (:group \"age\" :type \"radio\") \"18-24\" \"25-34\" \"35-44\")"
   `(spinneret:with-html
      (:fieldset (:legend ,question)
-                (:ol ,@(loop for text in rest
-                             collect `(answer ,text ,group ,type))))))
+                (:ol ,@(loop for text in choices
+                             collect `(choice ,text ,group ,type))))))
 
 (defmacro questionnaire (action &body body)
   "This macro generates an HTML form composed of multiple questions, each
@@ -202,13 +202,12 @@ QUESTIONS: A series of plists, each representing a question. Each plist should
 contain the keys :question, :name, :type, and :answers.
 
 Example:
-  (questionnaire \"/submit\" (:ask \"How old are you?\" :group \"age\" :type \"radio\" :answers (\"18-24\" \"25-34\" \"35-44\")))
-
-This will create a form with a question and radio button options, and a Submit button."
+  (questionnaire \"/submit\"
+                 (:ask \"How old are you?\" :group \"age\" :type \"radio\" :choices (\"18-24\" \"25-34\" \"35-44\")))"
   `(spinneret:with-html
      (:form :action ,action
             :method "post"
             ,@(loop for q in questions
-                    collect (destructuring-bind (&key ask group type answers) q
-                              `(question ,ask (:group ,group :type ,type) ,@answers)))
+                    collect (destructuring-bind (&key ask group type choices) q
+                              `(question ,ask (:group ,group :type ,type) ,@choices)))
             (btn-primary (:type "submit") "Submit"))))
