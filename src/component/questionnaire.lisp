@@ -22,7 +22,7 @@ with the name specified in the containing question.
 TYPE: Specifies the type of input element, such as \"radio\" for radio buttons.
 
 Example usage:
-  (answer \"18-24\" \"age\" \"radio\")"
+  (choice \"18-24\" \"age\" \"radio\")"
   `(spinneret:with-html
      (:li (:label :class "form-label"
                   (:input :type ,type :name ,name)
@@ -77,15 +77,19 @@ ACTION: Specifies the URL where the form will be submitted. This should be a
 string representing the URL path.
 
 QUESTIONS: A series of plists, each representing a question. Each plist should
-contain the keys :question, :name, :type, and :answers.
+contain the keys :ask, :group, and :choices. The first element of :choices
+should be a keyword specifying the type of input elements (e.g. :radio), followed
+by a list of answer options.
 
 Example:
-  (questionnaire \"/submit\"
-                 (:ask \"How old are you?\" :group \"age\" :type \"radio\" :choices (\"18-24\" \"25-34\" \"35-44\")))"
+  (questionnaire-1 \"/submit\"
+                   (:ask \"How old are you?\" :group \"age\" :choices (:radio \"18-24\" \"25-34\" \"35-44\")))"
   `(spinneret:with-html
      (:form :action ,action
             :method "post"
             ,@(loop for q in questions
-                    collect (destructuring-bind (&key ask group type choices) q
-                              `(question ,ask (:group ,group :type ,type) ,@choices)))
+                    collect (destructuring-bind (&key ask group choices) q
+                              (let ((input-type (string-downcase (when (keywordp (first choices))
+                                                                   (pop choices)))))
+                                `(question ,ask (:group ,group :type ,input-type) ,@choices))))
             (btn-primary (:type "submit") "Submit"))))
