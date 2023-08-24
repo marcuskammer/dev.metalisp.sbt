@@ -48,7 +48,7 @@ Example:
                 (:ol ,@(loop for text in choices
                              collect `(choice ,text ,group ,type))))))
 
-(defmacro questionnaire (action &body body)
+(defmacro questionnaire-1 (action &body body)
   "This macro generates an HTML form composed of multiple questions, each
    rendered using the `question` macro.
 
@@ -67,7 +67,7 @@ Example:
             ,@body
             (btn-primary (:type "submit") "Submit"))))
 
-(defmacro questionnaire-1 (action &rest questions)
+(defmacro questionnaire (action &rest questions)
   "This macro generates an HTML form composed of multiple questions, each
    rendered using the `question` macro.
 
