@@ -33,11 +33,9 @@ Example usage:
 
 QUESTION: The text of the question to be displayed in the legend.
 
-NAME: Specifies the name attribute for the input elements. Defaults to an empty
-string.
+NAME: Specifies the name attribute for the input elements.
 
 TYPE: Specifies the type of input elements. Commonly used value is \"radio\".
-Defaults to an empty string.
 
 CHOICES: A list of strings representing the different answers available for
 selection.
