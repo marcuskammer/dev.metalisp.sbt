@@ -24,7 +24,8 @@
                  (:file "pagination")
                  (:file "table")
                  (:file "spinner")
-                 (:file "form")))
+                 (:file "form")
+                 (:file "questionnaire")))
                (:module "examples"
                 :components
                 ((:file "album"))))
