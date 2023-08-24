@@ -133,7 +133,13 @@ Example:
                    :aria-label "Search")
            (btn-outline-success (:type "submit") "Search"))))
 
-(defmacro question (question (&key (name "") (type "")) &rest rest)
+(defmacro answer (text (&key name type))
+  `(spinneret:with-html
+     (:li (:label :class "form-label"
+                  (:input :type ,type :name ,name)
+                  ,text))))
+
+(defmacro question (question answers (&key (name "") (type "")))
   "This macro generates a fieldset for a question with multiple answers.
 
 QUESTION: The text of the question to be displayed in the legend.
@@ -152,11 +158,10 @@ Example:
             (:name \"age\" :type \"radio\") \"18-24\" \"25-34\" \"35-44\")"
   `(spinneret:with-html
      (:fieldset (:legend ,question)
-                (:ol ,@(loop for answer in rest
-                             collect `(:li (:label :class "form-label"
-                                                   (:input :type ,type :name ,name) ,answer)))))))
+                (:ol ,@(loop for item in answers
+                             collect `(answer ,item (:name ,name :type ,type)))))))
 
-(defmacro questionnaire (action &rest rest)
+(defmacro questionnaire (action &body body)
   "This macro generates an HTML form composed of multiple questions, each
    rendered using the `question` macro.
 
@@ -176,7 +181,5 @@ This will create a form with two questions, each with radio button options, and 
   `(spinneret:with-html
      (:form :action ,action
             :method "post"
-            ,@(loop for item in rest
-                    collect (destructuring-bind (&key question name type answers) item
-                              `(question ,question (:name ,name :type ,type) ,@answers)))
+            ,@body
             (btn-primary (:type "submit") "Submit"))))
