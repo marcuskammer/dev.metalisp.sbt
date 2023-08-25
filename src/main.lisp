@@ -10,10 +10,10 @@
 (defparameter *cdn-css* "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
 (defparameter *cdn-js* "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js")
 
-(defmacro with-page ((&key (author "") (description "") (cdn t) (pagetitle "")) &body body)
+(defmacro with-page ((&key (author "") (description "") (cdn t) (pagetitle "") (theme "dark")) &body body)
   `(spinneret:with-html
      (:doctype)
-     (:html
+     (:html :data-bs-theme ,theme
       (:head
        (:meta :charset "utf-8")
        (:meta :name "viewport" :content "width=device-width, initial-scale=1")
@@ -23,7 +23,7 @@
        (if ,cdn
            (:link :type "text/css" :rel "stylesheet" :href ,*cdn-css*)
            (:link :type "text/css" :rel "stylesheet" :href "5.3.0/bootstrap.min.css")))
-      (:body (:h1 ,pagetitle)
+      (:body (:h1 :class "visually-hidden" ,pagetitle)
         (:main ,@body))
       (if ,cdn
           (:script :src *cdn-js*)
