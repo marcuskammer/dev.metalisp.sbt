@@ -23,11 +23,12 @@
        (if ,cdn
            (:link :type "text/css" :rel "stylesheet" :href ,*cdn-css*)
            (:link :type "text/css" :rel "stylesheet" :href "5.3.0/bootstrap.min.css")))
-      (:body ,@body)
+      (:body (:h1 ,pagetitle)
+        (:main ,@body))
       (if ,cdn
           (:script :src *cdn-js*)
           (:script :src "5.3.0/bootstrap.bundle.min.js")))))
 
-(defun write-string-to-file (filename string)
+(defun write-html-to-file (filename string)
   (with-open-file (stream filename :direction :output :if-exists :supersede)
     (write-string string stream)))
