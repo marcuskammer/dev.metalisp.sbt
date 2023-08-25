@@ -4,29 +4,18 @@
   (:import-from
    :cl-sbt/btn
    :btn-primary)
+  (:import-from
+   :cl-sbt/utility
+   :spacing)
+  (:import-from
+   :cl-sbt/form
+   :choice)
   (:export
    :choice
    :question
    :questionnaire))
 
 (in-package :cl-sbt/questionnaire)
-
-(defmacro choice (text name type)
-  "This macro generates a list item for an answer option in a question.
-
-TEXT: The display text of the answer option.
-
-NAME: Specifies the name attribute for the input element. This should align
-with the name specified in the containing question.
-
-TYPE: Specifies the type of input element, such as \"radio\" for radio buttons.
-
-Example usage:
-  (choice \"18-24\" \"age\" \"radio\")"
-  `(spinneret:with-html
-     (:li (:label :class "form-label"
-                  (:input :type ,type :name ,name)
-                  (format nil " ~a" ,text)))))
 
 (defmacro question (question (&key (group "group") (type "radio")) &rest choices)
   "This macro generates a fieldset for a question with multiple answers.

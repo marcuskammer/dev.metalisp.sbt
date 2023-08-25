@@ -10,6 +10,7 @@
    :ctrl-col
    :select
    :select-option
+   :choice
    :search-form))
 
 (in-package :cl-sbt/form)
@@ -119,6 +120,23 @@ Example:
          :aria-label "Default select example"
          (:option :selected t "Open this selected menu")
          (select-option ,@body)))))
+
+(defmacro choice (text name type)
+  "This macro generates a list item for an answer option in a question.
+
+TEXT: The display text of the answer option.
+
+NAME: Specifies the name attribute for the input element. This should align
+with the name specified in the containing question.
+
+TYPE: Specifies the type of input element, such as \"radio\" for radio buttons.
+
+Example usage:
+  (choice \"18-24\" \"age\" \"radio\")"
+  `(spinneret:with-html
+     (:li (:label :class "form-label"
+                  (:input :type ,type :name ,name :value ,text)
+                  (format nil " ~a" ,text)))))
 
 (defun search-form ()
   "Generates a general used search form"
