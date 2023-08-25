@@ -33,11 +33,9 @@ Example usage:
 
 QUESTION: The text of the question to be displayed in the legend.
 
-NAME: Specifies the name attribute for the input elements. Defaults to an empty
-string.
+NAME: Specifies the name attribute for the input elements.
 
 TYPE: Specifies the type of input elements. Commonly used value is \"radio\".
-Defaults to an empty string.
 
 CHOICES: A list of strings representing the different answers available for
 selection.
@@ -50,7 +48,7 @@ Example:
                 (:ol ,@(loop for text in choices
                              collect `(choice ,text ,group ,type))))))
 
-(defmacro questionnaire (action &body body)
+(defmacro questionnaire-1 (action &body body)
   "This macro generates an HTML form composed of multiple questions, each
    rendered using the `question` macro.
 
@@ -69,7 +67,7 @@ Example:
             ,@body
             (btn-primary (:type "submit") "Submit"))))
 
-(defmacro questionnaire-1 (action &rest questions)
+(defmacro questionnaire (action &rest questions)
   "This macro generates an HTML form composed of multiple questions, each
    rendered using the `question` macro.
 
