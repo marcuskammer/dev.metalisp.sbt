@@ -1,0 +1,43 @@
+#+name: social-media-questionnaire
+
+This org file demonstrate the creation of a questionnaire.
+
+#+begin_src lisp :results none
+
+  (defpackage feat-questionnaire
+    (:use :cl)
+    (:import-from
+     :cl-sbt
+     :with-page
+     :write-html-to-file)
+    (:import-from
+     :cl-sbt/grid
+     :con)
+    (:import-from
+     :cl-sbt/questionnaire
+     :questionnaire))
+
+  (in-package :feat-questionnaire)
+
+  (write-html-to-file "questionnaire.html"
+                      (spinneret:with-html-string
+                        (with-page (:author "Marcus Kammer" :pagetitle "Questionnaire Example")
+                          (con ()
+                            (questionnaire "/submit"
+                              (:ask "How old are you?"
+                               :group "age"
+                               :choices (:single "18-24" "25-34" "35-44" "45-54" "55+"))
+                              (:ask "Your Gender?"
+                               :group "gender"
+                               :choices (:single "Male" "Female" "Non-Binary" "Prefer not to say"))
+                              (:ask "How many hours per day, on average, do you spend browsing the internet?"
+                               :group "internet"
+                               :choices (:single "Less than 1 hour" "1-3 hours" "3-5 hours" "5+ hours"))
+                              (:ask "Which of the following devices do you regularly use to browse the internet? (Select all that apply)"
+                               :group "devices"
+                               :choices (:multiple "Desktop" "Laptop" "Tablet" "Smartphone"))
+                              (:ask "Which social media platforms do you use regularly? (Select all that apply)"
+                               :group "socialmedia"
+                               :choices (:multiple "Facebook" "Twitter" "Instagram" "LinkedIn" "TikTok" "Snapchat" "Pinterest" "Youtube")))))))
+
+#+end_src
