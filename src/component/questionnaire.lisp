@@ -67,6 +67,39 @@ Example:
             ,@body
             (btn-primary (:type "submit") "Submit"))))
 
+(defun resolve-input-type (type)
+  "Resolve the given input TYPE keyword to the corresponding HTML input type.
+
+The function maps specific keywords to HTML input types. For example, it maps
+\"single\" to \"radio\" and \"multiple\" to \"checkbox\". If the input TYPE does not
+match these special cases, it is returned as-is.
+
+Arguments:
+  TYPE (string) - The input type keyword to resolve.
+
+Returns:
+  The corresponding HTML input type string."
+  (cond ((string= type "single") "radio")
+        ((string= type "multiple") "checkbox")
+        (t type)))
+
+(defun resolve-input-and-choices (choices)
+  "Separate the input type keyword from the remaining CHOICES in a list.
+
+If the first element of CHOICES is a keyword, it is taken to be the input type
+keyword, and the rest of the list is taken to be the actual choices.
+
+Arguments:
+  CHOICES (list) - The choices list, possibly including an input type keyword.
+
+Returns two values:
+  1. The input type string if a keyword is present, or NIL if no keyword is found.
+  2. The remaining choices in the list, excluding the input type keyword."
+  (let ((input-type-keyword (first choices)))
+    (if (keywordp input-type-keyword)
+        (values (string-downcase (symbol-name input-type-keyword)) (rest choices))
+        (values nil choices))))
+
 (defmacro questionnaire (action &rest questions)
   "This macro generates an HTML form composed of multiple questions, each
    rendered using the `question` macro.
@@ -87,7 +120,8 @@ Example:
             :method "post"
             ,@(loop for q in questions
                     collect (destructuring-bind (&key ask group choices) q
-                              (let ((input-type (string-downcase (when (keywordp (first choices))
-                                                                   (pop choices)))))
-                                `(question ,ask (:group ,group :type ,input-type) ,@choices))))
+                              (multiple-value-bind (input-type remaining-choices)
+                                  (resolve-input-and-choices choices)
+                                (let ((input-type (resolve-input-type input-type)))
+                                  `(question ,ask (:group ,group :type ,input-type) ,@remaining-choices)))))
             (btn-primary (:type "submit") "Submit"))))
