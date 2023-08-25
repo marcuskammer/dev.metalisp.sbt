@@ -1,7 +1,7 @@
 (defpackage cl-sbt
   (:use :cl)
   (:export
-   :write-string-to-file
+   :write-html-to-file
    :with-page))
 
 (in-package :cl-sbt)
@@ -29,6 +29,9 @@
           (:script :src *cdn-js*)
           (:script :src "5.3.0/bootstrap.bundle.min.js")))))
 
-(defun write-html-to-file (filename string)
-  (with-open-file (stream filename :direction :output :if-exists :supersede)
-    (write-string string stream)))
+(defun write-html-to-file (filename string &key (lang "en") (style :tree) (fc 120))
+  (let ((spinneret:*html-lang* lang)
+        (spinneret:*html-style* style)
+        (spinneret:*fill-column* fc))
+    (with-open-file (stream filename :direction :output :if-exists :supersede)
+      (write-string string stream))))
