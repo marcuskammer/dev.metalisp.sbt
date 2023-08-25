@@ -101,10 +101,10 @@ Example:
   (btn (:type \"danger\" :size \"lg\") \"Delete\")"
   `(spinneret:with-html
      (:button :type ,type
-              :class (concatenate 'string
+              :class ,(concatenate 'string
                                   "btn"
-                                  (format nil " btn-~a" ,color)
-                                  (if (string-equal ,size "") nil (format nil " btn~a" ,size)))
+                                  (format nil " btn-~a" color)
+                                  (if (string-equal size "") nil (format nil " btn~a" size)))
               ,@body)))
 
 (defmacro define-btn (color &optional (outline nil) (size nil))
