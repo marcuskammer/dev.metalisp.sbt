@@ -35,7 +35,7 @@
   (:import-from :cl-sbt/btn :btn-primary)
   (:import-from :cl-sbt/navbar :navbar :brand :toggler :collapsible)
   (:import-from :cl-sbt/utility :color)
-  (:import-from :cl-sbt :write-string-to-file :with-page)
+  (:import-from :cl-sbt :write-html-to-file :with-page)
   (:import-from :spinneret :with-html-string)
   (:export
    :contact
@@ -233,7 +233,7 @@ to the respective component macros."
   (let ((spinneret:*html-lang* lang)
         (spinneret:*html-style* style)
         (spinneret:*fill-column* fc))
-    (write-string-to-file filepath
+    (write-html-to-file filepath
                           (with-html-string (page "Album" t)))))
 
 ;(cl-sbt/album:write-page "~/quicklisp/local-projects/cl-sbt/public/examples/album.html")
