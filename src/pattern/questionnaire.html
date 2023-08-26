@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang=en data-bs-theme=dark>
+ <head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <meta name=author content="Marcus Kammer">
+  <meta name=description content="">
+  <title>Questionnaire Example</title>
+  <link rel=stylesheet type=text/css
+        href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css>
+ </head>
+ <body>
+  <h1 class=visually-hidden>Questionnaire Example</h1>
+  <main>
+   <!-- START CONTAINER -->
+<div class=container>
+    <form class=py-5 action=/submit method=get>
+     <fieldset>
+      <legend>How old are you?</legend>
+      <ol>
+       <li>
+        <label class=form-label>
+         <input type=radio name=age value=18-24> 18-24</label>
+       <li>
+        <label class=form-label>
+         <input type=radio name=age value=25-34> 25-34</label>
+       <li>
+        <label class=form-label>
+         <input type=radio name=age value=35-44> 35-44</label>
+       <li>
+        <label class=form-label>
+         <input type=radio name=age value=45-54> 45-54</label>
+       <li>
+        <label class=form-label>
+         <input type=radio name=age value=55+> 55+</label>
+      </ol>
+      <hr class=my-4>
+     </fieldset>
+     <fieldset>
+      <legend>Your Gender?</legend>
+      <ol>
+       <li>
+        <label class=form-label>
+         <input type=radio name=gender value=Male> Male</label>
+       <li>
+        <label class=form-label>
+         <input type=radio name=gender value=Female> Female</label>
+       <li>
+        <label class=form-label>
+         <input type=radio name=gender value=Non-Binary> Non-Binary</label>
+       <li>
+        <label class=form-label>
+         <input type=radio name=gender value="Prefer not to say"> Prefer not to say</label>
+      </ol>
+      <hr class=my-4>
+     </fieldset>
+     <fieldset>
+      <legend>How many hours per day, on average, do you spend browsing the internet?</legend>
+      <ol>
+       <li>
+        <label class=form-label>
+         <input type=radio name=internet value="Less than 1 hour"> Less than 1 hour</label>
+       <li>
+        <label class=form-label>
+         <input type=radio name=internet value="1-3 hours"> 1-3 hours</label>
+       <li>
+        <label class=form-label>
+         <input type=radio name=internet value="3-5 hours"> 3-5 hours</label>
+       <li>
+        <label class=form-label>
+         <input type=radio name=internet value="5+ hours"> 5+ hours</label>
+      </ol>
+      <hr class=my-4>
+     </fieldset>
+     <fieldset>
+      <legend>Which of the following devices do you regularly use to browse the internet? (Select all that apply)</legend>
+      <ol>
+       <li>
+        <label class=form-label>
+         <input type=checkbox name=devices value=Desktop> Desktop</label>
+       <li>
+        <label class=form-label>
+         <input type=checkbox name=devices value=Laptop> Laptop</label>
+       <li>
+        <label class=form-label>
+         <input type=checkbox name=devices value=Tablet> Tablet</label>
+       <li>
+        <label class=form-label>
+         <input type=checkbox name=devices value=Smartphone> Smartphone</label>
+      </ol>
+      <hr class=my-4>
+     </fieldset>
+     <fieldset>
+      <legend>Which social media platforms do you use regularly? (Select all that apply)</legend>
+      <ol>
+       <li>
+        <label class=form-label>
+         <input type=checkbox name=socialmedia value=Facebook> Facebook</label>
+       <li>
+        <label class=form-label>
+         <input type=checkbox name=socialmedia value=Twitter> Twitter</label>
+       <li>
+        <label class=form-label>
+         <input type=checkbox name=socialmedia value=Instagram> Instagram</label>
+       <li>
+        <label class=form-label>
+         <input type=checkbox name=socialmedia value=LinkedIn> LinkedIn</label>
+       <li>
+        <label class=form-label>
+         <input type=checkbox name=socialmedia value=TikTok> TikTok</label>
+       <li>
+        <label class=form-label>
+         <input type=checkbox name=socialmedia value=Snapchat> Snapchat</label>
+       <li>
+        <label class=form-label>
+         <input type=checkbox name=socialmedia value=Pinterest> Pinterest</label>
+       <li>
+        <label class=form-label>
+         <input type=checkbox name=socialmedia value=Youtube> Youtube</label>
+      </ol>
+      <hr class=my-4>
+     </fieldset>
+     <button class="btn btn-primary" type=submit>Submit</button>
+    </form>
+   </div>
+   <!-- END CONTAINER -->
+
+  </main>
+ </body>
+ <script
+         src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js></script>
+</html>

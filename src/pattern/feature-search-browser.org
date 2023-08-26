@@ -1,6 +1,6 @@
 #+title: Interaction Pattern: Feature, Search, and Browse
 #+author: Marcus Kammer
-#+date:[2023-08-14 Mon]
+#+date:[2023-08-15 Tue]
 #+email: marcus.kammer@mailbox.org
 #+license: MIT
 
@@ -60,7 +60,6 @@
      :cl-sbt/form
      :ctrl-col))
   (in-package :cl-sbt/fsb/content)
-
 #+end_src
 
 #+RESULTS:
