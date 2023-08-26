@@ -69,12 +69,12 @@ The following components are available as packages:
 The following code demonstrates how to define a card using the card macro.
 
 #+begin_src lisp :results output :exports both
-  (cl-sbt-card:card
-    (cl-sbt-card:body
-      (cl-sbt-card:title "Card title")
-      (cl-sbt-card:subtitle "Card subtitle")
-      (cl-sbt-card:text "Some quick example text to build on the card title and make up the bulk of the card's content.")
-      (cl-sbt-card:link (:href "#") "Card link")))
+  (cl-sbt/card:card
+    (cl-sbt/card:body
+      (cl-sbt/card:title "Card title")
+      (cl-sbt/card:subtitle "Card subtitle")
+      (cl-sbt/card:text "Some quick example text to build on the card title and make up the bulk of the card's content.")
+      (cl-sbt/card:link (:href "#") "Card link")))
 #+end_src
 
 #+RESULTS:
@@ -94,11 +94,11 @@ The following code demonstrates how to define a card using the card macro.
 The following code demonstrates how to define a card using the card-with-img macro.
 
 #+begin_src lisp :results output :exports both
-  (cl-sbt-card:card-with-img (:img-src "test.jpg")
-    (cl-sbt-card:title "Card title")
-    (cl-sbt-card:subtitle "Card subtitle")
-    (cl-sbt-card:text "Some quick example text to build on the card title and make up the bulk of the card's content.")
-    (cl-sbt-card:link (:href "#") "Card link"))
+  (cl-sbt/card:card-with-img (:img-src "test.jpg")
+    (cl-sbt/card:title "Card title")
+    (cl-sbt/card:subtitle "Card subtitle")
+    (cl-sbt/card:text "Some quick example text to build on the card title and make up the bulk of the card's content.")
+    (cl-sbt/card:link (:href "#") "Card link"))
 #+end_src
 
 #+RESULTS:
@@ -123,11 +123,11 @@ The following code demonstrates how to define a dropdown using the dropdown
 macro.
 
 #+begin_src lisp :results output :exports both
-  (cl-sbt-dropdown:dropdown (:title "Dropdown button")
-    (cl-sbt-dropdown:menu
-      (cl-sbt-dropdown:item "Action")
-      (cl-sbt-dropdown:item "Another action")
-      (cl-sbt-dropdown:item "Something else here")))
+  (cl-sbt/dropdown:dropdown (:name "Dropdown button")
+    (cl-sbt/dropdown:menu
+      (cl-sbt/dropdown:item "Action")
+      (cl-sbt/dropdown:item "Another action")
+      (cl-sbt/dropdown:item "Something else here")))
 #+end_src
 
 #+RESULTS:
