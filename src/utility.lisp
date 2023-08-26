@@ -108,27 +108,27 @@ EMPHASIS: Specifies whether the color should be emphasized or not.
 BODY: Specifies whether the color of the text should be body color.
 
 Example 1:
-  (color :text :primary)
+  (color :text \"primary\")
   ; This will generate a string 'text-primary'
 
 Example 2:
-  (color :background '(:color :danger))
+  (color :background '(:color \"danger\"))
   ; This will generate a string 'bg-danger'
 
 Example 3:
-  (color :text :info :background '(:color :dark))
+  (color :text \"info\" :background '(:color \"dark\"))
   ; This will generate a string 'text-info bg-dark'
 
 Example 4:
-  (color :text :white :background '(:color :primary))
+  (color :text :white \"background\" '(:color \"primary\"))
   ; This will generate a string 'text-white bg-primary'
 
 Example 5:
-  (color :text :primary :emphasis t)
+  (color :text \"primary\" :emphasis t)
   ; This will generate a string 'text-primary-emphasis'
 
 Example 6:
-  (color :body :secondary)
+  (color :body \"secondary\")
   ; This will generate a string 'text-body-secondary'
 
 Example 7:
