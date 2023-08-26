@@ -53,11 +53,48 @@
 
 (in-package :cl-sbt/utility)
 
-(defparameter *colors* '("primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "body" "muted" "white" "transparent"))
+(defparameter *colors*
+  '("primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "body" "muted" "white" "transparent")
+  "List of color classes defined in the Bootstrap framework.
 
-(defparameter *breakpoints* '("xs" "sm" "md" "lg" "xl" "xxl"))
+  - 'primary': Represents the main attention color, often blue.
+  - 'secondary': Represents a less attention-grabbing color, often gray.
+  - 'success': Represents a successful or positive action, often green.
+  - 'danger': Represents a dangerous or negative action, often red.
+  - 'warning': Represents a warning that might need attention, often yellow.
+  - 'info': Represents additional or extra information, often light blue.
+  - 'light': Represents a light background color, often light gray.
+  - 'dark': Represents a dark background color, often close to black.
+  - 'body': Represents the default color for body text, often dark gray.
+  - 'muted': Represents muted or less prominent text.
+  - 'white': Represents the white color.
+  - 'transparent': Represents no color, transparent.")
 
-(defparameter *sides* '("t" "b" "s" "e" "x" "y"))
+(defparameter *breakpoints*
+  '("xs" "sm" "md" "lg" "xl" "xxl")
+  "List of breakpoint sizes defined in the Bootstrap framework.
+
+  These correspond to various device screen sizes:
+
+  - 'xs': Extra small screens (portrait phones)
+  - 'sm': Small screens (landscape phones)
+  - 'md': Medium screens (tablets)
+  - 'lg': Large screens (small laptops and desktops)
+  - 'xl': Extra-large screens (large laptops and desktops)
+  - 'xxl': Extremely large screens (full-size monitors)")
+
+(defparameter *sides*
+  '("t" "b" "s" "e" "x" "y")
+  "List of sides for Bootstrap's margin and padding spacing utilities.
+
+  Each character represents a side where the spacing utility can be applied:
+
+  - 't': Top
+  - 'b': Bottom
+  - 's': Start (usually maps to 'left' in LTR layouts)
+  - 'e': End (usually maps to 'right' in LTR layouts)
+  - 'x': Horizontal axis (both 'Start' and 'End')
+  - 'y': Vertical axis (both 'Top' and 'Bottom')")
 
 (defun string-clean (str)
   (string-trim " " (string-downcase str)))
