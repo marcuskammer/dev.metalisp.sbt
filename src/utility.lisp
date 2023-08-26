@@ -57,17 +57,39 @@
   '("primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "body" "muted" "white" "transparent")
   "List of color classes defined in the Bootstrap framework.
 
-  - 'primary': Represents the main attention color, often blue.
-  - 'secondary': Represents a less attention-grabbing color, often gray.
-  - 'success': Represents a successful or positive action, often green.
-  - 'danger': Represents a dangerous or negative action, often red.
-  - 'warning': Represents a warning that might need attention, often yellow.
-  - 'info': Represents additional or extra information, often light blue.
-  - 'light': Represents a light background color, often light gray.
-  - 'dark': Represents a dark background color, often close to black.
-  - 'body': Represents the default color for body text, often dark gray.
+  - 'primary': Main theme color, used for hyperlinks, focus styles, and
+  component and form active states. #0d6efd
+
+  - 'secondary': Use the color option for lighter text. Use the bg option for
+  dividers and to indicate disabled component states. #6c757d
+
+  - 'success': Theme color used for positive or successful actions and
+  information. #198754
+
+  - 'danger': Theme color used for errors and dangerous actions.
+  #dc3545
+
+  - 'warning': Theme color used for non-destructive warning messages.
+  #ffc107
+
+  - 'info': Theme color used for neutral and informative content.
+  #0dcaf0
+
+  - 'light': Additional theme option for less contrasting colors.
+  #f8f9fa
+
+  - 'dark': Additional theme option for higher contrasting colors.
+  #212529
+
+  - 'body': Default foreground (color) and background, including components.
+  #212529
+
   - 'muted': Represents muted or less prominent text.
+  #6c757d
+
   - 'white': Represents the white color.
+  #ffffff
+
   - 'transparent': Represents no color, transparent.")
 
 (defparameter *breakpoints*
