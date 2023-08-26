@@ -9,7 +9,8 @@
    :ctrl-col
    :select
    :select-option
-   :search-form))
+   :search-form
+   :choice))
 
 (in-package :cl-sbt/tests/form)
 
@@ -106,3 +107,11 @@
       (ok (search "class=\"btn btn-outline-success\"" result))
       (ok (search "<input" result))
       (ok (search "<button" result)))))
+
+(deftest test-choice
+  (let ((result (spinneret:with-html-string (choice "18-24" "age" "radio"))))
+    (testing "Generates correct HTML for choice"
+      (ok (search "class=form-label" result))
+      (ok (search "value=18-24" result))
+      (ok (search "type=radio" result))
+      (ok (search "name=age" result)))))
