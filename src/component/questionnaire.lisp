@@ -103,14 +103,14 @@ string representing the URL path.
 
 QUESTIONS: A series of plists, each representing a question. Each plist should
 contain the keys :ask, :group, and :choices. The first element of :choices
-should be a keyword specifying the type of input elements (e.g. :radio), followed
-by a list of answer options.
+should be a keyword specifying the type of input elements (e.g. :radio),
+followed by a list of answer options.
 
 Example:
-  (questionnaire-1 \"/submit\"
-                   (:ask \"How old are you?\"
-                    :group \"age\"
-                    :choices (:radio \"18-24\" \"25-34\" \"35-44\")))"
+  (questionnaire \"/submit\"
+                 (:ask \"How old are you?\"
+                  :group \"age\"
+                  :choices (:radio \"18-24\" \"25-34\" \"35-44\")))"
   `(spinneret:with-html
      (:form :action ,action
             :method "get"
