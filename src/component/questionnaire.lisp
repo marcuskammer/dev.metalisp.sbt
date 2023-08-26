@@ -49,8 +49,12 @@ BODY: A series of calls to the `question` macro to define each question.
 
 Example:
   (questionnaire \"/submit\"
-                 (question \"How old are you?\" (:name \"age\" :type \"radio\") \"18-24\" \"25-34\" \"35-44\")
-                 (question \"What's your favorite color?\" (:name \"color\" :type \"radio\") \"Red\" \"Blue\" \"Green\"))"
+                 (question \"How old are you?\"
+                           (:name \"age\" :type \"radio\")
+                           \"18-24\" \"25-34\" \"35-44\")
+                 (question \"What's your favorite color?\"
+                           (:name \"color\" :type \"radio\")
+                           \"Red\" \"Blue\" \"Green\"))"
   `(spinneret:with-html
      (:form :action ,action
             :method "post"
