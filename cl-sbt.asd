@@ -59,7 +59,7 @@
                  (:file "nav-tab")
                  (:file "form")))
                (:module "tests/pattern"
-                :component
+                :components
                 ((:file "questionnaire"))))
   :description "Test system for cl-sbt"
   :perform (test-op (op c) (symbol-call :rove :run c)))
