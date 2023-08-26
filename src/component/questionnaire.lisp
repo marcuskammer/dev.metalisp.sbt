@@ -65,8 +65,8 @@ Example:
   "Resolve the given input TYPE keyword to the corresponding HTML input type.
 
 The function maps specific keywords to HTML input types. For example, it maps
-\"single\" to \"radio\" and \"multiple\" to \"checkbox\". If the input TYPE does not
-match these special cases, it is returned as-is.
+\"single\" to \"radio\" and \"multiple\" to \"checkbox\". If the input TYPE
+does not match these special cases, it is returned as-is.
 
 Arguments:
   TYPE (string) - The input type keyword to resolve.
@@ -108,7 +108,9 @@ by a list of answer options.
 
 Example:
   (questionnaire-1 \"/submit\"
-                   (:ask \"How old are you?\" :group \"age\" :choices (:radio \"18-24\" \"25-34\" \"35-44\")))"
+                   (:ask \"How old are you?\"
+                    :group \"age\"
+                    :choices (:radio \"18-24\" \"25-34\" \"35-44\")))"
   `(spinneret:with-html
      (:form :action ,action
             :method "get"
