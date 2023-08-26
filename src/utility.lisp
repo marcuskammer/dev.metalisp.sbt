@@ -154,13 +154,13 @@ Example 4:
 (defun color (&key (text nil) (background nil) (emphasis nil) (body nil))
   "Generates a Bootstrap color class.
 
-TEXT: Specifies the color of the text. Should be :primary, :secondary,
-:success, :danger, :warning, :info, :light, :dark, :white, :body,
-:muted, :reset
+TEXT: Specifies the color of the text. Should be 'primary', 'secondary',
+'success', 'danger', 'warning', 'info', 'light', 'dark', 'white', 'body',
+'muted', 'reset'
 
-BACKGROUND: Specifies the color of the background. Should be :primary,
-:secondary, :success, :danger, :warning, :info, :light, :dark, :white,
-:transparent.
+BACKGROUND: Specifies the color of the background. Should be 'primary',
+'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'white',
+'transparent'.
 
 EMPHASIS: Specifies whether the color should be emphasized or not.
 
