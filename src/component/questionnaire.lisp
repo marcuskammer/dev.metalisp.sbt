@@ -35,7 +35,8 @@ Example:
   `(spinneret:with-html
      (:fieldset (:legend ,question)
                 (:ol ,@(loop for text in choices
-                             collect `(choice ,text ,group ,type))))))
+                             collect `(choice ,text ,group ,type)))
+                (:hr :class "my-4"))))
 
 (defmacro questionnaire-1 (action &body body)
   "This macro generates an HTML form composed of multiple questions, each
