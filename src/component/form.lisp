@@ -144,7 +144,15 @@ Example usage:
                  (format nil " ~a" text)))))
 
 (defun search-form ()
-  "Generates a general used search form"
+  "This function generates a general-purpose search form.
+
+This form uses the HTML5 search input type and contains a search button. It
+also utilizes Bootstrap classes for styling. The form uses a `d-flex` class to
+display its elements in a flexible layout, allowing the input and button to be
+horizontally aligned.
+
+Example usage:
+  (search-form)"
   (spinneret:with-html
     (:form :class "d-flex"
            :role "search"
