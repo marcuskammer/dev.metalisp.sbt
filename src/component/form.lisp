@@ -121,7 +121,7 @@ Example:
          (:option :selected t "Open this selected menu")
          (select-option ,@body)))))
 
-(defmacro choice (text name type)
+(defun choice (text name type)
   "This macro generates a list item for an answer option in a question.
 
 TEXT: The display text of the answer option.
@@ -133,10 +133,10 @@ TYPE: Specifies the type of input element, such as \"radio\" for radio buttons.
 
 Example usage:
   (choice \"18-24\" \"age\" \"radio\")"
-  `(spinneret:with-html
-     (:li (:label :class "form-label"
-                  (:input :type ,type :name ,name :value ,text)
-                  (format nil " ~a" ,text)))))
+  (spinneret:with-html
+    (:li (:label :class "form-label"
+                 (:input :type type :name name :value text)
+                 (format nil " ~a" text)))))
 
 (defun search-form ()
   "Generates a general used search form"
