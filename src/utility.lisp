@@ -57,6 +57,8 @@
   '("primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "body" "tertiary" "emphasis" "border")
   "List of color classes and variables defined in the updated Bootstrap framework.
 
+  https://getbootstrap.com/docs/5.3/customize/color/
+
   - 'primary': Main theme color, used for hyperlinks, focus styles, and
   component and form active states.
   --bs-primary,
