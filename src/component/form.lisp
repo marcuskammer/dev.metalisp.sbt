@@ -32,7 +32,12 @@ details.
 DESCRIBEBY: Refers to the id of the element that describes the input field.
 
 Example:
-  (ctrl (:id \"inputID\" :label \"Label\" :type \"text\" :placeholder \"Placeholder\" :describeby \"hintID\" :text \"Hint text\"))"
+  (ctrl (:id \"inputID\"
+         :label \"Label\"
+         :type \"text\"
+         :placeholder \"Placeholder\"
+         :describeby \"hintID\"
+         :text \"Hint text\"))"
   `(spinneret:with-html
      ,@(loop for item in rest
              collect (destructuring-bind (&key id label type placeholder text describeby) item
