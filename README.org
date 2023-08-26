@@ -68,7 +68,7 @@ The following components are available as packages:
 
 The following code demonstrates how to define a card using the card macro.
 
-#+begin_src lisp :results output :exports both
+#+begin_src lisp :results output :exports both :eval no-export
   (cl-sbt/card:card
     (cl-sbt/card:body
       (cl-sbt/card:title "Card title")
@@ -80,22 +80,18 @@ The following code demonstrates how to define a card using the card macro.
 Results in:
 
 #+RESULTS:
-#+begin_example
-<div class=card>
- <div class=card-body>
-  <h5 class=card-title>Card title</h5>
-  <h6
-      class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-  <p class=card-text>Some quick example text to build on the card title and make up
-   the bulk of the card&#39;s content.
-  <a class=card-link href=#>Card link</a>
- </div>
-</div>
-#+end_example
+: <div class=card>
+:  <div class=card-body>
+:   <h5 class=card-title>Card title</h5>
+:   <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+:   <p class=card-text>Some quick example text to build on the card title and make up the bulk of the card&#39;s content.
+:   <a class=card-link href=#>Card link</a>
+:  </div>
+: </div>
 
 The following code demonstrates how to define a card using the card-with-img macro.
 
-#+begin_src lisp :results output :exports both
+#+begin_src lisp :results output :exports both :eval no-export
   (cl-sbt/card:card-with-img (:img-src "test.jpg")
     (cl-sbt/card:title "Card title")
     (cl-sbt/card:subtitle "Card subtitle")
@@ -106,27 +102,22 @@ The following code demonstrates how to define a card using the card-with-img mac
 Results in:
 
 #+RESULTS:
-#+begin_example
-<div class=card>
- <img class=card-img-top src=test.jpg
-      alt="Card Image">
- <div class=card-body>
-  <h5 class=card-title>Card title</h5>
-  <h6
-      class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-  <p class=card-text>Some quick example text to build on the card title and make up
-   the bulk of the card&#39;s content.
-  <a class=card-link href=#>Card link</a>
- </div>
-</div>
-#+end_example
+: <div class=card>
+:  <img class=card-img-top src=test.jpg alt="Card Image">
+:  <div class=card-body>
+:   <h5 class=card-title>Card title</h5>
+:   <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+:   <p class=card-text>Some quick example text to build on the card title and make up the bulk of the card&#39;s content.
+:   <a class=card-link href=#>Card link</a>
+:  </div>
+: </div>
 
 *** Defining a Dropdown
 
 The following code demonstrates how to define a dropdown using the dropdown
 macro.
 
-#+begin_src lisp :results output :exports both
+#+begin_src lisp :results output :exports both :eval no-export
   (cl-sbt/dropdown:dropdown (:name "Dropdown button")
     (cl-sbt/dropdown:menu
       (cl-sbt/dropdown:item "Action")
@@ -137,18 +128,15 @@ macro.
 Results in:
 
 #+RESULTS:
-#+begin_example
-<div class=dropdown>
- <button class="btn btn-secondary dropdown-toggle"
-         type=button data-bs-toggle=dropdown
-         aria-expanded=false>Dropdown button</button>
- <ul class=dropdown-menu>
-  <li><a class=dropdown-item href=#>Action</a>
-  <li><a class=dropdown-item href=#>Another action</a>
-  <li><a class=dropdown-item href=#>Something else here</a>
- </ul>
-</div>
-#+end_example
+: <div class=dropdown>
+:  <button class="btn btn-secondary dropdown-toggle" type=button
+:          data-bs-toggle=dropdown aria-expanded=false>Dropdown button</button>
+:  <ul class=dropdown-menu>
+:   <li><a class=dropdown-item href=#>Action</a>
+:   <li><a class=dropdown-item href=#>Another action</a>
+:   <li><a class=dropdown-item href=#>Something else here</a>
+:  </ul>
+: </div>
 
 ** Installation
 
