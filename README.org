@@ -77,6 +77,8 @@ The following code demonstrates how to define a card using the card macro.
       (cl-sbt/card:link (:href "#") "Card link")))
 #+end_src
 
+Results in:
+
 #+RESULTS:
 #+begin_example
 <div class=card>
@@ -100,6 +102,8 @@ The following code demonstrates how to define a card using the card-with-img mac
     (cl-sbt/card:text "Some quick example text to build on the card title and make up the bulk of the card's content.")
     (cl-sbt/card:link (:href "#") "Card link"))
 #+end_src
+
+Results in:
 
 #+RESULTS:
 #+begin_example
@@ -129,6 +133,8 @@ macro.
       (cl-sbt/dropdown:item "Another action")
       (cl-sbt/dropdown:item "Something else here")))
 #+end_src
+
+Results in:
 
 #+RESULTS:
 #+begin_example
