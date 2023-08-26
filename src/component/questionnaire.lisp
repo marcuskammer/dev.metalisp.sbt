@@ -114,6 +114,8 @@ Example:
                               (multiple-value-bind (input-type remaining-choices)
                                   (resolve-input-and-choices choices)
                                 (let ((input-type (resolve-input-type input-type)))
-                                  `(question ,ask (:group ,group :type ,input-type) ,@remaining-choices)))))
+                                  `(question ,ask
+                                       (:group ,group :type ,input-type)
+                                       ,@remaining-choices)))))
 
             (btn-primary (:type "submit") "Submit"))))
