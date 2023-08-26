@@ -107,11 +107,13 @@ Example:
                    (:ask \"How old are you?\" :group \"age\" :choices (:radio \"18-24\" \"25-34\" \"35-44\")))"
   `(spinneret:with-html
      (:form :action ,action
-            :method "post"
+            :method "get"
+            :class (spacing :property "p" :side "y" :size 5)
             ,@(loop for q in questions
                     collect (destructuring-bind (&key ask group choices) q
                               (multiple-value-bind (input-type remaining-choices)
                                   (resolve-input-and-choices choices)
                                 (let ((input-type (resolve-input-type input-type)))
                                   `(question ,ask (:group ,group :type ,input-type) ,@remaining-choices)))))
+
             (btn-primary (:type "submit") "Submit"))))
