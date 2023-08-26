@@ -84,21 +84,7 @@ Example:
                                             :id ,id
                                             :placeholder ,placeholder)))))))
 
-(defmacro select-option (&rest rest)
-  "This macro generates option elements for a select dropdown.
-
-CONTENT: The text content displayed for the option.
-
-VALUE: The value of the option that gets sent when the form is submitted.
-
-Example:
-  (select-option (:content \"Option 1\" :value \"opt1\"))"
-  `(spinneret:with-html
-     ,@(loop for item in rest
-             collect (destructuring-bind (&key content value) item
-                       `(:option :value ,value ,content)))))
-
-(defmacro select ((&key size) &body body)
+(defmacro select ((&key size) &rest rest)
   "This macro generates a Bootstrap select dropdown menu.
 
 SIZE: Specifies the size of the select menu. It can be a number specifying the
@@ -111,20 +97,20 @@ BODY: The contents of the select menu, typically options.
 Example:
   (select (:size \"sm\")
           (:content \"Option 1\" :value \"opt1\"))"
-  (let ((class-attr (cond ((null size) "form-select")
-                          ((numberp size) "form-select")
-                          ((and (stringp size)
+  (let ((class-attr (cond ((and (stringp size)
                                 (string= size "multiple")) "form-select")
                           ((stringp size)
                            (format nil "form-select form-select-~a" size))
-                          (t (error "Invalid size specification: ~a" size)))))
+                          (t "form-select"))))
     `(spinneret:with-html
        (:select :class ,class-attr
          ,@(when (numberp size) `(:size ,size))
          ,@(when (and (stringp size) (string= size "multiple")) (list :multiple t))
          :aria-label "Default select example"
          (:option :selected t "Open this selected menu")
-         (select-option ,@body)))))
+         ,@(loop for item in rest
+                 collect (destructuring-bind (&key content value) item
+                           `(:option :value ,value ,content)))))))
 
 (defun choice (text name type)
   "This macro generates a list item for an answer option in a question.
