@@ -54,43 +54,89 @@
 (in-package :cl-sbt/utility)
 
 (defparameter *colors*
-  '("primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "body" "muted" "white" "transparent")
-  "List of color classes defined in the Bootstrap framework.
+  '("primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "body" "tertiary" "emphasis" "border")
+  "List of color classes and variables defined in the updated Bootstrap framework.
 
   - 'primary': Main theme color, used for hyperlinks, focus styles, and
-  component and form active states. #0d6efd
+  component and form active states.
+  --bs-primary,
+  --bs-primary-rgb,
+  --bs-primary-bg-subtle,
+  --bs-primary-border-subtle,
+  --bs-primary-text-emphasis
 
   - 'secondary': Use the color option for lighter text. Use the bg option for
-  dividers and to indicate disabled component states. #6c757d
+  dividers and to indicate disabled component states.
+  --bs-secondary-color,
+  --bs-secondary-color-rgb,
+  --bs-secondary-bg,
+  --bs-secondary-bg-rgb
+
+  - 'tertiary': Use the color option for even lighter text. Use the bg option
+  to style backgrounds for hover states, accents, and wells.
+  --bs-tertiary-color,
+  --bs-tertiary-color-rgb,
+  --bs-tertiary-bg,
+  --bs-tertiary-bg-rgb
+
+  - 'emphasis': For higher contrast text. Not applicable for backgrounds.
+  --bs-emphasis-color,
+  --bs-emphasis-color-rgb
+
+  - 'border': For component borders, dividers, and rules. Use
+  --bs-border-color-translucent to blend with backgrounds with an rgba() value.
+  --bs-border-color,
+  --bs-border-color-rgb
 
   - 'success': Theme color used for positive or successful actions and
-  information. #198754
+  information.
+  --bs-success,
+  --bs-success-rgb,
+  --bs-success-bg-subtle,
+  --bs-success-border-subtle,
+  --bs-success-text-emphasis
 
   - 'danger': Theme color used for errors and dangerous actions.
-  #dc3545
+  --bs-danger,
+  --bs-danger-rgb,
+  --bs-danger-bg-subtle,
+  --bs-danger-border-subtle,
+  --bs-danger-text-emphasis
 
   - 'warning': Theme color used for non-destructive warning messages.
-  #ffc107
+  --bs-warning,
+  --bs-warning-rgb,
+  --bs-warning-bg-subtle,
+  --bs-warning-border-subtle,
+  --bs-warning-text-emphasis
 
   - 'info': Theme color used for neutral and informative content.
-  #0dcaf0
+  --bs-info,
+  --bs-info-rgb,
+  --bs-info-bg-subtle,
+  --bs-info-border-subtle,
+  --bs-info-text-emphasis
 
   - 'light': Additional theme option for less contrasting colors.
-  #f8f9fa
+  --bs-light,
+  --bs-light-rgb,
+  --bs-light-bg-subtle,
+  --bs-light-border-subtle,
+  --bs-light-text-emphasis
 
   - 'dark': Additional theme option for higher contrasting colors.
-  #212529
+  --bs-dark,
+  --bs-dark-rgb,
+  --bs-dark-bg-subtle,
+  --bs-dark-border-subtle,
+  --bs-dark-text-emphasis
 
   - 'body': Default foreground (color) and background, including components.
-  #212529
-
-  - 'muted': Represents muted or less prominent text.
-  #6c757d
-
-  - 'white': Represents the white color.
-  #ffffff
-
-  - 'transparent': Represents no color, transparent.")
+  --bs-body-color,
+  --bs-body-color-rgb,
+  --bs-body-bg,
+  --bs-body-bg-rgb
+  ")
 
 (defparameter *breakpoints*
   '("xs" "sm" "md" "lg" "xl" "xxl")
