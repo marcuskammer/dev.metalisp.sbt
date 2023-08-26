@@ -91,7 +91,7 @@ Returns two values:
   2. The remaining choices in the list, excluding the input type keyword."
   (let ((input-type-keyword (first choices)))
     (if (keywordp input-type-keyword)
-        (values (string-downcase (symbol-name input-type-keyword)) (rest choices))
+        (values (string-downcase input-type-keyword) (rest choices))
         (values nil choices))))
 
 (defmacro questionnaire (action &rest questions)
