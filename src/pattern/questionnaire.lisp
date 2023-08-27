@@ -86,7 +86,7 @@ The function maps specific keywords to HTML input types. For example, it maps
 \"single\" to \"radio\" and \"multiple\" to \"checkbox\". If the input TYPE
 does not match these special cases, it is returned as-is.
 
-TYPE (string) - The input type keyword to resolve.
+TYPE: The input type keyword to resolve.
 
 Returns:
   The corresponding HTML input type string."
@@ -100,7 +100,7 @@ Returns:
 If the first element of CHOICES is a keyword, it is taken to be the input type
 keyword, and the rest of the list is taken to be the actual choices.
 
-CHOICES (list) - The choices list, possibly including an input type keyword.
+CHOICES: The choices list, possibly including an input type keyword.
 
 Returns two values:
   1. The input type string if a keyword is present, or NIL if no keyword is found.
