@@ -207,11 +207,11 @@
   These correspond to various device screen sizes:
 
   - 'xs': Extra small screens (portrait phones)
-  - 'sm': Small screens (landscape phones)
-  - 'md': Medium screens (tablets)
-  - 'lg': Large screens (small laptops and desktops)
-  - 'xl': Extra-large screens (large laptops and desktops)
-  - 'xxl': Extremely large screens (full-size monitors)")
+  - 'sm': Small screens (landscape phones ≥576px)
+  - 'md': Medium screens (tablets ≥768px)
+  - 'lg': Large screens (small laptops and desktops ≥992px)
+  - 'xl': Extra-large screens (large laptops and desktops ≥1200px)
+  - 'xxl': Extremely large screens (full-size monitors ≥1400px)")
 
 (defparameter *sides*
   '("t" "b" "s" "e" "x" "y")
