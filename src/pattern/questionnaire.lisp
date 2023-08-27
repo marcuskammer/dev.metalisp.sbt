@@ -131,7 +131,7 @@ Example:
                   :choices (:radio \"18-24\" \"25-34\" \"35-44\")))"
   `(spinneret:with-html
      (:form :action ,action
-            :method "get"
+            :method "post"
             :class (spacing :property "p" :side "y" :size 5)
             ,@(loop for q in questions
                     collect (destructuring-bind (&key ask group choices) q
