@@ -54,90 +54,150 @@
 (in-package :cl-sbt/utility)
 
 (defparameter *colors*
-  '("primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "body" "tertiary" "emphasis" "border")
+  '("body" "secondary" "tertiary" "emphasis" "border" "primary" "success" "danger" "warning" "info" "light" "dark" )
   "List of color classes and variables defined in the updated Bootstrap framework.
 
   https://getbootstrap.com/docs/5.3/customize/color/
 
-  - 'primary': Main theme color, used for hyperlinks, focus styles, and
-  component and form active states.
-  --bs-primary,
-  --bs-primary-rgb,
-  --bs-primary-bg-subtle,
-  --bs-primary-border-subtle,
-  --bs-primary-text-emphasis
+  - 'body': Default foreground (color) and background, including components.
+    DARK THEME:
+    --bs-body-color: #dee2e6
+    --bs-body-color-rgb: 222,226,230
+    --bs-body-bg: #212529
+    --bs-body-bg-rgb: 33,37,41
+    LIGHT THEME:
+    --bs-body-color: #212529
+    --bs-body-color-rgb: 33,37,41
+    --bs-body-bg: #fff
+    --bs-body-bg-rgb: 255,255,255
 
   - 'secondary': Use the color option for lighter text. Use the bg option for
   dividers and to indicate disabled component states.
-  --bs-secondary-color,
-  --bs-secondary-color-rgb,
-  --bs-secondary-bg,
-  --bs-secondary-bg-rgb
+    DARK THEME:
+    --bs-secondary-color: rgba(222, 226, 230, 0.75)
+    --bs-secondary-color-rgb: 222,226,230;
+    --bs-secondary-bg: #343a40
+    --bs-secondary-bg-rgb: 52,58,64
+    LIGTH THEME:
+    --bs-secondary-color: rgba(33, 37, 41, 0.75)
+    --bs-secondary-color-rgb: 33,37,41
+    --bs-secondary-bg: #e9ecef
+    --bs-secondary-bg-rgb: 233,236,239
 
   - 'tertiary': Use the color option for even lighter text. Use the bg option
   to style backgrounds for hover states, accents, and wells.
-  --bs-tertiary-color,
-  --bs-tertiary-color-rgb,
-  --bs-tertiary-bg,
-  --bs-tertiary-bg-rgb
+    DARK THEME:
+    --bs-tertiary-color: rgba(222, 226, 230, 0.5)
+    --bs-tertiary-color-rgb: 222,226,230
+    --bs-tertiary-bg: #2b3035
+    --bs-tertiary-bg-rgb: 43,48,53
+    LIGHT THEME:
+    --bs-tertiary-color: rgba(33, 37, 41, 0.5)
+    --bs-tertiary-color-rgb: 33,37,41
+    --bs-tertiary-bg: #f8f9fa
+    --bs-tertiary-bg-rgb: 248,249,250
 
   - 'emphasis': For higher contrast text. Not applicable for backgrounds.
-  --bs-emphasis-color,
-  --bs-emphasis-color-rgb
+    DARK THEME:
+    --bs-emphasis-color: #fff
+    --bs-emphasis-color-rgb: 255,255,255
+    LIGHT THEME:
+    --bs-emphasis-color: #000
+    --bs-emphasis-color-rgb: 0,0,0
 
-  - 'border': For component borders, dividers, and rules. Use
-  --bs-border-color-translucent to blend with backgrounds with an rgba() value.
-  --bs-border-color,
-  --bs-border-color-rgb
+  - 'border': For component borders, dividers, and rules.
+    DARK THEME:
+    --bs-border-color-translucent: rgba(255, 255, 255, 0.15)
+    --bs-border-color: #495057
+    LIGHT THEME:
+    --bs-border-color-translucent: rgba(0, 0, 0, 0.175)
+    --bs-border-color: #dee2e6
+
+  - 'primary': Main theme color, used for hyperlinks, focus styles, and
+  component and form active states.
+    --bs-primary: #0d6efd
+    --bs-primary-rgb: 13,110,253
+    DARK THEME:
+    --bs-primary-bg-subtle: #031633
+    --bs-primary-border-subtle: #084298
+    --bs-primary-text-emphasis: #6ea8fe
+    LIGHT THEME:
+    --bs-primary-bg-subtle: #cfe2ff
+    --bs-primary-border-subtle: #9ec5fe
+    --bs-primary-text-emphasis: #052c65
 
   - 'success': Theme color used for positive or successful actions and
   information.
-  --bs-success,
-  --bs-success-rgb,
-  --bs-success-bg-subtle,
-  --bs-success-border-subtle,
-  --bs-success-text-emphasis
+    --bs-success: #198754
+    --bs-success-rgb: 25,135,84
+    DARK THEME:
+    --bs-success-bg-subtle: #051b11
+    --bs-success-border-subtle: #0f5132
+    --bs-success-text-emphasis: #75b798
+    LIGHT THEME:
+    --bs-success-bg-subtle: #d1e7dd
+    --bs-success-border-subtle: #a3cfbb
+    --bs-success-text-emphasis: #0a3622
 
   - 'danger': Theme color used for errors and dangerous actions.
-  --bs-danger,
-  --bs-danger-rgb,
-  --bs-danger-bg-subtle,
-  --bs-danger-border-subtle,
-  --bs-danger-text-emphasis
+    --bs-danger: #dc3545
+    --bs-danger-rgb: 220,53,69
+    DARK THEME:
+    --bs-danger-bg-subtle: #2c0b0e
+    --bs-danger-border-subtle: #842029
+    --bs-danger-text-emphasis: #ea868f
+    LIGHT THEME:
+    --bs-danger-bg-subtle: #f8d7da
+    --bs-danger-border-subtle: #f1aeb5
+    --bs-danger-text-emphasis: #58151c
 
   - 'warning': Theme color used for non-destructive warning messages.
-  --bs-warning,
-  --bs-warning-rgb,
-  --bs-warning-bg-subtle,
-  --bs-warning-border-subtle,
-  --bs-warning-text-emphasis
+    --bs-warning: #ffc107
+    --bs-warning-rgb: 255,193,7
+    DARK THEME:
+    --bs-warning-bg-subtle: #332701
+    --bs-warning-border-subtle: #997404
+    --bs-warning-text-emphasis: #ffda6a
+    LIGHT THEME:
+    --bs-warning-bg-subtle: #fff3cd
+    --bs-warning-border-subtle: #ffe69c
+    --bs-warning-text-emphasis: #664d03
 
   - 'info': Theme color used for neutral and informative content.
-  --bs-info,
-  --bs-info-rgb,
-  --bs-info-bg-subtle,
-  --bs-info-border-subtle,
-  --bs-info-text-emphasis
+    --bs-info: #0dcaf0
+    --bs-info-rgb: 13,202,240
+    DARK THEME:
+    --bs-info-bg-subtle: #032830
+    --bs-info-border-subtle: #087990
+    --bs-info-text-emphasis: #6edff6
+    LIGHT THEME:
+    --bs-info-bg-subtle: #cff4fc
+    --bs-info-border-subtle: #9eeaf9
+    --bs-info-text-emphasis: #055160
 
   - 'light': Additional theme option for less contrasting colors.
-  --bs-light,
-  --bs-light-rgb,
-  --bs-light-bg-subtle,
-  --bs-light-border-subtle,
-  --bs-light-text-emphasis
+    --bs-light: #f8f9fa
+    --bs-light-rgb: 248,249,250
+    DARK THEME:
+    --bs-light-bg-subtle: #343a40
+    --bs-light-border-subtle: #495057
+    --bs-light-text-emphasis: #f8f9fa
+    LIGHT THEME:
+    --bs-light-bg-subtle: #fcfcfd
+    --bs-light-border-subtle: #e9ecef
+    --bs-light-text-emphasis: #495057
 
   - 'dark': Additional theme option for higher contrasting colors.
-  --bs-dark,
-  --bs-dark-rgb,
-  --bs-dark-bg-subtle,
-  --bs-dark-border-subtle,
-  --bs-dark-text-emphasis
-
-  - 'body': Default foreground (color) and background, including components.
-  --bs-body-color,
-  --bs-body-color-rgb,
-  --bs-body-bg,
-  --bs-body-bg-rgb
+    --bs-dark: #212529
+    --bs-dark-rgb: 33,37,41
+    DARK THEME:
+    --bs-dark-bg-subtle: #1a1d20
+    --bs-dark-border-subtle: #343a40
+    --bs-dark-text-emphasis: #dee2e6
+    LIGHT THEME:
+    --bs-dark-bg-subtle: #ced4da
+    --bs-dark-border-subtle: #adb5bd
+    --bs-dark-text-emphasis: #495057
   ")
 
 (defparameter *breakpoints*
