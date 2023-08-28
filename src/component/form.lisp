@@ -6,6 +6,7 @@
    :btn-outline-success
    :btn-primary)
   (:export
+   :find-l10n
    :ctrl
    :ctrl-col
    :select
@@ -14,6 +15,11 @@
    :search-form))
 
 (in-package :cl-sbt/form)
+
+(defun find-l10n (key lang)
+  (let ((l10n '((submit ("en" "Submit" "de" "Absenden" "fr" "Soumettre"))
+                (cancel ("en" "Cancel" "de" "Abbrechen" "fr" "Annuler")))))
+    (cadr (member lang (cadr (assoc key l10n)) :test #'string=))))
 
 (defmacro ctrl (&rest rest)
   "This macro generates Bootstrap form controls.

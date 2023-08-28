@@ -28,6 +28,7 @@
    :spacing)
   (:import-from
    :cl-sbt/form
+   :find-l10n
    :choice)
   (:export
    :question
@@ -110,11 +111,6 @@ Returns two values:
         (values (string-downcase input-type-keyword) (rest choices))
         (values nil choices))))
 
-(defun submit-lang (lang)
-  (cond ((string= "de" lang) "Absenden")
-        ((string= "en" lang) "Submit")
-        ((string= "fr" lang) "Soumettre")))
-
 (defmacro questionnaire (action &rest questions)
   "This macro generates an HTML form composed of multiple questions, each
    rendered using the `question` macro.
@@ -144,4 +140,5 @@ Example:
                                   `(question ,ask
                                        (:group ,group :type ,input-type)
                                        ,@remaining-choices)))))
-            (btn-primary (:type "submit") (submit-lang ,spinneret:*html-lang*)))))
+            (btn-primary (:type "submit") (find-l10n 'cl-sbt/form::submit
+                                                     spinneret:*html-lang*)))))
