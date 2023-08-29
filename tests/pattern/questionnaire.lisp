@@ -8,7 +8,6 @@
    :question
    :resolve-input-type
    :resolve-input-and-choices
-   ::submit-lang
    :questionnaire))
 
 (in-package :cl-sbt/tests/questionnaire)
