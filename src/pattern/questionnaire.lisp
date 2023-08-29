@@ -140,4 +140,5 @@ Example:
                                   `(question ,ask
                                        (:group ,group :type ,input-type)
                                        ,@remaining-choices)))))
-            (btn-primary (:type "submit") (find-l10n "submit" spinneret:*html-lang*)))))
+            (btn-primary (:type "submit")
+              (find-l10n "submit" spinneret:*html-lang*)))))
