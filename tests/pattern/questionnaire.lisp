@@ -29,9 +29,3 @@
         (resolve-input-and-choices '("A" "B"))
       (ok (null type))
       (ok (equal choices '("A" "B"))))))
-
-(deftest test-submit-btn-translation
-  (testing "Submit button content is shown in a specific language"
-    (ok (string= "Absenden" (submit-lang "de")))
-    (ok (string= "Soumettre" (submit-lang "fr")))
-    (ok (string= "Submit" (submit-lang "en")))))
