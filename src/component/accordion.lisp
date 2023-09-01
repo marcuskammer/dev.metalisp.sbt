@@ -113,10 +113,3 @@ Example:
                    collect (destructuring-bind (&key target name show content) item
                              `(item (header ,target ,name ,show)
                                 (collapse ,id ,target ,show ,content)))))))
-
-(defun show-accordion-example ()
-  "Show an generated accordion example"
-  (accordion (:id "accordionExample")
-             (:target "collapseOne" :name "Accordion Item #1" :show t :content "This is the first item's accordion body.")
-             (:target "collapseTwo" :name "Accordion Item #2" :content "This is the second item's accordion body.")
-             (:target "collapseThree" :name "Accordion Item #3" :content "This is the second item's accordion body.")))
