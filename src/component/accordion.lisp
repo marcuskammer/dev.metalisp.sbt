@@ -82,13 +82,10 @@ Example:
 (defmacro item (&body body)
   "This macro generates a Bootstrap accordion item.
 
-   BODY: The contents of the accordion item.
+BODY: The contents of the accordion item.
 
-   The macro creates a <div> element with the class 'accordion-item' and inserts the BODY as its child elements.
-
-   Example:
-     (item (header \"collapseOne\" \"Heading\" t) (collapse \"accordionExample\" \"collapseOne\" t \"Some content\"))"
-
+Example:
+  (item (header \"collapseOne\" \"Heading\" t) (collapse \"accordionExample\" \"collapseOne\" t \"Some content\"))"
   `(spinneret:with-html
      (:div :class "accordion-item"
            ,@body)))
@@ -96,20 +93,19 @@ Example:
 (defmacro accordion ((&key (id "accordionExample")) &rest rest)
   "This macro generates an accordion-style collapsible list with Bootstrap.
 
-   ID: Specifies a unique identifier for the accordion. Defaults to 'accordionExample'.
+ID: Specifies a unique identifier for the accordion. Defaults to 'accordionExample'.
 
-   REST: Specifies a list of accordion items. Each item is a plist with the following keys:
-   - :target: Specifies a unique identifier for the accordion item.
-   - :name: Specifies the name of the accordion item.
-   - :show: Specifies whether the accordion item should be displayed by default.
-   - :content: Specifies the content of the accordion item.
+REST: Specifies a list of accordion items. Each item is a plist with the following keys:
+- :target: Specifies a unique identifier for the accordion item.
+- :name: Specifies the name of the accordion item.
+- :show: Specifies whether the accordion item should be displayed by default.
+- :content: Specifies the content of the accordion item.
 
-   Example:
-    (accordion (:id \"accordionExample\")
-               (:target \"collapseOne\" :name \"Accordion Item #1\" :show t :content \"This is the first item's accordion body.\")
-               (:target \"collapseTwo\" :name \"Accordion Item #2\" :content \"This is the second item's accordion body.\")
-               (:target \"collapseThree\" :name \"Accordion Item #3\" :content \"This is the second item's accordion body.\"))"
-
+Example:
+ (accordion (:id \"accordionExample\")
+            (:target \"collapseOne\" :name \"Accordion Item #1\" :show t :content \"This is the first item's accordion body.\")
+            (:target \"collapseTwo\" :name \"Accordion Item #2\" :content \"This is the second item's accordion body.\")
+            (:target \"collapseThree\" :name \"Accordion Item #3\" :content \"This is the second item's accordion body.\"))"
   `(spinneret:with-html
      (:div :class "accordion"
            :id ,id
