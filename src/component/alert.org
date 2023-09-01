@@ -1,0 +1,73 @@
+#+title: Using cl-sbt/alert Macros for Bootstrap Alert Components
+#+author: Marcus Kammer
+#+email: marcus.kammer@mailbox.org
+#+date: [2023-09-01 Fri]
+* Introduction
+
+Alerts are a crucial UI element for relaying information to the user. Be it
+warnings, success messages, or other contextual information, a well-placed
+alert can significantly improve the user experience. Bootstrap offers a highly
+customizable and flexible alert system, which can be beneficial for delivering
+different types of messages.
+
+** Bootstrap Alerts
+
+[[https://getbootstrap.com/docs/][Bootstrap]]'s alert component allows for the easy creation of flexible and
+dismissible alert messages. Bootstrap alerts come with different types such as
+'success', 'info', 'warning', 'danger', 'primary', 'secondary', 'light', and
+'dark', each with its visual distinction.
+
+*** Features of Bootstrap Alerts
+
+- Different types to suit the context ('success', 'warning', etc.)
+- Optional dismissibility
+- Supports nearly all kinds of HTML content like headers, paragraphs, and
+  links.
+
+* Utilizing cl-sbt/alert Macros
+
+Integrating Bootstrap-style alerts in your Common Lisp web application is
+streamlined thanks to cl-sbt/alert macros. These macros create the necessary
+HTML structure for the Bootstrap alert component.
+
+Here's a simple example:
+
+#+begin_src lisp
+  (defpackage my-web-app
+    (:use :cl :cl-sbt/alert)
+    (:export :generate-alert-page))
+
+  (in-package :my-web-app)
+
+  (defun generate-alert-page ()
+    "Generates an HTML page featuring various Bootstrap alerts using cl-sbt/alert macros."
+    (spinneret:with-html-string
+      (:html
+       (:head
+        (:title "Alert Example")
+        ;; Include Bootstrap CSS here
+        )
+       (:body
+         (:h1 "Alert Examples")
+         (alert-primary "This is a primary alert.")
+         (alert-danger "This is a danger alert.")
+         (alert-dismiss-success "This is a dismissible success alert.")
+         ;; Include Bootstrap JavaScript initialization script here
+         ))))
+
+  (generate-alert-page)
+#+end_src
+
+* Getting Started
+
+1. Include Bootstrap CSS and JavaScript libraries in your HTML, along with the
+   Spinneret library for HTML generation.
+2. Import the `cl-sbt/alert` package into your web application package.
+3. Use the `generate-alert-page` function to generate an HTML page containing
+   various alert types.
+4. Bootstrap's JavaScript takes care of making the alerts dismissible and
+   interactive.
+
+Utilizing cl-sbt/alert macros makes it quick and efficient to insert
+Bootstrap-style alerts in your web application, enhancing user experience by
+providing dynamic, context-appropriate notifications.
