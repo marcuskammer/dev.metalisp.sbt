@@ -88,8 +88,10 @@
 
 (in-package :cl-sbt/btn)
 
-(defmacro btn ((&key (type "button") (color "primary") (size "")) &body body)
+(defmacro btn ((&key (id nil) (type "button") (color "primary") (size "")) &body body)
   "This macro generates a Bootstrap button.
+
+ID: (optional) The HTML id attribute for the button.
 
 COLOR: The color of the button (like 'primary', 'secondary', 'success', etc.).
 
@@ -106,6 +108,7 @@ Example:
     `(spinneret:with-html
        (:button :type ,type
                 :class ,class-str
+                ,@(when (stringp id) (list :id id))
                 ,@body))))
 
 (defmacro define-btn (color &optional (outline nil) (size nil))
@@ -123,8 +126,8 @@ button of the specified type and size."
          (outline-name (if (null outline) "" "outline-"))
          (color-name (concatenate 'string outline-name color))
          (macro-name (intern (string-upcase (concatenate 'string "BTN-" outline-name color size-name)))))
-    `(defmacro ,macro-name ((&key (type "button")) &body body)
-       `(btn (:type ,type :color ,,color-name :size ,,size-name) ,@body))))
+    `(defmacro ,macro-name ((&key (id nil) (type "button")) &body body)
+       `(btn (:id ,id :type ,type :color ,,color-name :size ,,size-name) ,@body))))
 
 (defmacro define-btns (colors)
   "This macro generates a suite of button-creating macros for each provided button type.
