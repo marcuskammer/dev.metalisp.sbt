@@ -58,24 +58,26 @@ Example:
 (defmacro collapse (parent id show &body body)
   "This macro generates a Bootstrap collapse for an accordion item.
 
-   PARENT: The id of the parent element that contains the collapse.
+PARENT: The id of the parent element that contains the collapse.
 
-   ID: The unique id for this collapse.
+ID: The unique id for this collapse.
 
-   SHOW: A boolean indicating whether the collapse should be shown when the accordion first loads.
-         If true, 'show' will be added to the classes of the collapse.
+SHOW: A boolean indicating whether the collapse should be shown when the
+accordion first loads. If true, 'show' will be added to the classes of the
+collapse.
 
-   BODY: The contents of the collapse.
+BODY: The contents of the collapse.
 
-   Example:
-     (collapse \"accordionExample\" \"collapseOne\" t \"Some content\")"
-
-  `(spinneret:with-html
-     (:div :id ,id
-           :class ,(concatenate 'string "accordion-collapse collapse" (if (null show) nil " show"))
-           :data-bs-parent (format nil "#~a" ,parent)
-           (:div :class "accordion-body"
-                 ,@body))))
+Example:
+  (collapse \"accordionExample\" \"collapseOne\" t \"Some content\")"
+  (let ((class (concatenate 'string "accordion-collapse collapse" (if (null show) nil " show")))
+        (parent (concatenate 'string "#" parent)))
+    `(spinneret:with-html
+       (:div :id ,id
+             :class ,class
+             :data-bs-parent ,parent
+             (:div :class "accordion-body"
+                   ,@body)))))
 
 (defmacro item (&body body)
   "This macro generates a Bootstrap accordion item.
