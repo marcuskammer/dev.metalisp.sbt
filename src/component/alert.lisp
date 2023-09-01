@@ -1,28 +1,7 @@
-;; https://getbootstrap.com/docs/5.3/components/alerts/
-
-;; The Bootstrap Alert component is a flexible, dismissible container for
-;; displaying important, often short, messages to the user. It's primarily used
-;; for system messaging.
-
-;; The Alerts are available for various types and states. They can be of different
-;; types such as success, info, warning, danger, primary, secondary, light, and
-;; dark to indicate the nature of the alert. Each type is visually distinguished
-;; by a different color.
-
-;; The content inside an alert can be nearly any valid HTML, including headings,
-;; paragraphs, and links.
-
-;; By adding an optional .alert-dismissible class to the alert container, and a
-;; close button, an alert can be made dismissible - it will disappear when the
-;; user clicks the close button. This is especially useful for ephemeral messages
-;; like form validation errors, where the message does not need to persist once
-;; the user has seen it.
-
-;; Here is a basic example of a Bootstrap Alert component:
-;; <div class="alert alert-warning alert-dismissible fade show" role="alert">
-;;   <strong>Warning!</strong> You should check in on some of those fields below.
-;;   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-;; </div>
+;;;; alert.lisp
+;;;;
+;;;; This file defines a package for generating Bootstrap alert components
+;;;; using Common Lisp macros.
 
 (defpackage cl-sbt/alert
   (:use :cl)
