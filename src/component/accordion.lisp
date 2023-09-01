@@ -102,10 +102,10 @@ REST: Specifies a list of accordion items. Each item is a plist with the followi
 - :content: Specifies the content of the accordion item.
 
 Example:
- (accordion \"accordionExample\"
-            (:target \"collapseOne\" :name \"Accordion Item #1\" :show t :content \"This is the first item's accordion body.\")
-            (:target \"collapseTwo\" :name \"Accordion Item #2\" :content \"This is the second item's accordion body.\")
-            (:target \"collapseThree\" :name \"Accordion Item #3\" :content \"This is the second item's accordion body.\"))"
+  (accordion \"accordionExample\"
+             (:target \"collapseOne\" :name \"Accordion Item #1\" :show t :content \"This is the first item's accordion body.\")
+             (:target \"collapseTwo\" :name \"Accordion Item #2\" :content \"This is the second item's accordion body.\")
+             (:target \"collapseThree\" :name \"Accordion Item #3\" :content \"This is the second item's accordion body.\"))"
   `(spinneret:with-html
      (:div :class "accordion"
            :id ,id
