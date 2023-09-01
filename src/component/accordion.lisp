@@ -30,28 +30,30 @@
 
 (in-package :cl-sbt/accordion)
 
-(defmacro header (target name show)
+(defun header (target name show)
   "This macro generates a Bootstrap header for an accordion item.
 
-   TARGET: The id of the collapse this header controls. Defaults to 'collapseOne'.
+TARGET: The id of the collapse this header controls.
 
-   NAME: The text that will be displayed on this header. Defaults to 'Heading'.
+NAME: The text that will be displayed on this header.
 
-   SHOW: A boolean indicating whether the collapse controlled by this header should be shown when
-         the accordion first loads. If true, the 'aria-expanded' attribute will be 'true'. Defaults to NIL.
+SHOW: A boolean indicating whether the collapse controlled by this header
+should be shown when the accordion first loads. If true, the 'aria-expanded'
+attribute will be 'true'.
 
-   Example:
-     (header \"collapseOne\" \"Heading\" t)"
-
-  `(spinneret:with-html
-     (:h2 :class "accordion-header"
-          (:button :class "accordion-button"
-                   :type "button"
-                   :data-bs-toggle "collapse"
-                   :data-bs-target (format nil "#~a" ,target)
-                   :aria-expanded ,(if (null show) "false" "true")
-                   :aria-controls (format nil "#~a" ,target)
-                   ,name))))
+Example:
+  (header \"collapseOne\" \"Heading\" t)"
+  (let ((target (concatenate 'string "#" target))
+        (show (if (null show) "false" "true")))
+    (spinneret:with-html
+      (:h2 :class "accordion-header"
+           (:button :class "accordion-button"
+                    :type "button"
+                    :data-bs-toggle "collapse"
+                    :data-bs-target target
+                    :aria-expanded show
+                    :aria-controls target
+                    name)))))
 
 (defmacro collapse (parent id show &body body)
   "This macro generates a Bootstrap collapse for an accordion item.
