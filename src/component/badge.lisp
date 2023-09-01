@@ -32,17 +32,18 @@
 (defmacro badge ((&key (color "primary") (pill nil)) &body body)
   "This macro generates a Bootstrap badge.
 
-COLOR: (optional) The type of the badge (like 'primary', 'secondary', 'success', etc.). Defaults to 'primary'.
+COLOR: The type of the badge (like 'primary', 'secondary', 'success', etc.). Defaults to 'primary'.
 
 BODY: The contents of the badge.
 
 Example:
   (badge (:color \"success\" :pill t) \"New\")"
-  `(spinneret:with-html
-     (:span :class ,(concatenate 'string
-                                 (format nil "badge text-bg-~a" color)
-                                 (if (null pill) "" " rounded-pill"))
-            ,@body)))
+  (let ((class-str (concatenate 'string
+                                (format nil "badge text-bg-~a" color)
+                                (if (null pill) "" " rounded-pill"))))
+    `(spinneret:with-html
+       (:span :class ,class-str
+              ,@body))))
 
 (defmacro define-badge (color &optional (pill nil))
   "This macro defines a new macro for creating a Bootstrap badge of a specific type.
