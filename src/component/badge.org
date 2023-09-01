@@ -70,7 +70,7 @@ them into your project:
 
 #+begin_src lisp
   (defpackage my-web-app
-    (:use :cl :cl-sbt/badge)
+    (:use :cl :cl-sbt/badge :cl-sbt/btn)
     (:export :generate-badge-page))
 
   (in-package :my-web-app)
@@ -85,13 +85,28 @@ them into your project:
         )
        (:body
         (:h1 "Badge Example")
-        (badge-primary "New")
+        (btn-primary () "Notifications " (badge-secondary "4"))
         (badge-success "Updated")
         ;; Include more badges here
         ))))
 
   (generate-badge-page)
 #+end_src
+
+#+RESULTS:
+#+begin_example
+<html lang=en>
+ <head>
+  <meta charset=UTF-8>
+  <title>Badge Example</title>
+ </head>
+ <body>
+  <h1>Badge Example</h1>
+  <button class="btn btn-primary" type=button>Notifications <span class="badge text-bg-secondary">4</span></button>
+  <span class="badge text-bg-success">Updated</span>
+ </body>
+</html>
+#+end_example
 
 This example demonstrates how to integrate cl-sbt/badge macros into a web
 application to create Bootstrap-style badges. By using these macros, you can
