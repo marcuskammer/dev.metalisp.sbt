@@ -99,13 +99,14 @@ BODY: The contents of the button.
 
 Example:
   (btn (:type \"danger\" :size \"lg\") \"Delete\")"
-  `(spinneret:with-html
-     (:button :type ,type
-              :class ,(concatenate 'string
-                                  "btn"
-                                  (format nil " btn-~a" color)
-                                  (if (string-equal size "") nil (format nil " btn~a" size)))
-              ,@body)))
+  (let ((class-str (concatenate 'string
+                                "btn"
+                                (format nil " btn-~a" color)
+                                (if (string-equal size "") nil (format nil " btn~a" size)))))
+    `(spinneret:with-html
+       (:button :type ,type
+                :class ,class-str
+                ,@body))))
 
 (defmacro define-btn (color &optional (outline nil) (size nil))
   "This macro defines a new macro for creating a Bootstrap button of a specific type, size, and outline style.
