@@ -31,16 +31,16 @@ attribute will be 'true'.
 
 Example:
   (header \"collapseOne\" \"Heading\" t)"
-  (let ((target (concatenate 'string "#" target))
-        (show (if (null show) "false" "true")))
+  (let ((target-str (concatenate 'string "#" target))
+        (show-str (if (null show) "false" "true")))
     (spinneret:with-html
       (:h2 :class "accordion-header"
            (:button :class "accordion-button"
                     :type "button"
                     :data-bs-toggle "collapse"
-                    :data-bs-target target
-                    :aria-expanded show
-                    :aria-controls target
+                    :data-bs-target target-str
+                    :aria-expanded show-str
+                    :aria-controls target-str
                     name)))))
 
 (defmacro collapse (parent id show &body body)
