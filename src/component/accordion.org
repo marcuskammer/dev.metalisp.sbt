@@ -1,0 +1,53 @@
+#+title: Using cl-sbt/accordion Macros in a Web Application
+
+#+begin_src common-lisp
+(defpackage my-web-app
+  (:use :cl :cl-sbt/accordion)
+  (:export :generate-accordion-page))
+
+(in-package :my-web-app)
+
+(defun generate-accordion-page ()
+  "Generates an HTML page with an accordion using cl-sbt/accordion macros."
+  (spinneret:with-html
+    (:html
+      (:head
+        (:title "Accordion Example")
+        ;; Include Bootstrap CSS and JavaScript links here
+        )
+      (:body
+        (:h1 "Accordion Example")
+        (accordion "myAccordion"
+                   (:target "collapseOne" :name "Section 1" :show t :content "Content for section 1.")
+                   (:target "collapseTwo" :name "Section 2" :content "Content for section 2.")
+                   (:target "collapseThree" :name "Section 3" :content "Content for section 3."))
+        ;; Include Bootstrap JavaScript initialization script here
+        ))))
+#+end_src
+
+This example demonstrates how to integrate the cl-sbt/accordion macros into a
+web application to create an interactive accordion component. The macros help
+generate the necessary HTML structure for the accordion, which allows users to
+navigate through content conveniently.
+
+To get started, follow these steps:
+
+1. Make sure you have included the Bootstrap CSS and JavaScript libraries in
+   your HTML. Also, include the Spinneret library for HTML generation.
+
+2. Define your web application package and import the necessary packages,
+   including cl-sbt/accordion.
+
+3. Implement the `generate-accordion-page` function. This function generates an
+   HTML page with an accordion using the cl-sbt/accordion macros.
+
+4. Call the `generate-accordion-page` function within your application's logic
+   to generate the HTML page with the accordion.
+
+5. Bootstrap's JavaScript library will handle the expansion and collapse
+   animations of the accordion content, providing an interactive user
+   experience.
+
+By using these macros, you can easily create accordion components that allow
+users to navigate and view content in a user-friendly manner within your web
+application.
