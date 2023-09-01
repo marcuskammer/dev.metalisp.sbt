@@ -1,24 +1,11 @@
-;; https://getbootstrap.com/docs/5.3/components/accordion/
-
-;; The Bootstrap Accordion component is a convenient way to condense a large
-;; amount of content into a limited amount of space.
-
-;; An Accordion is a list of headers that can be clicked to hide or reveal
-;; additional content associated with them. Each header can control the visibility
-;; of a 'collapse' element that can hold any kind of HTML content.
-
-;; Each accordion item (consisting of a header and its associated collapse) can be
-;; expanded or collapsed independently of the others. However, in Bootstrap, the
-;; Accordion is designed so that only one item can be expanded at a time.
-
-;; The component uses Bootstrap's collapse JavaScript plugin, and it is designed
-;; to be accessible and web standards-compliant. This means it's keyboard
-;; navigable and it provides appropriate ARIA roles and properties.
-
-;; The Accordion component is perfect for FAQ sections, multi-part forms, or any
-;; situation where you need to present the user with a range of options or
-;; information, but you want to keep the interface uncluttered by hiding content
-;; that isn't immediately necessary.
+;;;; accordion.lisp
+;;;;
+;;;; This file defines a package for generating Bootstrap accordion components
+;;;; using Common Lisp macros. The package provides four main macros:
+;;;; - header: Generates a Bootstrap header for an accordion item.
+;;;; - collapse: Generates a Bootstrap collapse for an accordion item.
+;;;; - item: Generates a Bootstrap accordion item.
+;;;; - accordion: Generates an accordion-style collapsible list with Bootstrap.
 
 (defpackage cl-sbt/accordion
   (:use :cl)
