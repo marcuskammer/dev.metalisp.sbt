@@ -12,6 +12,37 @@ indicators, and more. They can be styled using contextual variations such as
 'primary', 'secondary', 'success', 'danger', etc., and can be made round-shaped
 by adding .rounded-pill class.
 
+* General Description from a UX Perspective
+   Badges are small interactive elements in a user interface that typically convey
+   a specific piece of information or serve as an indicator for something.
+
+** Visibility
+    Badges are usually designed to stand out, often with bright colors or distinctive
+    shapes, so that the user's attention is drawn to them.
+
+** Contextual Information
+    Badges often carry critical or contextual information that helps the user make
+    decisions or take action.
+
+** Affordance
+    The presence of a badge often indicates that the associated item is interactive
+    and provides extra information or functionality.
+
+** Scalability
+    Because badges are typically small and non-intrusive, they can be easily added
+    to existing interface elements without causing a major redesign.
+
+** Feedback and Micro-interactions
+    Badges can change dynamically based on user interaction or system status,
+    giving immediate feedback to the user.
+
+** Aesthetic Value
+    A well-designed badge can also add to the aesthetic quality of an application,
+    improving the overall user experience by making the interface more visually appealing.
+
+** Overuse
+    Like any UI element, badges should be used judiciously. Overuse can lead to a
+    cluttered interface and may decrease their effectiveness.
 * Features of Bootstrap Badges
 
 ** Contextual Variations
