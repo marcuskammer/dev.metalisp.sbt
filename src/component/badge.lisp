@@ -4,6 +4,7 @@
 ;;;; a lightweight and versatile component used to add contextual highlights or emphasis.
 
 (defpackage cl-sbt/badge
+  (:documentation "A package for generating Bootstrap badges.")
   (:use :cl)
   (:export
    :badge

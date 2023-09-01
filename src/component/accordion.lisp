@@ -8,6 +8,7 @@
 ;;;; - accordion: Generates an accordion-style collapsible list with Bootstrap.
 
 (defpackage cl-sbt/accordion
+  (:documentation "A package for generating Bootstrap accordions.")
   (:use :cl)
   (:export
    :header
