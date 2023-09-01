@@ -1,0 +1,68 @@
+#+title: Using cl-sbt/badge Macros for Bootstrap Badges in a Web Application
+#+author: Marcus Kammer
+#+email: marcus.kammer@mailbox.org
+#+date: [2023-09-01 Fri]
+
+* Introduction
+
+The Bootstrap Badge component is a small, pill-shaped or circular indicator
+that adds contextual information to an item in your web application. Badges are
+versatile components that can be used for notifications, tags, status
+indicators, and more. They can be styled using contextual variations such as
+'primary', 'secondary', 'success', 'danger', etc., and can be made round-shaped
+by adding .rounded-pill class.
+
+* Features of Bootstrap Badges
+
+** Contextual Variations
+   - Use classes like .bg-primary, .bg-success, etc., to style the badge.
+
+** Pill Badges
+   - Add .rounded-pill to make badges round.
+
+** Links
+   - Badges can be clickable if used within <a> or <button> elements.
+
+** Placement
+   - Can be placed on other Bootstrap components like buttons, navs, cards,
+     etc.
+
+** Dismissable
+   - With extra HTML, badges can be made dismissable.
+
+* Integrating cl-sbt/badge Macros
+
+To create Bootstrap-style badges in your Common Lisp web application, you can
+use the cl-sbt/badge macros. These macros provide a convenient way to generate
+the necessary HTML structure for badge components. Here's how you can integrate
+them into your project:
+
+#+begin_src lisp
+  (defpackage my-web-app
+    (:use :cl :cl-sbt/badge)
+    (:export :generate-badge-page))
+
+  (in-package :my-web-app)
+
+  (defun generate-badge-page ()
+    "Generates an HTML page with badges using cl-sbt/badge macros."
+    (spinneret:with-html-string
+      (:html
+       (:head
+        (:title "Badge Example")
+        ;; Include Bootstrap CSS and JavaScript links here
+        )
+       (:body
+        (:h1 "Badge Example")
+        (badge-primary "New")
+        (badge-success "Updated")
+        ;; Include more badges here
+        ))))
+
+  (generate-badge-page)
+#+end_src
+
+This example demonstrates how to integrate cl-sbt/badge macros into a web
+application to create Bootstrap-style badges. By using these macros, you can
+quickly and easily add badges to your web application, customizing them to fit
+your needs.
