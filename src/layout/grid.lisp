@@ -225,19 +225,20 @@ Examples:
 
 This will generate a row element with Bootstrap classes based on the given
 arguments, containing the specified body content."
-  `(spinneret:with-html
-     (:div :class
-           ,(string-clean
-             (concatenate 'string
-                          "row "
-                          (if (null cols) "" (make-row-class "cols" cols))
-                          (if (null breakpoint) ""
-                              (apply #'breakpoint-class breakpoint))
-                          (if (null alignitems) "" (format nil "align-items-~a " alignitems))
-                          (if (null justifycontent) "" (format nil "justify-content-~a " justifycontent))
-                          (if (null spacing) ""
-                              (apply #'cl-sbt/utility:spacing spacing))))
-           ,@body)))
+  (let ((class-str (string-clean
+                    (concatenate 'string
+                                 "row "
+                                 (if (null cols) "" (make-row-class "cols" cols))
+                                 (if (null breakpoint) ""
+                                     (apply #'breakpoint-class breakpoint))
+                                 (if (null alignitems) "" (format nil "align-items-~a " alignitems))
+                                 (if (null justifycontent) "" (format nil "justify-content-~a " justifycontent))
+                                 (if (null spacing) ""
+                                     (apply #'cl-sbt/utility:spacing spacing))))))
+
+    `(spinneret:with-html
+       (:div :class ,class
+             ,@body))))
 
 (defmacro col ((&key (cols nil) (breakpoint nil) (alignself nil) (spacing nil)) &body body)
   "Generates a Bootstrap column.
