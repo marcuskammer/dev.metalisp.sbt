@@ -255,22 +255,22 @@ SPACING: A list specifying the Bootstrap spacing class. The list should contain
 keyword arguments that can be passed to the cl-sbt/utility:spacing function.
 
 Example 1:
-  (col (:col 6) \"Hello, world!\")
+  (col (:cols 6) \"Hello, world!\")
   ; This will generate a column that spans 6 columns by default, containing the
   ; text 'Hello, world!'.
 
 Example 2:
-  (col (:breakpoint (:md (8 2))) \"Hello, world!\")
+  (col (:breakpoint (:kind \"col\" :md (8 2))) \"Hello, world!\")
   ; This will generate a column that spans 8 medium-sized columns with an
   ; offset of 2 medium-sized columns, containing the text 'Hello, world!'.
 
 Example 3:
-  (col (:alignself :center) \"Hello, world!\")
+  (col (:alignself \"center\") \"Hello, world!\")
   ; This will generate a column that aligns its content in the center,
   ; containing the text 'Hello, world!'.
 
 Example 4:
-  (col (:spacing (:property :p :size 2)) \"Hello, world!\")
+  (col (:spacing (:property \"p\" :size 2)) \"Hello, world!\")
   ; This will generate a column that has a padding of 2 units on all sides,
   ; containing the text 'Hello, world!'."
   (let ((class-str (string-clean
