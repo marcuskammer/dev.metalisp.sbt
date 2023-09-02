@@ -283,4 +283,4 @@ Example 4:
                                      (apply #'cl-sbt/utility:spacing spacing))))))
     `(spinneret:with-html
        (:div :class ,class-str
-             ,@body)))
+             ,@body))))
