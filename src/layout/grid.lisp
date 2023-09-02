@@ -181,13 +181,14 @@ Example 4:
   (con (:fluid t :breakpoint (:sm t) :text (:weight \"bold\")) \"Bold text in a small fluid container!\")
   ; This will generate a full width (fluid) container that is small at the
   ; defined breakpoint, containing bold text."
-  (let ((fluid-str (if (null fluid) "container " "container-fluid "))
-        (breakpoint-str (if (null breakpoint) "" (format nil "~a " (apply #'breakpoint-class breakpoint))))
-        (text-str (if (null text) "" (format nil "~a " (apply #'cl-sbt/utility:text text))))
-        (spacing-str (if (null spacing) "" (apply #'cl-sbt/utility:spacing spacing))))
+  (let* ((fluid-str (if (null fluid) "container " "container-fluid "))
+         (breakpoint-str (if (null breakpoint) "" (format nil "~a " (apply #'breakpoint-class breakpoint))))
+         (text-str (if (null text) "" (format nil "~a " (apply #'cl-sbt/utility:text text))))
+         (spacing-str (if (null spacing) "" (apply #'cl-sbt/utility:spacing spacing)))
+         (class-str (string-clean (concatenate 'string fluid-str breakpoint-str text-str spacing-str))))
     `(spinneret:with-html
        (:comment "START CONTAINER")
-       (:div :class ,(string-clean (concatenate 'string fluid-str breakpoint-str text-str spacing-str))
+       (:div :class ,class-str
              ,@body)
        (:comment "END CONTAINER"))))
 
