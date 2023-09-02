@@ -245,27 +245,31 @@ arguments, containing the specified body content."
 COLS: Specifies the number of columns the element spans.
 
 BREAKPOINT: List that specifies the number of columns the element spans and
-optional offset at various breakpoints. It should be :xs, :sm, :md, :lg, :xl,
-or :xxl.
+optional offset at various breakpoints. It should be 'xs', 'sm', 'md', 'lg', 'xl',
+or 'xxl'.
 
-ALIGN-SELF: Specifies the alignment of the column. Possible values are :start, :center, :end.
+ALIGN-SELF: Specifies the alignment of the column.
+Possible values are 'start', 'center', 'end'.
 
 SPACING: A list specifying the Bootstrap spacing class. The list should contain
 keyword arguments that can be passed to the cl-sbt/utility:spacing function.
 
-Examples:
+Example 1:
   (col (:col 6) \"Hello, world!\")
   ; This will generate a column that spans 6 columns by default, containing the
   ; text 'Hello, world!'.
 
+Example 2:
   (col (:breakpoint (:md (8 2))) \"Hello, world!\")
   ; This will generate a column that spans 8 medium-sized columns with an
   ; offset of 2 medium-sized columns, containing the text 'Hello, world!'.
 
+Example 3:
   (col (:alignself :center) \"Hello, world!\")
   ; This will generate a column that aligns its content in the center,
   ; containing the text 'Hello, world!'.
 
+Example 4:
   (col (:spacing (:property :p :size 2)) \"Hello, world!\")
   ; This will generate a column that has a padding of 2 units on all sides,
   ; containing the text 'Hello, world!'."
