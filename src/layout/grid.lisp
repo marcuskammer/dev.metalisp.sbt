@@ -269,14 +269,14 @@ Examples:
   (col (:spacing (:property :p :size 2)) \"Hello, world!\")
   ; This will generate a column that has a padding of 2 units on all sides,
   ; containing the text 'Hello, world!'."
-  `(spinneret:with-html
-     (:div :class
-           ,(string-clean
-             (concatenate 'string
-                          (if (null cols) "col " (format nil "col-~d " cols))
-                          (if (null breakpoint) ""
-                              (apply #'breakpoint-class breakpoint))
-                          (if (null alignself) "" (format nil "align-self-~a " alignself))
-                          (if (null spacing) ""
-                              (apply #'cl-sbt/utility:spacing spacing))))
-           ,@body)))
+  (let ((class-str (string-clean
+                    (concatenate 'string
+                                 (if (null cols) "col " (format nil "col-~d " cols))
+                                 (if (null breakpoint) ""
+                                     (apply #'breakpoint-class breakpoint))
+                                 (if (null alignself) "" (format nil "align-self-~a " alignself))
+                                 (if (null spacing) ""
+                                     (apply #'cl-sbt/utility:spacing spacing))))))
+    `(spinneret:with-html
+       (:div :class ,class-str
+             ,@body)))
