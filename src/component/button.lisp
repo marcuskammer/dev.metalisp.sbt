@@ -1,31 +1,7 @@
-;; https://getbootstrap.com/docs/5.3/components/buttons/
-
-;; The Bootstrap button component is a versatile and customizable interface
-;; element used in numerous contexts across web applications. These buttons are
-;; often utilized for various actions and functionalities such as form
-;; submissions, toggling visibility of content, triggering modals, and
-;; initiating other interactive behaviors.
-
-;; A Bootstrap button is typically defined by an HTML button element or an a
-;; element styled with Bootstrap's pre-defined CSS classes.
-
-;; Here are some key features of the Bootstrap button component:
-
-;; Button styles: Bootstrap includes several built-in button styles that
-;; indicate different types of actions, including 'primary', 'secondary',
-;; 'success', 'danger', 'warning', 'info', 'light', 'dark', and 'link'. These
-;; styles control the color of the button.
-
-;; Button sizes: Bootstrap buttons can be resized using the 'btn-lg' or
-;; 'btn-sm' classes for larger and smaller buttons, respectively. There's also
-;; a 'btn-block' class that makes a button take up the full width of its parent
-;; container.
-
-;; Button states: Buttons can also have different states like 'active' and
-;; 'disabled'.
-
-;; Outline buttons: Bootstrap also provides 'outline' button styles which have
-;; transparent backgrounds and a colored border and text.
+;;;; button.lisp
+;;;;
+;;;; This file defines a package for generating Bootstrap button components
+;;;; using Common Lisp macros.
 
 (defpackage cl-sbt/btn
   (:use :cl)

@@ -1,7 +1,7 @@
 #+title: Using cl-sbt/accordion Macros in a Web Application
 #+author: Marcus Kammer
 #+email: marcus.kammer@mailbox.org
-#+date: [2023-09-01 Fri]
+#+date: [2023-09-02 Sat]
 * Introduction
 
 The accordion component is a popular UI element that helps to organize and
@@ -126,25 +126,3 @@ This example demonstrates how to integrate the cl-sbt/accordion macros into a
 web application to create an interactive accordion component. The macros help
 generate the necessary HTML structure for the accordion, which allows users to
 navigate through content conveniently.
-
-To get started, follow these steps:
-
-1. Make sure you have included the Bootstrap CSS and JavaScript libraries in
-   your HTML. Also, include the Spinneret library for HTML generation.
-
-2. Define your web application package and import the necessary packages,
-   including cl-sbt/accordion.
-
-3. Implement the `generate-accordion-page` function. This function generates an
-   HTML page with an accordion using the cl-sbt/accordion macros.
-
-4. Call the `generate-accordion-page` function within your application's logic
-   to generate the HTML page with the accordion.
-
-5. Bootstrap's JavaScript library will handle the expansion and collapse
-   animations of the accordion content, providing an interactive user
-   experience.
-
-By using these macros, you can easily create accordion components that allow
-users to navigate and view content in a user-friendly manner within your web
-application.

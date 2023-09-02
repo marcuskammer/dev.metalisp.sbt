@@ -1,0 +1,75 @@
+#+title: Using cl-sbt/button Macros in a Web Application
+#+author: Marcus Kammer
+#+email: marcus.kammer@mailbox.org
+#+date: [2023-09-02 Sat]
+* Introduction
+
+Buttons are fundamental elements in modern user interfaces. They are essential
+for triggering actions or navigating within or between pages. They come in
+various styles and sizes to fit different contexts and user needs. This
+document will cover how to implement button elements in a web application using
+the cl-sbt/button macros.
+
+** Bootstrap Buttons
+
+[[https://getbootstrap.com/docs/][Bootstrap]] is a commonly used front-end framework that provides a variety of UI
+components, including [[https://getbootstrap.com/docs/5.3/components/buttons/][buttons]]. Using Bootstrap, you can easily style buttons
+and add functionality without the need for extensive custom CSS or JavaScript.
+
+*** How Bootstrap Buttons Work
+
+Bootstrap buttons are usually generated using HTML and get styled via CSS
+classes provided by the framework. The Bootstrap JavaScript library can add
+interactivity to buttons, such as states or tooltips. Here's what to know:
+
+- Buttons can be hyperlinks, button elements, or input elements.
+- Bootstrap provides various classes to change the button's appearance.
+- You can easily hook JavaScript events to Bootstrap buttons for interactivity.
+
+* Integrating cl-sbt/btn Macros
+
+To implement Bootstrap-style buttons in your Common Lisp web application, the
+cl-sbt/button macros can be used. These macros generate the HTML structure
+required for different types of Bootstrap buttons.
+
+#+begin_src lisp
+  (defpackage my-web-app
+    (:use :cl :cl-sbt/btn)
+    (:export :generate-button-page))
+
+  (in-package :my-web-app)
+
+  (defun generate-button-page ()
+    "Generates an HTML page with various buttons using cl-sbt/button macros."
+    (spinneret:with-html-string
+      (:html
+       (:head
+        (:title "Button Examples")
+        ;; Include Bootstrap CSS and JavaScript links here
+        )
+       (:body
+        (:h1 "Button Examples")
+        (btn-primary () "Primary")
+        ;; Include Bootstrap JavaScript initialization script here
+        ))))
+
+  (generate-button-page)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+<html lang=en>
+ <head>
+  <meta charset=UTF-8>
+  <title>Button Examples</title>
+ </head>
+ <body>
+  <h1>Button Examples</h1>
+  <button class="btn btn-primary" type=button>Primary</button>
+ </body>
+</html>
+#+end_example
+
+This example demonstrates the integration of the cl-sbt/button macros into a
+web application. The macros assist in generating the required HTML for
+different types of Bootstrap buttons.
