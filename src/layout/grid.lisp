@@ -162,14 +162,14 @@ FLUID: When non-nil, the container becomes fluid (full width).
 BREAKPOINT: Specifies the size of the container at various breakpoints, should
 be 'sm', 'md', 'lg', 'xl', or 'xxl'.
 
-TEXT: A keyword list that applies text utilities.
+TEXT: A keyword list that applies text utilities. -> cl-sbt/utility:text
 
 Example 1:
   (con (:fluid t) \"Hello, world!\")
   ; This will generate a full width (fluid) container with the text 'Hello, world!'.
 
 Example 2:
-  (con (:breakpoint (:md t)) \"Welcome to the site!\")
+  (con (:breakpoint (:kind \"con\" :md t)) \"Welcome to the site!\")
   ; This will generate a container that is medium-sized at the defined
   ; breakpoint, containing the text 'Welcome to the site!'.
 
@@ -178,7 +178,7 @@ Example 3:
   ; This will generate a container with center-aligned text.
 
 Example 4:
-  (con (:fluid t :breakpoint (:sm t) :text (:weight \"bold\")) \"Bold text in a small fluid container!\")
+  (con (:fluid t :breakpoint (:kind \"con\" :sm t) :text (:weight \"bold\")) \"Bold text in a small fluid container!\")
   ; This will generate a full width (fluid) container that is small at the
   ; defined breakpoint, containing bold text."
   (let* ((fluid-str (if (null fluid) "container " "container-fluid "))
