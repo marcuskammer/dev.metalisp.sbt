@@ -235,9 +235,8 @@ arguments, containing the specified body content."
                                  (if (null justifycontent) "" (format nil "justify-content-~a " justifycontent))
                                  (if (null spacing) ""
                                      (apply #'cl-sbt/utility:spacing spacing))))))
-
     `(spinneret:with-html
-       (:div :class ,class
+       (:div :class ,class-str
              ,@body))))
 
 (defmacro col ((&key (cols nil) (breakpoint nil) (alignself nil) (spacing nil)) &body body)
