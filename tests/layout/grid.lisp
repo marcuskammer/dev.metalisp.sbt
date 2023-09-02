@@ -180,6 +180,6 @@
       (ok (string= result "<div class=col></div>")))))
 
 (deftest test-col-default
-  (let ((result (spinneret:with-html-string (col (:default 3)))))
+  (let ((result (spinneret:with-html-string (col (:cols 3)))))
     (testing "Generates correct HTML for column with no arguments"
       (ok (string= result "<div class=col-3></div>")))))

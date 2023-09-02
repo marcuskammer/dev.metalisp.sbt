@@ -239,10 +239,10 @@ arguments, containing the specified body content."
                               (apply #'cl-sbt/utility:spacing spacing))))
            ,@body)))
 
-(defmacro col ((&key (default nil) (breakpoint nil) (alignself nil) (spacing nil)) &body body)
+(defmacro col ((&key (cols nil) (breakpoint nil) (alignself nil) (spacing nil)) &body body)
   "Generates a Bootstrap column.
 
-COL: Specifies the number of columns the element spans.
+COLS: Specifies the number of columns the element spans.
 
 BREAKPOINT: List that specifies the number of columns the element spans and
 optional offset at various breakpoints. It should be :xs, :sm, :md, :lg, :xl,
@@ -273,7 +273,7 @@ Examples:
      (:div :class
            ,(string-clean
              (concatenate 'string
-                          (if (null default) "col " (format nil "col-~d " default))
+                          (if (null cols) "col " (format nil "col-~d " cols))
                           (if (null breakpoint) ""
                               (apply #'breakpoint-class breakpoint))
                           (if (null alignself) "" (format nil "align-self-~a " alignself))
