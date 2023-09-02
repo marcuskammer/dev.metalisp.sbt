@@ -1,0 +1,58 @@
+#+title: Using cl-sbt/card Macros in a Web Application
+#+author: Marcus Kammer
+#+email: marcus.kammer@mailbox.org
+#+date: [2023-09-02 Sat]
+* Introduction
+
+The card component is a versatile and flexible container for displaying content
+in a neat and organized fashion. Cards can hold a variety of elements such as
+images, text, links, and even other components like buttons. This makes them
+ideal for showcasing related pieces of information, or for creating a grid of
+similar elements.
+
+** Bootstrap Cards
+
+[[https://getbootstrap.com/docs/][Bootstrap]] is a well-known front-end framework offering a range of components,
+one of which is the [[https://getbootstrap.com/docs/5.3/components/card/][card]]. It allows developers to create attractive and
+functional card components easily.
+
+*** How Bootstrap Cards Work
+
+Bootstrap cards are mainly constructed using HTML and CSS. Bootstrap provides
+various classes to style and align the content within the card:
+
+- Cards can contain multiple elements like headers, footers, and body content.
+- Cards are flexible; you can add images, buttons, and other elements inside
+  them.
+- Bootstrap classes can be used to control the card's appearance and behavior,
+  such as rounded corners, shadow, and so on.
+
+* Integrating cl-sbt/card Macros
+
+If you're working on a Common Lisp web application and want to include
+Bootstrap-style cards, the cl-sbt/card macros can help. Below is an example of
+how to integrate this functionality into your project:
+
+#+begin_src lisp
+  (defpackage my-web-app
+    (:use :cl :cl-sbt/card)
+    (:export :generate-card-page))
+
+  (in-package :my-web-app)
+
+  (defun generate-card-page ()
+    "Generates an HTML page featuring a card using cl-sbt/card macros."
+    (spinneret:with-html-string
+      (:html
+       (:head
+        (:title "Card Example")
+        ;; Include Bootstrap CSS here
+        )
+       (:body
+         (:h1 "Card Example")
+         (card (:title "Card Title" :content "This is the content of the card."))
+         ;; Include Bootstrap JavaScript initialization script here
+         ))))
+
+  (generate-card-page)
+#+end_src
