@@ -198,33 +198,33 @@ COLS: Specifies the number of columns irrespective of the viewport or
 breakpoint size.
 
 BREAKPOINT: Specifies the number of equal-width columns at various
-breakpoints. It should be :xs, :sm, :md, :lg, :xl, or :xxl.
+breakpoints. It should be 'xs', 'sm', 'md', 'lg', 'xl', or 'xxl'.
 
-ALIGN-ITEMS: Specifies the vertical alignment of columns. It can be :start,
-:center, :end, :stretch, or :baseline.
+ALIGNITEMS: Specifies the vertical alignment of columns. It can be :start,
+'center', 'end', 'stretch', or 'baseline'.
 
-JUSTIFY-CONTENT: Specifies the horizontal alignment of columns. It can be
-:start, :center, :end, :around, or :between.
+JUSTIFYCONTENT: Specifies the horizontal alignment of columns. It can be
+'start', 'center', 'end', 'around', or 'between'.
 
-Examples:
+Example 1:
   (row (:breakpoint (:kind :row :xs 2)) \"Hello, world!\")
   ; Creates a row with two equal-width columns for extra small devices,
   ; containing the text 'Hello, world!'
 
+Example 2:
   (row (:breakpoint (:kind :row :sm 4 :md 3 :lg 2)) \"Hello, world!\")
   ; Creates a row with four equal-width columns for small devices, three for
   ; medium devices, and two for large devices, containing the text 'Hello, world!'
 
+Example 3:
   (row (:cols 3) \"Hello, world!\")
   ; Creates a row with three equal-width columns irrespective of the viewport
   ; or breakpoint size, containing the text 'Hello, world!'
 
+Example 4:
   (row (:alignitems :center :justifycontent :between) \"Hello, world!\")
   ; Creates a row with centered items that are evenly distributed in the
-  ; horizontal direction, containing the text 'Hello, world!'
-
-This will generate a row element with Bootstrap classes based on the given
-arguments, containing the specified body content."
+  ; horizontal direction, containing the text 'Hello, world!'"
   (let ((class-str (string-clean
                     (concatenate 'string
                                  "row "
