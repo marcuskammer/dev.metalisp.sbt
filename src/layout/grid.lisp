@@ -207,12 +207,12 @@ JUSTIFYCONTENT: Specifies the horizontal alignment of columns. It can be
 'start', 'center', 'end', 'around', or 'between'.
 
 Example 1:
-  (row (:breakpoint (:kind :row :xs 2)) \"Hello, world!\")
+  (row (:breakpoint (:kind \"row\" :xs 2)) \"Hello, world!\")
   ; Creates a row with two equal-width columns for extra small devices,
   ; containing the text 'Hello, world!'
 
 Example 2:
-  (row (:breakpoint (:kind :row :sm 4 :md 3 :lg 2)) \"Hello, world!\")
+  (row (:breakpoint (:kind \"row\" :sm 4 :md 3 :lg 2)) \"Hello, world!\")
   ; Creates a row with four equal-width columns for small devices, three for
   ; medium devices, and two for large devices, containing the text 'Hello, world!'
 
@@ -222,7 +222,7 @@ Example 3:
   ; or breakpoint size, containing the text 'Hello, world!'
 
 Example 4:
-  (row (:alignitems :center :justifycontent :between) \"Hello, world!\")
+  (row (:alignitems \"center\" :justifycontent \"between\") \"Hello, world!\")
   ; Creates a row with centered items that are evenly distributed in the
   ; horizontal direction, containing the text 'Hello, world!'"
   (let ((class-str (string-clean
