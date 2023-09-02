@@ -41,6 +41,9 @@
 (defpackage :cl-sbt/utility
   (:use :cl)
   (:export
+   :*colors*
+   :*breakpoints*
+   :*sides*
    :background
    :color
    :opacity

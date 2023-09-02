@@ -37,14 +37,15 @@
 
 (defpackage cl-sbt/grid
   (:use :cl)
+  (:import-from
+   :cl-sbt/utility
+   :*breakpoints*)
   (:export
    :con
    :row
    :col))
 
 (in-package :cl-sbt/grid)
-
-(defvar *breakpoints* '("xs" "sm" "md" "lg" "xl" "xxl"))
 
 (defun string-clean (str)
   (string-trim " " (string-downcase str)))
