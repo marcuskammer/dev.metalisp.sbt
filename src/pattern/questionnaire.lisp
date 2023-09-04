@@ -36,7 +36,21 @@
 
 (in-package :cl-sbt/questionnaire)
 
-(defmacro question (question (&key (group "group") (type "radio")) &rest choices)
+(defun split-plist-by-keyword (plist)
+  (let ((result '())
+        (current-list '()))
+    (loop for item in plist
+          do (if (keywordp item)
+                 (progn
+                   (when current-list
+                     (push (nreverse current-list) result))
+                   (setq current-list (list item)))
+                 (push item current-list)))
+    (when current-list
+      (push (nreverse current-list) result))
+    (nreverse result)))
+
+(defmacro question (ask group &rest choices)
   "This macro generates a fieldset for a question with multiple answers.
 
 QUESTION: The text of the question to be displayed in the legend.
@@ -52,10 +66,13 @@ Example:
   (question \"How old are you?\"
             (:group \"age\" :type \"radio\") \"18-24\" \"25-34\" \"35-44\")"
   `(spinneret:with-html
-     (:fieldset (:legend ,question)
-                (:ol ,@(loop for text in choices
-                             collect `(:li (checkable ,type ,group ,text))))
-                (:hr :class "my-4"))))
+     (:fieldset (:legend ,ask)
+                (:ol ,@(loop for choice in choices
+                             append (multiple-value-bind (type choices)
+                                         (resolve-input-and-choices choice)
+                                       (loop for item in choices
+                                             collect `(:li (checkable ,type ,group ,item)))))
+                     (:hr :class "my-4")))))
 
 (defmacro questionnaire-1 (action &body body)
   "This macro generates an HTML form composed of multiple questions, each
@@ -134,9 +151,7 @@ Example:
             :class (spacing :property "p" :side "y" :size 5)
             ,@(loop for q in questions
                     collect (destructuring-bind (&key ask group choices) q
-                              (multiple-value-bind (input-type remaining-choices)
-                                  (resolve-input-and-choices choices)
-                                `(question ,ask (:group ,group :type ,input-type)
-                                           ,@remaining-choices))))
+                              (let ((splitted-choices (split-plist-by-keyword choices)))
+                                `(question ,ask ,group ,@splitted-choices))))
             (btn-primary (:type "submit")
               (find-l10n "submit" spinneret:*html-lang*)))))
