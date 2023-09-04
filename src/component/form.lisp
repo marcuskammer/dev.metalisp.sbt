@@ -37,6 +37,16 @@
               (:input :type type :name name-str :value value-str)
               (format nil " ~a" (string-trim '(#\Space) value))))))
 
+(defun ctrl-describe (id text)
+  (spinneret:with-html
+    (:div :id id :class "form-text" text)))
+
+(defun ctrl-1 (label type placeholder)
+  (spinneret:with-html
+    (:div :class (spacing :property "m" :side "b" :size 3)
+          (:label :class "form-label" label
+                  (:input :class "form-control" :type type :placeholder placeholder)))))
+
 (defmacro ctrl (&rest rest)
   "This macro generates Bootstrap form controls.
 
