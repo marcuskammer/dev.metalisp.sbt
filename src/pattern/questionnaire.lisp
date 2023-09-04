@@ -117,11 +117,21 @@ contain the keys :ask, :group, and :choices. The first element of :choices
 should be a keyword specifying the type of input elements (e.g. :radio),
 followed by a list of answer options.
 
-Example:
+Example 1:
   (questionnaire \"/submit\"
                  (:ask \"How old are you?\"
                   :group \"age\"
-                  :choices (:radio \"18-24\" \"25-34\" \"35-44\")))"
+                  :choices (:radio \"18-24\" \"25-34\" \"35-44\")))
+Example 2:
+  (questionnaire \"/submit\"
+                 (:ask \"How old are you?\"
+                  :group \"age\"
+                  :choices (:single \"18-24\" \"25-34\" \"35-44\")))
+Example 3:
+  (questionnaire \"/submit\"
+                 (:ask \"Which social media platforms do you use regularly?\"
+                  :group \"age\"
+                  :choices (:multiple \"Facebook\" \"Twitter\" \"Instagram\" \"LinkedIn\" \"TikTok\" \"Snapchat\")))"
   `(spinneret:with-html
      (:form :action ,action
             :method "post"
