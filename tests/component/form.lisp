@@ -10,7 +10,7 @@
    :select
    :select-option
    :search-form
-   :choice))
+   :checkable))
 
 (in-package :cl-sbt/tests/form)
 
@@ -109,9 +109,9 @@
       (ok (search "<button" result)))))
 
 (deftest test-choice
-  (let ((result (spinneret:with-html-string (choice "18-24" "age" "radio"))))
+  (let ((result (spinneret:with-html-string (checkable "radio" "age" "18-24"))))
     (testing "Generates correct HTML for choice"
       (ok (search "class=form-label" result))
-      (ok (search "value=18-24" result))
+      (ok (search "value=18_24" result))
       (ok (search "type=radio" result))
-      (ok (search "name=age" result)))))
+      (ok (search "name=group-age" result)))))
