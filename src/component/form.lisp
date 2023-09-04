@@ -25,17 +25,18 @@
                 ("search" ("en" "Search" "de" "Suchen" "fr" "Cherchent")))))
     (cadr (member lang (cadr (assoc key l10n :test #'string=)) :test #'string=))))
 
-(defun clean-value-str (str)
+(defun clean-value-prop-str (str)
   "Clean STR to better fit to the value property of a input element"
-  (substitute #\_ #\- (substitute #\_ #\Space (string-trim '(#\Space) str))))
+  (substitute #\_ #\- (substitute #\_ #\Space str)))
 
 (defun checkable (type name value)
-  (let ((name-str (concatenate 'string "group-" name))
-        (value-str (clean-value-str value)))
+  (let* ((name-str (concatenate 'string "group-" name))
+         (value-trim (string-trim '(#\Space) value))
+         (value-prop-str (clean-value-prop-str value-trim)))
     (spinneret:with-html
       (:label :class "form-label"
-              (:input :type type :name name-str :value value-str)
-              (format nil " ~a" (string-trim '(#\Space) value))))))
+              (:input :type type :name name-str :value value-prop-str)
+              (format nil " ~a" value-trim)))))
 
 (defun ctrl-describe (id text)
   (spinneret:with-html
