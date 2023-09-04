@@ -108,7 +108,7 @@ Returns two values:
   2. The remaining choices in the list, excluding the input type keyword."
   (let ((input-type-keyword (first choices)))
     (if (keywordp input-type-keyword)
-        (values (string-downcase input-type-keyword) (rest choices))
+        (values (resolve-input-type (string-downcase input-type-keyword)) (rest choices))
         (values nil choices))))
 
 (defmacro questionnaire (action &rest questions)
@@ -136,8 +136,7 @@ Example:
                     collect (destructuring-bind (&key ask group choices) q
                               (multiple-value-bind (input-type remaining-choices)
                                   (resolve-input-and-choices choices)
-                                (let ((input-type (resolve-input-type input-type)))
-                                  `(question ,ask (:group ,group :type ,input-type)
-                                             ,@remaining-choices)))))
+                                `(question ,ask (:group ,group :type ,input-type)
+                                           ,@remaining-choices))))
             (btn-primary (:type "submit")
               (find-l10n "submit" spinneret:*html-lang*)))))
