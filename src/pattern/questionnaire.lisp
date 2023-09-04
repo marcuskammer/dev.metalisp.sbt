@@ -36,19 +36,36 @@
 
 (in-package :cl-sbt/questionnaire)
 
-(defun split-plist-by-keyword (plist)
-  (let ((result '())
-        (current-list '()))
-    (loop for item in plist
-          do (if (keywordp item)
-                 (progn
-                   (when current-list
-                     (push (nreverse current-list) result))
-                   (setq current-list (list item)))
-                 (push item current-list)))
-    (when current-list
-      (push (nreverse current-list) result))
-    (nreverse result)))
+(defun resolve-input-type (type)
+  "Resolve the given input TYPE keyword to the corresponding HTML input type.
+
+The function maps specific keywords to HTML input types. For example, it maps
+\"single\" to \"radio\" and \"multiple\" to \"checkbox\". If the input TYPE
+does not match these special cases, it is returned as-is.
+
+TYPE: The input type keyword to resolve.
+
+Returns:
+  The corresponding HTML input type string."
+  (cond ((string= type "single") "radio")
+        ((string= type "multiple") "checkbox")
+        (t type)))
+
+(defun resolve-input-and-choices (choices)
+  "Separate the input type keyword from the remaining CHOICES in a list.
+
+If the first element of CHOICES is a keyword, it is taken to be the input type
+keyword, and the rest of the list is taken to be the actual choices.
+
+CHOICES: The choices list, possibly including an input type keyword.
+
+Returns two values:
+  1. The input type string if a keyword is present, or NIL if no keyword is found.
+  2. The remaining choices in the list, excluding the input type keyword."
+  (let ((input-type-keyword (first choices)))
+    (if (keywordp input-type-keyword)
+        (values (resolve-input-type (string-downcase input-type-keyword)) (rest choices))
+        (values nil choices))))
 
 (defmacro question (ask group &rest choices)
   "This macro generates a fieldset for a question with multiple answers.
@@ -97,36 +114,19 @@ Example:
             ,@body
             (btn-primary (:type "submit") "Submit"))))
 
-(defun resolve-input-type (type)
-  "Resolve the given input TYPE keyword to the corresponding HTML input type.
-
-The function maps specific keywords to HTML input types. For example, it maps
-\"single\" to \"radio\" and \"multiple\" to \"checkbox\". If the input TYPE
-does not match these special cases, it is returned as-is.
-
-TYPE: The input type keyword to resolve.
-
-Returns:
-  The corresponding HTML input type string."
-  (cond ((string= type "single") "radio")
-        ((string= type "multiple") "checkbox")
-        (t type)))
-
-(defun resolve-input-and-choices (choices)
-  "Separate the input type keyword from the remaining CHOICES in a list.
-
-If the first element of CHOICES is a keyword, it is taken to be the input type
-keyword, and the rest of the list is taken to be the actual choices.
-
-CHOICES: The choices list, possibly including an input type keyword.
-
-Returns two values:
-  1. The input type string if a keyword is present, or NIL if no keyword is found.
-  2. The remaining choices in the list, excluding the input type keyword."
-  (let ((input-type-keyword (first choices)))
-    (if (keywordp input-type-keyword)
-        (values (resolve-input-type (string-downcase input-type-keyword)) (rest choices))
-        (values nil choices))))
+(defun split-plist-by-keyword (plist)
+  (let ((result '())
+        (current-list '()))
+    (loop for item in plist
+          do (if (keywordp item)
+                 (progn
+                   (when current-list
+                     (push (nreverse current-list) result))
+                   (setq current-list (list item)))
+                 (push item current-list)))
+    (when current-list
+      (push (nreverse current-list) result))
+    (nreverse result)))
 
 (defmacro questionnaire (action &rest questions)
   "This macro generates an HTML form composed of multiple questions, each
