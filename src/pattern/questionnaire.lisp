@@ -91,29 +91,6 @@ Example:
                                              collect `(:li (checkable ,type ,group ,item)))))
                      (:hr :class "my-4")))))
 
-(defmacro questionnaire-1 (action &body body)
-  "This macro generates an HTML form composed of multiple questions, each
-   rendered using the `question` macro.
-
-ACTION: Specifies the URL where the form will be submitted. This should be a
-string representing the URL path.
-
-BODY: A series of calls to the `question` macro to define each question.
-
-Example:
-  (questionnaire \"/submit\"
-                 (question \"How old are you?\"
-                           (:name \"age\" :type \"radio\")
-                           \"18-24\" \"25-34\" \"35-44\")
-                 (question \"What's your favorite color?\"
-                           (:name \"color\" :type \"radio\")
-                           \"Red\" \"Blue\" \"Green\"))"
-  `(spinneret:with-html
-     (:form :action ,action
-            :method "post"
-            ,@body
-            (btn-primary (:type "submit") "Submit"))))
-
 (defun split-plist-by-keyword (plist)
   (let ((result '())
         (current-list '()))
