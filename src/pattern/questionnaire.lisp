@@ -29,7 +29,7 @@
   (:import-from
    :cl-sbt/form
    :find-l10n
-   :choice)
+   :checkable)
   (:export
    :question
    :questionnaire))
@@ -54,7 +54,7 @@ Example:
   `(spinneret:with-html
      (:fieldset (:legend ,question)
                 (:ol ,@(loop for text in choices
-                             collect `(choice ,text ,group ,type)))
+                             collect `(:li (checkable ,type ,group ,text))))
                 (:hr :class "my-4"))))
 
 (defmacro questionnaire-1 (action &body body)
@@ -137,8 +137,7 @@ Example:
                               (multiple-value-bind (input-type remaining-choices)
                                   (resolve-input-and-choices choices)
                                 (let ((input-type (resolve-input-type input-type)))
-                                  `(question ,ask
-                                       (:group ,group :type ,input-type)
-                                       ,@remaining-choices)))))
+                                  `(question ,ask (:group ,group :type ,input-type)
+                                             ,@remaining-choices)))))
             (btn-primary (:type "submit")
               (find-l10n "submit" spinneret:*html-lang*)))))

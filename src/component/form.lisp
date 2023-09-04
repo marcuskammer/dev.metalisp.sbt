@@ -5,13 +5,16 @@
    :cl-sbt/btn
    :btn-outline-success
    :btn-primary)
+  (:import-from
+   :cl-sbt/utility
+   :spacing)
   (:export
    :find-l10n
    :ctrl
    :ctrl-col
    :select
    :select-option
-   :choice
+   :checkable
    :search-form))
 
 (in-package :cl-sbt/form)
@@ -21,6 +24,18 @@
                 ("cancel" ("en" "Cancel" "de" "Abbrechen" "fr" "Annuler"))
                 ("search" ("en" "Search" "de" "Suchen" "fr" "Cherchent")))))
     (cadr (member lang (cadr (assoc key l10n :test #'string=)) :test #'string=))))
+
+(defun clean-value-str (str)
+  "Clean STR to better fit to the value property of a input element"
+  (substitute #\_ #\- (substitute #\_ #\Space (string-trim '(#\Space) str))))
+
+(defun checkable (type name value)
+  (let ((name-str (concatenate 'string "group-" name))
+        (value-str (clean-value-str value)))
+    (spinneret:with-html
+      (:label :class "form-label"
+              (:input :type type :name name-str :value value-str)
+              (format nil " ~a" (string-trim '(#\Space) value))))))
 
 (defmacro ctrl (&rest rest)
   "This macro generates Bootstrap form controls.
@@ -118,23 +133,6 @@ Example:
          ,@(loop for item in rest
                  collect (destructuring-bind (&key content value) item
                            `(:option :value ,value ,content)))))))
-
-(defun choice (text name type)
-  "This macro generates a list item for an answer option in a question.
-
-TEXT: The display text of the answer option.
-
-NAME: Specifies the name attribute for the input element. This should align
-with the name specified in the containing question.
-
-TYPE: Specifies the type of input element, such as \"radio\" for radio buttons.
-
-Example usage:
-  (choice \"18-24\" \"age\" \"radio\")"
-  (spinneret:with-html
-    (:li (:label :class "form-label"
-                 (:input :type type :name name :value text)
-                 (format nil " ~a" text)))))
 
 (defun search-form ()
   "This function generates a general-purpose search form.
