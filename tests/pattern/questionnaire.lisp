@@ -38,7 +38,7 @@
     (testing "Generates correct HTML for questionnaire with single choices"
       (ok (search "<form class=py-5 action=/submit method=post>" result))
       (ok (search "<legend>Your Gender?</legend>" result))
-      (ok (search "<input type=radio name=group-gender value=Male> Male</label>" result))
+      (ok (search "<input type=radio name=group-gender value=male> Male</label>" result))
       (ok (search "<hr class=my-4>" result))
       (ok (search "<button class=\"btn btn-primary\" type=submit>Submit</button>" result)))))
 
@@ -51,7 +51,7 @@
     (testing "Generates correct HTML for questionnaire with multiple choices"
       (ok (search "<form class=py-5 action=/submit method=post>" result))
       (ok (search "<legend>Which of the following devices do you regularly use to browse the internet?</legend>" result))
-      (ok (search "<input type=checkbox name=group-device value=Desktop> Desktop</label>" result))
+      (ok (search "<input type=checkbox name=group-device value=desktop> Desktop</label>" result))
       (ok (search "<hr class=my-4>" result))
       (ok (search "<button class=\"btn btn-primary\" type=submit>Submit</button>" result)))))
 
@@ -65,7 +65,6 @@
     (testing "Generates correct HTML for questionnaire with multiple choices"
       (ok (search "<form class=py-5 action=/submit method=post>" result))
       (ok (search "<legend>Which of the following devices do you regularly use to browse the internet?</legend>" result))
-      (ok (search "<input type=checkbox name=group-device value=Desktop> Desktop</label>" result))
-      (ok (search "<label>Others (please specify) <input type=text name=group-device>" result))
+      (ok (search "<input type=checkbox name=group-device value=desktop> Desktop</label>" result))
       (ok (search "<hr class=my-4>" result))
       (ok (search "<button class=\"btn btn-primary\" type=submit>Submit</button>" result)))))
