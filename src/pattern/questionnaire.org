@@ -38,6 +38,6 @@ This org file demonstrate the creation of a questionnaire.
                                :choices (:multiple "Desktop" "Laptop" "Tablet" "Smartphone"))
                               (:ask "Which social media platforms do you use regularly? (Select all that apply)"
                                :group "socialmedia"
-                               :choices (:multiple "Facebook" "Twitter" "Instagram" "LinkedIn" "TikTok" "Snapchat" "Pinterest" "Youtube")))))))
+                               :choices (:multiple "Facebook" "Twitter" "Instagram" "LinkedIn" "TikTok" "Snapchat" "Pinterest" "Youtube" :text "Others")))))))
 
 #+end_src
