@@ -29,7 +29,8 @@
   (:import-from
    :cl-sbt/form
    :find-l10n
-   :checkable)
+   :checkable
+   :ctrl-1)
   (:export
    :question
    :questionnaire))
@@ -67,29 +68,33 @@ Returns two values:
         (values (resolve-input-type (string-downcase input-type-keyword)) (rest choices))
         (values nil choices))))
 
+(defun choose-input-form (type group item)
+  (cond ((or (string= type "radio")
+             (string= type "checkbox"))
+         (checkable type group item))
+        ((string= type "text")
+         (ctrl-1 type group item))))
+
 (defmacro question (ask group &rest choices)
   "This macro generates a fieldset for a question with multiple answers.
 
-QUESTION: The text of the question to be displayed in the legend.
+ASK: The text of the question to be displayed in the legend.
 
-NAME: Specifies the name attribute for the input elements.
+GROUP: Specifies the name attribute for the input elements.
 
-TYPE: Specifies the type of input elements. Commonly used value is \"radio\".
-
-CHOICES: A list of strings representing the different answers available for
-selection.
+CHOICES: A list of strings starting with a keyword representing the different
+answers available for selection.
 
 Example:
-  (question \"How old are you?\"
-            (:group \"age\" :type \"radio\") \"18-24\" \"25-34\" \"35-44\")"
+  (question \"How old are you?\" \"age\" (:radio \"18-24\" \"25-34\" \"35-44\")"
   `(spinneret:with-html
      (:fieldset (:legend ,ask)
                 (:ol ,@(loop for choice in choices
                              append (multiple-value-bind (type choices)
-                                         (resolve-input-and-choices choice)
-                                       (loop for item in choices
-                                             collect `(:li (checkable ,type ,group ,item)))))
-                     (:hr :class "my-4")))))
+                                        (resolve-input-and-choices choice)
+                                      (loop for item in choices
+                                            collect `(:li (choose-input-form ,type ,group ,item))))))
+                (:hr :class (spacing :property "m" :side "y" :size 4)))))
 
 (defun split-plist-by-keyword (plist)
   (let ((result '())
@@ -131,7 +136,12 @@ Example 3:
   (questionnaire \"/submit\"
                  (:ask \"Which social media platforms do you use regularly?\"
                   :group \"age\"
-                  :choices (:multiple \"Facebook\" \"Twitter\" \"Instagram\" \"LinkedIn\" \"TikTok\" \"Snapchat\")))"
+                  :choices (:multiple \"Facebook\" \"Twitter\" \"Instagram\")))
+Example 4:
+  (questionnaire \"/submit\"
+                 (:ask \"Which social media platforms do you use regularly?\"
+                  :group \"age\"
+                  :choices (:multiple \"Facebook\" \"Twitter\" \"Instagram\" :text \"Others\")))"
   `(spinneret:with-html
      (:form :action ,action
             :method "post"
