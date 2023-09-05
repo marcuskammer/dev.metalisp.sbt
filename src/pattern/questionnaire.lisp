@@ -68,12 +68,15 @@ Returns two values:
         (values (resolve-input-type (string-downcase input-type-keyword)) (rest choices))
         (values nil choices))))
 
-(defun choose-input-form (type group item)
-  (cond ((or (string= type "radio")
-             (string= type "checkbox"))
-         (checkable type group item))
-        ((string= type "text")
-         (ctrl-1 type group item))))
+(defun choose-input-form (type)
+  (cond
+    ((string= type "radio") #'checkable)
+    ((string= type "checkbox") #'checkable)
+    ((string= type "text") #'ctrl-1)
+    (t (error "Unknown type ~A" type))))
+
+(defun apply-input-form (type group item)
+  (funcall (choose-input-form type) type group item))
 
 (defmacro question (ask group &rest choices)
   "This macro generates a fieldset for a question with multiple answers.
@@ -86,14 +89,14 @@ CHOICES: A list of strings starting with a keyword representing the different
 answers available for selection.
 
 Example:
-  (question \"How old are you?\" \"age\" (:radio \"18-24\" \"25-34\" \"35-44\")"
+  (question \"How old are you?\" \"age\" (:radio \"18-24\" \"25-34\" \"35-44\"))"
   `(spinneret:with-html
      (:fieldset (:legend ,ask)
                 (:ol ,@(loop for choice in choices
                              append (multiple-value-bind (type choices)
                                         (resolve-input-and-choices choice)
                                       (loop for item in choices
-                                            collect `(:li (choose-input-form ,type ,group ,item))))))
+                                            collect `(:li (apply-input-form ,type ,group ,item))))))
                 (:hr :class (spacing :property "m" :side "y" :size 4)))))
 
 (defun split-plist-by-keyword (plist)
