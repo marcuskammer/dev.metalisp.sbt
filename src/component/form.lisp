@@ -20,33 +20,60 @@
 (in-package :cl-sbt/form)
 
 (defun find-l10n (key lang)
+  "Finds the localized string for a given key and language.
+
+KEY: The key to look up the localization for.
+
+LANG: The language to get the localized string for."
   (let ((l10n '(("submit" ("en" "Submit" "de" "Absenden" "fr" "Soumettre"))
                 ("cancel" ("en" "Cancel" "de" "Abbrechen" "fr" "Annuler"))
                 ("search" ("en" "Search" "de" "Suchen" "fr" "Cherchent")))))
     (cadr (member lang (cadr (assoc key l10n :test #'string=)) :test #'string=))))
 
-(defun clean-value-prop-str (str)
-  "Clean STR to better fit to the value property of a input element"
-  (substitute #\_ #\- (substitute #\_ #\Space str)))
+(defun clean-form-str (str)
+  "Cleans a form string for use as a name or identifier.
+
+STR: The string to clean. Removes leading and trailing spaces, replaces spaces
+with dashes, and converts to lowercase."
+  (string-downcase (substitute #\- #\Space (string-trim '(#\Space) str))))
 
 (defun checkable (type name value)
-  (let* ((name-str (concatenate 'string "group-" name))
-         (value-trim (string-trim '(#\Space) value))
-         (value-prop-str (clean-value-prop-str value-trim)))
+  "Generates a checkable form control (e.g., radio or checkbox).
+
+TYPE: The type of the control (either 'radio' or 'checkbox').
+
+NAME: The name attribute for the control.
+
+VALUE: The value attribute for the control."
+  (let ((name-str (concatenate 'string "group-" (clean-form-str name)))
+         (value-str (string-trim '(#\Space) value)))
     (spinneret:with-html
       (:label :class "form-label"
-              (:input :type type :name name-str :value value-prop-str)
-              (format nil " ~a" value-trim)))))
+              (:input :type type :name name-str :value (clean-form-str value-str))
+              (format nil " ~a" value-str)))))
 
 (defun ctrl-describe (id text)
+  "Generates a descriptive text element for a form control.
+
+ID: The unique identifier for the descriptive text.
+
+TEXT: The actual description."
   (spinneret:with-html
     (:div :id id :class "form-text" text)))
 
-(defun ctrl-1 (label type placeholder)
-  (spinneret:with-html
-    (:div :class (spacing :property "m" :side "b" :size 3)
-          (:label :class "form-label" label
-                  (:input :class "form-control" :type type :placeholder placeholder)))))
+(defun ctrl-1 (type name label)
+  "Generates a basic Bootstrap form control with a label.
+
+TYPE: Specifies the type of input, such as 'text', 'password', etc.
+
+NAME: The name attribute for the control.
+
+LABEL: The label to display next to the control."
+  (let ((name-str (concatenate 'string "group-" (clean-form-str name))))
+    (spinneret:with-html
+      (:div :class (spacing :property "m" :side "b" :size 3)
+            (:label :class "form-label" label
+                    (:input :class "form-control" :type type :name name-str))))))
 
 (defmacro ctrl (&rest rest)
   "This macro generates Bootstrap form controls.
