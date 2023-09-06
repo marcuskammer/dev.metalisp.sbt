@@ -111,7 +111,7 @@
 (deftest test-checkable
   (let ((result (spinneret:with-html-string (checkable "radio" "age" "18-24"))))
     (testing "Generates correct HTML for checkable"
-      (ok (search "class=form-label" result))
+      (ok (search "class=\"form-check-label group-age\"" result))
       (ok (search "value=18-24" result))
       (ok (search "type=radio" result))
       (ok (search "name=group-age" result)))))
