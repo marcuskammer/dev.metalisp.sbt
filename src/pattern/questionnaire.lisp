@@ -69,6 +69,14 @@ Returns two values:
         (values nil choices))))
 
 (defun choose-input-form (type)
+  "Choose the appropriate function to generate the HTML form input based on
+   TYPE.
+
+TYPE: A string specifying the HTML input type like 'radio', 'checkbox', 'text',
+etc.
+
+Returns:
+  A function that can be used to generate the HTML form input."
   (cond
     ((string= type "radio") #'checkable)
     ((string= type "checkbox") #'checkable)
@@ -76,6 +84,18 @@ Returns two values:
     (t (error "Unknown type ~A" type))))
 
 (defun apply-input-form (type group item)
+  "Apply the chosen input form function to generate HTML for a single form
+   element.
+
+TYPE: A string specifying the HTML input type like 'radio', 'checkbox', 'text',
+etc.
+
+GROUP: Specifies the name attribute for the input elements.
+
+ITEM: The particular choice item that this form element represents.
+
+Returns:
+  The HTML form element generated for the ITEM."
   (funcall (choose-input-form type) type group item))
 
 (defmacro question (ask group &rest choices)
@@ -100,6 +120,20 @@ Example:
                 (:hr :class (spacing :property "m" :side "y" :size 4)))))
 
 (defun split-plist-by-keyword (plist)
+  "Splits a property list (PLIST) into a list of smaller property lists, each
+   starting with a keyword.
+
+PLIST: A property list that includes keywords and their associated values.
+
+This function treats the first element after each keyword as its value, and
+each new keyword signifies the start of a new property list.
+
+Example:
+  Given the plist '(:a 1 :b 2 :c 3 :d 4),
+  it will return '((:a 1) (:b 2) (:c 3) (:d 4)).
+
+Returns:
+  A list of property lists, each starting with a keyword."
   (let ((result '())
         (current-list '()))
     (loop for item in plist
