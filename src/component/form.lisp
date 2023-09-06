@@ -45,12 +45,18 @@ TYPE: The type of the control (either 'radio' or 'checkbox').
 NAME: The name attribute for the control.
 
 VALUE: The value attribute for the control."
-  (let ((name-str (concatenate 'string "group-" (clean-form-str name)))
-         (value-str (string-trim '(#\Space) value)))
+  (let* ((name-str (concatenate 'string "group-" (clean-form-str name)))
+         (value-str (string-trim '(#\Space) value))
+         (value-prop-str (clean-form-str value-str))
+         (class-str (concatenate 'string "form-check-label " name-str)))
     (spinneret:with-html
-      (:label :class "form-label"
-              (:input :type type :name name-str :value (clean-form-str value-str))
-              (format nil " ~a" value-str)))))
+      (:div :class "form-check"
+            (:label :class class-str
+                    (:input :type type
+                            :name name-str
+                            :value value-prop-str
+                            :class "form-check-input")
+                    (format nil " ~a" value-str))))))
 
 (defun ctrl-describe (id text)
   "Generates a descriptive text element for a form control.
