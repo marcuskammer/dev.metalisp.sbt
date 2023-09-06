@@ -75,10 +75,12 @@ TYPE: Specifies the type of input, such as 'text', 'password', etc.
 NAME: The name attribute for the control.
 
 LABEL: The label to display next to the control."
-  (let ((name-str (concatenate 'string "group-" (clean-form-str name))))
+  (let* ((name-str (concatenate 'string "group-" (clean-form-str name)))
+         (class-str (concatenate 'string "form-label " name-str)))
     (spinneret:with-html
       (:div :class (spacing :property "m" :side "b" :size 3)
-            (:label :class "form-label" label
+            (:label :class class-str
+                    label
                     (:input :class "form-control" :type type :name name-str))))))
 
 (defmacro ctrl (&rest rest)
