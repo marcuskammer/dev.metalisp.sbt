@@ -203,6 +203,13 @@ Results in:
     (ql:quickload :cl-sbt)
 
 
+## Similar Libraries
+
+-   <https://github.com/rmhsilva/semantic-spinneret>
+-   <https://github.com/thephoeron/cl-bootstrap>
+-   <https://github.com/rajasegar/cl-bootstrap/>
+
+
 ## Author
 
 -   Marcus Kammer (marcus.kammer@mailbox.org)
