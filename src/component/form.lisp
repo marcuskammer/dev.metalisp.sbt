@@ -19,6 +19,21 @@
 
 (in-package :cl-sbt/form)
 
+(defun remove-special-chars (str)
+  "Removes all special characters from the string STR except numbers and
+   alphabets.
+
+STR: The input string from which special characters need to be removed.
+
+Example:
+  (remove-special-chars \"a1b!@#$%^&*()c2\") will return \"a1bc2\"
+
+Returns:
+  A new string with special characters removed."
+  (remove-if-not #'(lambda (char)
+                     (or (alpha-char-p char) (digit-char-p char)))
+                 str))
+
 (defun find-l10n (key lang)
   "Finds the localized string for a given key and language.
 
@@ -37,6 +52,24 @@ STR: The string to clean. Removes leading and trailing spaces, replaces spaces
 with dashes, and converts to lowercase."
   (string-downcase (substitute #\- #\Space (string-trim '(#\Space) str))))
 
+(defun build-name-str (name)
+  (concatenate 'string "group-" (clean-form-str name)))
+
+(defun build-value-str (value)
+  (string-trim '(#\Space) value))
+
+(defun build-value-prop-str (value)
+  (clean-form-str (build-value-str value)))
+
+(defun build-class-str (name)
+  (concatenate 'string "form-check-label " (build-name-str name)))
+
+(defun build-id-str (name value)
+  (concatenate 'string
+               (build-name-str name)
+               "-"
+               (remove-special-chars (build-value-prop-str value))))
+
 (defun checkable (type name value)
   "Generates a checkable form control (e.g., radio or checkbox).
 
@@ -45,16 +78,19 @@ TYPE: The type of the control (either 'radio' or 'checkbox').
 NAME: The name attribute for the control.
 
 VALUE: The value attribute for the control."
-  (let* ((name-str (concatenate 'string "group-" (clean-form-str name)))
-         (value-str (string-trim '(#\Space) value))
-         (value-prop-str (clean-form-str value-str))
-         (class-str (concatenate 'string "form-check-label " name-str)))
+  (let* ((name-str (build-name-str name))
+         (value-str (build-value-str value))
+         (value-prop-str (build-value-prop-str value))
+         (class-str (build-class-str name))
+         (id-str (build-id-str name value)))
     (spinneret:with-html
       (:div :class "form-check"
             (:label :class class-str
+                    :for id-str
                     (:input :type type
                             :name name-str
                             :value value-prop-str
+                            :id id-str
                             :class "form-check-input")
                     (format nil " ~a" value-str))))))
 
@@ -75,13 +111,15 @@ TYPE: Specifies the type of input, such as 'text', 'password', etc.
 NAME: The name attribute for the control.
 
 LABEL: The label to display next to the control."
-  (let* ((name-str (concatenate 'string "group-" (clean-form-str name)))
-         (class-str (concatenate 'string "form-label " name-str)))
+  (let* ((name-str (build-name-str name))
+         (class-str (build-class-str name)))
     (spinneret:with-html
       (:div :class (spacing :property "m" :side "b" :size 3)
             (:label :class class-str
                     label
-                    (:input :class "form-control" :type type :name name-str))))))
+                    (:input :class "form-control"
+                            :type type
+                            :name name-str))))))
 
 (defmacro ctrl (&rest rest)
   "This macro generates Bootstrap form controls.
