@@ -42,6 +42,7 @@ KEY: The key to look up the localization for.
 LANG: The language to get the localized string for."
   (let ((l10n '(("submit" ("en" "Submit" "de" "Absenden" "fr" "Soumettre"))
                 ("cancel" ("en" "Cancel" "de" "Abbrechen" "fr" "Annuler"))
+                ("upload" ("en" "Upload" "de" "Hochladen" "fr" "Télécharger"))
                 ("search" ("en" "Search" "de" "Suchen" "fr" "Cherchent")))))
     (cadr (member lang (cadr (assoc key l10n :test #'string=)) :test #'string=))))
 
