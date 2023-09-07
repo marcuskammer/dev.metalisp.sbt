@@ -113,12 +113,15 @@ NAME: The name attribute for the control.
 
 LABEL: The label to display next to the control."
   (let* ((name-str (build-name-str name))
-         (class-str (build-class-str name)))
+         (class-str (build-class-str name))
+         (id-str (build-id-str name label)))
     (spinneret:with-html
       (:div :class (spacing :property "m" :side "b" :size 3)
             (:label :class class-str
+                    :for id-str
                     label
                     (:input :class "form-control"
+                            :id id-str
                             :type type
                             :name name-str))))))
 
