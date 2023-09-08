@@ -14,13 +14,9 @@
    :cl-sbt/utility
    :spacing)
   (:export
-   :find-l10n
-   :ctrl
-   :ctrl-col
    :select
-   :select-option
    :checkable
-   :ctrl-1
+   :ctrl
    :search-form))
 
 (in-package :cl-sbt/form)
