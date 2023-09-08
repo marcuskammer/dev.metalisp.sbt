@@ -137,15 +137,6 @@ VALUE: The value attribute for the control."
                             :class "form-check-input")
                     (format nil " ~a" value-str))))))
 
-(defun ctrl-describe (id text)
-  "Generates a descriptive text element for a form control.
-
-ID: The unique identifier for the descriptive text.
-
-TEXT: The actual description."
-  (spinneret:with-html
-    (:div :id id :class "form-text" text)))
-
 (defun ctrl-1 (type name label)
   "Generates a basic Bootstrap form control with a label.
 
@@ -166,75 +157,6 @@ LABEL: The label to display next to the control."
                             :id id-str
                             :type type
                             :name name-str))))))
-
-(defmacro ctrl (&rest rest)
-  "This macro generates Bootstrap form controls.
-
-ID: A unique identifier for the input control.
-
-LABEL: The label text displayed next to the form control.
-
-TYPE: Specifies the type of input. For example, 'text', 'password', etc.
-
-PLACEHOLDER: A hint to the user of what can be entered in the control.
-
-TEXT: Descriptive text about the input field, often used for instructions or
-details.
-
-DESCRIBEBY: Refers to the id of the element that describes the input field.
-
-Example:
-  (ctrl (:id \"inputID\"
-         :label \"Label\"
-         :type \"text\"
-         :placeholder \"Placeholder\"
-         :describeby \"hintID\"
-         :text \"Hint text\"))"
-  `(spinneret:with-html
-     ,@(loop for item in rest
-             collect (destructuring-bind (&key id label type placeholder text describeby) item
-                       `(:div :class "mb-3"
-                              (:label :for ,id
-                                      :class "form-label"
-                                      ,label)
-                              (:input :type ,type
-                                      :class "form-control"
-                                      :id ,id
-                                      :placeholder ,placeholder
-                                      ,@(when (stringp describeby)
-                                          (list :aria-describeby describeby)))
-                              ,(if (stringp text)
-                                   `(:div :id ,describeby
-                                          :class "form-text"
-                                          ,text)
-                                   nil))))))
-
-(defmacro ctrl-col (&rest rest)
-  "This macro generates Bootstrap form controls arranged in a column.
-
-ID: A unique identifier for the input control.
-
-LABEL: The label text displayed next to the form control.
-
-TYPE: Specifies the type of input, e.g., 'text', 'password', etc.
-
-PLACEHOLDER: A hint to the user of what can be entered in the control.
-
-Example:
-  (ctrl-col (:id \"inputID\" :label \"Label\" :type \"text\" :placeholder \"Placeholder\"))"
-  `(spinneret:with-html
-     ,@(loop for item in rest
-             collect (destructuring-bind (&key id label type placeholder) item
-                       `(:div :class "row g-3 align-items-center"
-                              (:div :class "col-auto"
-                                    (:label :for ,id
-                                            :class "col-form-label"
-                                            ,label))
-                              (:div :class "col-auto"
-                                    (:input :class "form-control"
-                                            :type ,type
-                                            :id ,id
-                                            :placeholder ,placeholder)))))))
 
 (defmacro select ((&key size) &rest rest)
   "This macro generates a Bootstrap select dropdown menu.
