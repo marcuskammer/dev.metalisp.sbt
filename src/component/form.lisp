@@ -42,18 +42,6 @@ Returns:
                      (or (alpha-char-p char) (digit-char-p char)))
                  str))
 
-(defun find-l10n (key lang)
-  "Finds the localized string for a given key and language.
-
-KEY: The key to look up the localization for.
-
-LANG: The language to get the localized string for."
-  (let ((l10n '(("submit" ("en" "Submit" "de" "Absenden" "fr" "Soumettre"))
-                ("cancel" ("en" "Cancel" "de" "Abbrechen" "fr" "Annuler"))
-                ("upload" ("en" "Upload" "de" "Hochladen" "fr" "Télécharger"))
-                ("search" ("en" "Search" "de" "Suchen" "fr" "Cherchent")))))
-    (cadr (member lang (cadr (assoc key l10n :test #'string=)) :test #'string=))))
-
 (defun clean-form-str (str)
   "Cleans a form string for use as a name or identifier.
 
