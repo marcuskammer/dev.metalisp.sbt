@@ -14,12 +14,18 @@
    :cl-sbt/utility
    :spacing)
   (:export
+   :l10n
    :select
    :checkable
    :ctrl
    :search-form))
 
 (in-package :cl-sbt/form)
+
+(defvar l10n '(("submit" ("en" "Submit" "de" "Absenden" "fr" "Soumettre"))
+               ("cancel" ("en" "Cancel" "de" "Abbrechen" "fr" "Annuler"))
+               ("upload" ("en" "Upload" "de" "Hochladen" "fr" "Télécharger"))
+               ("search" ("en" "Search" "de" "Suchen" "fr" "Cherchent"))))
 
 (defun remove-special-chars (str)
   "Removes all special characters from the string STR except numbers and

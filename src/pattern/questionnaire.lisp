@@ -21,6 +21,9 @@
   (:use
    :cl)
   (:import-from
+   :cl-sbt
+   :find-l10n)
+  (:import-from
    :cl-sbt/btn
    :btn-primary)
   (:import-from
@@ -28,9 +31,9 @@
    :spacing)
   (:import-from
    :cl-sbt/form
-   :find-l10n
+   :l10n
    :checkable
-   :ctrl-1)
+   :ctrl)
   (:export
    :question
    :questionnaire))
@@ -188,4 +191,4 @@ Example 4:
                               (let ((splitted-choices (split-plist-by-keyword choices)))
                                 `(question ,ask ,group ,@splitted-choices))))
             (btn-primary (:type "submit")
-              (find-l10n "submit" spinneret:*html-lang*)))))
+              (find-l10n "submit" spinneret:*html-lang* cl-sbt/form:l10n)))))

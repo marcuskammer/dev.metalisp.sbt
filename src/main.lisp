@@ -2,7 +2,8 @@
   (:use :cl)
   (:export
    :write-html-to-file
-   :with-page))
+   :with-page
+   :find-l10n))
 
 (in-package :cl-sbt)
 
@@ -35,3 +36,11 @@
         (spinneret:*fill-column* fc))
     (with-open-file (stream filename :direction :output :if-exists :supersede)
       (write-string string stream))))
+
+(defun find-l10n (key lang alist)
+  "Finds the localized string for a given key and language.
+
+KEY: The key to look up the localization for.
+
+LANG: The language to get the localized string for."
+  (cadr (member lang (cadr (assoc key alist :test #'string=)) :test #'string=)))
