@@ -1,3 +1,8 @@
+;;;; This file is part of the CL-SBT project and defines utility functions,
+;;;; macros, and HTML templates for generating Bootstrap-formatted forms.
+;;;; It provides mechanisms to build form controls, manage localization,
+;;;; and perform string manipulations.
+
 (defpackage cl-sbt/form
   (:use
    :cl)
@@ -15,6 +20,7 @@
    :select
    :select-option
    :checkable
+   :ctrl-1
    :search-form))
 
 (in-package :cl-sbt/form)
@@ -54,18 +60,54 @@ with dashes, and converts to lowercase."
   (string-downcase (substitute #\- #\Space (string-trim '(#\Space) str))))
 
 (defun build-name-str (name)
+  "Builds a standardized string by adding a 'group-' prefix and applying
+   cleaning functions.
+
+NAME: The initial name string.
+
+Returns:
+  A new standardized string."
   (concatenate 'string "group-" (clean-form-str name)))
 
 (defun build-value-str (value)
+  "Trims leading and trailing spaces from the given value string.
+
+VALUE: The string to be cleaned.
+
+Returns:
+  A new string without leading and trailing spaces."
   (string-trim '(#\Space) value))
 
 (defun build-value-prop-str (value)
+  "Builds a value property string by applying various cleaning functions.
+
+VALUE: The initial value string.
+
+Returns:
+  A new value property string."
   (clean-form-str (build-value-str value)))
 
-(defun build-class-str (name)
-  (concatenate 'string "form-check-label " (build-name-str name)))
+(defun build-class-str (class name)
+  "Builds a class string by concatenating 'form-check-label' and a standardized name string.
+
+CLASS: Corresponding class property.
+
+NAME: The initial name string.
+
+Returns:
+  A new class string."
+  (concatenate 'string class " " (build-name-str name)))
 
 (defun build-id-str (name value)
+  "Builds an ID string by concatenating a standardized name string and a
+   sanitized value property string.
+
+NAME: The initial name string.
+
+VALUE: The initial value string.
+
+Returns:
+  A new ID string."
   (concatenate 'string
                (build-name-str name)
                "-"
@@ -82,7 +124,7 @@ VALUE: The value attribute for the control."
   (let* ((name-str (build-name-str name))
          (value-str (build-value-str value))
          (value-prop-str (build-value-prop-str value))
-         (class-str (build-class-str name))
+         (class-str (build-class-str "form-check-label" name))
          (id-str (build-id-str name value)))
     (spinneret:with-html
       (:div :class "form-check"
@@ -113,7 +155,7 @@ NAME: The name attribute for the control.
 
 LABEL: The label to display next to the control."
   (let* ((name-str (build-name-str name))
-         (class-str (build-class-str name))
+         (class-str (build-class-str "form-label" name))
          (id-str (build-id-str name label)))
     (spinneret:with-html
       (:div :class (spacing :property "m" :side "b" :size 3)
