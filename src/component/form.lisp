@@ -139,7 +139,7 @@ VALUE: The value attribute for the control."
                             :class "form-check-input")
                     (format nil " ~a" value-str))))))
 
-(defun ctrl-1 (type name label)
+(defun ctrl (type name label)
   "Generates a basic Bootstrap form control with a label.
 
 TYPE: Specifies the type of input, such as 'text', 'password', etc.
@@ -154,11 +154,11 @@ LABEL: The label to display next to the control."
       (:div :class (spacing :property "m" :side "b" :size 3)
             (:label :class class-str
                     :for id-str
-                    label
-                    (:input :class "form-control"
-                            :id id-str
-                            :type type
-                            :name name-str))))))
+                    label)
+            (:input :class "form-control"
+                    :id id-str
+                    :type type
+                    :name name-str)))))
 
 (defmacro select ((&key size) &rest rest)
   "This macro generates a Bootstrap select dropdown menu.

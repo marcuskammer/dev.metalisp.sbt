@@ -83,7 +83,7 @@ Returns:
   (cond
     ((string= type "radio") #'checkable)
     ((string= type "checkbox") #'checkable)
-    ((string= type "text") #'ctrl-1)
+    ((string= type "text") #'ctrl)
     (t (error "Unknown type ~A" type))))
 
 (defun apply-input-form (type group item)
