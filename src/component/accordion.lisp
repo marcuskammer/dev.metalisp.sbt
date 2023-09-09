@@ -1,11 +1,7 @@
 ;;;; accordion.lisp
 ;;;;
 ;;;; This file defines a package for generating Bootstrap accordion components
-;;;; using Common Lisp macros. The package provides four main macros:
-;;;; - header: Generates a Bootstrap header for an accordion item.
-;;;; - collapse: Generates a Bootstrap collapse for an accordion item.
-;;;; - item: Generates a Bootstrap accordion item.
-;;;; - accordion: Generates an accordion-style collapsible list with Bootstrap.
+;;;; using Common Lisp macros.
 
 (defpackage cl-sbt/accordion
   (:documentation "A package for generating Bootstrap accordions.")
