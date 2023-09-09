@@ -9,6 +9,9 @@
   (:use
    :cl)
   (:import-from
+   :cl-sbt
+   :find-l10n)
+  (:import-from
    :cl-sbt/btn
    :btn-outline-success
    :btn-primary)
@@ -27,7 +30,10 @@
 (defvar l10n '(("submit" ("en" "Submit" "de" "Absenden" "fr" "Soumettre"))
                ("cancel" ("en" "Cancel" "de" "Abbrechen" "fr" "Annuler"))
                ("upload" ("en" "Upload" "de" "Hochladen" "fr" "Télécharger"))
-               ("search" ("en" "Search" "de" "Suchen" "fr" "Cherchent"))))
+               ("search" ("en" "Search" "de" "Suchen" "fr" "Cherchent"))
+               ("select-option" ("en" "Open this selected menu"
+                                 "de" "Das ausgewählte Menü öffnen"
+                                 "fr" "Ouvrir le menu sélectionné"))))
 
 (defun remove-special-chars (str)
   "Removes all special characters from the string STR except numbers and
@@ -173,7 +179,9 @@ Example:
          ,@(when (numberp size) `(:size ,size))
          ,@(when (and (stringp size) (string= size "multiple")) (list :multiple t))
          :aria-label "Default select example"
-         (:option :selected t "Open this selected menu")
+         (:option :selected t (find-l10n "select-option"
+                                         spinneret:*html-lang*
+                                         l10n))
          ,@(loop for item in rest
                  collect (destructuring-bind (&key content value) item
                            `(:option :value ,value ,content)))))))
@@ -197,4 +205,5 @@ Example usage:
                    :aria-label "Search")
            (btn-outline-success (:type "submit")
              (find-l10n "search"
-                        spinneret:*html-lang*)))))
+                        spinneret:*html-lang*
+                        l10n)))))
