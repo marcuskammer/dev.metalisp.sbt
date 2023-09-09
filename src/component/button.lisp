@@ -88,7 +88,8 @@ Example:
                 ,@body))))
 
 (defmacro define-btn (color &optional (outline nil) (size nil))
-  "This macro defines a new macro for creating a Bootstrap button of a specific type, size, and outline style.
+  "This macro defines a new macro for creating a Bootstrap button of a specific
+   type, size, and outline style.
 
 COLOR: The color of the button (like 'primary', 'secondary', 'success', etc.).
 
