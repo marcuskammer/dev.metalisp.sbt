@@ -31,7 +31,7 @@
                ("cancel" ("en" "Cancel" "de" "Abbrechen" "fr" "Annuler"))
                ("upload" ("en" "Upload" "de" "Hochladen" "fr" "Télécharger"))
                ("search" ("en" "Search" "de" "Suchen" "fr" "Cherchent"))
-               ("select-option" ("en" "Open this selected menu"
+               ("option-selected" ("en" "Open this selected menu"
                                  "de" "Das ausgewählte Menü öffnen"
                                  "fr" "Ouvrir le menu sélectionné"))))
 
