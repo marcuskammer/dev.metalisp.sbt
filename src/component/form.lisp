@@ -164,7 +164,7 @@ visible number of options or a string indicating the size, like 'sm' for small
 or 'lg' for large. The special string 'multiple' can also be used to allow for
 multiple selections.
 
-BODY: The contents of the select menu, typically options.
+REST: The contents of the select menu, typically options.
 
 Example:
   (select (:size \"sm\")
