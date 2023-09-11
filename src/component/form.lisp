@@ -175,16 +175,17 @@ Example:
                            (format nil "form-select form-select-~a" size))
                           (t "form-select"))))
     `(spinneret:with-html
-       (:select :class ,class-attr
-         ,@(when (numberp size) `(:size ,size))
-         ,@(when (and (stringp size) (string= size "multiple")) (list :multiple t))
-         :aria-label "Default select example"
-         (:option :selected t (find-l10n "select-option"
-                                         spinneret:*html-lang*
-                                         l10n))
-         ,@(loop for item in rest
-                 collect (destructuring-bind (&key content value) item
-                           `(:option :value ,value ,content)))))))
+         (:select :class ,class-attr
+                  ,@(when (numberp size) `(:size ,size))
+                  ,@(when (and (stringp size) (string= size "multiple")) (list :multiple t))
+                  :aria-label "Default select example"
+                  (:option :selected t
+                           (find-l10n "option-selected"
+                                      spinneret:*html-lang*
+                                      l10n))
+                  ,@(loop for item in rest
+                          collect (destructuring-bind (&key content value) item
+                                    `(:option :value ,value ,content)))))))
 
 (defun search-form ()
   "This function generates a general-purpose search form.
