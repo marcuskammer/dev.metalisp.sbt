@@ -21,6 +21,8 @@
   (:export
    :l10n
    :select
+   :select-lg
+   :select-sm
    :checkable
    :ctrl
    :search-form))
@@ -36,8 +38,7 @@
                                  "fr" "Ouvrir le menu sélectionné"))))
 
 (defun remove-special-chars (str)
-  "Removes all special characters from the string STR except numbers and
-   alphabets.
+  "Removes all special characters from the string STR except numbers and alphabets.
 
 STR: The input string from which special characters need to be removed.
 
@@ -54,12 +55,14 @@ Returns:
   "Cleans a form string for use as a name or identifier.
 
 STR: The string to clean. Removes leading and trailing spaces, replaces spaces
-with dashes, and converts to lowercase."
+with dashes, and converts to lowercase.
+
+Returns:
+  A new string which can be used as HTML class."
   (string-downcase (substitute #\- #\Space (string-trim '(#\Space) str))))
 
 (defun build-name-str (name)
-  "Builds a standardized string by adding a 'group-' prefix and applying
-   cleaning functions.
+  "Builds a standardized string by adding a 'group-' prefix and applying cleaning functions.
 
 NAME: The initial name string.
 
@@ -97,8 +100,7 @@ Returns:
   (concatenate 'string class " " (build-name-str name)))
 
 (defun build-id-str (name value)
-  "Builds an ID string by concatenating a standardized name string and a
-   sanitized value property string.
+  "Builds an ID string by concatenating a standardized name string and a sanitized value property string.
 
 NAME: The initial name string.
 
@@ -156,29 +158,25 @@ LABEL: The label to display next to the control."
                     :type type
                     :name name-str)))))
 
-(defmacro select ((&key size) &rest rest)
+(defmacro select ((&key size multiple) &rest rest)
   "This macro generates a Bootstrap select dropdown menu.
 
-SIZE: Specifies the size of the select menu. It can be a number specifying the
-visible number of options or a string indicating the size, like 'sm' for small
-or 'lg' for large. The special string 'multiple' can also be used to allow for
-multiple selections.
+SIZE: Specifies the size of the select menu. It can be a string indicating the
+size, like 'sm' for small or 'lg' for large.
+
+MULTIPLE: If specified as a number, allows multiple selections.
 
 REST: The contents of the select menu, typically options.
 
 Example:
   (select (:size \"sm\")
           (:content \"Option 1\" :value \"opt1\"))"
-  (let ((class-attr (cond ((and (stringp size)
-                                (string= size "multiple")) "form-select")
-                          ((stringp size)
+  (let ((class-attr (cond ((stringp size)
                            (format nil "form-select form-select-~a" size))
                           (t "form-select"))))
     `(spinneret:with-html
          (:select :class ,class-attr
-                  ,@(when (numberp size) `(:size ,size))
-                  ,@(when (and (stringp size) (string= size "multiple")) (list :multiple t))
-                  :aria-label "Default select example"
+                  ,@(when (numberp multiple) (list :size multiple :multiple t))
                   (:option :selected t
                            (find-l10n "option-selected"
                                       spinneret:*html-lang*
@@ -186,6 +184,25 @@ Example:
                   ,@(loop for item in rest
                           collect (destructuring-bind (&key content value) item
                                     `(:option :value ,value ,content)))))))
+
+(defmacro define-select (size)
+  "Defines a new select macro tailored for a given size.
+
+SIZE: A string that specifies the size ('lg' for large, 'sm' for small)."
+  (let ((macro-name (intern (string-upcase (concatenate 'string "SELECT-" size)))))
+    `(defmacro ,macro-name (&body body)
+       `(select (:size ,,size) ,@body))))
+
+(defmacro define-selects (sizes)
+  "Generates multiple select macros based on the provided list of sizes.
+
+SIZES: A list of strings that specifies the sizes for which to generate select
+macros."
+  `(progn
+     ,@(loop for size in sizes
+             collect `(define-select ,size))))
+
+(define-selects ("lg" "sm"))
 
 (defun search-form ()
   "This function generates a general-purpose search form.
