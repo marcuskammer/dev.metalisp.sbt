@@ -25,6 +25,8 @@
    :select-sm
    :select-multiple
    :checkable
+   :checkable-radio
+   :checkable-checkbox
    :ctrl
    :search-form))
 
@@ -139,6 +141,21 @@ VALUE: The value attribute for the control."
                             :id id-str
                             :class "form-check-input")
                     (format nil " ~a" value-str))))))
+
+(defmacro define-checkable (type)
+  (let ((func-name (intern (string-upcase (concatenate 'string "checkable-" type)))))
+    `(defun ,func-name (name value)
+       (checkable ,type name value))))
+
+(defmacro define-checkables (types)
+  "Generates multiple checkable functions based on the provided list of types.
+
+TYPES: A list of strings that specifies the types for which to generate
+checkable macros."
+  `(progn
+     ,@(loop for type in types collect `(define-checkable ,type))))
+
+(define-checkables ("radio" "checkbox"))
 
 (defun ctrl (type name label)
   "Generates a basic Bootstrap form control with a label.
