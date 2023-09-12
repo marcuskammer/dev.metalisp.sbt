@@ -23,6 +23,7 @@
    :select
    :select-lg
    :select-sm
+   :select-multiple
    :checkable
    :ctrl
    :search-form))
@@ -158,7 +159,7 @@ LABEL: The label to display next to the control."
                     :type type
                     :name name-str)))))
 
-(defmacro select ((&key size multiple) &rest rest)
+(defmacro select (size multiple &rest rest)
   "This macro generates a Bootstrap select dropdown menu.
 
 SIZE: Specifies the size of the select menu. It can be a string indicating the
@@ -190,13 +191,16 @@ Example 2:
                           collect (destructuring-bind (&key content value) item
                                     `(:option :value ,value ,content)))))))
 
+(defmacro select-multiple (rows &body body)
+  `(select nil ,rows ,@body))
+
 (defmacro define-select (size)
   "Defines a new select macro tailored for a given size.
 
 SIZE: A string that specifies the size ('lg' for large, 'sm' for small)."
   (let ((macro-name (intern (string-upcase (concatenate 'string "SELECT-" size)))))
     `(defmacro ,macro-name (&body body)
-       `(select (:size ,,size) ,@body))))
+       `(select ,,size nil ,@body))))
 
 (defmacro define-selects (sizes)
   "Generates multiple select macros based on the provided list of sizes.
