@@ -34,8 +34,8 @@
                ("upload" ("en" "Upload" "de" "Hochladen" "fr" "Télécharger"))
                ("search" ("en" "Search" "de" "Suchen" "fr" "Cherchent"))
                ("option-selected" ("en" "Open this selected menu"
-                                 "de" "Das ausgewählte Menü öffnen"
-                                 "fr" "Ouvrir le menu sélectionné"))))
+                                   "de" "Das ausgewählte Menü öffnen"
+                                   "fr" "Ouvrir le menu sélectionné"))))
 
 (defun remove-special-chars (str)
   "Removes all special characters from the string STR except numbers and alphabets.
