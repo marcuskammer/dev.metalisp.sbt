@@ -36,7 +36,8 @@
                ("search" ("en" "Search" "de" "Suchen" "fr" "Cherchent"))
                ("option-selected" ("en" "Open this selected menu"
                                    "de" "Das ausgewählte Menü öffnen"
-                                   "fr" "Ouvrir le menu sélectionné"))))
+                                   "fr" "Ouvrir le menu sélectionné"))
+               ("sign-up" ("en" "Sign Up" "de" "Anmelden" "fr" "Inscrivez-vous"))))
 
 (defun remove-special-chars (str)
   "Removes all special characters from the string STR except numbers and alphabets.
