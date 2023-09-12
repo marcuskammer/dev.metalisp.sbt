@@ -164,12 +164,17 @@ LABEL: The label to display next to the control."
 SIZE: Specifies the size of the select menu. It can be a string indicating the
 size, like 'sm' for small or 'lg' for large.
 
-MULTIPLE: If specified as a number, allows multiple selections.
+MULTIPLE: If specified as a number, allows multiple selections. And makes the
+select a scrolling list box. This attribute represents the number of rows in
+the list that should be visible at one time.
 
 REST: The contents of the select menu, typically options.
 
-Example:
+Example 1:
   (select (:size \"sm\")
+          (:content \"Option 1\" :value \"opt1\"))
+Example 2:
+  (select (:multiple 3)
           (:content \"Option 1\" :value \"opt1\"))"
   (let ((class-attr (cond ((stringp size)
                            (format nil "form-select form-select-~a" size))
