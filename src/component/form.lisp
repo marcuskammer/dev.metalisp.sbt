@@ -220,7 +220,7 @@ Example usage:
            (:input :class "form-control me-2"
                    :type "search"
                    :placeholder "Search"
-                   :aria-label "Search")
+                   :title "Search")
            (btn-outline-success (:type "submit")
              (find-l10n "search"
                         spinneret:*html-lang*
