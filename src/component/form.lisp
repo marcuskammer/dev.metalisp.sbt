@@ -128,6 +128,7 @@ VALUE: The value attribute for the control."
          (class-str (build-class-str "form-check-label" name))
          (id-str (build-id-str name value)))
     (spinneret:with-html
+      (:comment "FORM/CHECKABLE")
       (:div :class "form-check"
             (:label :class class-str
                     :for id-str
@@ -150,6 +151,7 @@ LABEL: The label to display next to the control."
          (class-str (build-class-str "form-label" name))
          (id-str (build-id-str name label)))
     (spinneret:with-html
+      (:comment "FORM/CTRL")
       (:div :class (spacing :property "m" :side "b" :size 3)
             (:label :class class-str
                     :for id-str
@@ -181,15 +183,16 @@ Example 2:
                            (format nil "form-select form-select-~a" size))
                           (t "form-select"))))
     `(spinneret:with-html
-         (:select :class ,class-attr
-                  ,@(when (numberp multiple) (list :size multiple :multiple t))
-                  (:option :selected t
-                           (find-l10n "option-selected"
-                                      spinneret:*html-lang*
-                                      l10n))
-                  ,@(loop for item in rest
-                          collect (destructuring-bind (&key content value) item
-                                    `(:option :value ,value ,content)))))))
+       (:comment "FORM/SELECT")
+       (:select :class ,class-attr
+         ,@(when (numberp multiple) (list :size multiple :multiple t))
+         (:option :selected t
+                  (find-l10n "option-selected"
+                             spinneret:*html-lang*
+                             l10n))
+         ,@(loop for item in rest
+                 collect (destructuring-bind (&key content value) item
+                           `(:option :value ,value ,content)))))))
 
 (defmacro select-multiple (rows &body body)
   `(select nil ,rows ,@body))
