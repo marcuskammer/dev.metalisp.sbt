@@ -72,8 +72,7 @@ Returns two values:
         (values nil choices))))
 
 (defun choose-input-form (type)
-  "Choose the appropriate function to generate the HTML form input based on
-   TYPE.
+  "Choose the appropriate function to generate the HTML form input based on TYPE.
 
 TYPE: A string specifying the HTML input type like 'radio', 'checkbox', 'text',
 etc.
@@ -123,8 +122,7 @@ Example:
                 (:hr :class (spacing :property "m" :side "y" :size 4)))))
 
 (defun split-plist-by-keyword (plist)
-  "Splits a property list (PLIST) into a list of smaller property lists, each
-   starting with a keyword.
+  "Splits a property list (PLIST) into a list of smaller property lists, each starting with a keyword.
 
 PLIST: A property list that includes keywords and their associated values.
 
@@ -151,8 +149,7 @@ Returns:
     (nreverse result)))
 
 (defmacro questionnaire (action &rest questions)
-  "This macro generates an HTML form composed of multiple questions, each
-   rendered using the `question` macro.
+  "This macro generates an HTML form composed of multiple questions, each rendered using the `question` macro.
 
 ACTION: Specifies the URL where the form will be submitted. This should be a
 string representing the URL path.
