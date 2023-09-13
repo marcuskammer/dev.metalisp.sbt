@@ -35,12 +35,13 @@
 (defvar l10n '(("submit" ("en" "Submit" "de" "Absenden" "fr" "Soumettre"))
                ("cancel" ("en" "Cancel" "de" "Abbrechen" "fr" "Annuler"))
                ("upload" ("en" "Upload" "de" "Hochladen" "fr" "Télécharger"))
-               ("search" ("en" "Search" "de" "Suchen" "fr" "Cherchent"))
+               ("search" ("en" "Search" "de" "Suchen" "fr" "Rechercher"))
                ("option-selected" ("en" "Open this selected menu"
                                    "de" "Das ausgewählte Menü öffnen"
                                    "fr" "Ouvrir le menu sélectionné"))
                ("sign-up" ("en" "Sign Up" "de" "Registrieren" "fr" "Inscrivez-vous"))
-               ("sign-in" ("en" "Sign In" "de" "Anmelden" "fr" "S'identifier"))))
+               ("sign-in" ("en" "Sign In" "de" "Anmelden" "fr" "S'identifier")))
+  "Localization (l10n) settings for multi-language support.")
 
 (defun remove-special-chars (str)
   "Removes all special characters from the string STR except numbers and alphabets.
