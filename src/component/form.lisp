@@ -10,6 +10,7 @@
    :cl)
   (:import-from
    :cl-sbt
+   :l10n
    :find-l10n)
   (:import-from
    :cl-sbt/btn
@@ -19,7 +20,6 @@
    :cl-sbt/utility
    :spacing)
   (:export
-   :l10n
    :select
    :select-lg
    :select-sm
@@ -31,31 +31,6 @@
    :search-form))
 
 (in-package :cl-sbt/form)
-
-(defvar l10n '(("submit" ("en" "Submit" "de" "Absenden" "fr" "Soumettre"))
-               ("cancel" ("en" "Cancel" "de" "Abbrechen" "fr" "Annuler"))
-               ("upload" ("en" "Upload" "de" "Hochladen" "fr" "Télécharger"))
-               ("search" ("en" "Search" "de" "Suchen" "fr" "Rechercher"))
-               ("option-selected" ("en" "Open this selected menu"
-                                   "de" "Das ausgewählte Menü öffnen"
-                                   "fr" "Ouvrir le menu sélectionné"))
-               ("sign-up" ("en" "Sign Up" "de" "Registrieren" "fr" "Inscrivez-vous"))
-               ("sign-in" ("en" "Sign In" "de" "Anmelden" "fr" "S'identifier"))
-               ("next" ("en" "Next" "de" "Weiter" "fr" "Suivant"))
-               ("previous" ("en" "Previous" "de" "Zurück" "fr" "Précédent"))
-               ("settings" ("en" "Settings" "de" "Einstellungen" "fr" "Paramètres"))
-               ("logout" ("en" "Logout" "de" "Abmelden" "fr" "Déconnexion"))
-               ("profile" ("en" "Profile" "de" "Profil" "fr" "Profil"))
-               ("save" ("en" "Save" "de" "Speichern" "fr" "Enregistrer"))
-               ("delete" ("en" "Delete" "de" "Löschen" "fr" "Supprimer"))
-               ("edit" ("en" "Edit" "de" "Bearbeiten" "fr" "Modifier"))
-               ("confirm" ("en" "Confirm" "de" "Bestätigen" "fr" "Confirmer"))
-               ("loading" ("en" "Loading..." "de" "Lädt..." "fr" "Chargement..."))
-               ("error" ("en" "Error" "de" "Fehler" "fr" "Erreur"))
-               ("success" ("en" "Success" "de" "Erfolg" "fr" "Succès"))
-               ("close" ("en" "Close" "de" "Schließen" "fr" "Fermer"))
-               ("help" ("en" "Help" "de" "Hilfe" "fr" "Aide")))
-  "Localization (l10n) settings for multi-language support.")
 
 (defun remove-special-chars (str)
   "Removes all special characters from the string STR except numbers and alphabets.
