@@ -148,6 +148,18 @@ Returns:
       (push (nreverse current-list) result))
     (nreverse result)))
 
+(defun extract-question-components (question)
+  "Extracts components of a question stored as a plist.
+
+QUESTION: A plist representing a question.
+
+Returns multiple values:
+  - The question text (ASK)
+  - The group name (GROUP)
+  - The choices (CHOICES)"
+  (let ((splitted-list (split-plist-by-keyword question)))
+    (apply #'values (mapcar (lambda (x) (first (last x))) splitted-list))))
+
 (defmacro questionnaire (action &rest questions)
   "This macro generates an HTML form composed of multiple questions, each rendered using the `question` macro.
 
@@ -184,7 +196,8 @@ Example 4:
             :method "post"
             :class (spacing :property "p" :side "y" :size 5)
             ,@(loop for q in questions
-                    collect (destructuring-bind (&key ask group choices) q
+                    collect (multiple-value-bind (ask group choices)
+                                (extract-question-components q)
                               (let ((splitted-choices (split-plist-by-keyword choices)))
                                 `(question ,ask ,group ,@splitted-choices))))
             (btn-primary (:type "submit")
