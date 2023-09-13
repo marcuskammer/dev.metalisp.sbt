@@ -97,4 +97,7 @@
 KEY: The key to look up the localization for.
 
 LANG: The language to get the localized string for."
-  (cadr (member lang (cadr (assoc key alist :test #'string=)) :test #'string=)))
+  (let ((term (cadr (assoc key alist :test #'string=))))
+    (if term
+        (cadr (member lang term :test #'string=))
+        "Translation not found")))
