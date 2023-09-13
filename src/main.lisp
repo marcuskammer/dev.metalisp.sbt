@@ -66,15 +66,12 @@
   "Localization (l10n) settings for multi-language support.")
 
 (defun find-l10n (key lang alist)
-  "Finds the localized string for a given key and language.
-
-KEY: The key to look up the localization for.
-
-LANG: The language to get the localized string for."
-  (let ((term (cadr (assoc key alist :test #'string=))))
-    (if term
-        (cadr (member lang term :test #'string=))
-        "Translation not found")))
+  "Finds the localized string for a given key and language."
+  (let ((entry (cadr (assoc key alist :test #'string=))))
+    (if entry
+        (let ((term (cadr (member lang entry :test #'string=))))
+          (or term "Translation not found"))
+        "Key not found")))
 
 (defmacro with-page ((&key (author "") (description "") (cdn t) (pagetitle "") (theme "dark")) &body body)
   `(spinneret:with-html
