@@ -23,19 +23,19 @@
       (ok (search "option value=3" result)))))
 
 (deftest test-select-size-lg
-  (let ((result (spinneret:with-html-string (select (:size "lg") (:content "One" :value 1)))))
+  (let ((result (spinneret:with-html-string (select "lg" (:content "One" :value 1)))))
     (testing "Generates correct HTML for select element"
       (ok (search "class=\"form-select form-select-lg\"" result))
       (ok (search "option value=1" result)))))
 
 (deftest test-select-size-sm
-  (let ((result (spinneret:with-html-string (select (:size "sm") (:content "One" :value 1)))))
+  (let ((result (spinneret:with-html-string (select "sm" (:content "One" :value 1)))))
     (testing "Generates correct HTML for select element"
       (ok (search "class=\"form-select form-select-sm\"" result))
       (ok (search "option value=1" result)))))
 
 (deftest test-select-size-multiple
-  (let ((result (spinneret:with-html-string (select (:multiple 3) (:content "One" :value 1)))))
+  (let ((result (spinneret:with-html-string (select nil 3 (:content "One" :value 1)))))
     (testing "Generates correct HTML for select element"
       (ok (search "class=form-select" result))
       (ok (search "multiple" result))
@@ -59,7 +59,7 @@
     (testing "Generates correct HTML for search form"
       (ok (search "class=\"form-control me-2\"" result))
       (ok (search "type=search" result))
-      (ok (search "aria-label=Search" result))
+      (ok (search "title=Search" result))
       (ok (search "type=submit" result))
       (ok (search "class=\"btn btn-outline-success\"" result))
       (ok (search "<input" result))
