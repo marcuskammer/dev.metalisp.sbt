@@ -75,3 +75,23 @@
       (ok (search "class=form-control" result))
       (ok (search "<hr class=my-4>" result))
       (ok (search "<button class=\"btn btn-primary\" type=submit>Submit</button>" result)))))
+
+(deftest test-create-questionnaire-single-german
+  (let* ((spinneret:*html-lang* "de")
+         (result (spinneret:with-html-string
+                   (questionnaire "/submit"
+                                  (:frage "Ihr Geschlecht?"
+                                   :gruppe "geschlecht"
+                                   :auswahl (:single "Männlich"
+                                                     "Weiblich"
+                                                     "Non-Binary"
+                                                     "Keine Angabe"))))))
+    (testing "Generates correct HTML for questionnaire with single choices"
+      (ok (search "<form class=py-5 action=/submit method=post>" result))
+      (ok (search "<legend>Ihr Geschlecht?</legend>" result))
+      (ok (search "class=form-check-input" result))
+      (ok (search "name=group-geschlecht" result))
+      (ok (search "value=männlich" result))
+      (ok (search "value=weiblich" result))
+      (ok (search "value=keine-angabe" result))
+      (ok (search "<button class=\"btn btn-primary\" type=submit>Absenden</button>" result)))))
