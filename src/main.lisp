@@ -65,6 +65,17 @@
                ("learn-more" ("en" "Learn More" "de" "Mehr erfahren" "fr" "En savoir plus")))
   "Localization (l10n) settings for multi-language support.")
 
+(defun find-l10n (key lang alist)
+  "Finds the localized string for a given key and language.
+
+KEY: The key to look up the localization for.
+
+LANG: The language to get the localized string for."
+  (let ((term (cadr (assoc key alist :test #'string=))))
+    (if term
+        (cadr (member lang term :test #'string=))
+        "Translation not found")))
+
 (defmacro with-page ((&key (author "") (description "") (cdn t) (pagetitle "") (theme "dark")) &body body)
   `(spinneret:with-html
      (:doctype)
@@ -90,14 +101,3 @@
         (spinneret:*fill-column* fc))
     (with-open-file (stream filename :direction :output :if-exists :supersede)
       (write-string string stream))))
-
-(defun find-l10n (key lang alist)
-  "Finds the localized string for a given key and language.
-
-KEY: The key to look up the localization for.
-
-LANG: The language to get the localized string for."
-  (let ((term (cadr (assoc key alist :test #'string=))))
-    (if term
-        (cadr (member lang term :test #'string=))
-        "Translation not found")))
