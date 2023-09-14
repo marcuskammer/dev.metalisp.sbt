@@ -115,10 +115,10 @@ Example:
   `(spinneret:with-html
      (:fieldset (:legend ,ask)
                 (:ol ,@(loop for choice in body
-                             append (multiple-value-bind (type choices)
+                             append (multiple-value-bind (type inputs)
                                         (resolve-input-and-choices choice)
-                                      (loop for item in choices
-                                            collect `(:li (apply-input-form ,type ,group ,item))))))
+                                      (loop for input in inputs
+                                            collect `(:li (apply-input-form ,type ,group ,input))))))
                 (:hr :class (spacing :property "m" :side "y" :size 4)))))
 
 (defun split-plist-by-keyword (plist)
