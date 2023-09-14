@@ -1,6 +1,33 @@
-#+name: social-media-questionnaire
+#+title: Creating a Questionnaire using cl-sbt/questionnaire Macros in a Web Application
+#+author: Marcus Kammer
+#+email: marcus.kammer@mailbox.org
+#+date: [2023-09-14 Thu]
 
-This org file demonstrate the creation of a questionnaire.
+* Introduction
+
+Questionnaires are powerful tools for gathering information and insights from
+users. They are crucial for understanding user behaviors, preferences, and
+requirements. This document will demonstrate how to build a web-based
+questionnaire using the cl-sbt/questionnaire macros in a Common Lisp
+application.
+
+** The Importance of Questionnaires
+
+Questionnaires help in collecting data for various purposes including market
+research, user experience study, and many more. They can be in multiple formats
+like single-choice, multiple-choice, or open-ended questions.
+
+*** Types of Questions
+
+- Single Choice: Questions that allow one answer.
+- Multiple Choice: Questions that allow multiple answers.
+- Text: Open-ended questions for free text input.
+
+* Integrating cl-sbt/questionnaire Macros
+
+To create a questionnaire in your Common Lisp web application,
+cl-sbt/questionnaire macros can be employed. These macros generate the HTML
+required for different types of questions in a questionnaire.
 
 #+begin_src lisp :results none
   (defpackage feat-questionnaire
