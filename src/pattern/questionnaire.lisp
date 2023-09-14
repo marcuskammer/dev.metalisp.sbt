@@ -100,21 +100,21 @@ Returns:
   The HTML form element generated for the ITEM."
   (funcall (choose-input-form type) type group item))
 
-(defmacro question (ask group &rest choices)
+(defmacro question (ask group &body body)
   "This macro generates a fieldset for a question with multiple answers.
 
 ASK: The text of the question to be displayed in the legend.
 
 GROUP: Specifies the name attribute for the input elements.
 
-CHOICES: A list of strings starting with a keyword representing the different
+BODY: A list of strings starting with a keyword representing the different
 answers available for selection.
 
 Example:
   (question \"How old are you?\" \"age\" (:radio \"18-24\" \"25-34\" \"35-44\"))"
   `(spinneret:with-html
      (:fieldset (:legend ,ask)
-                (:ol ,@(loop for choice in choices
+                (:ol ,@(loop for choice in body
                              append (multiple-value-bind (type choices)
                                         (resolve-input-and-choices choice)
                                       (loop for item in choices
