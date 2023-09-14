@@ -160,7 +160,7 @@ Returns multiple values:
   (let ((splitted-list (split-plist-by-keyword question)))
     (apply #'values (mapcar (lambda (x) (first (last x))) splitted-list))))
 
-(defmacro questionnaire (action &rest questions)
+(defmacro questionnaire (action &body body)
   "This macro generates an HTML form composed of multiple questions, each rendered using the `question` macro.
 
 ACTION: Specifies the URL where the form will be submitted. This should be a
@@ -195,7 +195,7 @@ Example 4:
      (:form :action ,action
             :method "post"
             :class (spacing :property "p" :side "y" :size 5)
-            ,@(loop for q in questions
+            ,@(loop for q in body
                     collect (multiple-value-bind (ask group choices)
                                 (extract-question-components q)
                               (let ((splitted-choices (split-plist-by-keyword choices)))
