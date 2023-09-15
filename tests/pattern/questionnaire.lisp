@@ -77,10 +77,10 @@
 
 (deftest test-create-questionnaire-multiple
   (let ((result (spinneret:with-html-string
-                   (questionnaire "/submit"
-                                  (:ask "Which of the following devices do you regularly use to browse the internet?"
-                                   :group "device"
-                                   :choices (:multiple "Desktop" "Laptop" "Tablet"))))))
+                  (questionnaire "/submit"
+                    (:ask "Which of the following devices do you regularly use to browse the internet?"
+                     :group "device"
+                     :choices (:multiple "Desktop" "Laptop" "Tablet"))))))
     (testing "Generates correct HTML for questionnaire with multiple choices"
       (ok (search "<form class=py-5 action=/submit method=post>" result))
       (ok (search "<legend>Which of the following devices do you regularly use to browse the internet?</legend>" result))
@@ -92,11 +92,11 @@
 
 (deftest test-create-questionnaire-mixed-choices
   (let ((result (spinneret:with-html-string
-                   (questionnaire "/submit"
-                                  (:ask "Which of the following devices do you regularly use to browse the internet?"
-                                   :group "device"
-                                   :choices (:multiple "Desktop" "Laptop" "Tablet"
-                                             :text "Others (please specify)"))))))
+                  (questionnaire "/submit"
+                    (:ask "Which of the following devices do you regularly use to browse the internet?"
+                     :group "device"
+                     :choices (:multiple "Desktop" "Laptop" "Tablet"
+                               :text "Others (please specify)"))))))
     (testing "Generates correct HTML for questionnaire with multiple choices"
       (ok (search "<form class=py-5 action=/submit method=post>" result))
       (ok (search "<legend>Which of the following devices do you regularly use to browse the internet?</legend>" result))
@@ -111,12 +111,12 @@
   (let* ((spinneret:*html-lang* "de")
          (result (spinneret:with-html-string
                    (questionnaire "/submit"
-                                  (:frage "Ihr Geschlecht?"
-                                   :gruppe "geschlecht"
-                                   :auswahl (:single "Männlich"
-                                                     "Weiblich"
-                                                     "Non-Binary"
-                                                     "Keine Angabe"))))))
+                     (:frage "Ihr Geschlecht?"
+                      :gruppe "geschlecht"
+                      :auswahl (:single "Männlich"
+                                        "Weiblich"
+                                        "Non-Binary"
+                                        "Keine Angabe"))))))
     (testing "Generates correct HTML for questionnaire with single choices"
       (ok (search "<form class=py-5 action=/submit method=post>" result))
       (ok (search "<legend>Ihr Geschlecht?</legend>" result))
