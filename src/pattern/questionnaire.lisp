@@ -1,23 +1,12 @@
-;;; cl-sbt/src/pattern/questionnaire.lisp -- Questionnaire and Choice Generation for HTML forms
+;;;; questionnaire.lisp
 
-;;; Commentary:
-
-;; This package, `cl-sbt/questionnaire`, provides a suite of utilities for generating
-;; HTML forms composed of multiple questions. Each question can have a different type
-;; of input (radio buttons, checkboxes, etc.), and the form itself can be customized
-;; according to the target URL for submissions.
-;;
-;; This package relies on the `spinneret` package for HTML generation and imports utility
-;; functions and macros from `cl-sbt/btn` for button styling, `cl-sbt/utility` for additional
-;; CSS utility, and `cl-sbt/form` for form-related functionality.
-;;
-;; The package provides the following public interfaces:
-;; - `question`: A macro to generate a single question with multiple choices.
-;; - `questionnaire`: A macro similar to `questionnaire-1`, but more dynamic in accepting questions.
-
-;;; Code:
+;;;; This package, `cl-sbt/questionnaire`, provides a suite of utilities for generating
+;;;; HTML forms composed of multiple questions. Each question can have a different type
+;;;; of input (radio buttons, checkboxes, etc.), and the form itself can be customized
+;;;; according to the target URL for submissions.
 
 (defpackage cl-sbt/questionnaire
+  (:documentation "Defines the `cl-sbt/questionnaire` package, a utility suite for generating HTML forms with various types of questions.")
   (:use
    :cl)
   (:import-from
