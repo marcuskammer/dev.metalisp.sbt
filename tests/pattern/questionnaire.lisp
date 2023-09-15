@@ -8,6 +8,7 @@
    :question
    :resolve-input-type
    :resolve-input-and-choices
+   :extract-question-components
    :questionnaire))
 
 (in-package :cl-sbt/tests/questionnaire)
@@ -29,12 +30,42 @@
       (ok (null type))
       (ok (equal choices '("A" "B"))))))
 
+(deftest test-extract-question-components
+  (testing "Test for extract-question-components"
+    (multiple-value-bind (ask1 group1 choices1)
+        (extract-question-components '(:ask "What is your favorite color?"
+                                       :group "favcolor"
+                                       :choices (:radio "Red" "Green" "Blue")))
+      (ok (string= ask1 "What is your favorite color?"))
+      (ok (string= group1 "favcolor"))
+      (ok (equal choices1 '(:radio "Red" "Green" "Blue"))))))
+
+(deftest test-extract-question-components-missing-components
+  (testing "Test for extract-question-components with missing components"
+    (multiple-value-bind (ask2 group2 choices2)
+        (extract-question-components '(:ask "What is your favorite color?"
+                                       :choices (:radio "Red" "Green" "Blue")))
+      (ok (string= ask2 "What is your favorite color?"))
+      (ok (equal group2 '(:radio "Red" "Green" "Blue")))
+      (ok (null choices2)))))
+
+(deftest test-extract-question-components-additional-keys
+  (testing "Test for extract-question-components with additional keys"
+    (multiple-value-bind (ask3 group3 choices3)
+        (extract-question-components '(:ask "What is your favorite color?"
+                                       :group "favcolor"
+                                       :choices (:radio "Red" "Green" "Blue")
+                                       :extra "some-extra-info"))
+      (ok (string= ask3 "What is your favorite color?"))
+      (ok (string= group3 "favcolor"))
+      (ok (equal choices3 '(:radio "Red" "Green" "Blue"))))))
+
 (deftest test-create-questionnaire-single
   (let ((result (spinneret:with-html-string
-                   (questionnaire "/submit"
-                                  (:ask "Your Gender?"
-                                   :group "gender"
-                                   :choices (:single "Male" "Female" "Non-Binary" "Prefer not to say"))))))
+                  (questionnaire "/submit"
+                    (:ask "Your Gender?"
+                     :group "gender"
+                     :choices (:single "Male" "Female" "Non-Binary" "Prefer not to say"))))))
     (testing "Generates correct HTML for questionnaire with single choices"
       (ok (search "<form class=py-5 action=/submit method=post>" result))
       (ok (search "<legend>Your Gender?</legend>" result))
