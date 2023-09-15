@@ -1,8 +1,7 @@
 #+title: Creating a Questionnaire using cl-sbt/questionnaire Macros in a Web Application
 #+author: Marcus Kammer
 #+email: marcus.kammer@mailbox.org
-#+date: [2023-09-14 Thu]
-
+#+date: [2023-09-15 Fri]
 * Introduction
 
 Questionnaires are powerful tools for gathering information and insights from
@@ -29,56 +28,79 @@ To create a questionnaire in your Common Lisp web application,
 cl-sbt/questionnaire macros can be employed. These macros generate the HTML
 required for different types of questions in a questionnaire.
 
-#+begin_src lisp :results none
-  (defpackage feat-questionnaire
-    (:use :cl)
-    (:import-from
-     :cl-sbt
-     :with-page
-     :write-html-to-file)
-    (:import-from
-     :cl-sbt/grid
-     :con)
-    (:import-from
-     :cl-sbt/questionnaire
-     :questionnaire))
+#+begin_src lisp
+  (defpackage my-web-app
+    (:use :cl :cl-sbt/questionnaire)
+    (:export :generate-button-page))
 
-  (in-package :feat-questionnaire)
+  (in-package :my-web-app)
 
-  (write-html-to-file "questionnaire.html"
-                      (spinneret:with-html-string
-                        (with-page (:author "Marcus Kammer" :pagetitle "Questionnaire Example")
-                          (con ()
-                            (questionnaire "/submit"
-                                           (:ask "How old are you?"
-                                            :group "age"
-                                            :choices (:single "18-24" "25-34" "35-44" "45-54" "55+"))
-                                           (:ask "Your Gender?"
-                                            :group "gender"
-                                            :choices (:single "Male" "Female" "Non-Binary" "Prefer not to say"))
-                                           (:ask "How many hours per day, on average, do you spend browsing the internet?"
-                                            :group "internet"
-                                            :choices (:single "Less than 1 hour" "1-3 hours" "3-5 hours" "5+ hours"))
-                                           (:ask "Which of the following devices do you regularly use to browse the internet? (Select all that apply)"
-                                            :group "devices"
-                                            :choices (:multiple
-                                                      "Desktop"
-                                                      "Laptop"
-                                                      "Tablet"
-                                                      "Smartphone"
-                                                      :text
-                                                      "Others (please specify):"))
-                                           (:ask "Which social media platforms do you use regularly? (Select all that apply)"
-                                            :group "socialmedia"
-                                            :choices (:multiple
-                                                      "Facebook"
-                                                      "Twitter"
-                                                      "Instagram"
-                                                      "LinkedIn"
-                                                      "TikTok"
-                                                      "Snapchat"
-                                                      "Pinterest"
-                                                      "Youtube"
-                                                      :text
-                                                      "Others (please specify):")))))))
+  (defun generate-questionnaire-page ()
+    "Generates an HTML page with questionnaires using cl-sbt/questionnaire macros."
+    (spinneret:with-html-string
+      (:html
+       (:head
+        (:title "Questionnaire Examples")
+        ;; Include Bootstrap CSS and JavaScript links here
+        )
+       (:body
+         (:h1 "Questionnaire Examples")
+         (questionnaire "/submit"
+           (:ask "What is your favorite color?"
+            :group "favcolor"
+            :choices (:radio "Red" "Green" "Blue")))
+         ;; Include Bootstrap JavaScript initialization script here
+         ))))
+
+  (generate-questionnaire-page)
 #+end_src
+
+#+RESULTS:
+#+begin_example
+<html lang=en>
+ <head>
+  <meta charset=UTF-8>
+  <title>Questionnaire Examples</title>
+ </head>
+ <body>
+  <h1>Questionnaire Examples</h1>
+  <form class=py-5 action=/submit method=post>
+   <fieldset>
+    <legend>What is your favorite color?</legend>
+    <ol>
+     <li>
+      <!-- FORM/CHECKABLE -->
+<div class=form-check>
+       <label for=group-favcolor-red
+              class="form-check-label group-favcolor">
+        <input class=form-check-input type=radio name=group-favcolor
+               value=red id=group-favcolor-red> Red</label>
+      </div>
+     <li>
+      <!-- FORM/CHECKABLE -->
+<div class=form-check>
+       <label for=group-favcolor-green
+              class="form-check-label group-favcolor">
+        <input class=form-check-input type=radio name=group-favcolor
+               value=green id=group-favcolor-green> Green</label>
+      </div>
+     <li>
+      <!-- FORM/CHECKABLE -->
+<div class=form-check>
+       <label for=group-favcolor-blue
+              class="form-check-label group-favcolor">
+        <input class=form-check-input type=radio name=group-favcolor
+               value=blue id=group-favcolor-blue> Blue</label>
+      </div>
+    </ol>
+    <hr class=my-4>
+   </fieldset>
+   <button class="btn btn-primary" type=submit>Submit</button>
+  </form>
+ </body>
+</html>
+#+end_example
+
+This example demonstrates the integration of the cl-sbt/questionnaire macros into a
+web application. The macros assist in generating the required HTML for
+different types of Bootstrap questionnaires.
