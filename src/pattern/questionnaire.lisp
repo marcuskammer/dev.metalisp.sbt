@@ -89,6 +89,14 @@ Returns:
   The HTML form element generated for the ITEM."
   (funcall (choose-input-form type) type group item))
 
+(defmacro process-input-choices (group choice)
+  (multiple-value-bind (type inputs)
+      (resolve-input-and-choices choice)
+    `(spinneret:with-html
+       ,@(loop for input in inputs
+               collect
+               `(:li (apply-input-form ,type ,group ,input))))))
+
 (defmacro question (ask group &body body)
   "This macro generates a fieldset for a question with multiple answers.
 
@@ -104,10 +112,8 @@ Example:
   `(spinneret:with-html
      (:fieldset (:legend ,ask)
                 (:ol ,@(loop for choice in body
-                             append (multiple-value-bind (type inputs)
-                                        (resolve-input-and-choices choice)
-                                      (loop for input in inputs
-                                            collect `(:li (apply-input-form ,type ,group ,input))))))
+                             append
+                             `((process-input-choices ,group ,choice))))
                 (:hr :class (spacing :property "m" :side "y" :size 4)))))
 
 (defun split-plist-by-keyword (plist)
