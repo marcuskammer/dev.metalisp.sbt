@@ -161,3 +161,15 @@
       (ok (search "value=weiblich" result))
       (ok (search "value=keine-angabe" result))
       (ok (search "<button class=\"btn btn-primary\" type=submit>Absenden</button>" result)))))
+
+(deftest test-create-questionnaire-select
+  (let ((result (spinneret:with-html-string
+                  (questionnaire "/submit"
+                    (:ask "What is your favorite color?"
+                     :group "favcolor"
+                     :choices (:select "Red" "Green" "Blue"))))))
+    (ok (search "select" result))
+    (ok (search "option value=red" result))
+    (ok (search "option value=green" result))
+    (ok (search "option value=blue" result))
+    (ok (search "What is your favorite color?" result))))
