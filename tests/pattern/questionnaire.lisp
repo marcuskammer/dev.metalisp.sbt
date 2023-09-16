@@ -30,6 +30,41 @@
       (ok (null type))
       (ok (equal choices '("A" "B"))))))
 
+(deftest test-question-radio
+  (let ((result (spinneret:with-html-string
+                  (question "What is your favorite color?"
+                      "favcolor"
+                    (:radio "Red" "Green" "Blue")))))
+    (testing "Generates correct HTML for question using radio checkable"
+      (ok (search "for=group-favcolor-red" result))
+      (ok (search "for=group-favcolor-green" result))
+      (ok (search "for=group-favcolor-blue" result))
+      (ok (search "id=group-favcolor-red" result))
+      (ok (search "id=group-favcolor-green" result))
+      (ok (search "id=group-favcolor-blue" result))
+      (ok (search "type=radio" result))
+      (ok (search "What is your favorite color?" result)))))
+
+(deftest test-question-checkbox
+  (let ((result (spinneret:with-html-string
+                  (question "What is your favorite color?"
+                      "favcolor"
+                    (:checkbox "Red" "Green" "Blue")))))
+    (testing "Generates correct HTML for question using checkbox checkable"
+      (ok (search "type=checkbox" result)))))
+
+(deftest test-question-select
+  (let ((result (spinneret:with-html-string
+                  (question "What is your favorite color?"
+                      "favcolor"
+                    (:select "Red" "Green" "Blue")))))
+    (testing "Generates correct HTML for question using select"
+      (ok (search "select" result))
+      (ok (search "option value=red" result))
+      (ok (search "option value=green" result))
+      (ok (search "option value=blue" result))
+      (ok (search "What is your favorite color?" result)))))
+
 (deftest test-extract-question-components
   (testing "Test for extract-question-components"
     (multiple-value-bind (ask1 group1 choices1)
