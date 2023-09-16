@@ -170,7 +170,7 @@ LABEL: The label to display next to the control."
                     :type type
                     :name name-str)))))
 
-(defmacro select (size multiple &rest rest)
+(defmacro select ((&key size multiple) &body body)
   "This macro generates a Bootstrap select dropdown menu.
 
 SIZE: Specifies the size of the select menu. It can be a string indicating the
@@ -183,11 +183,10 @@ the list that should be visible at one time.
 REST: The contents of the select menu, typically options.
 
 Example 1:
-  (select (:size \"sm\")
-          (:content \"Option 1\" :value \"opt1\"))
+  (select (:size \"sm\") \"Red\" \"Green\" \"Blue\"
+
 Example 2:
-  (select (:multiple 3)
-          (:content \"Option 1\" :value \"opt1\"))"
+  (select (:multiple 3) \"Red\" \"Green\" \"Blue\""
   (let ((class-attr (cond ((stringp size)
                            (format nil "form-select form-select-~a" size))
                           (t "form-select"))))
@@ -196,15 +195,14 @@ Example 2:
        (:select :class ,class-attr
          ,@(when (numberp multiple) (list :size multiple :multiple t))
          (:option :selected t
-                  (find-l10n "option-selected"
-                             spinneret:*html-lang*
-                             l10n))
-         ,@(loop for item in rest
-                 collect (destructuring-bind (&key content value) item
-                           `(:option :value ,value ,content)))))))
+                  (find-l10n "option-selected" spinneret:*html-lang* l10n))
+         ,@(loop for item in body
+                 collect
+                 (let ((value-prop-str (build-value-prop-str item)))
+                   `(:option :value ,value-prop-str ,item)))))))
 
 (defmacro select-multiple (rows &body body)
-  `(select nil ,rows ,@body))
+  `(select (:multiple ,rows) ,@body))
 
 (defmacro define-select (size)
   "Defines a new select macro tailored for a given size.
@@ -212,7 +210,7 @@ Example 2:
 SIZE: A string that specifies the size ('lg' for large, 'sm' for small)."
   (let ((macro-name (intern (string-upcase (concatenate 'string "SELECT-" size)))))
     `(defmacro ,macro-name (&body body)
-       `(select ,,size nil ,@body))))
+       `(select (:size ,,size) ,@body))))
 
 (defmacro define-selects (sizes)
   "Generates multiple select macros based on the provided list of sizes.
