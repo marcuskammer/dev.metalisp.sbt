@@ -57,7 +57,7 @@
   (let ((result (spinneret:with-html-string
                   (question "What is your favorite color?"
                       "favcolor"
-                    (:select "Red" "Green" "Blue")))))
+                    (:combo "Red" "Green" "Blue")))))
     (testing "Generates correct HTML for question using select"
       (ok (search "select" result))
       (ok (search "option value=red" result))
@@ -167,7 +167,7 @@
                   (questionnaire "/submit"
                     (:ask "What is your favorite color?"
                      :group "favcolor"
-                     :choices (:select "Red" "Green" "Blue"))))))
+                     :choices (:combo "Red" "Green" "Blue"))))))
     (ok (search "select" result))
     (ok (search "option value=red" result))
     (ok (search "option value=green" result))
