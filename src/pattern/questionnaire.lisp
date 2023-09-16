@@ -22,7 +22,8 @@
   (:import-from
    :cl-sbt/form
    :checkable
-   :ctrl)
+   :ctrl
+   :select)
   (:export
    :question
    :questionnaire))
