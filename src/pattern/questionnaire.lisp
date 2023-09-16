@@ -130,17 +130,25 @@ Example:
 
 Returns:
   A list of property lists, each starting with a keyword."
+  ;; Initialize result and current-list
   (let ((result '())
         (current-list '()))
+    ;; Loop through each item in plist
     (loop for item in plist
-          do (if (keywordp item)
+          do (if (keywordp item)  ; Check if item is a keyword
+                 ;; Start of new property list detected
                  (progn
+                   ;; Add current list to result if it is not empty
                    (when current-list
                      (push (nreverse current-list) result))
+                   ;; Reset current-list with the new keyword
                    (setq current-list (list item)))
+                 ;; Add item to the current property list
                  (push item current-list)))
+    ;; Add remaining current-list to result
     (when current-list
       (push (nreverse current-list) result))
+    ;; Return the reversed result list
     (nreverse result)))
 
 (defun extract-question-components (question)
