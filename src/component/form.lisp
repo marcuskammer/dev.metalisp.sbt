@@ -20,10 +20,10 @@
    :cl-sbt/utility
    :spacing)
   (:export
-   :select
-   :select-lg
-   :select-sm
-   :select-multiple
+   :combo
+   :combo-lg
+   :combo-sm
+   :combo-multiple
    :checkable
    :checkable-radio
    :checkable-checkbox
@@ -170,7 +170,7 @@ LABEL: The label to display next to the control."
                     :type type
                     :name name-str)))))
 
-(defmacro select ((&key size multiple) &body body)
+(defmacro combo ((&key size multiple) &body body)
   "This macro generates a Bootstrap select dropdown menu.
 
 SIZE: Specifies the size of the select menu. It can be a string indicating the
@@ -183,10 +183,10 @@ the list that should be visible at one time.
 REST: The contents of the select menu, typically options.
 
 Example 1:
-  (select (:size \"sm\") \"Red\" \"Green\" \"Blue\"
+  (combo (:size \"sm\") \"Red\" \"Green\" \"Blue\"
 
 Example 2:
-  (select (:multiple 3) \"Red\" \"Green\" \"Blue\""
+  (combo (:multiple 3) \"Red\" \"Green\" \"Blue\""
   (let ((class-attr (cond ((stringp size)
                            (format nil "form-select form-select-~a" size))
                           (t "form-select"))))
@@ -201,27 +201,27 @@ Example 2:
                  (let ((value-prop-str (build-value-prop-str item)))
                    `(:option :value ,value-prop-str ,item)))))))
 
-(defmacro select-multiple (rows &body body)
-  `(select (:multiple ,rows) ,@body))
+(defmacro combo-multiple (rows &body body)
+  `(combo (:multiple ,rows) ,@body))
 
-(defmacro define-select (size)
+(defmacro define-combo (size)
   "Defines a new select macro tailored for a given size.
 
 SIZE: A string that specifies the size ('lg' for large, 'sm' for small)."
-  (let ((macro-name (intern (string-upcase (concatenate 'string "SELECT-" size)))))
+  (let ((macro-name (intern (string-upcase (concatenate 'string "COMBO-" size)))))
     `(defmacro ,macro-name (&body body)
-       `(select (:size ,,size) ,@body))))
+       `(combo (:size ,,size) ,@body))))
 
-(defmacro define-selects (sizes)
+(defmacro define-combos (sizes)
   "Generates multiple select macros based on the provided list of sizes.
 
 SIZES: A list of strings that specifies the sizes for which to generate select
 macros."
   `(progn
      ,@(loop for size in sizes
-             collect `(define-select ,size))))
+             collect `(define-combo ,size))))
 
-(define-selects ("lg" "sm"))
+(define-combos ("lg" "sm"))
 
 (defun search-form ()
   "This function generates a general-purpose search form.

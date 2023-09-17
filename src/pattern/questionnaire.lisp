@@ -23,7 +23,7 @@
    :cl-sbt/form
    :checkable
    :ctrl
-   :select)
+   :combo)
   (:export
    :question
    :questionnaire))
@@ -95,7 +95,7 @@ Returns:
       (resolve-input-and-choices choice)
     (if (string= type "combo")
         `(spinneret:with-html
-           (:li (select () ,@inputs)))
+           (:li (combo () ,@inputs)))
         `(spinneret:with-html
            ,@(loop for input in inputs
                    collect

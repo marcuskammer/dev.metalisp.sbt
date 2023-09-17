@@ -6,16 +6,16 @@
   (:import-from
    :cl-sbt/form
    :ctrl
-   :select
-   :select-sm
-   :select-lg
+   :combo
+   :combo-sm
+   :combo-lg
    :search-form
    :checkable))
 
 (in-package :cl-sbt/tests/form)
 
 (deftest test-select-default
-  (let ((result (spinneret:with-html-string (select () "Red" "Green" "Blue"))))
+  (let ((result (spinneret:with-html-string (combo () "Red" "Green" "Blue"))))
     (testing "Generates correct HTML for select element"
       (ok (search "class=form-select" result))
       (ok (search "option value=red" result))
