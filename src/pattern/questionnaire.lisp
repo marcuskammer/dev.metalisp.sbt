@@ -30,6 +30,15 @@
 
 (in-package :cl-sbt/questionnaire)
 
+(defun plist-p (lst)
+  (and (some #'keywordp lst)
+       (some #'stringp lst)))
+
+(deftype plist ()
+  '(and list (satisfies plist-p)))
+
+(declaim (ftype (function (plist) list) split-plist-by-keyword))
+
 (defun resolve-input-type (type)
   "Resolve the given input TYPE keyword to the corresponding HTML input type.
 
@@ -120,14 +129,6 @@ Example:
                              `((process-choice ,group ,choice))))
                 (:hr :class (spacing :property "m" :side "y" :size 4)))))
 
-(defun plist-p (lst)
-  (and (some #'keywordp lst)
-       (some #'stringp lst)))
-
-(deftype plist ()
-  '(and list (satisfies plist-p)))
-
-(declaim (ftype (function (plist) list) split-plist-by-keyword))
 (defun split-plist-by-keyword (plist)
   "Splits a property list (PLIST) into a list of smaller property lists, each starting with a keyword.
 
