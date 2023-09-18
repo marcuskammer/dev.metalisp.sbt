@@ -207,14 +207,15 @@ Example 4:
                  (:ask \"Which social media platforms do you use regularly?\"
                   :group \"age\"
                   :choices (:multiple \"Facebook\" \"Twitter\" \"Instagram\" :text \"Others\")))"
-  `(spinneret:with-html
-     (:form :action ,action
-            :method "post"
-            :class (spacing :property "p" :side "y" :size 5)
-            ,@(loop for q in body
-                    collect (multiple-value-bind (ask group choices)
-                                (extract-question-components q)
-                              (let ((splitted-choices (split-plist-by-keyword choices)))
-                                `(question ,ask ,group ,@splitted-choices))))
-            (btn-primary (:type "submit")
-              (find-l10n "submit" spinneret:*html-lang* l10n)))))
+  (let ((class-string (spacing :property "p" :side "y" :size 5)))
+    `(spinneret:with-html
+       (:form :action ,action
+              :method "post"
+              :class ,class-string
+              ,@(loop for q in body
+                      for (ask group choices) = (multiple-value-list (extract-question-components q))
+                      do (unless (questionp q)
+                           (error "Invalid question format: ~a" q))
+                      collect `(question ,ask ,group ,@(split-plist-by-keyword choices)))
+              (btn-primary (:type "submit")
+                (find-l10n "submit" spinneret:*html-lang* l10n))))))
