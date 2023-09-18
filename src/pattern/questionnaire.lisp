@@ -32,8 +32,10 @@
 
 (defun plistp (lst)
   "Checks if the given list LST is a property list."
-  (and (some #'keywordp lst)
-       (some #'stringp lst)))
+  (loop for elem in lst
+        always (or (keywordp elem)
+                   (stringp elem)
+                   (listp elem))))
 
 (deftype plist ()
   "A property list is a flat list containing keywords and strings."
