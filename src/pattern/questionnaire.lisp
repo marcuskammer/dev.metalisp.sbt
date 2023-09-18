@@ -30,14 +30,25 @@
 
 (in-package :cl-sbt/questionnaire)
 
-(defun plist-p (lst)
+(defun plistp (lst)
+  "Checks if the given list LST is a property list."
   (and (some #'keywordp lst)
        (some #'stringp lst)))
 
 (deftype plist ()
-  '(and list (satisfies plist-p)))
+  "A property list is a flat list containing keywords and strings."
+  '(and list (satisfies plistp)))
 
-(declaim (ftype (function (plist) list) split-plist-by-keyword))
+(defun questionp (lst)
+  (loop for i from 0 below (length lst)
+        for elem = (nth i lst)
+        always (if (evenp i)
+                   (keywordp elem)
+                   (or (stringp elem)
+                       (plistp elem)))))
+
+(deftype question ()
+  '(and list (satisfies questionp)))
 
 (defun resolve-input-type (type)
   "Resolve the given input TYPE keyword to the corresponding HTML input type.
