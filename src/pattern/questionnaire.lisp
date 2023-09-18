@@ -1,9 +1,9 @@
 ;;;; questionnaire.lisp
 
-;;;; This package, `cl-sbt/questionnaire`, provides a suite of utilities for generating
-;;;; HTML forms composed of multiple questions. Each question can have a different type
-;;;; of input (radio buttons, checkboxes, etc.), and the form itself can be customized
-;;;; according to the target URL for submissions.
+;;;; This package, `cl-sbt/questionnaire`, provides a suite of utilities for
+;;;; generating HTML forms composed of multiple questions. Each question can
+;;;; have a different type of input (radio buttons, checkboxes, etc.), and the
+;;;; form itself can be customized according to the target URL for submissions.
 
 (defpackage cl-sbt/questionnaire
   (:documentation "Defines the `cl-sbt/questionnaire` package, a utility suite for generating HTML forms with various types of questions.")
