@@ -87,8 +87,8 @@ Returns two values:
 TYPE: A string specifying the HTML input type like 'radio', 'checkbox', 'text',
 etc.
 
-Returns:
-  A function that can be used to generate the HTML form input."
+Returns: A function that can be used to generate the HTML form input. Or throws
+an error if an unknown type is passed."
   (cond
     ((string= type "radio") #'checkable)
     ((string= type "checkbox") #'checkable)
