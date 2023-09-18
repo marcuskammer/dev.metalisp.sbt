@@ -140,6 +140,7 @@ Example:
                              `((process-choice ,group ,choice))))
                 (:hr :class (spacing :property "m" :side "y" :size 4)))))
 
+(declaim (ftype (function (plist) list) split-plist-by-keyword))
 (defun split-plist-by-keyword (plist)
   "Splits a property list (PLIST) into a list of smaller property lists, each starting with a keyword.
 
