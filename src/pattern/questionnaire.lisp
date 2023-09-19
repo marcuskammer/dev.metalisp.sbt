@@ -30,16 +30,21 @@
 
 (in-package :cl-sbt/questionnaire)
 
-(defun plistp (lst)
-  "Checks if the given list LST is a property list."
+
+(defun choicep (lst)
+  (and (keywordp (first lst))
+       (every #'stringp (rest lst))))
+
+(deftype choice ()
+  '(and list (satisfies choicep)))
+
+(defun choicesp (lst)
   (loop for elem in lst
         always (or (keywordp elem)
-                   (stringp elem)
-                   (listp elem))))
+                   (stringp elem))))
 
-(deftype plist ()
-  "A property list is a flat list containing keywords and strings."
-  '(and list (satisfies plistp)))
+(deftype choices ()
+  '(and list (satisfies choicesp)))
 
 (defun questionp (lst)
   (loop for i from 0 below (length lst)
@@ -47,9 +52,10 @@
         always (if (evenp i)
                    (keywordp elem)
                    (or (stringp elem)
-                       (plistp elem)))))
+                       (choicesp elem)))))
 
 (deftype question ()
+  " A question is a list of keyword value pairs."
   '(and list (satisfies questionp)))
 
 (defun resolve-input-type (type)
