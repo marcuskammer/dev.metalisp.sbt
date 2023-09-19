@@ -73,22 +73,22 @@ Returns:
         ((string= type "multiple") "checkbox")
         (t type)))
 
-(declaim (ftype (function (choice) t) resolve-input-and-choice))
+(declaim (ftype (function (choice) (values string list)) resolve-input-and-choice))
 (defun resolve-input-and-choice (choice)
-  "Separate the input type keyword from the remaining CHOICES in a list.
+  "Separate the input-type keyword from the remaining CHOICE in a list.
 
-If the first element of CHOICES is a keyword, it is taken to be the input type
-keyword, and the rest of the list is taken to be the actual choices.
+If the first element of CHOICE is a keyword, it is taken to be the input-type
+keyword, and the rest of the list is taken to be the actual values.
 
-CHOICES: The choices list, possibly including an input type keyword.
+CHOICE: The choice list, including an input type keyword.
 
 Returns two values:
-  1. The input type string if a keyword is present, or NIL if no keyword is found.
-  2. The remaining choices in the list, excluding the input type keyword."
+  1. The input-type string if a keyword.
+  2. The remaining values in the list, excluding the input type keyword."
   (let ((input-type-keyword (first choice)))
     (if (keywordp input-type-keyword)
         (values (resolve-input-type (string-downcase input-type-keyword)) (rest choice))
-        (values nil choice))))
+        (error "A choice always starts with a input-type keyword"))))
 
 (defun choose-input-form (type)
   "Choose the appropriate function to generate the HTML form input based on TYPE.
