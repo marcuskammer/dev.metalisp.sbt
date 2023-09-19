@@ -7,7 +7,7 @@
    :cl-sbt/questionnaire
    :question
    :resolve-input-type
-   :resolve-input-and-choices
+   :resolve-input-and-choice
    :extract-question-components
    :questionnaire))
 
@@ -19,14 +19,14 @@
     (ok (string= "checkbox" (resolve-input-type "multiple")))
     (ok (string= "text" (resolve-input-type "text")))))
 
-(deftest test-resolve-input-and-choices
+(deftest test-resolve-input-and-choice
   (testing "Test for resolve-input-and-choices"
     (multiple-value-bind (type choices)
-        (resolve-input-and-choices '(:radio "A" "B"))
+        (resolve-input-and-choice '(:radio "A" "B"))
       (ok (string= type "radio"))
       (ok (equal choices '("A" "B"))))
     (multiple-value-bind (type choices)
-        (resolve-input-and-choices '("A" "B"))
+        (resolve-input-and-choice '("A" "B"))
       (ok (null type))
       (ok (equal choices '("A" "B"))))))
 

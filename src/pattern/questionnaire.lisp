@@ -125,7 +125,7 @@ Returns:
 
 (defmacro process-choice (group choice)
   (multiple-value-bind (type values)
-      (resolve-input-and-choices choice)
+      (resolve-input-and-choice choice)
     (if (string= type "combo")
         `(spinneret:with-html
            (:li (combo () ,@values)))
