@@ -195,6 +195,7 @@ Returns:
     ;; Return the reversed result list
     (nreverse result)))
 
+(declaim (ftype (function (question) (values string string string)) extract-question-components))
 (defun extract-question-components (question)
   "Extracts components of a question stored as a plist.
 
