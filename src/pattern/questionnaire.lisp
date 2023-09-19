@@ -120,13 +120,13 @@ Returns:
   (funcall (choose-input-form type) type group item))
 
 (defmacro process-choice (group choice)
-  (multiple-value-bind (type inputs)
+  (multiple-value-bind (type values)
       (resolve-input-and-choices choice)
     (if (string= type "combo")
         `(spinneret:with-html
-           (:li (combo () ,@inputs)))
+           (:li (combo () ,@values)))
         `(spinneret:with-html
-           ,@(loop for input in inputs
+           ,@(loop for input in values
                    collect
                    `(:li (apply-input-form ,type ,group ,input)))))))
 
