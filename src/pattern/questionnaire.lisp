@@ -142,21 +142,26 @@ Example:
                              `((process-choice ,group ,choice))))
                 (:hr :class (spacing :property "m" :side "y" :size 4)))))
 
-(declaim (ftype (function (plist) list) split-plist-by-keyword))
-(defun split-plist-by-keyword (plist)
-  "Splits a property list (PLIST) into a list of smaller property lists, each starting with a keyword.
+(defun split-plist-by-keyword (lst)
+  "Splits a list (LST) into a list of smaller lists, each starting with a keyword.
 
-PLIST: A property list that includes keywords and their associated values.
+LST: A list that includes keywords followed by their associated values. The
+list can be a standard property list or a key-grouped list.
 
-This function treats the first element after each keyword as its value, and
-each new keyword signifies the start of a new property list.
+This function treats all elements after each keyword and before the next
+keyword as its values, and each new keyword signifies the start of a new
+sublist.
 
-Example:
-  Given the plist '(:a 1 :b 2 :c 3 :d 4),
-  it will return '((:a 1) (:b 2) (:c 3) (:d 4)).
+Example 1 (Property List):
+  Given the plist '(:a 1 :b 2 :c 3),
+  it will return '((:a 1) (:b 2) (:c 3)).
+
+Example 2 (Key-Grouped List):
+  Given the list '(:a 1 2 3 :b 4 5),
+  it will return '((:a 1 2 3) (:b 4 5)).
 
 Returns:
-  A list of property lists, each starting with a keyword."
+  A list of sublists, each starting with a keyword."
   ;; Initialize result and current-list
   (let ((result '())
         (current-list '()))
