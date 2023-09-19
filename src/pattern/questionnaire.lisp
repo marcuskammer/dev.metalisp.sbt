@@ -58,6 +58,10 @@
   " A question is a list of keyword value pairs."
   '(and list (satisfies questionp)))
 
+(deftype composite-list ()
+  '(or (satisfies choicesp)
+       (satisfies questionp)))
+
 (defun resolve-input-type (type)
   "Resolve the given input TYPE keyword to the corresponding HTML input type.
 
@@ -149,6 +153,7 @@ Example:
                              `((process-choice ,group ,choice))))
                 (:hr :class (spacing :property "m" :side "y" :size 4)))))
 
+(declaim (ftype (function (composite-list) list) split-list-by-keyword))
 (defun split-list-by-keyword (lst)
   "Splits a list (LST) into a list of smaller lists, each starting with a keyword.
 
@@ -170,8 +175,6 @@ Example 2 (Key-Grouped List):
 Returns:
   A list of sublists, each starting with a keyword."
   ;; Initialize result and current-list
-  (unless (or (choicesp lst) (questionp lst))
-    (error "Invalid type for LST. Expected a 'choices' or 'question'."))
   (let ((result '())
         (current-list '()))
     ;; Loop through each item in plist
