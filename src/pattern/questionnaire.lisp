@@ -166,7 +166,7 @@ Returns:
   (let ((result '())
         (current-list '()))
     ;; Loop through each item in plist
-    (loop for item in plist
+    (loop for item in lst
           do (if (keywordp item)  ; Check if item is a keyword
                  ;; Start of new property list detected
                  (progn
