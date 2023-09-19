@@ -149,7 +149,7 @@ Example:
                              `((process-choice ,group ,choice))))
                 (:hr :class (spacing :property "m" :side "y" :size 4)))))
 
-(defun split-plist-by-keyword (lst)
+(defun split-list-by-keyword (lst)
   "Splits a list (LST) into a list of smaller lists, each starting with a keyword.
 
 LST: A list that includes keywords followed by their associated values. The
@@ -199,7 +199,7 @@ Returns multiple values:
   - The question text (ASK)
   - The group name (GROUP)
   - The choices (CHOICES)"
-  (let ((splitted-list (split-plist-by-keyword question)))
+  (let ((splitted-list (split-list-by-keyword question)))
     (apply #'values (mapcar (lambda (x) (first (last x))) splitted-list))))
 
 (defmacro questionnaire (action &body body)
@@ -242,6 +242,6 @@ Example 4:
                       for (ask group choices) = (multiple-value-list (extract-question-components q))
                       do (unless (questionp q)
                            (error "Invalid question format: ~a" q))
-                      collect `(question ,ask ,group ,@(split-plist-by-keyword choices)))
+                      collect `(question ,ask ,group ,@(split-list-by-keyword choices)))
               (btn-primary (:type "submit")
                 (find-l10n "submit" spinneret:*html-lang* l10n))))))
