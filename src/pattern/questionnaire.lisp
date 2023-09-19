@@ -170,6 +170,8 @@ Example 2 (Key-Grouped List):
 Returns:
   A list of sublists, each starting with a keyword."
   ;; Initialize result and current-list
+  (unless (or (choicesp lst) (questionp lst))
+    (error "Invalid type for LST. Expected a 'choices' or 'question'."))
   (let ((result '())
         (current-list '()))
     ;; Loop through each item in plist
