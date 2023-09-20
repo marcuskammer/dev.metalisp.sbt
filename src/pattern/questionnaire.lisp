@@ -31,21 +31,41 @@
 (in-package :cl-sbt/questionnaire)
 
 (defun choicep (lst)
+  "Checks if the given list LST is a valid choice.
+
+A valid choice list starts with a keyword, followed by strings.
+
+Returns T if it's a valid choice list, otherwise NIL."
   (and (keywordp (first lst))
        (every #'stringp (rest lst))))
 
 (deftype choice ()
+  "Represents a valid choice list.
+
+A choice list is expected to satisfy the `choicep` predicate."
   '(and list (satisfies choicep)))
 
 (defun choicesp (lst)
+  "Checks if the given list LST contains only keyword or string elements.
+
+Returns T if all elements are either keywords or strings, otherwise NIL."
   (loop for elem in lst
         always (or (keywordp elem)
                    (stringp elem))))
 
 (deftype choices ()
+  "Represents a valid choices list.
+
+A choices list is expected to satisfy the `choicesp` predicate."
   '(and list (satisfies choicesp)))
 
 (defun questionp (lst)
+  "Checks if the given list LST is a valid question.
+
+A valid question is a list of alternating keywords and either strings or lists
+satisfying `choicesp`.
+
+Returns T if it's a valid question, otherwise NIL."
   (loop for i from 0 below (length lst)
         for elem = (nth i lst)
         always (if (evenp i)
@@ -54,10 +74,15 @@
                        (choicesp elem)))))
 
 (deftype question ()
-  " A question is a list of keyword value pairs."
+  "Represents a valid question list.
+
+A question list is expected to satisfy the `questionp` predicate."
   '(and list (satisfies questionp)))
 
 (deftype composite-list ()
+  "Represents a composite list that can either be a valid `choices` or `question`.
+
+A composite list is expected to satisfy either the `choicesp` or `questionp` predicate."
   '(or (satisfies choicesp)
        (satisfies questionp)))
 
