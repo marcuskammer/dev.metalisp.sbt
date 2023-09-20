@@ -148,6 +148,13 @@ Returns:
   (funcall (choose-input-form type) type group item))
 
 (defmacro process-choice (group choice)
+  "Generate HTML list elements based on the CHOICE specification for a question group.
+
+GROUP is the name attribute for the HTML form elements and CHOICE is the list that
+defines the input types and values for those form elements.
+
+Example:
+  (process-choice \"hobbies\" '(:radio \"Reading\" \"Swimming\" \"Coding\"))"
   (unless (choicep choice)
     (error "Invalid question format: ~a" choice))
   (multiple-value-bind (type values)
