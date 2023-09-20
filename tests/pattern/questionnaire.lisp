@@ -6,6 +6,8 @@
   (:import-from
    :cl-sbt/questionnaire
    :choicep
+   :choicesp
+   :questionp
    :question
    :resolve-input-type
    :resolve-input-and-choice
@@ -22,6 +24,21 @@
     (ng (choicep '(:radio "foo" :bar)))
     (ng (choicep '("foo" :bar :radio)))
     (ng (choicep '(() nil nil "foo")))))
+
+(deftest test-choicesp
+  (testing "Test for choicesp"
+    (ok (choicesp '(:radio "foo" :text "bar")))
+    (ng (choicesp '("radio" :foo "text" :bar)))
+    (ng (choicesp '("foo" "bar")))
+    (ng (choicesp '("foo" :bar)))
+    (ng (choicesp '(:radio ())))))
+
+(deftest test-questionp
+  (testing "Test for questionp"
+    (ok (questionp '(:ask "foo" :group "bar" :choices (:radio "foo"))))
+    (ok (questionp '(:frage "foo" :gruppe "bar" :auswahl (:radio "foo"))))
+    (ng (questionp '(:ask ("foo") :group ("bar") :choices ("radio"))))
+    (ng (questionp '("ask" :foo "group" :bar "choices" :radio)))))
 
 (deftest test-resolve-input-type
   (testing "Test for resolve-input-type"
