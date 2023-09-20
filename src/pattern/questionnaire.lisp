@@ -25,7 +25,6 @@
    :ctrl
    :combo)
   (:export
-   :question
    :questionnaire))
 
 (in-package :cl-sbt/questionnaire)
