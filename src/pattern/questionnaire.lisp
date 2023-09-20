@@ -124,6 +124,8 @@ Returns:
   (funcall (choose-input-form type) type group item))
 
 (defmacro process-choice (group choice)
+  (unless (choicep choice)
+    (error "Invalid question format: ~a" choice))
   (multiple-value-bind (type values)
       (resolve-input-and-choice choice)
     (if (string= type "combo")
