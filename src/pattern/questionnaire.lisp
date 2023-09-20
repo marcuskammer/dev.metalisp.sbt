@@ -49,8 +49,9 @@ A choice list is expected to satisfy the `choicep` predicate."
 
 Returns T if all elements are either keywords or strings, otherwise NIL."
   (loop for elem in lst
-        always (or (keywordp elem)
-                   (stringp elem))))
+        always (and (keywordp (first lst))
+                    (or (keywordp elem)
+                        (stringp elem)))))
 
 (deftype choices ()
   "Represents a valid choices list.
