@@ -132,14 +132,14 @@ an error if an unknown type is passed."
     ((string= type "text") #'ctrl)
     (t (error "Unknown type ~A" type))))
 
+(declaim (ftype (function (string string string) function) apply-input-form))
 (defun apply-input-form (type group item)
-  "Apply the chosen input form function to generate HTML for a single form
-   element.
+  "Apply the chosen input form function to generate HTML for a single form element.
 
 TYPE: A string specifying the HTML input type like 'radio', 'checkbox', 'text',
 etc.
 
-GROUP: Specifies the name attribute for the input elements.
+GROUP: A string specifying the name attribute for the input elements.
 
 ITEM: The particular choice item that this form element represents.
 
