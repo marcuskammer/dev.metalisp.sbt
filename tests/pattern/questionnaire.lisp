@@ -5,6 +5,7 @@
    :rove)
   (:import-from
    :cl-sbt/questionnaire
+   :choicep
    :question
    :resolve-input-type
    :resolve-input-and-choice
@@ -12,6 +13,15 @@
    :questionnaire))
 
 (in-package :cl-sbt/tests/questionnaire)
+
+(deftest test-choicep
+  (testing "Test for choicep"
+    (ok (choicep '(:radio "foo" "bar")))
+    (ok (choicep '(:text "foo")))
+    (ok (choicep '(:combo "foo" "bar")))
+    (ng (choicep '(:radio "foo" :bar)))
+    (ng (choicep '("foo" :bar :radio)))
+    (ng (choicep '(() nil nil "foo")))))
 
 (deftest test-resolve-input-type
   (testing "Test for resolve-input-type"
