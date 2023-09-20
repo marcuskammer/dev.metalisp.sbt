@@ -30,7 +30,6 @@
 
 (in-package :cl-sbt/questionnaire)
 
-
 (defun choicep (lst)
   (and (keywordp (first lst))
        (every #'stringp (rest lst))))
