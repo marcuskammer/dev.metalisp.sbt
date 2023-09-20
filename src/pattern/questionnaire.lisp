@@ -65,12 +65,14 @@ A valid question is a list of alternating keywords and either strings or lists
 satisfying `choicesp`.
 
 Returns T if it's a valid question, otherwise NIL."
-  (loop for i from 0 below (length lst)
-        for elem = (nth i lst)
-        always (if (evenp i)
-                   (keywordp elem)
-                   (or (stringp elem)
-                       (choicesp elem)))))
+  (if (= (length lst) 6)
+      (loop for i from 0 below (length lst)
+            for elem = (nth i lst)
+            always (if (evenp i)
+                       (keywordp elem)
+                       (or (stringp elem)
+                           (choicesp elem))))
+      nil))
 
 (deftype question ()
   "Represents a valid question list.
