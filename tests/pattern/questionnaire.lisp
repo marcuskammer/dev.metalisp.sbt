@@ -25,10 +25,7 @@
         (resolve-input-and-choice '(:radio "A" "B"))
       (ok (string= type "radio"))
       (ok (equal choices '("A" "B"))))
-    (multiple-value-bind (type choices)
-        (resolve-input-and-choice '("A" "B"))
-      (ok (null type))
-      (ok (equal choices '("A" "B"))))))
+    (ok (signals (resolve-input-and-choice '("A" "B"))))))
 
 (deftest test-question-radio
   (let ((result (spinneret:with-html-string
@@ -77,23 +74,15 @@
 
 (deftest test-extract-question-components-missing-components
   (testing "Test for extract-question-components with missing components"
-    (multiple-value-bind (ask2 group2 choices2)
-        (extract-question-components '(:ask "What is your favorite color?"
-                                       :choices (:radio "Red" "Green" "Blue")))
-      (ok (string= ask2 "What is your favorite color?"))
-      (ok (equal group2 '(:radio "Red" "Green" "Blue")))
-      (ok (null choices2)))))
+    (ok (signals (extract-question-components '(:ask "What is your favorite color?"
+                                                :choices (:radio "Red" "Green" "Blue")))))))
 
 (deftest test-extract-question-components-additional-keys
   (testing "Test for extract-question-components with additional keys"
-    (multiple-value-bind (ask3 group3 choices3)
-        (extract-question-components '(:ask "What is your favorite color?"
-                                       :group "favcolor"
-                                       :choices (:radio "Red" "Green" "Blue")
-                                       :extra "some-extra-info"))
-      (ok (string= ask3 "What is your favorite color?"))
-      (ok (string= group3 "favcolor"))
-      (ok (equal choices3 '(:radio "Red" "Green" "Blue"))))))
+    (ok (signals (extract-question-components '(:ask "What is your favorite color?"
+                                                :group "favcolor"
+                                                :choices (:radio "Red" "Green" "Blue")
+                                                :extra "some-extra-info"))))))
 
 (deftest test-create-questionnaire-single
   (let ((result (spinneret:with-html-string
