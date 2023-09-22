@@ -6,6 +6,7 @@
   :components ((:module "src"
                 :components
                 ((:file "main")
+                 (:file "translate")
                  (:file "utility")))
                (:module "src/layout"
                 :components
