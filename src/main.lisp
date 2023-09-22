@@ -76,7 +76,7 @@
                ("learn-more" ("en" "Learn More" "de" "Mehr erfahren" "fr" "En savoir plus")))
   "Localization (l10n) settings for multi-language support.")
 
-(declaim (ftype (function (string string dict) string)))
+(declaim (ftype (function (string string dict) string) find-l10n))
 (defun find-l10n (key lang dict)
   "Finds the localized string for a given key and language."
   (let ((entry (cadr (assoc key dict :test #'string=))))
