@@ -28,9 +28,7 @@
     ("cancel" ("en" "Cancel" "de" "Abbrechen" "fr" "Annuler"))
     ("upload" ("en" "Upload" "de" "Hochladen" "fr" "Télécharger"))
     ("search" ("en" "Search" "de" "Suchen" "fr" "Rechercher"))
-    ("option-selected" ("en" "Open this selected menu"
-                        "de" "Das ausgewählte Menü öffnen"
-                        "fr" "Ouvrir le menu sélectionné"))
+    ("option-selected" ("en" "Open this selected menu" "de" "Das ausgewählte Menü öffnen" "fr" "Ouvrir le menu sélectionné"))
     ("sign-up" ("en" "Sign Up" "de" "Registrieren" "fr" "Inscrivez-vous"))
     ("sign-in" ("en" "Sign In" "de" "Anmelden" "fr" "S'identifier"))
     ("next" ("en" "Next" "de" "Weiter" "fr" "Suivant"))
