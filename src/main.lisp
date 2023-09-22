@@ -23,7 +23,7 @@
   '(and list (satisfies dictp)))
 
 (declaim (type dict *l10n*))
-(defvar *l10n*
+(defparameter *l10n*
   '(("submit" ("en" "Submit" "de" "Absenden" "fr" "Soumettre"))
     ("cancel" ("en" "Cancel" "de" "Abbrechen" "fr" "Annuler"))
     ("upload" ("en" "Upload" "de" "Hochladen" "fr" "Télécharger"))
