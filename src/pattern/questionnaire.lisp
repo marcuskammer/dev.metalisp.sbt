@@ -152,8 +152,10 @@ Returns:
 (defmacro process-choice (group choice)
   "Generate HTML list elements based on the CHOICE specification for a question group.
 
-GROUP is the name attribute for the HTML form elements and CHOICE is the list that
-defines the input types and values for those form elements.
+GROUP is the name attribute for the HTML form elements.
+
+CHOICE is the list that defines the input types and values for those form
+elements. See `choicep'
 
 Example:
   (process-choice \"hobbies\" '(:radio \"Reading\" \"Swimming\" \"Coding\"))"
@@ -177,10 +179,19 @@ ASK: The text of the question to be displayed in the legend.
 GROUP: Specifies the name attribute for the input elements.
 
 BODY: A list of strings starting with a keyword representing the different
-answers available for selection.
+answers available for selection. See `choicesp'
 
-Example:
-  (question \"How old are you?\" \"age\" (:radio \"18-24\" \"25-34\" \"35-44\"))"
+Example 1:
+  (question  \"How old are you?\"  \"age\" (:radio \"18-24\" \"25-34\" \"35-44\"))
+
+Example 2:
+  (question \"How old are you?\" \"age\" (:single \"18-24\" \"25-34\" \"35-44\"))
+
+Example 3:
+  (question \"Which social media platforms do you use regularly?\" \"age\" (:multiple \"Facebook\" \"Twitter\" \"Instagram\"))
+
+Example 4:
+  (question \"Which social media platforms do you use regularly?\" \"age\" (:multiple \"Facebook\" \"Twitter\" \"Instagram\" :text \"Others\"))"
   `(spinneret:with-html
      (:fieldset (:legend ,ask)
                 (:ol ,@(loop for choice in body
@@ -245,15 +256,17 @@ Returns multiple values:
     (apply #'values (mapcar (lambda (x) (first (last x))) splitted-list))))
 
 (defmacro questionnaire (action &body body)
-  "This macro generates an HTML form composed of multiple questions, each rendered using the `question` macro.
+  "This macro generates an HTML form composed of multiple questions, each rendered using the `question' macro.
 
 ACTION: Specifies the URL where the form will be submitted. This should be a
 string representing the URL path.
 
-QUESTIONS: A series of plists, each representing a question. Each plist should
-contain the keys :ask, :group, and :choices. The first element of :choices
-should be a keyword specifying the type of input elements (e.g. :radio),
-followed by a list of answer options.
+BODY: A series of questions. Each question should contain the keys :ask,
+:group, and :choices. The first element of :choices should be a keyword
+specifying the type of input elements (e.g. :radio), followed by a list of
+answer options.
+
+See: `questionp', `choicesp', `choicep'
 
 Example 1:
   (questionnaire \"/submit\"
