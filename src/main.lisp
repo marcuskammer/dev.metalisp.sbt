@@ -12,6 +12,17 @@
 (defparameter *cdn-css* "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
 (defparameter *cdn-js* "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js")
 
+(defun dictp (lst)
+  (loop for entry in lst always
+        (and (listp entry)
+             (= (length entry) 2)
+             (stringp (first entry))
+             (mapcar (lambda (entry) (every #'stringp entry)) (rest entry)))))
+
+(deftype dict ()
+  '(and list (satisfies dictp)))
+
+(declaim (type dict l10n))
 (defvar l10n '(("submit" ("en" "Submit" "de" "Absenden" "fr" "Soumettre"))
                ("cancel" ("en" "Cancel" "de" "Abbrechen" "fr" "Annuler"))
                ("upload" ("en" "Upload" "de" "Hochladen" "fr" "Télécharger"))
@@ -65,9 +76,10 @@
                ("learn-more" ("en" "Learn More" "de" "Mehr erfahren" "fr" "En savoir plus")))
   "Localization (l10n) settings for multi-language support.")
 
-(defun find-l10n (key lang alist)
+(declaim (ftype (function (string string dict) string)))
+(defun find-l10n (key lang dict)
   "Finds the localized string for a given key and language."
-  (let ((entry (cadr (assoc key alist :test #'string=))))
+  (let ((entry (cadr (assoc key dict :test #'string=))))
     (if entry
         (let ((term (cadr (member lang entry :test #'string=))))
           (or term "Translation not found"))
