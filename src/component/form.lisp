@@ -10,7 +10,7 @@
    :cl)
   (:import-from
    :cl-sbt
-   :l10n
+   :*l10n*
    :find-l10n)
   (:import-from
    :cl-sbt/btn
@@ -195,7 +195,7 @@ Example 2:
        (:select :class ,class-attr
          ,@(when (numberp multiple) (list :size multiple :multiple t))
          (:option :selected t
-                  (find-l10n "option-selected" spinneret:*html-lang* l10n))
+                  (find-l10n "option-selected" spinneret:*html-lang* *l10n*))
          ,@(loop for item in body
                  collect
                  (let ((value-prop-str (build-value-prop-str item)))
@@ -243,4 +243,4 @@ Example usage:
            (btn-outline-success (:type "submit")
              (find-l10n "search"
                         spinneret:*html-lang*
-                        l10n)))))
+                        *l10n*)))))

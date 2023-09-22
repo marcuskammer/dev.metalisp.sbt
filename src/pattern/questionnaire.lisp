@@ -11,7 +11,7 @@
    :cl)
   (:import-from
    :cl-sbt
-   :l10n
+   :*l10n*
    :find-l10n)
   (:import-from
    :cl-sbt/btn
@@ -300,4 +300,4 @@ Example 4:
                            (error "Invalid question format: ~a" q))
                       collect `(question ,ask ,group ,@(split-list-by-keyword choices)))
               (btn-primary (:type "submit")
-                (find-l10n "submit" spinneret:*html-lang* l10n))))))
+                (find-l10n "submit" spinneret:*html-lang* *l10n*))))))
