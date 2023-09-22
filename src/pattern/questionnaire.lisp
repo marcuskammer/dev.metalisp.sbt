@@ -149,7 +149,7 @@ Returns:
   The HTML form element generated for the ITEM."
   (funcall (choose-input-form type) type group item))
 
-(defmacro process-choice (group choice)
+(defmacro choice (group choice)
   "Generate HTML list elements based on the CHOICE specification for a question group.
 
 GROUP is the name attribute for the HTML form elements.
@@ -158,7 +158,7 @@ CHOICE is the list that defines the input types and values for those form
 elements. See `choicep'
 
 Example:
-  (process-choice \"hobbies\" '(:radio \"Reading\" \"Swimming\" \"Coding\"))"
+  (choice \"hobbies\" '(:radio \"Reading\" \"Swimming\" \"Coding\"))"
   (unless (choicep choice)
     (error "Invalid question format: ~a" choice))
   (multiple-value-bind (type values)
@@ -196,7 +196,7 @@ Example 4:
      (:fieldset (:legend ,ask)
                 (:ol ,@(loop for choice in body
                              append
-                             `((process-choice ,group ,choice))))
+                             `((choice ,group ,choice))))
                 (:hr :class (spacing :property "m" :side "y" :size 4)))))
 
 (declaim (ftype (function (composite-list) list) split-list-by-keyword))
