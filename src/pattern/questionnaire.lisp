@@ -167,9 +167,9 @@ Example:
         `(spinneret:with-html
            (:li (combo () ,@values)))
         `(spinneret:with-html
-           ,@(loop for input in values
+           ,@(loop for value in values
                    collect
-                   `(:li (apply-input-form ,type ,group ,input)))))))
+                   `(:li (apply-input-form ,type ,group ,value)))))))
 
 (defmacro question (ask group &body body)
   "This macro generates a fieldset for a question with multiple answers.
