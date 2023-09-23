@@ -1,0 +1,52 @@
+* Making Localization (l10n) More Modular
+:PROPERTIES:
+:Author: Your Name
+:Date: [2023-09-22 Thu]
+:END:
+
+** Introduction
+This document outlines various approaches for making the l10n system more modular and extendable.
+
+** Nested Hash-Table Approach
+   - Use hash-tables to store language translations.
+   - Keys in the hash-table are language codes like "en", "de", etc.
+   - Values are also hash-tables that store key-value pairs for translations.
+
+*** Example Code
+#+BEGIN_SRC lisp
+(defparameter *l10n-hash-table* (make-hash-table :test 'equal))
+
+(defun set-translation (lang key value)
+  (let ((lang-table (or (gethash lang *l10n-hash-table*)
+                        (make-hash-table :test 'equal))))
+    (setf (gethash key lang-table) value)
+    (setf (gethash lang *l10n-hash-table*) lang-table)))
+#+END_SRC
+
+** Modular Functions to Add Translations
+   - Develop utility functions for adding or updating translations easily.
+
+*** Example Code
+#+BEGIN_SRC lisp
+(defun add-translation (l10n key translations)
+  (setf (gethash key l10n) translations))
+
+(defun add-language-translation (l10n key lang translation)
+  (let ((translations (gethash key l10n)))
+    (if translations
+        (setf (gethash lang translations) translation)
+        (setf (gethash key l10n) (make-hash-table :test 'equal)))))
+#+END_SRC
+
+** Use of Macros for Simplicity
+   - Use macros to make the syntax for adding new translations more straightforward.
+
+*** Example Code
+#+BEGIN_SRC lisp
+(defmacro deftranslation (key &rest translations)
+  `(progn ,@(loop for (lang val) on translations by #'cddr
+                  collect `(add-language-translation *l10n* ,key ,lang ,val))))
+#+END_SRC
+
+* Conclusion
+  These approaches aim to make the localization system in Common Lisp more modular and extendable. By implementing one or more of these approaches, adding new translations or modifying existing ones becomes simpler and more organized.
