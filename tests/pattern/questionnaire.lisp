@@ -8,6 +8,7 @@
    :choicep
    :choicesp
    :questionp
+   :choice
    :question
    :resolve-input-type
    :resolve-input-and-choice
@@ -53,6 +54,15 @@
       (ok (string= type "radio"))
       (ok (equal choices '("A" "B"))))
     (ok (signals (resolve-input-and-choice '("A" "B"))))))
+
+(deftest test-choice-radio
+  (let ((result (spinneret:with-html-string
+                  (choice "hobbies" (:radio "Reading" "Swimming" "Coding")))))
+    (testing "Generates correct HTML for choice"
+      (ok (search "type=radio" result))
+      (ok (search "for=group-hobbies-reading" result))
+      (ok (search "for=group-hobbies-swimming" result))
+      (ok (search "for=group-hobbies-coding" result)))))
 
 (deftest test-question-radio
   (let ((result (spinneret:with-html-string
