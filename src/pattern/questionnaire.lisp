@@ -160,7 +160,7 @@ elements. See `choicep'
 Example:
   (choice \"hobbies\" (:radio \"Reading\" \"Swimming\" \"Coding\"))"
   (unless (choicep choice)
-    (error "Invalid question format: ~a" choice))
+    (error "Invalid choice format: ~a" choice))
   (multiple-value-bind (type values)
       (resolve-input-and-choice choice)
     (if (string= type "combo")
