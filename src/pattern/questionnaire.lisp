@@ -158,7 +158,7 @@ CHOICE is the list that defines the input types and values for those form
 elements. See `choicep'
 
 Example:
-  (choice \"hobbies\" '(:radio \"Reading\" \"Swimming\" \"Coding\"))"
+  (choice \"hobbies\" (:radio \"Reading\" \"Swimming\" \"Coding\"))"
   (unless (choicep choice)
     (error "Invalid question format: ~a" choice))
   (multiple-value-bind (type values)
