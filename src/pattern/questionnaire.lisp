@@ -191,7 +191,7 @@ Example 3:
   (question \"Which social media platforms do you use regularly?\" \"age\" (:multiple \"Facebook\" \"Twitter\" \"Instagram\"))
 
 Example 4:
-  (question \"Which social media platforms do you use regularly?\" \"age\" (:multiple \"Facebook\" \"Twitter\" \"Instagram\" :text \"Others\"))"
+  (question \"Which social media platforms do you use regularly?\" \"age\" (:multiple \"Facebook\" \"Twitter\" \"Instagram\" (:text \"Others\")))"
   `(spinneret:with-html
      (:fieldset (:legend ,ask)
                 (:ol ,@(loop for choice in body
