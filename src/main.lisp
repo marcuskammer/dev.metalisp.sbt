@@ -1,4 +1,4 @@
-;;;; -*- mode: lisp; coding: utf-8; tab-width: 4; -*-
+;;;; -*- mode: lisp; coding: utf-8; tab-width: 4; fill-column: 100; indent-tabs-mode: nil; -*-
 (defpackage cl-sbt
   (:use :cl)
   (:export
