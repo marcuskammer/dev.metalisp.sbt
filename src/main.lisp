@@ -1,6 +1,9 @@
+;;;; -*- mode: lisp; coding: utf-8; tab-width: 4; -*-
 (defpackage cl-sbt
   (:use :cl)
   (:export
+   :*cdn-css*
+   :*cdn-js*
    :write-html-to-file
    :with-page
    :*l10n*
