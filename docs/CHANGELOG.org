@@ -1,0 +1,10 @@
+#+author: Marcus Kammer
+#+email: marcus.kammer@mailbox.org
+#+date: [2023-10-02 Mon]
+#+title: CHANGELOG of cl-sbt library
+#+language: en
+
+* [2023-10-02 Mon] Start logging
+
+On this day I am starting to describe changes I made to =c-sbt= for my future
+self also for future users of the library.
