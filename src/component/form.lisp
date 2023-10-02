@@ -1,3 +1,4 @@
+;;;; -*- mode: lisp; coding: utf-8-unix; tab-width: 4; fill-column: 100; indent-tabs-mode: nil; -*-
 ;;;; form.lisp
 ;;;;
 ;;;; This file is part of the CL-SBT project and defines utility functions,
