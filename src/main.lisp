@@ -19,20 +19,20 @@
   `(spinneret:with-html
      (:doctype)
      (:html :data-bs-theme ,theme
-      (:head
-       (:meta :charset "utf-8")
-       (:meta :name "viewport" :content "width=device-width, initial-scale=1")
-       (:meta :name "author" :content ,author)
-       (:meta :name "description" :content ,description)
-       (:title ,pagetitle)
-       (if ,cdn
-           (:link :type "text/css" :rel "stylesheet" :href ,*cdn-css*)
-           (:link :type "text/css" :rel "stylesheet" :href "5.3.0/bootstrap.min.css")))
-      (:body (:h1 :class "visually-hidden" ,pagetitle)
-        (:main ,@body))
-      (if ,cdn
-          (:script :src *cdn-js*)
-          (:script :src "5.3.0/bootstrap.bundle.min.js")))))
+            (:head
+             (:meta :charset "utf-8")
+             (:meta :name "viewport" :content "width=device-width, initial-scale=1")
+             (:meta :name "author" :content ,author)
+             (:meta :name "description" :content ,description)
+             (:title ,pagetitle)
+             (if ,cdn
+                 (:link :type "text/css" :rel "stylesheet" :href ,*cdn-css*)
+                 (:link :type "text/css" :rel "stylesheet" :href "5.3.0/bootstrap.min.css")))
+            (:body (:h1 :class "visually-hidden" ,pagetitle)
+              (:main ,@body))
+            (if ,cdn
+                (:script :src *cdn-js*)
+                (:script :src "5.3.0/bootstrap.bundle.min.js")))))
 
 (defun write-html-to-file (filename string &key (lang "en") (style :tree) (fc 120))
   (let ((spinneret:*html-lang* lang)
