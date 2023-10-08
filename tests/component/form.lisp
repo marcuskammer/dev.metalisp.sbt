@@ -5,6 +5,7 @@
    :rove)
   (:import-from
    :cl-sbt/form
+   :remove-special-chars
    :ctrl
    :combo
    :combo-sm
@@ -13,6 +14,10 @@
    :checkable))
 
 (in-package :cl-sbt/tests/form)
+
+(deftest test-remove-special-chars
+  (testing "Removes all special characters from the string STR except numbers and alphabets."
+    (ok (string= (remove-special-chars "a1b!@#$%^&*()c2") "a1bc2"))))
 
 (deftest test-select-default
   (let ((result (spinneret:with-html-string (combo () "Red" "Green" "Blue"))))
