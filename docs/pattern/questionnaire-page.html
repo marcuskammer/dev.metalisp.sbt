@@ -1,0 +1,145 @@
+<html lang=en>
+ <head>
+  <meta charset=UTF-8>
+  <title>Questionnaire Examples</title>
+  <link rel=stylesheet type=text/css
+        href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css>
+ </head>
+ <body>
+  <h1>Questionnaire Examples</h1>
+  <form class=py-5 action=/submit method=post>
+   <fieldset>
+    <legend>How old are you?</legend>
+    <ol>
+     <li>
+      <!-- FORM/CHECKABLE -->
+<div class=form-check>
+       <label for=group-age-1824 class="form-check-label group-age">
+        <input class=form-check-input type=radio name=group-age value=18-24
+               id=group-age-1824> 18-24</label>
+      </div>
+     <li>
+      <!-- FORM/CHECKABLE -->
+<div class=form-check>
+       <label for=group-age-2534 class="form-check-label group-age">
+        <input class=form-check-input type=radio name=group-age value=25-34
+               id=group-age-2534> 25-34</label>
+      </div>
+     <li>
+      <!-- FORM/CHECKABLE -->
+<div class=form-check>
+       <label for=group-age-3544 class="form-check-label group-age">
+        <input class=form-check-input type=radio name=group-age value=35-44
+               id=group-age-3544> 35-44</label>
+      </div>
+     <li>
+      <!-- FORM/CHECKABLE -->
+<div class=form-check>
+       <label for=group-age-4554 class="form-check-label group-age">
+        <input class=form-check-input type=radio name=group-age value=45-54
+               id=group-age-4554> 45-54</label>
+      </div>
+     <li>
+      <!-- FORM/CHECKABLE -->
+<div class=form-check>
+       <label for=group-age-55 class="form-check-label group-age">
+        <input class=form-check-input type=radio name=group-age value=55+
+               id=group-age-55> 55+</label>
+      </div>
+    </ol>
+    <hr class=my-4>
+   </fieldset>
+   <fieldset>
+    <legend>Gender</legend>
+    <ol>
+     <li>
+      <!-- FORM/CHECKABLE -->
+<div class=form-check>
+       <label for=group-gender-male class="form-check-label group-gender">
+        <input class=form-check-input type=radio name=group-gender
+               value=male id=group-gender-male> Male</label>
+      </div>
+     <li>
+      <!-- FORM/CHECKABLE -->
+<div class=form-check>
+       <label for=group-gender-female class="form-check-label group-gender">
+        <input class=form-check-input type=radio name=group-gender
+               value=female id=group-gender-female> Female</label>
+      </div>
+     <li>
+      <!-- FORM/CHECKABLE -->
+<div class=form-check>
+       <label for=group-gender-nonbinary
+              class="form-check-label group-gender">
+        <input class=form-check-input type=radio name=group-gender
+               value=non-binary id=group-gender-nonbinary> Non-binary</label>
+      </div>
+     <li>
+      <!-- FORM/CHECKABLE -->
+<div class=form-check>
+       <label for=group-gender-prefernottosay
+              class="form-check-label group-gender">
+        <input class=form-check-input type=radio name=group-gender
+               value=prefer-not-to-say id=group-gender-prefernottosay> Prefer not to say</label>
+      </div>
+     <li>
+      <!-- FORM/CHECKABLE -->
+<div class=form-check>
+       <label for=group-gender-other class="form-check-label group-gender">
+        <input class=form-check-input type=radio name=group-gender
+               value=other id=group-gender-other> Other</label>
+      </div>
+     <li>
+      <!-- FORM/CTRL -->
+<div class=mb-3>
+       <label for=group-gender-other class="form-label group-gender">Other</label>
+       <input class=form-control id=group-gender-other type=text
+              name=group-gender>
+      </div>
+    </ol>
+    <hr class=my-4>
+   </fieldset>
+   <fieldset>
+    <legend>How many hours per day, on average, do you spend browsing the internet?</legend>
+    <ol>
+     <li>
+      <!-- FORM/CHECKABLE -->
+<div class=form-check>
+       <label for=group-webbrowsing-lessthan1hour
+              class="form-check-label group-webbrowsing">
+        <input class=form-check-input type=radio name=group-webbrowsing
+               value=less-than-1-hour id=group-webbrowsing-lessthan1hour> Less than 1 hour</label>
+      </div>
+     <li>
+      <!-- FORM/CHECKABLE -->
+<div class=form-check>
+       <label for=group-webbrowsing-13hours
+              class="form-check-label group-webbrowsing">
+        <input class=form-check-input type=radio name=group-webbrowsing
+               value=1-3-hours id=group-webbrowsing-13hours> 1-3 hours</label>
+      </div>
+     <li>
+      <!-- FORM/CHECKABLE -->
+<div class=form-check>
+       <label for=group-webbrowsing-35hours
+              class="form-check-label group-webbrowsing">
+        <input class=form-check-input type=radio name=group-webbrowsing
+               value=3-5-hours id=group-webbrowsing-35hours> 3-5 hours</label>
+      </div>
+     <li>
+      <!-- FORM/CHECKABLE -->
+<div class=form-check>
+       <label for=group-webbrowsing-5hours
+              class="form-check-label group-webbrowsing">
+        <input class=form-check-input type=radio name=group-webbrowsing
+               value=5+-hours id=group-webbrowsing-5hours> 5+ hours</label>
+      </div>
+    </ol>
+    <hr class=my-4>
+   </fieldset>
+   <button class="btn btn-primary" type=submit>Submit</button>
+  </form>
+  <script
+          src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js></script>
+ </body>
+</html>
