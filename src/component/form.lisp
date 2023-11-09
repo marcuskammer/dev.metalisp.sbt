@@ -152,7 +152,9 @@ checkable macros."
 (defun ctrl (type name label)
   "Generates a basic Bootstrap form control with a label.
 
-TYPE: Specifies the type of input, such as 'text', 'password', etc.
+TYPE: Specifies the type of input, such as: 'button', 'checkbox', 'color', 'date', 'datetime-local',
+'email', 'file', 'hidden', 'image', 'month', 'number', 'password', 'radio', 'range', 'reset',
+'search', 'submit', 'tel', 'text', 'time', 'url', 'week'.
 
 NAME: The name attribute for the control.
 
