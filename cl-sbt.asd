@@ -2,6 +2,8 @@
   :version "0.1.0"
   :author "Marcus Kammer"
   :license "MIT"
+  :bug-tracker "https://todo.sr.ht/~marcuskammer/cl-sbt"
+  :source-control (:git "git@git.sr.ht:~marcuskammer/cl-sbt")
   :depends-on (:spinneret)
   :components ((:module "src"
                 :components
