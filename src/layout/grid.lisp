@@ -35,17 +35,17 @@
 ;; richness. From mobile to desktop, the grid system will scale up
 ;; appropriately to ensure your designs are fully responsive.
 
-(defpackage cl-sbt/grid
+(defpackage dev.metalisp.sbt/grid
   (:use :cl)
   (:import-from
-   :cl-sbt/utility
+   :dev.metalisp.sbt/utility
    :*breakpoints*)
   (:export
    :con
    :row
    :col))
 
-(in-package :cl-sbt/grid)
+(in-package :dev.metalisp.sbt/grid)
 
 (defun string-clean (str)
   (string-trim " " (string-downcase str)))
@@ -163,7 +163,7 @@ FLUID: When non-nil, the container becomes fluid (full width).
 BREAKPOINT: Specifies the size of the container at various breakpoints, should
 be 'sm', 'md', 'lg', 'xl', or 'xxl'.
 
-TEXT: A keyword list that applies text utilities. -> cl-sbt/utility:text
+TEXT: A keyword list that applies text utilities. -> dev.metalisp.sbt/utility:text
 
 Example 1:
   (con (:fluid t) \"Hello, world!\")
@@ -184,8 +184,8 @@ Example 4:
   ; defined breakpoint, containing bold text."
   (let* ((fluid-str (if (null fluid) "container " "container-fluid "))
          (breakpoint-str (if (null breakpoint) "" (format nil "~a " (apply #'breakpoint-class breakpoint))))
-         (text-str (if (null text) "" (format nil "~a " (apply #'cl-sbt/utility:text text))))
-         (spacing-str (if (null spacing) "" (apply #'cl-sbt/utility:spacing spacing)))
+         (text-str (if (null text) "" (format nil "~a " (apply #'dev.metalisp.sbt/utility:text text))))
+         (spacing-str (if (null spacing) "" (apply #'dev.metalisp.sbt/utility:spacing spacing)))
          (class-str (string-clean (concatenate 'string fluid-str breakpoint-str text-str spacing-str))))
     `(spinneret:with-html
        (:comment "START CONTAINER")
@@ -236,7 +236,7 @@ Example 4:
                                  (if (null alignitems) "" (format nil "align-items-~a " alignitems))
                                  (if (null justifycontent) "" (format nil "justify-content-~a " justifycontent))
                                  (if (null spacing) ""
-                                     (apply #'cl-sbt/utility:spacing spacing))))))
+                                     (apply #'dev.metalisp.sbt/utility:spacing spacing))))))
     `(spinneret:with-html
        (:div :class ,class-str
              ,@body))))
@@ -254,7 +254,7 @@ ALIGN-SELF: Specifies the alignment of the column.
 Possible values are 'start', 'center', 'end'.
 
 SPACING: A list specifying the Bootstrap spacing class. The list should contain
-keyword arguments that can be passed to the cl-sbt/utility:spacing function.
+keyword arguments that can be passed to the dev.metalisp.sbt/utility:spacing function.
 
 Example 1:
   (col (:cols 6) \"Hello, world!\")
@@ -282,7 +282,7 @@ Example 4:
                                      (apply #'breakpoint-class breakpoint))
                                  (if (null alignself) "" (format nil "align-self-~a " alignself))
                                  (if (null spacing) ""
-                                     (apply #'cl-sbt/utility:spacing spacing))))))
+                                     (apply #'dev.metalisp.sbt/utility:spacing spacing))))))
     `(spinneret:with-html
        (:div :class ,class-str
              ,@body))))

@@ -6,19 +6,19 @@
 ;;;; It provides mechanisms to build form controls, manage localization,
 ;;;; and perform string manipulations.
 
-(defpackage cl-sbt/form
+(defpackage dev.metalisp.sbt/form
   (:use
    :cl)
   (:import-from
-   :cl-sbt
+   :dev.metalisp.sbt
    :*l10n*
    :find-l10n)
   (:import-from
-   :cl-sbt/btn
+   :dev.metalisp.sbt/btn
    :btn-outline-success
    :btn-primary)
   (:import-from
-   :cl-sbt/utility
+   :dev.metalisp.sbt/utility
    :spacing)
   (:export
    :combo
@@ -31,7 +31,7 @@
    :ctrl
    :search-form))
 
-(in-package :cl-sbt/form)
+(in-package :dev.metalisp.sbt/form)
 
 (defun remove-special-chars (str)
   "Removes all special characters from the string STR except numbers and alphabets.

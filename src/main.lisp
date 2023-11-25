@@ -1,5 +1,5 @@
 ;;;; -*- mode: lisp; coding: utf-8; tab-width: 4; fill-column: 100; indent-tabs-mode: nil; -*-
-(defpackage cl-sbt
+(defpackage dev.metalisp.sbt
   (:use :cl)
   (:export
    :*cdn-css*
@@ -9,7 +9,7 @@
    :*l10n*
    :find-l10n))
 
-(in-package :cl-sbt)
+(in-package :dev.metalisp.sbt)
 
 (setq spinneret:*fill-column* 120)
 (defparameter *cdn-css* "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")

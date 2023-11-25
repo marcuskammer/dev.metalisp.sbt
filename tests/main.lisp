@@ -1,7 +1,7 @@
-(defpackage cl-sbt/tests/main
+(defpackage dev.metalisp.sbt/tests/main
   (:use :cl
-        :cl-sbt
+        :dev.metalisp.sbt
         :rove))
-(in-package :cl-sbt/tests/main)
+(in-package :dev.metalisp.sbt/tests/main)
 
-;; NOTE: To run this test file, execute `(asdf:test-system :cl-sbt)' in your Lisp.
+;; NOTE: To run this test file, execute `(asdf:test-system :dev.metalisp.sbt)' in your Lisp.

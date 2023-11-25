@@ -1,4 +1,4 @@
-(in-package :cl-sbt)
+(in-package :dev.metalisp.sbt)
 
 (defun dictp (lst)
   (loop for entry in lst always

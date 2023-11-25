@@ -1,33 +1,33 @@
 ;;;; questionnaire.lisp
 
-;;;; This package, `cl-sbt/questionnaire`, provides a suite of utilities for
+;;;; This package, `dev.metalisp.sbt/questionnaire`, provides a suite of utilities for
 ;;;; generating HTML forms composed of multiple questions. Each question can
 ;;;; have a different type of input (radio buttons, checkboxes, etc.), and the
 ;;;; form itself can be customized according to the target URL for submissions.
 
-(defpackage cl-sbt/questionnaire
-  (:documentation "Defines the `cl-sbt/questionnaire` package, a utility suite for generating HTML forms with various types of questions.")
+(defpackage dev.metalisp.sbt/questionnaire
+  (:documentation "Defines the `dev.metalisp.sbt/questionnaire` package, a utility suite for generating HTML forms with various types of questions.")
   (:use
    :cl)
   (:import-from
-   :cl-sbt
+   :dev.metalisp.sbt
    :*l10n*
    :find-l10n)
   (:import-from
-   :cl-sbt/btn
+   :dev.metalisp.sbt/btn
    :btn-primary)
   (:import-from
-   :cl-sbt/utility
+   :dev.metalisp.sbt/utility
    :spacing)
   (:import-from
-   :cl-sbt/form
+   :dev.metalisp.sbt/form
    :checkable
    :ctrl
    :combo)
   (:export
    :questionnaire))
 
-(in-package :cl-sbt/questionnaire)
+(in-package :dev.metalisp.sbt/questionnaire)
 
 (defun choicep (lst)
   "Checks if the given list LST is a valid choice.

@@ -1,16 +1,16 @@
-(defpackage cl-sbt/tests/accordion
+(defpackage dev.metalisp.sbt/tests/accordion
   (:use
    :cl
-   :cl-sbt
+   :dev.metalisp.sbt
    :rove)
   (:import-from
-   :cl-sbt/accordion
+   :dev.metalisp.sbt/accordion
    :header
    :collapse
    :item
    :accordion))
 
-(in-package :cl-sbt/tests/accordion)
+(in-package :dev.metalisp.sbt/tests/accordion)
 
 (deftest test-header
   (let ((result (spinneret:with-html-string (header "collapseOne" "Heading" t))))

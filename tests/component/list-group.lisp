@@ -1,14 +1,14 @@
-(defpackage cl-sbt/tests/list-group
+(defpackage dev.metalisp.sbt/tests/list-group
   (:use
    :cl
-   :cl-sbt
+   :dev.metalisp.sbt
    :rove)
   (:import-from
-   :cl-sbt/list-group
+   :dev.metalisp.sbt/list-group
    :item
    :list-group))
 
-(in-package :cl-sbt/tests/list-group)
+(in-package :dev.metalisp.sbt/tests/list-group)
 
 (deftest test-item
   (let ((result (spinneret:with-html-string (item "Item 1"))))

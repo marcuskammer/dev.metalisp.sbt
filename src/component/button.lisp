@@ -3,7 +3,7 @@
 ;;;; This file defines a package for generating Bootstrap button components
 ;;;; using Common Lisp macros.
 
-(defpackage cl-sbt/btn
+(defpackage dev.metalisp.sbt/btn
   (:use :cl)
   (:export
    :btn
@@ -62,7 +62,7 @@
    :btn-outline-dark-sm
    :btn-outline-link-sm))
 
-(in-package :cl-sbt/btn)
+(in-package :dev.metalisp.sbt/btn)
 
 (defmacro btn ((&key (id nil) (type "button") (color "primary") (size "")) &body body)
   "This macro generates a Bootstrap button.

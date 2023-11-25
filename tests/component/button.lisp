@@ -1,15 +1,15 @@
-(defpackage cl-sbt/tests/btn
+(defpackage dev.metalisp.sbt/tests/btn
   (:use
    :cl
-   :cl-sbt
+   :dev.metalisp.sbt
    :rove)
   (:import-from
-   :cl-sbt/btn
+   :dev.metalisp.sbt/btn
    :btn
    :btn-primary
    :btn-outline-primary))
 
-(in-package :cl-sbt/tests/btn)
+(in-package :dev.metalisp.sbt/tests/btn)
 
 (deftest test-btn-macro
   (testing "Testing btn macro"

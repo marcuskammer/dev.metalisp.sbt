@@ -1,10 +1,10 @@
-(defpackage cl-sbt/tests/card
+(defpackage dev.metalisp.sbt/tests/card
   (:use
    :cl
-   :cl-sbt
+   :dev.metalisp.sbt
    :rove)
   (:import-from
-   :cl-sbt/card
+   :dev.metalisp.sbt/card
    :title
    :subtitle
    :text
@@ -16,7 +16,7 @@
    :card
    :card-group))
 
-(in-package :cl-sbt/tests/card)
+(in-package :dev.metalisp.sbt/tests/card)
 
 (deftest test-title
   (let ((result (spinneret:with-html-string (title "My Title"))))

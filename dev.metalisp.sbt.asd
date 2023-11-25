@@ -1,9 +1,8 @@
-(defsystem "cl-sbt"
+(defsystem "dev.metalisp.sbt"
   :version "0.1.0"
   :author "Marcus Kammer"
   :license "MIT"
-  :bug-tracker "https://todo.sr.ht/~marcuskammer/cl-sbt"
-  :source-control (:git "git@git.sr.ht:~marcuskammer/cl-sbt")
+  :source-control (:git "git@git.sr.ht:~marcuskammer/dev.metalisp.sbt")
   :depends-on (:spinneret)
   :components ((:module "src"
                 :components
@@ -35,12 +34,12 @@
                 :components
                 ((:file "album"))))
   :description "A Common Lisp library for generating Bootstrap-based HTML markup. It provides macros to easily create Bootstrap components such as accordions, alerts, badges, buttons, cards, dropdowns, headers, list groups, navbars, nav-tabs, pagination, and tables. This library is dependent on the Spinneret library for HTML generation."
-  :in-order-to ((test-op (test-op "cl-sbt/tests"))))
+  :in-order-to ((test-op (test-op "dev.metalisp.sbt/tests"))))
 
-(defsystem "cl-sbt/tests"
+(defsystem "dev.metalisp.sbt/tests"
   :author "Marcus Kammer"
   :license "MIT"
-  :depends-on ("cl-sbt"
+  :depends-on ("dev.metalisp.sbt"
                "rove")
   :components ((:module "tests"
                 :components
@@ -64,5 +63,5 @@
                (:module "tests/pattern"
                 :components
                 ((:file "questionnaire"))))
-  :description "Test system for cl-sbt"
+  :description "Test system for dev.metalisp.sbt"
   :perform (test-op (op c) (symbol-call :rove :run c)))

@@ -1,10 +1,10 @@
-(defpackage cl-sbt/tests/questionnaire
+(defpackage dev.metalisp.sbt/tests/questionnaire
   (:use
    :cl
-   :cl-sbt
+   :dev.metalisp.sbt
    :rove)
   (:import-from
-   :cl-sbt/questionnaire
+   :dev.metalisp.sbt/questionnaire
    :choicep
    :choicesp
    :questionp
@@ -15,7 +15,7 @@
    :extract-question-components
    :questionnaire))
 
-(in-package :cl-sbt/tests/questionnaire)
+(in-package :dev.metalisp.sbt/tests/questionnaire)
 
 (deftest test-choicep
   (testing "Test for choicep"

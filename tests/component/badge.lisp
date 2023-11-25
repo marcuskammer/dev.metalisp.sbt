@@ -1,15 +1,15 @@
-(defpackage cl-sbt/tests/badge
+(defpackage dev.metalisp.sbt/tests/badge
   (:use
    :cl
-   :cl-sbt
+   :dev.metalisp.sbt
    :rove)
   (:import-from
-   :cl-sbt/badge
+   :dev.metalisp.sbt/badge
    :badge
    :badge-primary
    :badge-pill-primary))
 
-(in-package :cl-sbt/tests/badge)
+(in-package :dev.metalisp.sbt/tests/badge)
 
 (deftest test-badge-macro
   (testing "Testing badge macro"

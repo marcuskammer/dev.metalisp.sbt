@@ -1,10 +1,10 @@
-(defpackage cl-sbt/tests/utility
+(defpackage dev.metalisp.sbt/tests/utility
   (:use
    :cl
-   :cl-sbt
+   :dev.metalisp.sbt
    :rove)
   (:import-from
-   :cl-sbt/utility
+   :dev.metalisp.sbt/utility
    :background
    :color
    :opacity
@@ -14,7 +14,7 @@
    :text
    :valign))
 
-(in-package :cl-sbt/tests/utility)
+(in-package :dev.metalisp.sbt/tests/utility)
 
 (deftest test-background-color
   (testing "Generates correct background class with color"

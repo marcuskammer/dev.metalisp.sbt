@@ -29,13 +29,13 @@
 ;; through this example, one can get a grasp of Bootstrap's conventions and
 ;; learn how to use its components effectively.
 
-(defpackage cl-sbt/album
+(defpackage dev.metalisp.sbt/album
   (:use :cl)
-  (:import-from :cl-sbt/grid :con :row :col)
-  (:import-from :cl-sbt/btn :btn-primary)
-  (:import-from :cl-sbt/navbar :navbar :brand :toggler :collapsible)
-  (:import-from :cl-sbt/utility :color)
-  (:import-from :cl-sbt :write-html-to-file :with-page)
+  (:import-from :dev.metalisp.sbt/grid :con :row :col)
+  (:import-from :dev.metalisp.sbt/btn :btn-primary)
+  (:import-from :dev.metalisp.sbt/navbar :navbar :brand :toggler :collapsible)
+  (:import-from :dev.metalisp.sbt/utility :color)
+  (:import-from :dev.metalisp.sbt :write-html-to-file :with-page)
   (:import-from :spinneret :with-html-string)
   (:export
    :contact
@@ -46,10 +46,10 @@
    :page
    :write-page
    :*navbar-header-id*)
-  (:documentation "The `cl-sbt-album` package provides macros for building an
+  (:documentation "The `dev.metalisp.sbt-album` package provides macros for building an
   album-style website page using Bootstrap and Spinneret."))
 
-(in-package :cl-sbt/album)
+(in-package :dev.metalisp.sbt/album)
 
 (defvar *navbar-header-id* "navbarHeader")
 
@@ -67,7 +67,7 @@ Example usage:
   ; provided content."
   `(spinneret:with-html
      (:h4 "About")
-     (:p :class ,(apply #'cl-sbt/utility:color color)
+     (:p :class ,(apply #'dev.metalisp.sbt/utility:color color)
          ,@body)))
 
 (defmacro contact (&rest rest)
@@ -87,7 +87,7 @@ Example usage:
      (:ul :class "list-unstyled"
           ,@(loop for item in rest
                   collect (destructuring-bind (&key url label) item
-                            `(:li (:a :class ,(cl-sbt/utility:color :text :white)
+                            `(:li (:a :class ,(dev.metalisp.sbt/utility:color :text :white)
                                       :href ,url
                                       ,label)))))))
 
@@ -113,11 +113,11 @@ predefined content."
   "Generates an HTML footer with Bootstrap classes.
 
 COLOR: Specifies the color scheme of the footer. It's a list containing keyword
-arguments that can be passed to the cl-sbt/utility:color function. Default is
+arguments that can be passed to the dev.metalisp.sbt/utility:color function. Default is
 '(:text :body-secondary), setting the text color to secondary.
 
 SPACING: A list specifying the Bootstrap spacing class. The list should contain
-keyword arguments that can be passed to the cl-sbt/utility:spacing function.
+keyword arguments that can be passed to the dev.metalisp.sbt/utility:spacing function.
 Default is '(:property :p :size 5), setting the padding size to 5.
 
 REST: A list of key-value pairs. A recognized key is :copyright which
@@ -138,8 +138,8 @@ Example usage:
   ; be added to the footer."
   `(spinneret:with-html
      (:footer :class ,(concatenate 'string
-                                   (apply #'cl-sbt/utility:color color) " "
-                                   (apply #'cl-sbt/utility:spacing spacing))
+                                   (apply #'dev.metalisp.sbt/utility:color color) " "
+                                   (apply #'dev.metalisp.sbt/utility:spacing spacing))
               (con nil
                 ,@(destructuring-bind (&key copyright content) rest
                     `((:p :class "float-end mb-1"
@@ -236,4 +236,4 @@ to the respective component macros."
     (write-html-to-file filepath
                           (with-html-string (page "Album" t)))))
 
-;(cl-sbt/album:write-page "~/quicklisp/local-projects/cl-sbt/public/examples/album.html")
+;(dev.metalisp.sbt/album:write-page "~/quicklisp/local-projects/dev.metalisp.sbt/public/examples/album.html")

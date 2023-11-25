@@ -3,7 +3,7 @@
 ;;;; This file defines a package for generating Bootstrap alert components
 ;;;; using Common Lisp macros.
 
-(defpackage cl-sbt/alert
+(defpackage dev.metalisp.sbt/alert
   (:use :cl)
   (:export
    :btn
@@ -25,7 +25,7 @@
    :alert-dismiss-light
    :alert-dismiss-dark))
 
-(in-package :cl-sbt/alert)
+(in-package :dev.metalisp.sbt/alert)
 
 (defmacro btn ()
   "This macro generates the close button used in a Bootstrap alert when it is set to be dismissible."

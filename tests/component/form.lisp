@@ -1,10 +1,10 @@
-(defpackage cl-sbt/tests/form
+(defpackage dev.metalisp.sbt/tests/form
   (:use
    :cl
-   :cl-sbt
+   :dev.metalisp.sbt
    :rove)
   (:import-from
-   :cl-sbt/form
+   :dev.metalisp.sbt/form
    :remove-special-chars
    :ctrl
    :combo
@@ -13,7 +13,7 @@
    :search-form
    :checkable))
 
-(in-package :cl-sbt/tests/form)
+(in-package :dev.metalisp.sbt/tests/form)
 
 (deftest test-remove-special-chars
   (testing "Removes all special characters from the string STR except numbers and alphabets."
