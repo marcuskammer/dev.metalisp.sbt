@@ -12,7 +12,8 @@
                (:module "src/layout"
                 :components
                 ((:file "grid")))
-               (:module "src/component" ; Components are the building blocks for Patterns
+               (:module "src/component"
+                        ;; Components are the building blocks for Patterns
                 :components
                 ((:file "accordion")
                  (:file "alert")
@@ -27,7 +28,8 @@
                  (:file "table")
                  (:file "spinner")
                  (:file "form")))
-               (:module "src/pattern" ; Patterns define their own DSL to create specific things
+               (:module "src/pattern"
+                        ;; Patterns define their own DSL to create specific things
                 :components
                 ((:file "questionnaire")))
                (:module "examples"
