@@ -20,7 +20,7 @@
    :dev.metalisp.sbt/utility
    :spacing)
   (:import-from
-   :dev.metalisp.sbt/form
+   :dev.metalisp.sbt/component/form
    :checkable
    :ctrl
    :combo)
