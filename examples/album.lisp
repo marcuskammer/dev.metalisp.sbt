@@ -31,9 +31,9 @@
 
 (defpackage dev.metalisp.sbt/album
   (:use :cl)
-  (:import-from :dev.metalisp.sbt/grid :con :row :col)
-  (:import-from :dev.metalisp.sbt/btn :btn-primary)
-  (:import-from :dev.metalisp.sbt/navbar :navbar :brand :toggler :collapsible)
+  (:import-from :dev.metalisp.sbt/layout/grid :con :row :col)
+  (:import-from :dev.metalisp.sbt/component/btn :btn-primary)
+  (:import-from :dev.metalisp.sbt/component/navbar :navbar :brand :toggler :collapsible)
   (:import-from :dev.metalisp.sbt/utility :color)
   (:import-from :dev.metalisp.sbt :write-html-to-file :with-page)
   (:import-from :spinneret :with-html-string)
