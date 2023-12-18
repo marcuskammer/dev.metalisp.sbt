@@ -4,7 +4,7 @@
    :dev.metalisp.sbt
    :rove)
   (:import-from
-   :dev.metalisp.sbt/form
+   :dev.metalisp.sbt/component/form
    :remove-special-chars
    :ctrl
    :combo
