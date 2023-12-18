@@ -4,7 +4,7 @@
    :dev.metalisp.sbt
    :rove)
   (:import-from
-   :dev.metalisp.sbt/dropdown
+   :dev.metalisp.sbt/component/dropdown
    :menu
    :item
    :dropdown))
