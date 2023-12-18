@@ -17,14 +17,14 @@
 ;; of emails with the number of unread messages, a list of tasks with their
 ;; completion status, and so on.
 
-(defpackage dev.metalisp.sbt/list-group
+(defpackage dev.metalisp.sbt/component/list-group
   (:use :cl)
   (:export
    :item
    :list-group)
 (:documentation "A Common Lisp package for generating Bootstrap List Group components."))
 
-(in-package :dev.metalisp.sbt/list-group)
+(in-package :dev.metalisp.sbt/component/list-group)
 
 (defmacro item (&body body)
   "This macro generates a Bootstrap list group item.

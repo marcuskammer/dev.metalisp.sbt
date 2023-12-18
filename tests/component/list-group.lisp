@@ -4,7 +4,7 @@
    :dev.metalisp.sbt
    :rove)
   (:import-from
-   :dev.metalisp.sbt/list-group
+   :dev.metalisp.sbt/component/list-group
    :item
    :list-group))
 
