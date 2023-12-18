@@ -31,7 +31,7 @@
                  (:file "spinner")
                  (:file "form")))
                (:module "src/pattern"
-                ;; Patterns define their own DSL to create specific things
+                ;; Patterns are built on top of components and define their own DSL to create specific things
                 :depends-on ("src" "src/component")
                 :components
                 ((:file "questionnaire")))
