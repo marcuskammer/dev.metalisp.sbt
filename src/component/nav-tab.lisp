@@ -33,13 +33,13 @@
 ;; adjusts its layout based on the size of the user's screen. This makes it a
 ;; flexible choice for a variety of web layouts.
 
-(defpackage dev.metalisp.sbt/nav
+(defpackage dev.metalisp.sbt/component/nav
   (:use :cl)
   (:export
    :item
    :nav))
 
-(in-package :dev.metalisp.sbt/nav)
+(in-package :dev.metalisp.sbt/component/nav)
 
 (defmacro item (name active url)
   "This macro generates a navigation item for a Bootstrap navigation list.
