@@ -4,7 +4,7 @@
    :dev.metalisp.sbt
    :rove)
   (:import-from
-   :dev.metalisp.sbt/alert
+   :dev.metalisp.sbt/component/alert
    :btn
    :alert
    :alert-primary
