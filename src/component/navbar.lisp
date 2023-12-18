@@ -28,8 +28,12 @@
 (defpackage dev.metalisp.sbt/navbar
   (:use :cl)
   (:import-from
-   :dev.metalisp.sbt/btn
+   :dev.metalisp.sbt/component/btn
    :btn-outline-success)
+  (:import-from
+   :dev.metalisp.sbt/layout/grid
+   :con
+   :row
   (:export
    :navbar
    :brand
@@ -127,8 +131,8 @@ Example:
   `(spinneret:with-html
      (:div :id ,id
            :class ,(format nil "collapse ~a" color)
-           (dev.metalisp.sbt/grid:con ()
-             (dev.metalisp.sbt/grid:row ()
+           (con ()
+             (row ()
                ,@body)))))
 
 (defmacro form-search ()

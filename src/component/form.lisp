@@ -14,7 +14,7 @@
    :*l10n*
    :find-l10n)
   (:import-from
-   :dev.metalisp.sbt/btn
+   :dev.metalisp.sbt/component/btn
    :btn-outline-success
    :btn-primary)
   (:import-from
