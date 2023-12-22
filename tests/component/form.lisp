@@ -41,17 +41,17 @@
 
 (deftest test-ctrl-number
   (let ((result (spinneret:with-html-string (ctrl "number" "testform" "Birth Date"))))
-    (testing "Generates multiple checkable functions based on the provided list of types."
+    (testing "Generates a basic Bootstrap form control with a label."
       (ok (search "type=number" result)))))
 
 (deftest test-ctrl-email
   (let ((result (spinneret:with-html-string (ctrl "email" "testform" "E-Mail"))))
-    (testing "Generates multiple checkable functions based on the provided list of types."
+    (testing "Generates a basic Bootstrap form control with a label."
       (ok (search "type=email" result)))))
 
 (deftest test-ctrl-tel
   (let ((result (spinneret:with-html-string (ctrl "tel" "testform" "Phone number"))))
-    (testing "Generates multiple checkable functions based on the provided list of types."
+    (testing "Generates a basic Bootstrap form control with a label."
       (ok (search "type=tel" result)))))
 
 (deftest test-select-default
