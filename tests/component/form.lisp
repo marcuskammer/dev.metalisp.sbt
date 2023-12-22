@@ -39,6 +39,21 @@
   (testing "Builds a value property string by applying various cleaning functions."
     (ok (string= (build-value-prop-str " hello world ") "hello-world"))))
 
+(deftest test-ctrl-number
+  (let ((result (spinneret:with-html-string (ctrl "number" "testform" "Birth Date"))))
+    (testing "Generates multiple checkable functions based on the provided list of types."
+      (ok (search "type=number" result)))))
+
+(deftest test-ctrl-email
+  (let ((result (spinneret:with-html-string (ctrl "email" "testform" "E-Mail"))))
+    (testing "Generates multiple checkable functions based on the provided list of types."
+      (ok (search "type=email" result)))))
+
+(deftest test-ctrl-tel
+  (let ((result (spinneret:with-html-string (ctrl "tel" "testform" "Phone number"))))
+    (testing "Generates multiple checkable functions based on the provided list of types."
+      (ok (search "type=tel" result)))))
+
 (deftest test-select-default
   (let ((result (spinneret:with-html-string (combo () "Red" "Green" "Blue"))))
     (testing "Generates correct HTML for select element"
