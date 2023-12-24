@@ -54,6 +54,12 @@
     (testing "Generates a basic Bootstrap form control with a label."
       (ok (search "type=tel" result)))))
 
+(deftest test-ctrl-wrong-type
+  (testing "Asserts error is signaled for invalid type."
+    (ok (signals (ctrl "wrong-type" "foo" "bar")))
+    (ok (signals (ctrl "telephone" "foo" "bar")))
+    (ok (signals (ctrl "e-mail" "foo" "bar")))))
+
 (deftest test-select-default
   (let ((result (spinneret:with-html-string (combo () "Red" "Green" "Blue"))))
     (testing "Generates correct HTML for select element"
