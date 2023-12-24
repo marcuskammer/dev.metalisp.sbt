@@ -32,6 +32,13 @@
 
 (in-package :dev.metalisp.sbt/component/form)
 
+(defvar input-types
+  '("button" "checkbox" "color" "date" "datetime-local" "email" "file" "hidden"
+    "image" "month" "number" "password" "radio" "range" "reset" "search" "submit"
+    "tel" "text" "time" "url" "week")
+  "List of types for input element.
+See: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input")
+
 (defun remove-special-chars (str)
   "Removes all special characters from the string STR except numbers and alphabets.
 
@@ -154,15 +161,13 @@ checkable macros."
 (defun ctrl (type name label)
   "Generates a basic Bootstrap form control with a label.
 
-TYPE: Specifies the type of input, such as: 'button', 'checkbox', 'color', 'date', 'datetime-local',
-'email', 'file', 'hidden', 'image', 'month', 'number', 'password', 'radio', 'range', 'reset',
-'search', 'submit', 'tel' 'text', 'time', 'url', 'week'
-
-See: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
+TYPE: Specifies the type of input. See `input-types`
 
 NAME: The name attribute for the control.
 
 LABEL: The label to display next to the control."
+  (unless (find type input-types :test 'string=)
+    (error "Wrong type for HTML input element. See `input-types`"))
   (let* ((name-str (build-name-str name))
          (class-str (build-class-str "form-label" name))
          (id-str (build-id-str name label)))
