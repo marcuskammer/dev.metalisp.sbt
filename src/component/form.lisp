@@ -1,7 +1,7 @@
 ;;;; -*- mode: lisp; coding: utf-8-unix; tab-width: 4; fill-column: 100; indent-tabs-mode: nil; -*-
 ;;;; form.lisp
 ;;;;
-;;;; This file is part of the CL-SBT project and defines utility functions,
+;;;; This file is part of the dev.metalisp.sbt project and defines utility functions,
 ;;;; macros, and HTML templates for generating Bootstrap-formatted forms.
 ;;;; It provides mechanisms to build form controls, manage localization,
 ;;;; and perform string manipulations.
@@ -135,6 +135,9 @@ VALUE: The value attribute for the control."
                     (format nil " ~a" value-str))))))
 
 (defmacro define-checkable (type)
+  "Generates a checkable function based on the provided type.
+
+TYPE: A string representing the type."
   (let ((func-name (intern (string-upcase (concatenate 'string "checkable-" type)))))
     `(defun ,func-name (name value)
        (checkable ,type name value))))
