@@ -5,7 +5,7 @@
 ;;;; have a different type of input (radio buttons, checkboxes, etc.), and the
 ;;;; form itself can be customized according to the target URL for submissions.
 
-(defpackage dev.metalisp.sbt/questionnaire
+(defpackage dev.metalisp.sbt/pattern/questionnaire
   (:documentation "Defines the `dev.metalisp.sbt/questionnaire` package, a utility suite for generating HTML forms with various types of questions.")
   (:use
    :cl)
@@ -14,20 +14,20 @@
    :*l10n*
    :find-l10n)
   (:import-from
-   :dev.metalisp.sbt/btn
+   :dev.metalisp.sbt/component/btn
    :btn-primary)
   (:import-from
    :dev.metalisp.sbt/utility
    :spacing)
   (:import-from
-   :dev.metalisp.sbt/form
+   :dev.metalisp.sbt/component/form
    :checkable
    :ctrl
    :combo)
   (:export
    :questionnaire))
 
-(in-package :dev.metalisp.sbt/questionnaire)
+(in-package :dev.metalisp.sbt/pattern/questionnaire)
 
 (defun choicep (lst)
   "Checks if the given list LST is a valid choice.

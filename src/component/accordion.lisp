@@ -3,7 +3,7 @@
 ;;;; This file defines a package for generating Bootstrap accordion components
 ;;;; using Common Lisp macros.
 
-(defpackage dev.metalisp.sbt/accordion
+(defpackage dev.metalisp.sbt/component/accordion
   (:documentation "A package for generating Bootstrap accordions.")
   (:use :cl)
   (:export
@@ -12,7 +12,7 @@
    :item
    :accordion))
 
-(in-package :dev.metalisp.sbt/accordion)
+(in-package :dev.metalisp.sbt/component/accordion)
 
 (defun header (target name show)
   "This macro generates a Bootstrap header for an accordion item.

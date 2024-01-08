@@ -4,7 +4,7 @@
    :dev.metalisp.sbt
    :rove)
   (:import-from
-   :dev.metalisp.sbt/navbar
+   :dev.metalisp.sbt/component/navbar
    :navbar
    :brand
    :nav

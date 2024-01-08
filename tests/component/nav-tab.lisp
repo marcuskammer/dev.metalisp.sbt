@@ -4,7 +4,7 @@
    :dev.metalisp.sbt
    :rove)
   (:import-from
-   :dev.metalisp.sbt/nav
+   :dev.metalisp.sbt/component/nav
    :item
    :nav))
 

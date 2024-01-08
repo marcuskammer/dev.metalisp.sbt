@@ -4,7 +4,7 @@
    :dev.metalisp.sbt
    :rove)
   (:import-from
-   :dev.metalisp.sbt/badge
+   :dev.metalisp.sbt/component/badge
    :badge
    :badge-primary
    :badge-pill-primary))

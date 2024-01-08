@@ -25,11 +25,15 @@
 ;; Form Support: You can include form elements directly in your Navbar, allowing
 ;; users to input data directly from the navigation bar.
 
-(defpackage dev.metalisp.sbt/navbar
+(defpackage dev.metalisp.sbt/component/navbar
   (:use :cl)
   (:import-from
-   :dev.metalisp.sbt/btn
+   :dev.metalisp.sbt/component/btn
    :btn-outline-success)
+  (:import-from
+   :dev.metalisp.sbt/layout/grid
+   :con
+   :row)
   (:export
    :navbar
    :brand
@@ -41,7 +45,7 @@
    :form-search
    :collapsible))
 
-(in-package :dev.metalisp.sbt/navbar)
+(in-package :dev.metalisp.sbt/component/navbar)
 
 (defmacro brand-logo ((&key (src "#") (alt "Logo") (width 30) (height 24) (classes "d-inline-block align-text-top")))
   "This macro generates a brand logo for a Bootstrap navbar.
@@ -127,8 +131,8 @@ Example:
   `(spinneret:with-html
      (:div :id ,id
            :class ,(format nil "collapse ~a" color)
-           (dev.metalisp.sbt/grid:con ()
-             (dev.metalisp.sbt/grid:row ()
+           (con ()
+             (row ()
                ,@body)))))
 
 (defmacro form-search ()

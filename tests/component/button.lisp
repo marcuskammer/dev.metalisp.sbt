@@ -4,7 +4,7 @@
    :dev.metalisp.sbt
    :rove)
   (:import-from
-   :dev.metalisp.sbt/btn
+   :dev.metalisp.sbt/component/btn
    :btn
    :btn-primary
    :btn-outline-primary))

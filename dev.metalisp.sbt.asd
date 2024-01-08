@@ -1,6 +1,6 @@
 (defsystem "dev.metalisp.sbt"
   :version "0.1.0"
-  :author "Marcus Kammer"
+  :author "Marcus Kammer <marcus.kammer@metalisp.dev"
   :license "MIT"
   :source-control (:git "git@git.sr.ht:~marcuskammer/dev.metalisp.sbt")
   :depends-on (:spinneret)
@@ -10,10 +10,12 @@
                  (:file "translate")
                  (:file "utility")))
                (:module "src/layout"
+                :depends-on ("src")
                 :components
                 ((:file "grid")))
                (:module "src/component"
-                        ;; Components are the building blocks for Patterns
+                ;; Components are the building blocks for Patterns
+                :depends-on ("src")
                 :components
                 ((:file "accordion")
                  (:file "alert")
@@ -29,10 +31,13 @@
                  (:file "spinner")
                  (:file "form")))
                (:module "src/pattern"
-                        ;; Patterns define their own DSL to create specific things
+                ;; Patterns are built on top of components and define their own DSL to create specific things
+                :depends-on ("src" "src/component")
                 :components
                 ((:file "questionnaire")))
                (:module "examples"
+                ;; Examples show how different patterns work together
+                :depends-on ("src/pattern")
                 :components
                 ((:file "album"))))
   :description "A Common Lisp library for generating Bootstrap-based HTML markup. It provides macros to easily create Bootstrap components such as accordions, alerts, badges, buttons, cards, dropdowns, headers, list groups, navbars, nav-tabs, pagination, and tables. This library is dependent on the Spinneret library for HTML generation."

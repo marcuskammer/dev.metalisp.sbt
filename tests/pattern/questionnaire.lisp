@@ -4,7 +4,7 @@
    :dev.metalisp.sbt
    :rove)
   (:import-from
-   :dev.metalisp.sbt/questionnaire
+   :dev.metalisp.sbt/pattern/questionnaire
    :choicep
    :choicesp
    :questionp

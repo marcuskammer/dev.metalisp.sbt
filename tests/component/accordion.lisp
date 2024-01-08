@@ -4,7 +4,7 @@
    :dev.metalisp.sbt
    :rove)
   (:import-from
-   :dev.metalisp.sbt/accordion
+   :dev.metalisp.sbt/component/accordion
    :header
    :collapse
    :item
