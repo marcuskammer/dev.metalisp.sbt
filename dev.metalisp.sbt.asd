@@ -1,7 +1,7 @@
 (defsystem "dev.metalisp.sbt"
   :version "0.1.0"
   :author "Marcus Kammer <marcus.kammer@metalisp.dev"
-  :license "MIT"
+  :license "GNU Lesser General Public License"
   :source-control (:git "git@git.sr.ht:~marcuskammer/dev.metalisp.sbt")
   :depends-on (:spinneret)
   :components ((:module "src"
