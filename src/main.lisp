@@ -1,4 +1,6 @@
 ;;;; -*- mode: lisp; coding: utf-8; tab-width: 4; fill-column: 100; indent-tabs-mode: nil; -*-
+;;;; main - Provide general functions.
+
 (defpackage dev.metalisp.sbt
   (:use :cl)
   (:export
