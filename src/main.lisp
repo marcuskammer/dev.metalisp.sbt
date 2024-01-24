@@ -14,36 +14,6 @@
 (in-package :dev.metalisp.sbt)
 
 (setq spinneret:*fill-column* 120)
-(defparameter *bs-version* "5.3.2")
-(defparameter *cdn-css*
-  (concatenate 'string
-               "https://cdn.jsdelivr.net/npm/bootstrap@"
-               *bs-version*
-               "/dist/css/bootstrap.min.css"))
-(defparameter *cdn-js*
-  (concatenate 'string
-               "https://cdn.jsdelivr.net/npm/bootstrap@"
-               *bs-version*
-               "/dist/js/bootstrap.bundle.min.js"))
-
-(defmacro with-page ((&key (author "") (description "") (cdn t) (pagetitle "") (theme "dark")) &body body)
-  `(spinneret:with-html
-     (:doctype)
-     (:html :data-bs-theme ,theme
-            (:head
-             (:meta :charset "utf-8")
-             (:meta :name "viewport" :content "width=device-width, initial-scale=1")
-             (:meta :name "author" :content ,author)
-             (:meta :name "description" :content ,description)
-             (:title ,pagetitle)
-             (if ,cdn
-                 (:link :type "text/css" :rel "stylesheet" :href ,*cdn-css*)
-                 (:link :type "text/css" :rel "stylesheet" :href "5.3.0/bootstrap.min.css")))
-            (:body (:h1 :class "visually-hidden" ,pagetitle)
-              (:main ,@body))
-            (if ,cdn
-                (:script :src *cdn-js*)
-                (:script :src "5.3.0/bootstrap.bundle.min.js")))))
 
 (defun write-html-to-file (filename string &key (lang "en") (style :tree) (fc 120))
   (let ((spinneret:*html-lang* lang)
