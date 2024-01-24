@@ -294,8 +294,7 @@ Example 4:
               :method "post"
               :class ,class-string
               ,@(loop for q in body
-                      for (ask group choices) = (multiple-value-list
-                                                 (extract-question-components q))
+                      for (ask group choices) = (multiple-value-list (extract-question-components q))
                       do (unless (questionp q)
                            (error "Invalid question format: ~a" q))
                       collect `(question ,ask ,group ,@(split-list-by-keyword choices)))
