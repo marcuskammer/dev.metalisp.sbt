@@ -49,11 +49,11 @@
              (if *use-cdn*
                  (:link :type "text/css" :rel "stylesheet" :href ,*cdn-css-url*)
                  (:link :type "text/css" :rel "stylesheet" :href "5.3.0/bootstrap.min.css"))
-            (:body (:h1 :class "visually-hidden" ,pagetitle)
-              (:main ,@body))
-            (if ,*use-cdn*
-                (:script :src *cdn-js-url*)
-                (:script :src "5.3.0/bootstrap.bundle.min.js"))))))
+             (:body (:h1 :class "visually-hidden" ,pagetitle)
+               (:main ,@body))
+             (if ,*use-cdn*
+                 (:script :src *cdn-js-url*)
+                 (:script :src "5.3.0/bootstrap.bundle.min.js"))))))
 
 (defmacro with-landing-page ())
 (defmacro with-blogpost-page ())
