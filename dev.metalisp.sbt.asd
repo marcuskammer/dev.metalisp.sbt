@@ -8,6 +8,7 @@
                 :components
                 ((:file "main")
                  (:file "translate")
+                 (:file "page")
                  (:file "utility")))
                (:module "src/layout"
                 :depends-on ("src")
