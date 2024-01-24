@@ -1,5 +1,5 @@
 ;;;; -*- mode: lisp; coding: utf-8; tab-width: 4; fill-column: 100; indent-tabs-mode: nil; -*-
-;;;; page - Provide macros for different type of pages
+;;;; page - Provide macros for different types of pages
 
 (defpackage dev.metalisp.sbt/page
   (:use :cl)
