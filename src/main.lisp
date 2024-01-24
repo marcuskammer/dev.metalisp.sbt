@@ -14,8 +14,17 @@
 (in-package :dev.metalisp.sbt)
 
 (setq spinneret:*fill-column* 120)
-(defparameter *cdn-css* "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
-(defparameter *cdn-js* "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js")
+(defparameter *bs-version* "5.3.2")
+(defparameter *cdn-css*
+  (concatenate 'string
+               "https://cdn.jsdelivr.net/npm/bootstrap@"
+               *bs-version*
+               "/dist/css/bootstrap.min.css"))
+(defparameter *cdn-js*
+  (concatenate 'string
+               "https://cdn.jsdelivr.net/npm/bootstrap@"
+               *bs-version*
+               "/dist/js/bootstrap.bundle.min.js"))
 
 (defmacro with-page ((&key (author "") (description "") (cdn t) (pagetitle "") (theme "dark")) &body body)
   `(spinneret:with-html
