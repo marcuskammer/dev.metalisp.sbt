@@ -4,6 +4,7 @@
 (defpackage dev.metalisp.sbt/page
   (:use :cl)
   (:export
+   :with-page
    :with-landing-page
    :with-blogpost-page
    :with-product-page
