@@ -37,7 +37,7 @@
   "Downloads a file from a given URL and saves it to the specified directory."
   (let* ((filename (car (last (uiop:split-string url :separator "/"))))
          (filepath (merge-pathnames filename directory)))
-    (uiop:ensure-all-directories-exist directory)
+    (ensure-directories-exist directory)
     (with-open-file (stream filepath
                             :direction :output
                             :if-exists :supersede
