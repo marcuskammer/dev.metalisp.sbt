@@ -3,12 +3,11 @@
   :author "Marcus Kammer <marcus.kammer@metalisp.dev"
   :license "GNU Lesser General Public License"
   :source-control (:git "git@git.sr.ht:~marcuskammer/dev.metalisp.sbt")
-  :depends-on (:spinneret)
+  :depends-on (:spinneret :dexador)
   :components ((:module "src"
                 :components
                 ((:file "main")
                  (:file "translate")
-                 (:file "page")
                  (:file "utility")))
                (:module "src/layout"
                 :depends-on ("src")
