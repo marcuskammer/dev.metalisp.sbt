@@ -78,7 +78,9 @@
             (:head (:meta :charset "utf-8")
                    (:meta :name "viewport" :content "width=device-width, initial-scale=1")
                    ,@(loop for (key value) on meta by #'cddr
-                           collect `(:meta :name ,(string-downcase (symbol-name key)) :content ,(getf meta key)))
+                           collect `(:meta :name
+                                           ,(string-downcase (symbol-name key))
+                                           :content ,(getf meta key)))
 
                    (:title ,title)
 
