@@ -9,7 +9,7 @@
    :*cdn-js-url*
    :*bs-version*
    :*color-theme*
-   :write-html-to-file
+   :write-html-to-file))
 
 (in-package :dev.metalisp.sbt)
 
