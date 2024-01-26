@@ -205,7 +205,7 @@ The footer contains a copyright notice.
 
 All of these components are customizable by providing different arguments
 to the respective component macros."
-  `(with-page (:author "Marcus Kammer" :description "Album Page" :cdn ,cdn :pagetitle ,title)
+  `(with-page (:meta (:author "Marcus Kammer" :description "Album Page") :title ,title)
      (navigation
        (col (:breakpoint (:kind :col :sm (8 nil) :md (7 nil))
              :spacing (:property "p" :side "y" :size 4))
