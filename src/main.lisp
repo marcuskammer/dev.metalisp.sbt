@@ -70,6 +70,8 @@
       (write-string string stream))))
 
 (defmacro with-page ((&key meta title add-css-urls add-js-urls) &body body)
+  (unless title
+    (error "Please add a title"))
   `(spinneret:with-html
      (:doctype)
      (:html :data-bs-theme ,*color-theme*
