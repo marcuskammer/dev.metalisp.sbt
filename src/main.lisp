@@ -69,9 +69,9 @@
     (with-open-file (stream filename :direction :output :if-exists :supersede)
       (write-string string stream))))
 
-(defmacro with-page ((&key meta title add-css-urls add-js-urls) &body body)
+(defmacro with-page ((&key meta title main-con add-css-urls add-js-urls) &body body)
   (unless title
-    (error "Please add a title"))
+    (error "A page needs a title. Please add a title."))
   `(spinneret:with-html
      (:doctype)
      (:html :data-bs-theme ,*color-theme*
@@ -89,7 +89,7 @@
                            collect `(:link :type "text/css" :rel "stylesheet" :href ,url)))
 
             (:body (:h1 :class "visually-hidden" ,title)
-              (:main ,@body)
+              (:main ,@(when main-con (list :class "container")) ,@body)
 
               (:script :src ,(js-url))
               ,@(loop for url in add-js-urls
