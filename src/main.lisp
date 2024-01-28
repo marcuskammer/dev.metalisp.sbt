@@ -7,6 +7,8 @@
    :*use-cdn*
    :*cdn-css-url*
    :*cdn-js-url*
+   :*local-css-url*
+   :*local-js-url*
    :*bs-version*
    :*color-theme*
    :write-html-to-file
