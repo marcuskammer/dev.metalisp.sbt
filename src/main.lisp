@@ -69,9 +69,7 @@
     (with-open-file (stream filename :direction :output :if-exists :supersede)
       (write-string string stream))))
 
-(defmacro with-page ((&key meta title main-con add-css-urls add-js-urls) &body body)
-  (unless title
-    (error "A page needs a title. Please add a title."))
+(defmacro with-page ((&key meta (title "Web page") main-con add-css-urls add-js-urls) &body body)
   `(spinneret:with-html
      (:doctype)
      (:html :data-bs-theme ,*color-theme*
