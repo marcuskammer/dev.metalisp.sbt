@@ -40,12 +40,12 @@
 
 (defparameter *color-theme* "dark")
 
-(defun css-url ()
+(defun bs-css-url ()
   (if *use-cdn*
       *cdn-css-url*
       *local-css-url*))
 
-(defun js-url ()
+(defun bs-js-url ()
   (if *use-cdn*
       *cdn-js-url*
       *local-js-url*))
@@ -82,13 +82,13 @@
 
                    (:title ,title)
 
-                   (:link :type "text/css" :rel "stylesheet" :href ,(css-url))
+                   (:link :type "text/css" :rel "stylesheet" :href ,(bs-css-url))
                    ,@(loop for url in add-css-urls
                            collect `(:link :type "text/css" :rel "stylesheet" :href ,url)))
 
             (:body (:h1 :class "visually-hidden" ,title)
               (:main ,@(when main-con (list :class "container")) ,@body)
 
-              (:script :src ,(js-url))
+              (:script :src ,(bs-js-url))
               ,@(loop for url in add-js-urls
                       collect `(:script :src ,url))))))
