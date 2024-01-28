@@ -4,6 +4,8 @@
 (defpackage dev.metalisp.sbt
   (:use :cl)
   (:export
+   :*l10n*
+   :find-l10n
    :*use-cdn*
    :*cdn-css-url*
    :*cdn-js-url*
