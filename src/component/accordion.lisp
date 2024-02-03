@@ -74,7 +74,7 @@ Example:
      (:div :class "accordion-item"
            ,@body)))
 
-(defmacro accordion (id &rest rest)
+(defmacro accordion-old (id &rest rest)
   "This macro generates an accordion-style collapsible list with Bootstrap.
 
 ID: Specifies a unique identifier for the accordion. Defaults to 'accordionExample'.
@@ -97,3 +97,13 @@ Example:
                    collect (destructuring-bind (&key target name show content) item
                              `(item (header ,target ,name ,show)
                                 (collapse ,id ,target ,show ,content)))))))
+
+(defmacro accordion ((&key id flush) &body body)
+  (let ((class (concatenate 'string "accordion" (when flush " accordion-flush"))))
+  `(spinneret:with-html
+     (:div :class ,class
+           :id ,id
+           ,@(loop for (title . content) in body
+                   collect `(:div :class "accordion-item"
+                                  (:h5 :class "accordion-header" ,title)
+                                  (:div :class "accordion-body" ,content)))))))
