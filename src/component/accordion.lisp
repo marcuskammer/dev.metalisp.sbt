@@ -99,6 +99,12 @@ Example:
                                 (collapse ,id ,target ,show ,content)))))))
 
 (defmacro accordion ((&key id flush) &body body)
+  "This macro generates an accordion-style collapsible list with Bootstrap.
+
+ID: Specifies a unique identifier for the accordion. Defaults to 'accordionExample'.
+
+Example:
+  (accordion (:id \"accordionExample\" :flush t) (\"foo\" \"bar\"))"
   (let ((class (concatenate 'string "accordion" (when flush " accordion-flush"))))
     `(spinneret:with-html
        (:div :class ,class
