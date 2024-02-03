@@ -106,6 +106,7 @@ ID: Specifies a unique identifier for the accordion. Defaults to 'accordionExamp
 FLUSH: If t add class `accordion-flush` to remove borders. Defaults to nil.
 
 Example:
+  (accordion () (\"foo\" \"bar\"))
   (accordion (:id \"accordionExample\" :flush t) (\"foo\" \"bar\"))"
   (let ((class (concatenate 'string "accordion" (when flush " accordion-flush"))))
     `(spinneret:with-html
