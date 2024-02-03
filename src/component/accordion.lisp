@@ -103,7 +103,7 @@ Example:
 
 ID: Specifies a unique identifier for the accordion. Defaults to 'accordionExample'.
 
-FLUSH: If t add class `accordion-flush` to remove borders.
+FLUSH: If t add class `accordion-flush` to remove borders. Defaults to nil.
 
 Example:
   (accordion (:id \"accordionExample\" :flush t) (\"foo\" \"bar\"))"
