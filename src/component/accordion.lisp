@@ -98,10 +98,12 @@ Example:
                              `(item (header ,target ,name ,show)
                                 (collapse ,id ,target ,show ,content)))))))
 
-(defmacro accordion ((&key id flush) &body body)
+(defmacro accordion ((&key (id "accordionExample") flush) &body body)
   "This macro generates an accordion-style collapsible list with Bootstrap.
 
 ID: Specifies a unique identifier for the accordion. Defaults to 'accordionExample'.
+
+FLUSH: If t add class `accordion-flush` to remove borders.
 
 Example:
   (accordion (:id \"accordionExample\" :flush t) (\"foo\" \"bar\"))"
