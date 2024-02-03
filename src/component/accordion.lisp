@@ -100,10 +100,10 @@ Example:
 
 (defmacro accordion ((&key id flush) &body body)
   (let ((class (concatenate 'string "accordion" (when flush " accordion-flush"))))
-  `(spinneret:with-html
-     (:div :class ,class
-           :id ,id
-           ,@(loop for (title . content) in body
-                   collect `(:div :class "accordion-item"
-                                  (:h5 :class "accordion-header" ,title)
-                                  (:div :class "accordion-body" ,content)))))))
+    `(spinneret:with-html
+       (:div :class ,class
+             :id ,id
+             ,@(loop for (title . content) in body
+                     collect `(:div :class "accordion-item"
+                                    (:h5 :class "accordion-header" ,title)
+                                    (:div :class "accordion-body" ,content)))))))
