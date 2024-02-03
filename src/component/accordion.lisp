@@ -99,27 +99,37 @@ Example:
                                 (collapse ,id ,target ,show ,content)))))))
 
 (defmacro accordion ((&key (id "accordionExample") flush) &body body)
-  "This macro generates an accordion-style collapsible list with Bootstrap.
+  "This macro generates an accordion-style collapsible list.
 
 ID: Specifies a unique identifier for the accordion. Defaults to 'accordionExample'.
 
-FLUSH: If t add class `accordion-flush` to remove borders. Defaults to nil.
+FLUSH: If t, adds class 'accordion-flush' to remove borders. Defaults to nil.
 
-Example:
-  (accordion () (\"foo\" \"bar\"))
-  (accordion (:id \"accordionExample\" :flush t) (\"foo\" \"bar\"))"
+---
+5 Scenarios to Avoid Them: https://www.nngroup.com/videos/avoid-accordions/
+---
+
+Example usage:
+  (accordion () (\"Title 1\" \"Content 1\") (\"Title 2\" \"Content 2\"))
+  (accordion (:id \"accordionExample\" :flush t) (\"Title 1\" \"Content 1\") (\"Title 2\" \"Content 2\"))"
   (let ((class (concatenate 'string "accordion" (when flush " accordion-flush"))))
     `(spinneret:with-html
        (:div :class ,class
              :id ,id
-             ,@(loop for (title . content) in body
+             ,@(loop for (title content) in body
+                     for counter from 1
+                     for collapse-id = (format nil "collapse-~a-~a" id counter)
                      collect `(:div :class "accordion-item"
                                     (:h2 :class "accordion-header"
                                          (:button :class "accordion-button"
                                                   :type "button"
                                                   :data-bs-toggle "collapse"
-                                                  :data-bs-target "#collapseOne"
-                                                  :aria-expanded "true"
-                                                  :aria-controls "collapseOne"
+                                                  :data-bs-target ,(concatenate 'string "#" collapse-id)
+                                                  :aria-expanded "false"
+                                                  :aria-controls ,collapse-id
                                                   ,title))
-                                    (:div :class "accordion-body" ,content)))))))
+                                    (:div :id ,collapse-id
+                                          :class "accordion-collapse collapse"
+                                          :data-bs-parent ,(concatenate 'string "#" id)
+                                          (:div :class "accordion-body"
+                                                ,content))))))))
