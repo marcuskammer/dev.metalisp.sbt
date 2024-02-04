@@ -1,7 +1,7 @@
 #+title: Using cl-sbt/accordion Macros in a Web Application
 #+author: Marcus Kammer
 #+email: marcus.kammer@mailbox.org
-#+date: 2024-02-04T13:09+01:00
+#+date: 2024-02-04T18:34+01:00
 * Introduction
 
 The accordion component is a popular UI element that helps to organize and
@@ -56,11 +56,14 @@ can integrate them into your project:
     (with-output-to-string (spinneret:*html*)
       (with-page (:title "Accordion Example" :main-con t)
         (accordion ()
-          ("Accordion Item #1" "This is the first item's accordion body. It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the .accordion-body, though the transition does limit overflow.")
-          ("Accordion Item #2" "This is the second item's accordion body. It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the .accordion-body, though the transition does limit overflow.")))))
+          "Accordion Item #1" "This is the first item's accordion body. It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the .accordion-body, though the transition does limit overflow."
+          "Accordion Item #2" "This is the second item's accordion body. It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the .accordion-body, though the transition does limit overflow."))))
 
   (format t (generate-accordion-page))
 #+end_src
+
+#+RESULTS: accordion-page
+[[file:accordion-page.html]]
 
 This example demonstrates how to integrate the cl-sbt/accordion macros into a
 web application to create an interactive accordion component. The macros help
