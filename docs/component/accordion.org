@@ -1,7 +1,7 @@
 #+title: Using cl-sbt/accordion Macros in a Web Application
 #+author: Marcus Kammer
 #+email: marcus.kammer@mailbox.org
-#+date: 2024-02-04T18:34+01:00
+#+date: 2024-02-04T20:18+01:00
 * Introduction
 
 The accordion component is a popular UI element that helps to organize and
@@ -56,8 +56,26 @@ can integrate them into your project:
     (with-output-to-string (spinneret:*html*)
       (with-page (:title "Accordion Example" :main-con t)
         (accordion ()
-          "Accordion Item #1" "This is the first item's accordion body. It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the .accordion-body, though the transition does limit overflow."
-          "Accordion Item #2" "This is the second item's accordion body. It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the .accordion-body, though the transition does limit overflow."))))
+          "What is the purpose of this website?"
+          "This website is designed to provide information and resources on various topics related to user experience, design thinking, and agile methodologies."
+
+          "How can I contact the support team?"
+          "You can reach our support team by sending an email to support@example.com. We'll be happy to assist you with any questions or issues you may have."
+
+          "Is there a mobile app available?"
+          "Yes, we have a mobile app available for both iOS and Android devices. You can download it from the App Store or Google Play Store."
+
+          "What payment methods do you accept?"
+          "We accept payments through credit cards, PayPal, and bank transfers. You can choose the payment method that suits you best during the checkout process."
+
+          "How do I reset my password?"
+          "To reset your password, go to the login page and click on the 'Forgot Password' link. Follow the instructions sent to your registered email address to create a new password."
+
+          "Can I contribute to your knowledge sharing initiatives?"
+          "Absolutely! We encourage contributions from our community. You can participate in our knowledge sharing initiatives by joining our forums and sharing your insights and experiences."
+
+          "What is the schedule for upcoming webinars and events?"
+          "You can find the schedule for upcoming webinars and events on our Events page. We regularly update it with details of upcoming sessions."))))
 
   (format t (generate-accordion-page))
 #+end_src
