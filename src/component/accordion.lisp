@@ -125,7 +125,7 @@ Example usage:
                                                   :type "button"
                                                   :data-bs-toggle "collapse"
                                                   :data-bs-target ,(concatenate 'string "#" collapse-id)
-                                                  :aria-expanded "false"
+                                                  :aria-expanded ,(if (= counter 1) "true" "false")
                                                   :aria-controls ,collapse-id
                                                   ,title))
                                     (:div :id ,collapse-id
