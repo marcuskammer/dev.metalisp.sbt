@@ -1,7 +1,7 @@
 #+title: Creating a Questionnaire using cl-sbt/questionnaire Macros in a Web Application
 #+author: Marcus Kammer
 #+email: marcus.kammer@mailbox.org
-#+date: 2024-01-28T11:38+01:00
+#+date: 2024-02-04T13:11+01:00
 * Introduction
 
 Questionnaires are powerful tools for gathering information and insights from
@@ -30,16 +30,16 @@ required for different types of questions in a questionnaire.
 
 #+name: questionnaire-page
 #+begin_src lisp :results output file :file-ext html
-  (defpackage my-web-app
+  (defpackage my-web-questionnaire-app
     (:use :cl)
     (:import-from :dev.metalisp.sbt :with-page)
     (:import-from :dev.metalisp.sbt/pattern/questionnaire :questionnaire)
-    (:export :generate-button-page))
+    (:export :generate-questionnaire-page))
 
-  (in-package :my-web-app)
+  (in-package :my-web-questionnaire-app)
 
   (defun generate-questionnaire-page ()
-    "Generates an HTML page with questionnaires using cl-sbt/questionnaire macros."
+    "Generates an HTML page with questionnaires using questionnaire macros."
     (with-output-to-string (spinneret:*html*)
       (with-page (:title "Questionnaire Example" :main-con t)
         (questionnaire "/submit"
@@ -52,7 +52,6 @@ required for different types of questions in a questionnaire.
           (:ask "How many hours per day, on average, do you spend browsing the internet?"
            :group "webbrowsing"
            :choices (:radio "Less than 1 hour" "1-3 hours" "3-5 hours" "5+ hours"))
-          ;; Additional Questions
           (:ask "What are your favorite brands?"
            :group "brands"
            :choices (:checkbox "Brand A" "Brand B" "Brand C" "None" :text "Other"))
