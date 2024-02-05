@@ -281,13 +281,20 @@ Example 2:
 Example 3:
   (questionnaire \"/submit\"
                  (:ask \"Which social media platforms do you use regularly?\"
-                  :group \"age\"
+                  :group \"socialmedia\"
                   :choices (:multiple \"Facebook\" \"Twitter\" \"Instagram\")))
 Example 4:
   (questionnaire \"/submit\"
                  (:ask \"Which social media platforms do you use regularly?\"
-                  :group \"age\"
-                  :choices (:multiple \"Facebook\" \"Twitter\" \"Instagram\" :text \"Others\")))"
+                  :group \"socialmedia\"
+                  :choices (:multiple \"Facebook\" \"Twitter\" \"Instagram\" :text \"Others\")))
+
+It is also possible to write the keys in another language:
+Example German:
+  (questionnaire \"/submit\"
+                 (:frage \"Welche Social Media-Plattformen nutzen Sie regelmäßig?\"
+                  :gruppe \"sozialemedien\"
+                  :auswahl (:multiple \"Facebook\" \"Twitter\" \"Instagram\" :text \"Andere\")))"
   (let ((class-string (spacing :property "p" :side "y" :size 5)))
     `(spinneret:with-html
        (:form :action ,action
