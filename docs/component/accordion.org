@@ -1,7 +1,7 @@
-#+title: Using cl-sbt/accordion Macros in a Web Application
+#+title: Using dev.metalisp.sbt/component/accordion Macros in a Web Application
 #+author: Marcus Kammer
 #+email: marcus.kammer@mailbox.org
-#+date: 2024-02-04T20:18+01:00
+#+date: 2024-02-06T10:12+01:00
 * Introduction
 
 The accordion component is a popular UI element that helps to organize and
@@ -34,7 +34,7 @@ how it works:
 - Bootstrap's JavaScript library manages the animations and transitions for
   smooth content expansion and collapse.
 
-* Integrating cl-sbt/accordion Macros
+* Integrating dev.metalisp.sbt/component/accordion Macros
 
 To create Bootstrap-style accordions in your Common Lisp web application, you
 can use the cl-sbt/accordion macros. These macros provide a convenient way to
@@ -55,7 +55,29 @@ can integrate them into your project:
     "Generates an HTML page with accordion using accordion macros."
     (with-output-to-string (spinneret:*html*)
       (with-page (:title "Accordion Example" :main-con t)
-        (accordion ()
+        (accordion (:id "firstAccordion")
+          "What is the purpose of this website?"
+          "This website is designed to provide information and resources on various topics related to user experience, design thinking, and agile methodologies."
+
+          "How can I contact the support team?"
+          "You can reach our support team by sending an email to support@example.com. We'll be happy to assist you with any questions or issues you may have."
+
+          "Is there a mobile app available?"
+          "Yes, we have a mobile app available for both iOS and Android devices. You can download it from the App Store or Google Play Store."
+
+          "What payment methods do you accept?"
+          "We accept payments through credit cards, PayPal, and bank transfers. You can choose the payment method that suits you best during the checkout process."
+
+          "How do I reset my password?"
+          "To reset your password, go to the login page and click on the 'Forgot Password' link. Follow the instructions sent to your registered email address to create a new password."
+
+          "Can I contribute to your knowledge sharing initiatives?"
+          "Absolutely! We encourage contributions from our community. You can participate in our knowledge sharing initiatives by joining our forums and sharing your insights and experiences."
+
+          "What is the schedule for upcoming webinars and events?"
+          "You can find the schedule for upcoming webinars and events on our Events page. We regularly update it with details of upcoming sessions.")
+
+        (accordion (:id "secondAccordion")
           "What is the purpose of this website?"
           "This website is designed to provide information and resources on various topics related to user experience, design thinking, and agile methodologies."
 
