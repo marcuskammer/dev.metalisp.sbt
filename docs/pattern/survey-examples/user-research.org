@@ -41,5 +41,8 @@
            :group "newsconsumption"
            :choices (:radio "Online News Websites" "Social Media" "Television" "Newspapers/Magazines" "Radio" "None"))))))
 
-  (format t (generate-questionnaire-page))
+  (format t (generate-survey-page))
 #+end_src
+
+#+RESULTS: survey-page
+[[file:survey-page.html]]
