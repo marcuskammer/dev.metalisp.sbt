@@ -1,0 +1,45 @@
+#+name: survey-page
+#+begin_src lisp :results output file :file-ext html
+  (defpackage survey-app
+    (:use :cl)
+    (:import-from :dev.metalisp.sbt :with-page)
+    (:import-from :dev.metalisp.sbt/pattern/questionnaire :questionnaire)
+    (:export :generate-survey-page))
+
+  (in-package :survey-app)
+
+  (defun generate-survey-page ()
+    "Generates an HTML page with questionnaires using questionnaire macros."
+    (with-output-to-string (spinneret:*html*)
+      (with-page (:title "Product Experience" :main-con t)
+        (questionnaire "/submit"
+          (:ask "What is your age range?"
+           :group "demo-age-range"
+           :choices (:single "18-24" "25-34" "35-44" "45-54" "55+"))
+          (:ask "What is your gender?"
+           :group "demo-gender"
+           :choices (:single "Male" "Female" "Non-binary" "Prefer not to say" "Other" :text "Other"))
+          (:ask "What is your profession?"
+           :group "demo-profession"
+           :choices (:text "Profession"))
+          (:ask "How often do you use our software?"
+           :group "behave-useage"
+           :choices (:single "Daily" "Weekly" "Monthly" "Less frequently"))
+          (:ask "What features do you use the most?"
+           :group "behave-features"
+           :choices (:multiple "Bookmarks" "Dashboard"))
+          (:ask "Have you used our software for a long period of time?"
+           :group "behave-period"
+           :choices (:single "Less than 1 month" "1-3 months" "3-6 months" "6-12 months" "1-2 years" "More than 2 years"))
+          (:ask "What is your preferred method of payment for online purchases?"
+           :group "payment"
+           :choices (:radio "Credit/Debit Card" "PayPal" "Bank Transfer" "Cash on Delivery" "Cryptocurrency"))
+          (:ask "Which social media platforms do you use regularly?"
+           :group "socialmedia"
+           :choices (:checkbox "Facebook" "Twitter" "Instagram" "LinkedIn" "TikTok" "None" :text "Other"))
+          (:ask "How do you usually consume news?"
+           :group "newsconsumption"
+           :choices (:radio "Online News Websites" "Social Media" "Television" "Newspapers/Magazines" "Radio" "None"))))))
+
+  (format t (generate-questionnaire-page))
+#+end_src
