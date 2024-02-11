@@ -114,3 +114,51 @@
 
 #+RESULTS: psychographics-survey
 [[file:psychographics-survey.html]]
+
+* Needs/Challenges
+
+#+name: nc-survey
+#+begin_src lisp :results output file :file-ext html
+  (in-package :user-research-app)
+
+  (defun generate-nc-survey ()
+    "Generates an HTML page with questionnaires using questionnaire macros."
+    (with-output-to-string (spinneret:*html*)
+      (with-page (:title "Product Experience Survey" :main-con t)
+        (questionnaire "/submit"
+          (:ask "What challenges, if any, does our software help you overcome?"
+           :group "nc-challenges"
+           :choices (:text "Please describe"))
+          (:ask "How could we improve to better meet your needs?"
+           :group "nc-improve"
+           :choices (:single "Please describe"))))))
+
+  (format t (generate-nc-survey))
+#+end_src
+
+#+RESULTS: nc-survey
+[[file:nc-survey.html]]
+
+* Technology Comfort Level
+
+#+name: tcl-survey
+#+begin_src lisp :results output file :file-ext html
+  (in-package :user-research-app)
+
+  (defun generate-tcl-survey ()
+    "Generates an HTML page with questionnaires using questionnaire macros."
+    (with-output-to-string (spinneret:*html*)
+      (with-page (:title "Product Experience Survey" :main-con t)
+        (questionnaire "/submit"
+          (:ask "How would you rate your comfort level with technology?"
+           :group "tcl-likeart"
+           :choices (:single "1 - Very Uncomfortable" "2 - Slightly Uncomfortable" "3 - Neutral" "4 - Quite Comfortable" "5 - Very Comfortable"))
+          (:ask "How frequently do you adopt new technologies?"
+           :group "tcl-adopt"
+           :choices (:single "1 - Always - I'm an early adopter." "2 - Often - I stay on top of technological advances and adopt them frequently." "3 - Sometimes - I adopt new technologies now and then." "4 - Rarely - I only adopt new technologies when it's necessary for work or other important tasks." "5 - Never - I avoid adopting new technologies unless absolutely required."))))))
+
+  (format t (generate-tcl-survey))
+#+end_src
+
+#+RESULTS: tcl-survey
+[[file:tcl-survey.html]]
