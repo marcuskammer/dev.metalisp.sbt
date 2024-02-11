@@ -253,7 +253,7 @@ Returns multiple values:
   - The group name (GROUP)
   - The choices (CHOICES)"
   (let ((splitted-list (split-list-by-keyword question)))
-    (apply #'values (mapcar (lambda (x) (cadr x)) splitted-list))))
+    (apply #'values (mapcar (lambda (x) (nth 1 x)) splitted-list))))
 
 (defmacro questionnaire (action &body body)
   "This macro generates an HTML form composed of multiple questions, each rendered using the `question' macro.
