@@ -1,17 +1,25 @@
-#+name: survey-page
-#+begin_src lisp :results output file :file-ext html
-  (defpackage survey-app
+* Create lisp package
+
+#+begin_src lisp
+  (defpackage user-research-app
     (:use :cl)
     (:import-from :dev.metalisp.sbt :with-page)
-    (:import-from :dev.metalisp.sbt/pattern/questionnaire :questionnaire)
-    (:export :generate-survey-page))
+    (:import-from :dev.metalisp.sbt/pattern/questionnaire :questionnaire))
+#+end_src
 
-  (in-package :survey-app)
+#+RESULTS:
+: #<PACKAGE "USER-RESEARCH-APP">
 
-  (defun generate-survey-page ()
+* Demographics
+
+#+name: demographics-survey
+#+begin_src lisp :results output file :file-ext html
+  (in-package :user-research-app)
+
+  (defun generate-demographics-survey ()
     "Generates an HTML page with questionnaires using questionnaire macros."
     (with-output-to-string (spinneret:*html*)
-      (with-page (:title "Product Experience" :main-con t)
+      (with-page (:title "Product Experience Survey" :main-con t)
         (questionnaire "/submit"
           (:ask "What is your age range?"
            :group "demo-age-range"
@@ -22,27 +30,87 @@
           (:ask "What is your profession?"
            :group "demo-profession"
            :choices (:text "Profession"))
-          (:ask "How often do you use our software?"
-           :group "behave-useage"
-           :choices (:single "Daily" "Weekly" "Monthly" "Less frequently"))
-          (:ask "What features do you use the most?"
-           :group "behave-features"
-           :choices (:multiple "Bookmarks" "Dashboard"))
-          (:ask "Have you used our software for a long period of time?"
-           :group "behave-period"
-           :choices (:single "Less than 1 month" "1-3 months" "3-6 months" "6-12 months" "1-2 years" "More than 2 years"))
-          (:ask "What is your preferred method of payment for online purchases?"
-           :group "payment"
-           :choices (:radio "Credit/Debit Card" "PayPal" "Bank Transfer" "Cash on Delivery" "Cryptocurrency"))
-          (:ask "Which social media platforms do you use regularly?"
-           :group "socialmedia"
-           :choices (:checkbox "Facebook" "Twitter" "Instagram" "LinkedIn" "TikTok" "None" :text "Other"))
-          (:ask "How do you usually consume news?"
-           :group "newsconsumption"
-           :choices (:radio "Online News Websites" "Social Media" "Television" "Newspapers/Magazines" "Radio" "None"))))))
+          (:ask "What is your educational background?"
+           :group "demo-edu"
+           :choices (:text "Last Degree"))))))
 
-  (format t (generate-survey-page))
+  (format t (generate-demographics-survey))
 #+end_src
 
-#+RESULTS: survey-page
-[[file:survey-page.html]]
+#+RESULTS: demographics-survey
+[[file:demographics-survey.html]]
+
+* Geographics
+
+#+name: geographics-survey
+#+begin_src lisp :results output file :file-ext html
+  (in-package :user-research-app)
+
+  (defun generate-geographics-survey ()
+    "Generates an HTML page with questionnaires using questionnaire macros."
+    (with-output-to-string (spinneret:*html*)
+      (with-page (:title "Product Experience Survey" :main-con t)
+        (questionnaire "/submit"
+          (:ask "Where are you located?"
+           :group "geo-loca"
+           :choices (:text "Country"))
+          (:ask "Which timezone do you operate in?"
+           :group "geo-timezone"
+           :choices (:text "Timezone"))))))
+
+  (format t (generate-geographics-survey))
+#+end_src
+
+#+RESULTS: geographics-survey
+[[file:geographics-survey.html]]
+
+* Behavioral
+
+#+name: behavioral-survey
+#+begin_src lisp :results output file :file-ext html
+  (in-package :user-research-app)
+
+  (defun generate-behavioral-survey ()
+    "Generates an HTML page with questionnaires using questionnaire macros."
+    (with-output-to-string (spinneret:*html*)
+      (with-page (:title "Product Experience Survey" :main-con t)
+        (questionnaire "/submit"
+          (:ask "How often do you use our software?"
+           :group "beh-useage"
+           :choices (:single "Daily" "Weekly" "Monthly" "Less frequently"))
+          (:ask "What features do you use the most?"
+           :group "beh-feature"
+           :choices (:multiple "Bookmarks" "KPI" "Contacts"))
+          (:ask "Have you used our software for along period of time?"
+           :group "beh-longuse"
+           :choices (:single "Yes" "No"))))))
+
+  (format t (generate-behavioral-survey))
+#+end_src
+
+#+RESULTS: behavioral-survey
+[[file:behavioral-survey.html]]
+
+* Psychographics
+
+#+name: psychographics-survey
+#+begin_src lisp :results output file :file-ext html
+  (in-package :user-research-app)
+
+  (defun generate-psychographics-survey ()
+    "Generates an HTML page with questionnaires using questionnaire macros."
+    (with-output-to-string (spinneret:*html*)
+      (with-page (:title "Product Experience Survey" :main-con t)
+        (questionnaire "/submit"
+          (:ask "What do you value most in our software?"
+           :group "psy-value"
+           :choices (:text "Most value"))
+          (:ask "What motivates you to use our software?"
+           :group "psy-motivate"
+           :choices (:text "Your motivation"))))))
+
+  (format t (generate-psychographics-survey))
+#+end_src
+
+#+RESULTS: psychographics-survey
+[[file:psychographics-survey.html]]
