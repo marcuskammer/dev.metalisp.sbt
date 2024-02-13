@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang=en data-bs-theme=dark>
+ <head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <title>Product Experience Survey</title>
+  <link rel=stylesheet type=text/css
+        href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css>
+ </head>
+ <body>
+  <h1 class=visually-hidden>Product Experience Survey</h1>
+  <main class=container>
+   <form class=py-5 action=/submit method=post>
+    <fieldset>
+     <legend>Where are you located?</legend>
+     <ol>
+      <li>
+       <!-- FORM/CTRL -->
+<div class=mb-3>
+        <label class="form-label group-geo-loca" for=group-geo-loca-country>Country</label>
+        <input class=form-control id=group-geo-loca-country type=text
+               name=group-geo-loca>
+       </div>
+     </ol>
+     <hr class=my-4>
+    </fieldset>
+    <fieldset>
+     <legend>Which timezone do you operate in?</legend>
+     <ol>
+      <li>
+       <!-- FORM/CTRL -->
+<div class=mb-3>
+        <label class="form-label group-geo-timezone"
+               for=group-geo-timezone-timezone>Timezone</label>
+        <input class=form-control id=group-geo-timezone-timezone type=text
+               name=group-geo-timezone>
+       </div>
+     </ol>
+     <hr class=my-4>
+    </fieldset>
+    <button class="btn btn-primary" type=submit>Submit</button>
+   </form>
+  </main>
+  <script
+          src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js></script>
+ </body>
+</html>

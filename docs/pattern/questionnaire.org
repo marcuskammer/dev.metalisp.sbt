@@ -1,7 +1,7 @@
 #+title: Creating a Questionnaire using cl-sbt/questionnaire Macros in a Web Application
 #+author: Marcus Kammer
 #+email: marcus.kammer@mailbox.org
-#+date: 2024-02-04T13:11+01:00
+#+date: 2024-02-10T12:45+01:00
 * Introduction
 
 Questionnaires are powerful tools for gathering information and insights from
@@ -22,7 +22,7 @@ like single-choice, multiple-choice, or open-ended questions.
 - Multiple Choice: Questions that allow multiple answers.
 - Text: Open-ended questions for free text input.
 
-* Integrating cl-sbt/questionnaire Macros
+* Integrating dev.metalisp.sbt/component/questionnaire Macros
 
 To create a questionnaire in your Common Lisp web application,
 cl-sbt/questionnaire macros can be employed. These macros generate the HTML

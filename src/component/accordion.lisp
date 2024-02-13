@@ -1,8 +1,6 @@
+;;;; -*- mode: lisp; coding: utf-8; tab-width: 4; fill-column: 100; indent-tabs-mode: nil; -*-
 ;;;; accordion.lisp
-;;;;
-;;;; This file defines a package for generating Bootstrap accordion components
-;;;; using Common Lisp macros.
-
+;;;; This file defines a package for generating Bootstrap accordion components using Common Lisp macros.
 (defpackage dev.metalisp.sbt/component/accordion
   (:documentation "A package for generating Bootstrap accordions.")
   (:use :cl)
