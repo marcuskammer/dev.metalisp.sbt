@@ -79,5 +79,7 @@
   (let ((entry (cadr (assoc key dict :test #'string=))))
     (if entry
         (let ((term (cadr (member lang entry :test #'string=))))
-          (or term "Translation not found"))
+          (if term
+              term
+              "Translation not found"))
         "Key not found")))
