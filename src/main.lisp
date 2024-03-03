@@ -37,10 +37,10 @@
                "/dist/js/bootstrap.bundle.min.js"))
 
 (defparameter *local-css-url*
-  "5.3.0/bootstrap.min.css")
+  (concatenate 'string "public/" *bs-version* "/bootstrap.min.css"))
 
 (defparameter *local-js-url*
-  "5.3.0/bootstrap.bundle.min.js")
+  (concatenate 'string "public/" *bs-version* "/bootstrap.bundle.min.js"))
 
 (defparameter *color-theme* "dark")
 
