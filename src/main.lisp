@@ -74,6 +74,22 @@
       (write-string string stream))))
 
 (defmacro with-page ((&key meta (title "Web page") main-con add-css-urls add-js-urls) &body body)
+  "This macro simplifies the process of creating an HTML web page.
+
+META: The meta-information for the web page.
+
+TITLE: Specifies the title of the web page. Defaults to 'Web page'.
+
+MAIN-CON: If t add css class `container` to main.
+
+ADD-CSS-URLS: An optional parameter for additional CSS file URLs.
+
+ADD-JS-URLS: An optional parameter for additional JavaScript file URLs.
+
+BODY: Denotes the markup for the body of the web page.
+
+Example usage:
+   (with-page (:meta (:author \"John Doe\") :title \"My Page\" :main-con t) \"foo\")"
   `(spinneret:with-html
      (:doctype)
      (:html :data-bs-theme ,*color-theme*
