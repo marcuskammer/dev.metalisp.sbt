@@ -36,11 +36,21 @@
                *bs-version*
                "/dist/js/bootstrap.bundle.min.js"))
 
+(defparameter *bs-path*
+  (concatenate 'string
+               "public/"
+               *bs-version*
+               "/"))
+
 (defparameter *local-css-url*
-  (concatenate 'string "public/" *bs-version* "/bootstrap.min.css"))
+  (concatenate 'string
+               *bs-path*
+               "bootstrap.min.css"))
 
 (defparameter *local-js-url*
-  (concatenate 'string "public/" *bs-version* "/bootstrap.bundle.min.js"))
+  (concatenate 'string
+               *bs-path*
+               "bootstrap.bundle.min.js"))
 
 (defparameter *color-theme* "dark")
 
@@ -59,12 +69,16 @@
   (let* ((filename (car (last (uiop:split-string url :separator "/"))))
          (filepath (merge-pathnames filename directory)))
     (ensure-directories-exist directory)
-    (with-open-file (stream filepath
-                            :direction :output
-                            :if-exists :supersede
-                            :element-type '(unsigned-byte 8))
-      (dex:get url :stream stream))
+    (let ((content (dex:get url)))
+      (with-open-file (stream filepath
+                              :direction :output
+                              :if-exists :supersede
+                              :if-does-not-exist :create)
+        (write-string content stream)))
     filepath))
+
+(defun download-bs-css (&optional (directory *bs-path*))
+  (download-file *cdn-css-url* directory))
 
 (defun write-html-str-to-file (filename string &key (lang "en") (style :tree) (fc 120))
   (let ((spinneret:*html-lang* lang)
