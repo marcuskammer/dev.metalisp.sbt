@@ -77,8 +77,12 @@
         (write-string content stream)))
     filepath))
 
-(defun download-bs-css (&optional (directory *bs-path*))
-  (download-file *cdn-css-url* directory))
+(defmacro define-download-function (name url directory)
+  `(defun ,name (&optional (directory ,directory))
+     (download-file ,url directory)))
+
+(define-download-function download-bs-css *cdn-css-url* *bs-path*)
+(define-download-function download-bs-js *cdn-js-url* *bs-path*)
 
 (defun write-html-str-to-file (filename string &key (lang "en") (style :tree) (fc 120))
   (let ((spinneret:*html-lang* lang)
