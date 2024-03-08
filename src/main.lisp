@@ -13,12 +13,14 @@
    :*local-js-url*
    :*bs-version*
    :*color-theme*
+   :download-bs-css
+   :download-bs-js
    :write-html-to-file
    :with-page))
 
 (in-package :dev.metalisp.sbt)
 
-(setq spinneret:*fill-column* 120)
+(defparameter spinneret:*fill-column* 120)
 
 (defparameter *bs-version* "5.3.2")
 
