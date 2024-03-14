@@ -9,7 +9,8 @@
                 :components
                 ((:file "main")
                  (:file "translate")
-                 (:file "utility")))
+                 (:file "utility")
+                 (:file "bi")))
                (:module "src/layout"
                 :depends-on ("src")
                 :components
