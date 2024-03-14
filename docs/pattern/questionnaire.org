@@ -1,7 +1,7 @@
 #+title: Creating a Questionnaire using cl-sbt/questionnaire Macros in a Web Application
 #+author: Marcus Kammer
 #+email: marcus.kammer@mailbox.org
-#+date: 2024-02-10T12:45+01:00
+#+date: [2024-03-14 18:12]
 * Introduction
 
 Questionnaires are powerful tools for gathering information and insights from
@@ -46,27 +46,35 @@ required for different types of questions in a questionnaire.
           (:ask "How old are you?"
            :group "age"
            :choices (:radio "18-24" "25-34" "35-44" "45-54" "55+"))
+
           (:ask "Gender"
            :group "gender"
            :choices (:radio "Male" "Female" "Non-binary" "Prefer not to say" "Other" :text "Other"))
+
           (:ask "How many hours per day, on average, do you spend browsing the internet?"
            :group "webbrowsing"
            :choices (:radio "Less than 1 hour" "1-3 hours" "3-5 hours" "5+ hours"))
+
           (:ask "What are your favorite brands?"
            :group "brands"
            :choices (:checkbox "Brand A" "Brand B" "Brand C" "None" :text "Other"))
+
           (:ask "How often do you shop online?"
            :group "shopping"
            :choices (:radio "Daily" "Weekly" "Monthly" "Rarely" "Never"))
+
           (:ask "Which of the following devices do you own?"
            :group "devices"
            :choices (:checkbox "Smartphone" "Laptop/PC" "Tablet" "Smartwatch" "None"))
+
           (:ask "What is your preferred method of payment for online purchases?"
            :group "payment"
            :choices (:radio "Credit/Debit Card" "PayPal" "Bank Transfer" "Cash on Delivery" "Cryptocurrency"))
+
           (:ask "Which social media platforms do you use regularly?"
            :group "socialmedia"
            :choices (:checkbox "Facebook" "Twitter" "Instagram" "LinkedIn" "TikTok" "None" :text "Other"))
+
           (:ask "How do you usually consume news?"
            :group "newsconsumption"
            :choices (:radio "Online News Websites" "Social Media" "Television" "Newspapers/Magazines" "Radio" "None"))))))
