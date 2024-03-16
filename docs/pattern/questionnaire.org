@@ -1,7 +1,7 @@
 #+title: Creating a Questionnaire using dev.metalisp.sbt/component/questionnaire Macros in a Web Application
 #+author: Marcus Kammer
 #+email: marcus.kammer@mailbox.org
-#+date: [2024-03-16 11:35]
+#+date: [2024-03-16 14:00]
 * Introduction
 
 Questionnaires are powerful tools for gathering information and insights from
@@ -29,12 +29,22 @@ cl-sbt/questionnaire macros can be employed. These macros generate the HTML
 required for different types of questions in a questionnaire.
 
 #+begin_src lisp
+  (ql:quickload '(:dev.metalisp.sbt :hunchentoot))
+#+end_src
+
+#+RESULTS:
+| :DEV.METALISP.SBT |
+
+#+begin_src lisp
   (defpackage my-web-questionnaire-app
     (:use :cl)
     (:import-from :dev.metalisp.sbt :with-page)
     (:import-from :dev.metalisp.sbt/pattern/questionnaire :questionnaire)
     (:export :generate-questionnaire-page))
 #+end_src
+
+#+RESULTS:
+: #<PACKAGE "MY-WEB-QUESTIONNAIRE-APP">
 
 #+name: questionnaire-page
 #+begin_src lisp :results output file :file-ext html
@@ -94,15 +104,21 @@ different types of Bootstrap questionnaires.
 #+begin_src lisp
   (in-package :my-web-questionnaire-app)
 
-  (defvar *basic-server* (make-instance 'hunchentoot:easy-acceptor :port 8080))
+  (defvar *basic-server*)
 
-  (defun start-server (server)
-    (hunchentoot:start server))
+  (defun start-server ()
+    (setf *basic-server* (make-instance 'hunchentoot:easy-acceptor :name "basic-server" :port 8080))
+    (hunchentoot:start *basic-server*))
 
   (defun stop-server (server)
-    (hunchentoot:stop server))
+    (when server
+      (hunchentoot:stop server)
+      (setf *basic-server* nil)))
 
   (defun restart-server (server)
     (stop-server server)
-    (start-server server))
+    (start-server))
 #+end_src
+
+#+RESULTS:
+: RESTART-SERVER
