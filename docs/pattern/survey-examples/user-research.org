@@ -162,3 +162,46 @@
 
 #+RESULTS: tcl-survey
 [[file:tcl-survey.html]]
+
+* System Usability Scale
+
+I would like to use this system frequently.
+The system is unnecessarily complex.
+The system is easy to use.
+I need the support of a technical person to use this system.
+The functions in this system are well integrated.
+There is too much inconsistency in this system.
+Most people would learn to use this system very quickly.
+The system is very awkward to use.
+I feel very confident using this system.
+I needed to learn a lot of things to get started with this system.
+
+Ich würde dieses System gerne häufig nutzen.
+Das System ist unnötig komplex.
+Das System ist einfach zu bedienen.
+Ich brauche die Unterstützung einer technischen Person, um dieses System zu benutzen.
+Die Funktionen in diesem System sind gut integriert.
+Es gibt zu viele Ungereimtheiten in diesem System.
+Die meisten Leute würden sehr schnell lernen, dieses System zu benutzen.
+Das System ist sehr umständlich zu bedienen.
+Ich fühle mich sehr sicher im Umgang mit diesem System.
+Ich musste eine Menge lernen, um mit diesem System arbeiten zu können.
+
+#+name: sus-survey
+#+begin_src lisp :results output file :file-ext html
+  (in-package :user-research-app)
+
+  (defun generate-sus-survey ()
+    "Generates an HTML page with questionnaires using questionnaire macros."
+    (with-output-to-string (spinneret:*html*)
+      (with-page (:title "System Usability Scale" :main-con t)
+        (questionnaire "/submit"
+          (:ask "I’d like to use this system frequently."
+           :group "sus-1"
+           :choices (:single "1 - Very Uncomfortable" "2 - Slightly Uncomfortable" "3 - Neutral" "4 - Quite Comfortable" "5 - Very Comfortable"))
+          (:ask "How frequently do you adopt new technologies?"
+           :group "tcl-adopt"
+           :choices (:single "1 - Always - I'm an early adopter." "2 - Often - I stay on top of technological advances and adopt them frequently." "3 - Sometimes - I adopt new technologies now and then." "4 - Rarely - I only adopt new technologies when it's necessary for work or other important tasks." "5 - Never - I avoid adopting new technologies unless absolutely required."))))))
+
+  (format t (generate-sus-survey))
+#+end_src
