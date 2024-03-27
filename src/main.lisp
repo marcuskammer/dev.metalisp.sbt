@@ -100,7 +100,7 @@ META: The meta-information for the web page.
 
 TITLE: Specifies the title of the web page. Defaults to 'Web page'.
 
-MAIN-CON: If t add css class `container` to main.
+MAIN-CON: If t add css class `container` to <main>.
 
 ADD-CSS-URLS: An optional parameter for additional CSS file URLs.
 
