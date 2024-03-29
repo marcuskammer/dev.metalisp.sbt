@@ -189,8 +189,7 @@ TYPE: Specifies the type of input. See `input-types`
 NAME: The name attribute for the control.
 
 LABEL: The label to display next to the control."
-  (unless (find type input-types :test 'string=)
-    (error "Wrong type for HTML input element. See `input-types`"))
+  (check-type type input-element)
   (let* ((name-str (build-name-str name))
          (class-str (build-class-str "form-label" name))
          (id-str (build-id-str name label)))
