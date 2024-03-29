@@ -1,9 +1,9 @@
-;;;; -*- mode: lisp; coding: utf-8-unix; fill-column: 84; indent-tabs-mode: nil; -*-
+;;;; -*- mode: lisp; coding: utf-8; fill-column: 84; indent-tabs-mode: nil; -*-
 ;;;; form.lisp
+
 ;;;; This file is part of the dev.metalisp.sbt project and defines utility
-;;;; functions, macros, and HTML templates for generating Bootstrap-formatted forms.
-;;;; It provides mechanisms to build form controls, manage localization, and perform
-;;;; string manipulations.
+;;;; functions, macros, and HTML templates for generating Bootstrap-formatted
+;;;; forms.
 
 (defpackage dev.metalisp.sbt/component/form
   (:use
