@@ -91,6 +91,10 @@ The following components are available as packages:
 
 - mailto:~marcuskammer/dev.metalisp.sbt@lists.sr.ht
 
+** RSS Feed
+
+- https://git.sr.ht/~marcuskammer/dev.metalisp.sbt/log/main/rss.xml
+
 ** Similar Libraries
 
 - https://github.com/rmhsilva/semantic-spinneret

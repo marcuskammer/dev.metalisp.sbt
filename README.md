@@ -1,24 +1,25 @@
 
 # Table of Contents
 
-1.  [dev.metalisp.sbt](#org699f02c)
-    1.  [Introduction](#orgd8944f8)
-    2.  [Installation](#orgabffdb4)
-        1.  [Load library](#org3b0b0c9)
-        2.  [Run tests](#orgec1cb6a)
-    3.  [Issue Tracker](#org1adb2e6)
-    4.  [Mailing list](#org8180018)
-    5.  [Similar Libraries](#orgd808d2d)
-    6.  [Author](#org18b4166)
-    7.  [Copyright](#orge683910)
+1.  [dev.metalisp.sbt](#org61f4e75)
+    1.  [Introduction](#orgd236391)
+    2.  [Installation](#orgcd799cd)
+        1.  [Load library](#orgdc6bab8)
+        2.  [Run tests](#org3ff6c1d)
+    3.  [Issue Tracker](#org082fbec)
+    4.  [Mailing list](#org4864ea5)
+    5.  [RSS Feed](#orgd23014e)
+    6.  [Similar Libraries](#org1f515f8)
+    7.  [Author](#org6e48505)
+    8.  [Copyright](#org396e36e)
 
 
-<a id="org699f02c"></a>
+<a id="org61f4e75"></a>
 
 # dev.metalisp.sbt
 
 
-<a id="orgd8944f8"></a>
+<a id="orgd236391"></a>
 
 ## Introduction
 
@@ -79,21 +80,21 @@ The following components are available as packages:
     section.
 
 
-<a id="orgabffdb4"></a>
+<a id="orgcd799cd"></a>
 
 ## Installation
 
     git clone https://git.sr.ht/~marcuskammer/dev.metalisp.sbt ~/quicklisp/local-projects/dev.metalisp.sbt/
 
 
-<a id="org3b0b0c9"></a>
+<a id="orgdc6bab8"></a>
 
 ### Load library
 
     (ql:quickload :dev.metalisp.sbt)
 
 
-<a id="orgec1cb6a"></a>
+<a id="org3ff6c1d"></a>
 
 ### Run tests
 
@@ -102,14 +103,14 @@ The following components are available as packages:
     sh run-tests.sh
 
 
-<a id="org1adb2e6"></a>
+<a id="org082fbec"></a>
 
 ## Issue Tracker
 
 -   <https://todo.sr.ht/~marcuskammer/dev.metalisp.sbt>
 
 
-<a id="org8180018"></a>
+<a id="org4864ea5"></a>
 
 ## Mailing list
 
@@ -118,7 +119,14 @@ The following components are available as packages:
 -   <mailto:~marcuskammer/dev.metalisp.sbt@lists.sr.ht>
 
 
-<a id="orgd808d2d"></a>
+<a id="orgd23014e"></a>
+
+## RSS Feed
+
+-   <https://git.sr.ht/~marcuskammer/dev.metalisp.sbt/log/main/rss.xml>
+
+
+<a id="org1f515f8"></a>
 
 ## Similar Libraries
 
@@ -129,14 +137,14 @@ The following components are available as packages:
 -   <https://github.com/rajasegar/cl-bootstrap/>
 
 
-<a id="org18b4166"></a>
+<a id="org6e48505"></a>
 
 ## Author
 
 -   Marcus Kammer (marcus.kammer@metalisp.dev)
 
 
-<a id="orge683910"></a>
+<a id="org396e36e"></a>
 
 ## Copyright
 
