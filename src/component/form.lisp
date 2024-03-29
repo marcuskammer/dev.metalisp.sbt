@@ -32,12 +32,24 @@
 
 (in-package :dev.metalisp.sbt/component/form)
 
-(defvar input-types
+(defconstant input-elements
   '("button" "checkbox" "color" "date" "datetime-local" "email" "file" "hidden"
     "image" "month" "number" "password" "radio" "range" "reset" "search" "submit"
     "tel" "text" "time" "url" "week")
-  "List of types for input element.
+  "List of input elements.
 See: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input")
+
+(defun input-element-p (input-element)
+  "Test for HTML input type.
+
+INPUT-TYPE: String
+
+Returns:
+  t or nil"
+  (find input-element input-elements :test #'string=))
+
+(deftype input-element ()
+  '(and string (satisfies input-element-p)))
 
 (defun remove-special-chars (str)
   "Removes all special characters from the string STR except numbers and alphabets.
@@ -115,14 +127,25 @@ Returns:
                "-"
                (remove-special-chars (build-value-prop-str value))))
 
-(defun checkable (type name value)
-  "Generates a checkable form control (e.g., radio or checkbox).
+(defconstant checkable-elements
+  '("radio" "checkbox")
+  "List of checkable specific input elements ")
 
-TYPE: The type of the control (either 'radio' or 'checkbox').
+(defun checkable-element-p (checkable-element)
+  (find checkable-element checkable-elements :test #'string=))
+
+(deftype checkable-element ()
+  '(and string (satisfies checkable-element-p)))
+
+(defun checkable (type name value)
+  "Generates a checkable form control.
+
+TYPE: A string representing checkable-element.
 
 NAME: The name attribute for the control.
 
 VALUE: The value attribute for the control."
+  (check-type type checkable-element)
   (let* ((name-str (build-name-str name))
          (value-str (build-value-str value))
          (value-prop-str (build-value-prop-str value))
@@ -143,7 +166,7 @@ VALUE: The value attribute for the control."
 (defmacro define-checkable (type)
   "Generates a checkable function based on the provided type.
 
-TYPE: A string representing the type."
+TYPE: A string representing checkable-element."
   (let ((func-name (intern (string-upcase (concatenate 'string "checkable-" type)))))
     `(defun ,func-name (name value)
        (checkable ,type name value))))
