@@ -1,22 +1,24 @@
 
 # Table of Contents
 
-1.  [dev.metalisp.sbt](#org8bf2b0f)
-    1.  [Introduction](#org9064803)
-    2.  [Installation](#orgae5e4dd)
-    3.  [Issue Tracker](#org0000d2d)
-    4.  [Mailing list](#orgb384f3b)
-    5.  [Similar Libraries](#orga333aa3)
-    6.  [Author](#orgd1478d1)
-    7.  [Copyright](#org9ae3ef0)
+1.  [dev.metalisp.sbt](#orgbb4b17d)
+    1.  [Introduction](#org358d7a8)
+    2.  [Installation](#orgd78b88c)
+        1.  [Load library](#org60e3c78)
+        2.  [Run tests](#orgc18a25a)
+    3.  [Issue Tracker](#orga00e078)
+    4.  [Mailing list](#orgef69d41)
+    5.  [Similar Libraries](#org574412f)
+    6.  [Author](#orgcf618ab)
+    7.  [Copyright](#org128ba2a)
 
 
-<a id="org8bf2b0f"></a>
+<a id="orgbb4b17d"></a>
 
 # dev.metalisp.sbt
 
 
-<a id="org9064803"></a>
+<a id="org358d7a8"></a>
 
 ## Introduction
 
@@ -77,23 +79,37 @@ The following components are available as packages:
     section.
 
 
-<a id="orgae5e4dd"></a>
+<a id="orgd78b88c"></a>
 
 ## Installation
 
     git clone https://git.sr.ht/~marcuskammer/dev.metalisp.sbt ~/quicklisp/local-projects/dev.metalisp.sbt/
 
+
+<a id="org60e3c78"></a>
+
+### Load library
+
     (ql:quickload :dev.metalisp.sbt)
 
 
-<a id="org0000d2d"></a>
+<a id="orgc18a25a"></a>
+
+### Run tests
+
+    cd ~/quicklisp/local-project/dev.metalisp.sbt/
+
+    sh run-tests.sh
+
+
+<a id="orga00e078"></a>
 
 ## Issue Tracker
 
 -   <https://todo.sr.ht/~marcuskammer/dev.metalisp.sbt>
 
 
-<a id="orgb384f3b"></a>
+<a id="orgef69d41"></a>
 
 ## Mailing list
 
@@ -102,7 +118,7 @@ The following components are available as packages:
 -   <mailto:~marcuskammer/dev.metalisp.sbt@lists.sr.ht>
 
 
-<a id="orga333aa3"></a>
+<a id="org574412f"></a>
 
 ## Similar Libraries
 
@@ -113,14 +129,14 @@ The following components are available as packages:
 -   <https://github.com/rajasegar/cl-bootstrap/>
 
 
-<a id="orgd1478d1"></a>
+<a id="orgcf618ab"></a>
 
 ## Author
 
 -   Marcus Kammer (marcus.kammer@metalisp.dev)
 
 
-<a id="org9ae3ef0"></a>
+<a id="org128ba2a"></a>
 
 ## Copyright
 

@@ -65,8 +65,20 @@ The following components are available as packages:
   git clone https://git.sr.ht/~marcuskammer/dev.metalisp.sbt ~/quicklisp/local-projects/dev.metalisp.sbt/
 #+end_src
 
+*** Load library
+
 #+begin_src lisp
   (ql:quickload :dev.metalisp.sbt)
+#+end_src
+
+*** Run tests
+
+#+begin_src bash
+ cd ~/quicklisp/local-project/dev.metalisp.sbt/
+#+end_src
+
+#+begin_src bash
+ sh run-tests.sh
 #+end_src
 
 ** Issue Tracker
