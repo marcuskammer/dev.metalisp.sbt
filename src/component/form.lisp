@@ -1,9 +1,9 @@
-;;;; -*- mode: lisp; coding: utf-8-unix; tab-width: 4; fill-column: 100; indent-tabs-mode: nil; -*-
+;;;; -*- mode: lisp; coding: utf-8-unix; fill-column: 84; indent-tabs-mode: nil; -*-
 ;;;; form.lisp
-;;;;
-;;;; This file is part of the dev.metalisp.sbt project and defines utility functions, macros, and
-;;;; HTML templates for generating Bootstrap-formatted forms.  It provides mechanisms to build form
-;;;; controls, manage localization, and perform string manipulations.
+;;;; This file is part of the dev.metalisp.sbt project and defines utility
+;;;; functions, macros, and HTML templates for generating Bootstrap-formatted forms.
+;;;; It provides mechanisms to build form controls, manage localization, and perform
+;;;; string manipulations.
 
 (defpackage dev.metalisp.sbt/component/form
   (:use
@@ -241,8 +241,9 @@ TYPE: A string representing checkable-element."
 TYPES: A list of strings that specifies the types for which to generate
 checkable macros."
   `(progn
-     ,@(loop for type in '("button" "checkbox" "color" "date" "datetime-local" "email" "file" "hidden"
-                           "image" "month" "number" "password" "radio" "range" "reset" "search" "submit"
+     ,@(loop for type in '("button" "checkbox" "color" "date" "datetime-local"
+                           "email" "file" "hidden" "image" "month" "number"
+                           "password" "radio" "range" "reset" "search" "submit"
                            "tel" "text" "time" "url" "week")
              collect `(define-ctrl ,type))))
 
