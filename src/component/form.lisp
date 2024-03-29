@@ -20,13 +20,13 @@
    :dev.metalisp.sbt/utility
    :spacing)
   (:export
+   :checkable
+   :checkable-radio
+   :checkable-checkbox
    :combo
    :combo-lg
    :combo-sm
    :combo-multiple
-   :checkable
-   :checkable-radio
-   :checkable-checkbox
    :ctrl
    :ctrl-button
    :ctrl-checkbox
