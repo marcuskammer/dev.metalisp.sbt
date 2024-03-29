@@ -74,7 +74,7 @@ The following components are available as packages:
 *** Run tests
 
 #+begin_src bash
- cd ~/quicklisp/local-project/dev.metalisp.sbt/
+ cd ~/quicklisp/local-projects/dev.metalisp.sbt/
 #+end_src
 
 #+begin_src bash

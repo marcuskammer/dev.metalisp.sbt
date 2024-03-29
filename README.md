@@ -1,24 +1,24 @@
 
 # Table of Contents
 
-1.  [dev.metalisp.sbt](#orgbb4b17d)
-    1.  [Introduction](#org358d7a8)
-    2.  [Installation](#orgd78b88c)
-        1.  [Load library](#org60e3c78)
-        2.  [Run tests](#orgc18a25a)
-    3.  [Issue Tracker](#orga00e078)
-    4.  [Mailing list](#orgef69d41)
-    5.  [Similar Libraries](#org574412f)
-    6.  [Author](#orgcf618ab)
-    7.  [Copyright](#org128ba2a)
+1.  [dev.metalisp.sbt](#org699f02c)
+    1.  [Introduction](#orgd8944f8)
+    2.  [Installation](#orgabffdb4)
+        1.  [Load library](#org3b0b0c9)
+        2.  [Run tests](#orgec1cb6a)
+    3.  [Issue Tracker](#org1adb2e6)
+    4.  [Mailing list](#org8180018)
+    5.  [Similar Libraries](#orgd808d2d)
+    6.  [Author](#org18b4166)
+    7.  [Copyright](#orge683910)
 
 
-<a id="orgbb4b17d"></a>
+<a id="org699f02c"></a>
 
 # dev.metalisp.sbt
 
 
-<a id="org358d7a8"></a>
+<a id="orgd8944f8"></a>
 
 ## Introduction
 
@@ -79,37 +79,37 @@ The following components are available as packages:
     section.
 
 
-<a id="orgd78b88c"></a>
+<a id="orgabffdb4"></a>
 
 ## Installation
 
     git clone https://git.sr.ht/~marcuskammer/dev.metalisp.sbt ~/quicklisp/local-projects/dev.metalisp.sbt/
 
 
-<a id="org60e3c78"></a>
+<a id="org3b0b0c9"></a>
 
 ### Load library
 
     (ql:quickload :dev.metalisp.sbt)
 
 
-<a id="orgc18a25a"></a>
+<a id="orgec1cb6a"></a>
 
 ### Run tests
 
-    cd ~/quicklisp/local-project/dev.metalisp.sbt/
+    cd ~/quicklisp/local-projects/dev.metalisp.sbt/
 
     sh run-tests.sh
 
 
-<a id="orga00e078"></a>
+<a id="org1adb2e6"></a>
 
 ## Issue Tracker
 
 -   <https://todo.sr.ht/~marcuskammer/dev.metalisp.sbt>
 
 
-<a id="orgef69d41"></a>
+<a id="org8180018"></a>
 
 ## Mailing list
 
@@ -118,7 +118,7 @@ The following components are available as packages:
 -   <mailto:~marcuskammer/dev.metalisp.sbt@lists.sr.ht>
 
 
-<a id="org574412f"></a>
+<a id="orgd808d2d"></a>
 
 ## Similar Libraries
 
@@ -129,14 +129,14 @@ The following components are available as packages:
 -   <https://github.com/rajasegar/cl-bootstrap/>
 
 
-<a id="orgcf618ab"></a>
+<a id="org18b4166"></a>
 
 ## Author
 
 -   Marcus Kammer (marcus.kammer@metalisp.dev)
 
 
-<a id="org128ba2a"></a>
+<a id="orge683910"></a>
 
 ## Copyright
 
