@@ -32,25 +32,6 @@
 
 (in-package :dev.metalisp.sbt/component/form)
 
-(defconstant input-elements
-  '("button" "checkbox" "color" "date" "datetime-local" "email" "file" "hidden"
-    "image" "month" "number" "password" "radio" "range" "reset" "search" "submit"
-    "tel" "text" "time" "url" "week")
-  "List of input elements.
-See: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input")
-
-(defun input-element-p (input-element)
-  "Test for HTML input type.
-
-INPUT-TYPE: String
-
-Returns:
-  t or nil"
-  (find input-element input-elements :test #'string=))
-
-(deftype input-element ()
-  '(and string (satisfies input-element-p)))
-
 (defun remove-special-chars (str)
   "Removes all special characters from the string STR except numbers and alphabets.
 
@@ -127,7 +108,7 @@ Returns:
                "-"
                (remove-special-chars (build-value-prop-str value))))
 
-(defconstant checkable-elements
+(defvar checkable-elements
   '("radio" "checkbox")
   "List of checkable specific input elements ")
 
@@ -181,15 +162,34 @@ checkable macros."
 
 (define-checkables ("radio" "checkbox"))
 
+(defvar ctrl-elements
+  '("button" "checkbox" "color" "date" "datetime-local" "email" "file" "hidden"
+    "image" "month" "number" "password" "radio" "range" "reset" "search" "submit"
+    "tel" "text" "time" "url" "week")
+  "List of input elements.
+See: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input")
+
+(defun ctrl-element-p (ctrl-element)
+  "Test for HTML input type.
+
+CTRL-ELEMENT: String
+
+Returns:
+  t or nil"
+  (find ctrl-element ctrl-elements :test #'string=))
+
+(deftype ctrl-element ()
+  '(and string (satisfies ctrl-element-p)))
+
 (defun ctrl (type name label)
   "Generates a basic Bootstrap form control with a label.
 
-TYPE: Specifies the type of input. See `input-types`
+TYPE: A string representing ctrl-element.
 
 NAME: The name attribute for the control.
 
 LABEL: The label to display next to the control."
-  (check-type type input-element)
+  (check-type type ctrl-element)
   (let* ((name-str (build-name-str name))
          (class-str (build-class-str "form-label" name))
          (id-str (build-id-str name label)))
