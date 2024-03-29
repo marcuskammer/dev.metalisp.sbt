@@ -28,6 +28,28 @@
    :checkable-radio
    :checkable-checkbox
    :ctrl
+   :ctrl-button
+   :ctrl-checkbox
+   :ctrl-color
+   :ctrl-date
+   :ctrl-datetime-local
+   :ctrl-email
+   :ctrl-file
+   :ctrl-hidden
+   :ctrl-image
+   :ctrl-month
+   :ctrl-number
+   :ctrl-password
+   :ctrl-radio
+   :ctrl-range
+   :ctrl-reset
+   :ctrl-search
+   :ctrl-submit
+   :ctrl-tel
+   :ctrl-text
+   :ctrl-time
+   :ctrl-url
+   :ctrl-week
    :search-form))
 
 (in-package :dev.metalisp.sbt/component/form)
@@ -152,15 +174,16 @@ TYPE: A string representing checkable-element."
     `(defun ,func-name (name value)
        (checkable ,type name value))))
 
-(defmacro define-checkables (types)
+(defmacro define-checkables ()
   "Generates multiple checkable functions based on the provided list of types.
 
 TYPES: A list of strings that specifies the types for which to generate
 checkable macros."
   `(progn
-     ,@(loop for type in types collect `(define-checkable ,type))))
+     ,@(loop for type in '("radio" "checkbox")
+             collect `(define-checkable ,type))))
 
-(define-checkables ("radio" "checkbox"))
+(define-checkables)
 
 (defvar ctrl-elements
   '("button" "checkbox" "color" "date" "datetime-local" "email" "file" "hidden"
@@ -203,6 +226,27 @@ LABEL: The label to display next to the control."
                     :id id-str
                     :type type
                     :name name-str)))))
+
+(defmacro define-ctrl (type)
+  "Generates a checkable function based on the provided type.
+
+TYPE: A string representing checkable-element."
+  (let ((func-name (intern (string-upcase (concatenate 'string "ctrl-" type)))))
+    `(defun ,func-name (name value)
+       (ctrl ,type name value))))
+
+(defmacro define-ctrls ()
+  "Generates multiple checkable functions based on the provided list of types.
+
+TYPES: A list of strings that specifies the types for which to generate
+checkable macros."
+  `(progn
+     ,@(loop for type in '("button" "checkbox" "color" "date" "datetime-local" "email" "file" "hidden"
+                           "image" "month" "number" "password" "radio" "range" "reset" "search" "submit"
+                           "tel" "text" "time" "url" "week")
+             collect `(define-ctrl ,type))))
+
+(define-ctrls)
 
 (defmacro combo ((&key size multiple) &body body)
   "This macro generates a Bootstrap select dropdown menu.
