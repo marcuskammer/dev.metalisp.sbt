@@ -265,9 +265,9 @@ Example 1:
 
 Example 2:
   (combo (:multiple 3) \"Red\" \"Green\" \"Blue\""
-  (let ((class-attr (cond ((stringp size)
-                           (format nil "form-select form-select-~a" size))
-                          (t "form-select"))))
+  (let ((class-attr (if (stringp size)
+                        (format nil "form-select form-select-~a" size)
+                        "form-select")))
     `(spinneret:with-html
        (:comment "FORM/SELECT")
        (:select :class ,class-attr
