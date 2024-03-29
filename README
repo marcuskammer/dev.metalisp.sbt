@@ -69,6 +69,11 @@ The following components are available as packages:
   (ql:quickload :dev.metalisp.sbt)
 #+end_src
 
+** Issue Tracker
+- https://todo.sr.ht/~marcuskammer/dev.metalisp.sbt
+** Mailing list
+- https://lists.sr.ht/~marcuskammer/dev.metalisp.sbt
+- mailto:~marcuskammer/dev.metalisp.sbt@lists.sr.ht
 ** Similar Libraries
 
 - https://github.com/rmhsilva/semantic-spinneret
