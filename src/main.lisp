@@ -102,7 +102,10 @@
     (with-open-file (stream filename :direction :output :if-exists :supersede)
       (write-string string stream))))
 
-(defmacro with-page ((&key meta (title "Web page") main-con add-css-urls
+(defmacro with-page ((&key
+                        meta (title "Web page")
+                        main-con
+                        add-css-urls
                         add-js-urls)
                      &body body)
   "This macro simplifies the process of creating an HTML web page.
