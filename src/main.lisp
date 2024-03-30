@@ -156,8 +156,8 @@ Example:
 
 Returns:
   A new string with special characters removed."
-  (remove-if-not #'(lambda (char)
-                     (or (alpha-char-p char) (digit-char-p char)))
+  (remove-if-not (lambda (char)
+                   (or (alpha-char-p char) (digit-char-p char)))
                  str))
 
 (defun clean-form-str (str)
