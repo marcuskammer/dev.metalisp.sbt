@@ -137,14 +137,14 @@ Example usage:
                    (:link :type "text/css" :rel "stylesheet" :href ,(bs-css-url))
                    ,@(loop for url in add-css-urls
                            collect `(:link :type "text/css"
-                                      :rel "stylesheet" :href ,url)))
+                                           :rel "stylesheet" :href ,url)))
 
             (:body (:h1 :class "visually-hidden" ,title)
-              (:main ,@(when main-con (list :class "container")) ,@body)
+                   (:main ,@(if main-con (list :class "container") nil) ,@body)
 
-              (:script :src ,(bs-js-url))
-              ,@(loop for url in add-js-urls
-                      collect `(:script :src ,url))))))
+                   (:script :src ,(bs-js-url))
+                   ,@(loop for url in add-js-urls
+                           collect `(:script :src ,url))))))
 
 (defun remove-special-chars (str)
   "Removes all special characters from the string STR except numbers and alphabets.
