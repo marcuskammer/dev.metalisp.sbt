@@ -94,14 +94,17 @@
 (define-download-function download-bs-css *cdn-css-url* *bs-path*)
 (define-download-function download-bs-js *cdn-js-url* *bs-path*)
 
-(defun write-html-str-to-file (filename string &key (lang "en") (style :tree) (fc 120))
+(defun write-html-str-to-file (filename string
+                               &key (lang "en") (style :tree) (fc 120))
   (let ((spinneret:*html-lang* lang)
         (spinneret:*html-style* style)
         (spinneret:*fill-column* fc))
     (with-open-file (stream filename :direction :output :if-exists :supersede)
       (write-string string stream))))
 
-(defmacro with-page ((&key meta (title "Web page") main-con add-css-urls add-js-urls) &body body)
+(defmacro with-page ((&key meta (title "Web page") main-con add-css-urls
+                        add-js-urls)
+                     &body body)
   "This macro simplifies the process of creating an HTML web page.
 
 META: The meta-information for the web page.
@@ -122,7 +125,8 @@ Example usage:
      (:doctype)
      (:html :data-bs-theme ,*color-theme*
             (:head (:meta :charset "utf-8")
-                   (:meta :name "viewport" :content "width=device-width, initial-scale=1")
+                   (:meta :name "viewport"
+                          :content "width=device-width, initial-scale=1")
                    ,@(loop for (key value) on meta by #'cddr
                            collect `(:meta :name
                                            ,(string-downcase (symbol-name key))
@@ -132,7 +136,8 @@ Example usage:
 
                    (:link :type "text/css" :rel "stylesheet" :href ,(bs-css-url))
                    ,@(loop for url in add-css-urls
-                           collect `(:link :type "text/css" :rel "stylesheet" :href ,url)))
+                           collect `(:link :type "text/css"
+                                      :rel "stylesheet" :href ,url)))
 
             (:body (:h1 :class "visually-hidden" ,title)
               (:main ,@(when main-con (list :class "container")) ,@body)
@@ -166,7 +171,8 @@ Returns:
   (string-downcase (substitute #\- #\Space (string-trim '(#\Space) str))))
 
 (defun build-name-str (name)
-  "Builds a standardized string by adding a 'group-' prefix and applying cleaning functions.
+  "Builds a standardized string by adding a 'group-' prefix and applying cleaning
+functions.
 
 NAME: The initial name string.
 
@@ -193,7 +199,8 @@ Returns:
   (clean-form-str (build-value-str value)))
 
 (defun build-class-str (class name)
-  "Builds a class string by concatenating 'form-check-label' and a standardized name string.
+  "Builds a class string by concatenating 'form-check-label' and a standardized
+name string.
 
 CLASS: Corresponding class property.
 
@@ -204,7 +211,8 @@ Returns:
   (concatenate 'string class " " (build-name-str name)))
 
 (defun build-id-str (name value)
-  "Builds an ID string by concatenating a standardized name string and a sanitized value property string.
+  "Builds an ID string by concatenating a standardized name string and a sanitized
+value property string.
 
 NAME: The initial name string.
 
