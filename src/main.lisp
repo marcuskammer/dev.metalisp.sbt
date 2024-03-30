@@ -1,6 +1,7 @@
-;;;; -*- mode: lisp; coding: utf-8; tab-width: 4; fill-column: 100; indent-tabs-mode: nil; -*-
+;;;; -*- mode: lisp; coding: utf-8; fill-column: 84; indent-tabs-mode: nil; -*-
 ;;;; main.lisp
 ;;;; Provide general functions.
+
 (defpackage dev.metalisp.sbt
   (:use :cl)
   (:export
@@ -16,7 +17,14 @@
    :download-bs-css
    :download-bs-js
    :write-html-to-file
-   :with-page))
+   :with-page
+   :remove-special-chars
+   :clean-form-str
+   :build-name-str
+   :build-value-str
+   :build-value-prop-str
+   :build-class-str
+   :build-id-str))
 
 (in-package :dev.metalisp.sbt)
 
@@ -132,3 +140,79 @@ Example usage:
               (:script :src ,(bs-js-url))
               ,@(loop for url in add-js-urls
                       collect `(:script :src ,url))))))
+
+(defun remove-special-chars (str)
+  "Removes all special characters from the string STR except numbers and alphabets.
+
+STR: The input string from which special characters need to be removed.
+
+Example:
+  (remove-special-chars \"a1b!@#$%^&*()c2\") will return \"a1bc2\"
+
+Returns:
+  A new string with special characters removed."
+  (remove-if-not #'(lambda (char)
+                     (or (alpha-char-p char) (digit-char-p char)))
+                 str))
+
+(defun clean-form-str (str)
+  "Cleans a form string for use as a name or identifier.
+
+STR: The string to clean. Removes leading and trailing spaces, replaces spaces
+with dashes, and converts to lowercase.
+
+Returns:
+  A new string which can be used as HTML class."
+  (string-downcase (substitute #\- #\Space (string-trim '(#\Space) str))))
+
+(defun build-name-str (name)
+  "Builds a standardized string by adding a 'group-' prefix and applying cleaning functions.
+
+NAME: The initial name string.
+
+Returns:
+  A new standardized string."
+  (concatenate 'string "group-" (clean-form-str name)))
+
+(defun build-value-str (value)
+  "Trims leading and trailing spaces from the given value string.
+
+VALUE: The string to be cleaned.
+
+Returns:
+  A new string without leading and trailing spaces."
+  (string-trim '(#\Space) value))
+
+(defun build-value-prop-str (value)
+  "Builds a value property string by applying various cleaning functions.
+
+VALUE: The initial value string.
+
+Returns:
+  A new value property string."
+  (clean-form-str (build-value-str value)))
+
+(defun build-class-str (class name)
+  "Builds a class string by concatenating 'form-check-label' and a standardized name string.
+
+CLASS: Corresponding class property.
+
+NAME: The initial name string.
+
+Returns:
+  A new class string."
+  (concatenate 'string class " " (build-name-str name)))
+
+(defun build-id-str (name value)
+  "Builds an ID string by concatenating a standardized name string and a sanitized value property string.
+
+NAME: The initial name string.
+
+VALUE: The initial value string.
+
+Returns:
+  A new ID string."
+  (concatenate 'string
+               (build-name-str name)
+               "-"
+               (remove-special-chars (build-value-prop-str value))))
