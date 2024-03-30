@@ -1,16 +1,10 @@
-(defpackage dev.metalisp.sbt/tests/alert
+(defpackage dev.metalisp.sbt/tests/component/alert
   (:use
    :cl
-   :dev.metalisp.sbt
-   :rove)
-  (:import-from
    :dev.metalisp.sbt/component/alert
-   :btn
-   :alert
-   :alert-primary
-   :alert-dismiss-primary))
+   :rove))
 
-(in-package :dev.metalisp.sbt/tests/alert)
+(in-package :dev.metalisp.sbt/tests/component/alert)
 
 (deftest test-btn-macro
   (testing "Testing btn macro"

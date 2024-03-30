@@ -1,20 +1,8 @@
 (defpackage dev.metalisp.sbt/tests/component/card
   (:use
    :cl
-   :dev.metalisp.sbt
-   :rove)
-  (:import-from
    :dev.metalisp.sbt/component/card
-   :title
-   :subtitle
-   :text
-   :link
-   :header
-   :img
-   :body
-   :card-with-img
-   :card
-   :card-group))
+   :rove))
 
 (in-package :dev.metalisp.sbt/tests/component/card)
 

@@ -1,15 +1,10 @@
-(defpackage dev.metalisp.sbt/tests/dropdown
+(defpackage dev.metalisp.sbt/tests/component/dropdown
   (:use
    :cl
-   :dev.metalisp.sbt
-   :rove)
-  (:import-from
    :dev.metalisp.sbt/component/dropdown
-   :menu
-   :item
-   :dropdown))
+   :rove))
 
-(in-package :dev.metalisp.sbt/tests/dropdown)
+(in-package :dev.metalisp.sbt/tests/component/dropdown)
 
 (deftest test-menu
   (let ((result (spinneret:with-html-string (menu (item "Item 1") (item "Item 2")))))
