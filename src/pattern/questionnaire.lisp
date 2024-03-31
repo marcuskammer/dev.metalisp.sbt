@@ -1,9 +1,12 @@
+;;;; -*- mode: lisp; coding: utf-8; fill-column: 84; indent-tabs-mode: nil; -*-
+;;;;
 ;;;; questionnaire.lisp
-
-;;;; This package, `dev.metalisp.sbt/questionnaire`, provides a suite of utilities for
-;;;; generating HTML forms composed of multiple questions. Each question can
-;;;; have a different type of input (radio buttons, checkboxes, etc.), and the
-;;;; form itself can be customized according to the target URL for submissions.
+;;;;
+;;;; This package, `dev.metalisp.sbt/questionnaire`, provides a suite of
+;;;; utilities for generating HTML forms composed of multiple questions. Each
+;;;; question can have a different type of input (radio buttons, checkboxes,
+;;;; etc.), and the form itself can be customized according to the target URL
+;;;; for submissions.
 
 (defpackage dev.metalisp.sbt/pattern/questionnaire
   (:documentation "Defines the `dev.metalisp.sbt/questionnaire` package, a utility suite for generating HTML forms with various types of questions.")
