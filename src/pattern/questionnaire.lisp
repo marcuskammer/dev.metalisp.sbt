@@ -159,8 +159,6 @@ elements. See `choicep'
 
 Example:
   (choice \"hobbies\" (:radio \"Reading\" \"Swimming\" \"Coding\"))"
-  (unless (choicep choice)
-    (error "Invalid choice format: ~a" choice))
   (multiple-value-bind (type values)
       (resolve-input-and-choice choice)
     (if (string= type "combo")
@@ -302,8 +300,6 @@ Example German:
               :class ,class-string
               ,@(loop for q in body
                       for (ask group choices) = (multiple-value-list (extract-question-components q))
-                      do (unless (questionp q)
-                           (error "Invalid question format: ~a" q))
                       collect `(question ,ask ,group ,@(split-list-by-keyword choices)))
               (btn-primary (:type "submit")
                 (find-l10n "submit" spinneret:*html-lang* *l10n*))))))
