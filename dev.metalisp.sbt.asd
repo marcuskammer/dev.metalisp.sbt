@@ -2,7 +2,7 @@
   :version "0.1.0"
   :author "Marcus Kammer"
   :mailto "marcus.kammer@metalisp.dev"
-  :license "GNU Lesser General Public License"
+  :license "MIT"
   :source-control (:git "git@git.sr.ht:~marcuskammer/dev.metalisp.sbt")
   :depends-on (:spinneret :dexador)
   :components ((:module "src"
