@@ -14,7 +14,7 @@
    :find-l10n
    :remove-special-chars
    :clean-form-str
-   :build-name-str
+   :build-str-name
    :build-value-str
    :build-value-prop-str
    :build-class-str
@@ -82,7 +82,7 @@ NAME: The name attribute for the control.
 
 VALUE: The value attribute for the control."
   (check-type type checkable-element)
-  (let* ((name-str (build-name-str name))
+  (let* ((name-str (build-str-name name))
          (value-str (build-value-str value))
          (value-prop-str (build-value-prop-str value))
          (class-str (build-class-str "form-check-label" name))
@@ -146,7 +146,7 @@ NAME: The name attribute for the control.
 
 LABEL: The label to display next to the control."
   (check-type type ctrl-element)
-  (let* ((name-str (build-name-str name))
+  (let* ((name-str (build-str-name name))
          (class-str (build-class-str "form-label" name))
          (id-str (build-id-str name label)))
     (spinneret:with-html
