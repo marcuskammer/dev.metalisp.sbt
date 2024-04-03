@@ -16,7 +16,9 @@
                 :components
                 ((:file "grid")))
                (:module "src/component"
+                ;;
                 ;; Components are the building blocks for Patterns
+                ;;
                 :depends-on ("src")
                 :components
                 ((:file "accordion")
@@ -33,12 +35,16 @@
                  (:file "spinner")
                  (:file "form")))
                (:module "src/pattern"
+                ;;
                 ;; Patterns are built on top of components and define their own DSL to create specific things
+                ;;
                 :depends-on ("src" "src/component")
                 :components
                 ((:file "questionnaire")))
                (:module "examples"
+                ;;
                 ;; Examples show how different patterns work together
+                ;;
                 :depends-on ("src/pattern")
                 :components
                 ((:file "album"))))
