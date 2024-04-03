@@ -304,7 +304,9 @@ Example German:
               :method "post"
               :class ,class-string
               ,@(loop for q in body
-                      for (ask group choices) = (multiple-value-list (extract-question-components q))
-                      collect `(question ,ask ,group ,@(split-list-by-keyword choices)))
+                      for (ask group choices) = (multiple-value-list
+                                                 (extract-question-components q))
+                      collect `(question ,ask ,group
+                                 ,@(split-list-by-keyword choices)))
               (btn-primary (:type "submit")
                 (find-l10n "submit" spinneret:*html-lang* *l10n*))))))
