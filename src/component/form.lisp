@@ -18,7 +18,7 @@
    :build-str-value
    :build-str-value-prop
    :build-str-class
-   :build-id-str)
+   :build-str-id)
   (:import-from
    :dev.metalisp.sbt/component/btn
    :btn-outline-success
@@ -86,7 +86,7 @@ VALUE: The value attribute for the control."
          (value-str (build-str-value value))
          (value-prop-str (build-str-value-prop value))
          (class-str (build-str-class "form-check-label" name))
-         (id-str (build-id-str name value)))
+         (id-str (build-str-id name value)))
     (spinneret:with-html
       (:comment "FORM/CHECKABLE")
       (:div :class "form-check"
@@ -148,7 +148,7 @@ LABEL: The label to display next to the control."
   (check-type type ctrl-element)
   (let* ((name-str (build-str-name name))
          (class-str (build-str-class "form-label" name))
-         (id-str (build-id-str name label)))
+         (id-str (build-str-id name label)))
     (spinneret:with-html
       (:comment "FORM/CTRL")
       (:div :class (spacing :property "m" :side "b" :size 3)
