@@ -25,7 +25,9 @@
   (:import-from
    :dev.metalisp.sbt/component/form
    :checkable
+   :checkable-element
    :ctrl
+   :ctrl-element
    :combo)
   (:export
    :questionnaire))
@@ -129,13 +131,13 @@ Returns two values:
 TYPE: A string specifying the HTML input type like 'radio', 'checkbox', 'text',
 etc.
 
-Returns: A function that can be used to generate the HTML form input. Or throws
-an error if an unknown type is passed."
-  (cond
-    ((string= type "radio") #'checkable)
-    ((string= type "checkbox") #'checkable)
-    ((string= type "text") #'ctrl)
-    (t (error "Unknown type ~A" type))))
+Returns:
+  A function that can be used to generate the HTML form input. Or throws an error
+  if an unknown type is passed."
+  (typecase type
+    (checkable-element #'checkable)
+    (ctrl-element #'ctrl)
+    (otherwise (error "Unknown type ~A" type))))
 
 (declaim (ftype (function (string string string) function) apply-input-form))
 (defun apply-input-form (type group item)

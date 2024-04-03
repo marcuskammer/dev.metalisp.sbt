@@ -30,6 +30,7 @@
    :checkable
    :checkable-radio
    :checkable-checkbox
+   :checkable-element
    :combo
    :combo-lg
    :combo-sm
@@ -57,6 +58,7 @@
    :ctrl-time
    :ctrl-url
    :ctrl-week
+   :ctrl-element
    :search-form))
 
 (in-package :dev.metalisp.sbt/component/form)
