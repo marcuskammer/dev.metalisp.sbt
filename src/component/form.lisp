@@ -15,7 +15,7 @@
    :remove-special-chars
    :clean-form-str
    :build-str-name
-   :build-value-str
+   :build-str-value
    :build-value-prop-str
    :build-class-str
    :build-id-str)
@@ -83,7 +83,7 @@ NAME: The name attribute for the control.
 VALUE: The value attribute for the control."
   (check-type type checkable-element)
   (let* ((name-str (build-str-name name))
-         (value-str (build-value-str value))
+         (value-str (build-str-value value))
          (value-prop-str (build-value-prop-str value))
          (class-str (build-class-str "form-check-label" name))
          (id-str (build-id-str name value)))
