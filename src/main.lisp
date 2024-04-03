@@ -20,11 +20,11 @@
    :with-page
    :remove-special-chars
    :clean-form-str
-   :build-name-str
-   :build-value-str
-   :build-value-prop-str
-   :build-class-str
-   :build-id-str))
+   :build-str-name
+   :build-str-value
+   :build-str-value-prop
+   :build-str-class
+   :build-str-id))
 
 (in-package :dev.metalisp.sbt)
 
@@ -173,7 +173,7 @@ Returns:
   A new string which can be used as HTML class."
   (string-downcase (substitute #\- #\Space (string-trim '(#\Space) str))))
 
-(defun build-name-str (name)
+(defun build-str-name (name)
   "Builds a standardized string by adding a 'group-' prefix and applying cleaning
 functions.
 
@@ -183,7 +183,7 @@ Returns:
   A new standardized string."
   (concatenate 'string "group-" (clean-form-str name)))
 
-(defun build-value-str (value)
+(defun build-str-value (value)
   "Trims leading and trailing spaces from the given value string.
 
 VALUE: The string to be cleaned.
@@ -192,16 +192,16 @@ Returns:
   A new string without leading and trailing spaces."
   (string-trim '(#\Space) value))
 
-(defun build-value-prop-str (value)
+(defun build-str-value-prop (value)
   "Builds a value property string by applying various cleaning functions.
 
 VALUE: The initial value string.
 
 Returns:
   A new value property string."
-  (clean-form-str (build-value-str value)))
+  (clean-form-str (build-str-value value)))
 
-(defun build-class-str (class name)
+(defun build-str-class (class name)
   "Builds a class string by concatenating 'form-check-label' and a standardized
 name string.
 
@@ -211,9 +211,9 @@ NAME: The initial name string.
 
 Returns:
   A new class string."
-  (concatenate 'string class " " (build-name-str name)))
+  (concatenate 'string class " " (build-str-name name)))
 
-(defun build-id-str (name value)
+(defun build-str-id (name value)
   "Builds an ID string by concatenating a standardized name string and a sanitized
 value property string.
 
@@ -224,6 +224,6 @@ VALUE: The initial value string.
 Returns:
   A new ID string."
   (concatenate 'string
-               (build-name-str name)
+               (build-str-name name)
                "-"
-               (remove-special-chars (build-value-prop-str value))))
+               (remove-special-chars (build-str-value-prop value))))

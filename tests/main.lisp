@@ -23,14 +23,14 @@
   (testing "Cleans a form string for use as a name or identifier."
     (ok (string= (clean-form-str " hello WORLD") "hello-world"))))
 
-(deftest test-build-name-str
+(deftest test-build-str-name
   (testing "Builds a standardized string by adding a 'group-' prefix and applying cleaning functions."
-    (ok (string= (build-name-str "somename") "group-somename"))))
+    (ok (string= (build-str-name "somename") "group-somename"))))
 
-(deftest test-build-value-str
+(deftest test-build-str-value
   (testing "Trims leading and trailing spaces from the given value string."
-    (ok (string= (build-value-str " hello-world ") "hello-world"))))
+    (ok (string= (build-str-value " hello-world ") "hello-world"))))
 
-(deftest test-build-value-prop-str
+(deftest test-build-str-value-prop
   (testing "Builds a value property string by applying various cleaning functions."
-    (ok (string= (build-value-prop-str " hello world ") "hello-world"))))
+    (ok (string= (build-str-value-prop " hello world ") "hello-world"))))
