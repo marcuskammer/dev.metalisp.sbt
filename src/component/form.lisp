@@ -150,7 +150,7 @@ LABEL: The label to display next to the control."
          (class-str (build-str-class "form-label" name))
          (id-str (build-str-id name label)))
     (spinneret:with-html
-      (:comment "FORM/CTRL")
+      (:comment (format nil "FORM/CTRL ~A ~A" type name))
       (:div :class (spacing :property "m" :side "b" :size 3)
             (:label :class class-str
                     :for id-str
