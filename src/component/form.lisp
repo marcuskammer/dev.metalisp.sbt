@@ -16,7 +16,7 @@
    :clean-form-str
    :build-str-name
    :build-str-value
-   :build-value-prop-str
+   :build-str-value-prop
    :build-class-str
    :build-id-str)
   (:import-from
@@ -84,7 +84,7 @@ VALUE: The value attribute for the control."
   (check-type type checkable-element)
   (let* ((name-str (build-str-name name))
          (value-str (build-str-value value))
-         (value-prop-str (build-value-prop-str value))
+         (value-prop-str (build-str-value-prop value))
          (class-str (build-class-str "form-check-label" name))
          (id-str (build-id-str name value)))
     (spinneret:with-html
@@ -210,7 +210,7 @@ Example 2:
                   (find-l10n "option-selected" spinneret:*html-lang* *l10n*))
          ,@(loop for item in body
                  collect
-                 (let ((value-prop-str (build-value-prop-str item)))
+                 (let ((value-prop-str (build-str-value-prop item)))
                    `(:option :value ,value-prop-str ,item)))))))
 
 (defmacro combo-multiple (rows &body body)
