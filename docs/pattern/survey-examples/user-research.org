@@ -165,17 +165,6 @@
 
 * System Usability Scale
 
-I would like to use this system frequently.
-The system is unnecessarily complex.
-The system is easy to use.
-I need the support of a technical person to use this system.
-The functions in this system are well integrated.
-There is too much inconsistency in this system.
-Most people would learn to use this system very quickly.
-The system is very awkward to use.
-I feel very confident using this system.
-I needed to learn a lot of things to get started with this system.
-
 Ich würde dieses System gerne häufig nutzen.
 Das System ist unnötig komplex.
 Das System ist einfach zu bedienen.
@@ -196,12 +185,47 @@ Ich musste eine Menge lernen, um mit diesem System arbeiten zu können.
     (with-output-to-string (spinneret:*html*)
       (with-page (:title "System Usability Scale" :main-con t)
         (questionnaire "/submit"
+
           (:ask "I’d like to use this system frequently."
            :group "sus-1"
-           :choices (:single "1 - Very Uncomfortable" "2 - Slightly Uncomfortable" "3 - Neutral" "4 - Quite Comfortable" "5 - Very Comfortable"))
-          (:ask "How frequently do you adopt new technologies?"
-           :group "tcl-adopt"
-           :choices (:single "1 - Always - I'm an early adopter." "2 - Often - I stay on top of technological advances and adopt them frequently." "3 - Sometimes - I adopt new technologies now and then." "4 - Rarely - I only adopt new technologies when it's necessary for work or other important tasks." "5 - Never - I avoid adopting new technologies unless absolutely required."))))))
+           :choices (:single "Strongly Disagree" "Disagree" "Neither Agree nor Disagree" "Agree" "Strongly Agree"))
+
+          (:ask "The system is unnecessarily complex."
+           :group "sus-2"
+           :choices (:single "Strongly Disagree" "Disagree" "Neither Agree nor Disagree" "Agree" "Strongly Agree"))
+
+          (:ask "The system is easy to use."
+           :group "sus-3"
+           :choices (:single "Strongly Disagree" "Disagree" "Neither Agree nor Disagree" "Agree" "Strongly Agree"))
+
+          (:ask "I need the support of a technical person to use this system."
+           :group "sus-4"
+           :choices (:single "Strongly Disagree" "Disagree" "Neither Agree nor Disagree" "Agree" "Strongly Agree"))
+
+          (:ask "The functions in this system are well integrated."
+           :group "sus-5"
+           :choices (:single "Strongly Disagree" "Disagree" "Neither Agree nor Disagree" "Agree" "Strongly Agree"))
+
+          (:ask "There is too much inconsistency in this system."
+           :group "sus-6"
+           :choices (:single "Strongly Disagree" "Disagree" "Neither Agree nor Disagree" "Agree" "Strongly Agree"))
+
+          (:ask "Most people would learn to use this system very quickly."
+           :group "sus-7"
+           :choices (:single "Strongly Disagree" "Disagree" "Neither Agree nor Disagree" "Agree" "Strongly Agree"))
+
+          (:ask "The system is very awkward to use."
+           :group "sus-8"
+           :choices (:single "Strongly Disagree" "Disagree" "Neither Agree nor Disagree" "Agree" "Strongly Agree"))
+
+          (:ask "I feel very confident using this system."
+           :group "sus-9"
+           :choices (:single "Strongly Disagree" "Disagree" "Neither Agree nor Disagree" "Agree" "Strongly Agree"))
+
+          (:ask "I needed to learn a lot of things to get started with this system."
+           :group "sus-10"
+           :choices (:single "Strongly Disagree" "Disagree" "Neither Agree nor Disagree" "Agree" "Strongly Agree"))
+  ))))
 
   (format t (generate-sus-survey))
 #+end_src
