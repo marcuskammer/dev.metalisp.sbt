@@ -1,7 +1,7 @@
 #+title: Creating a Questionnaire using dev.metalisp.sbt/component/questionnaire Macros in a Web Application
 #+author: Marcus Kammer
 #+email: marcus.kammer@mailbox.org
-#+date: [2024-03-16 14:00]
+#+date: [2024-04-17 09:36]
 * Introduction
 
 Questionnaires are powerful tools for gathering information and insights from
@@ -104,7 +104,7 @@ different types of Bootstrap questionnaires.
 #+begin_src lisp
   (in-package :my-web-questionnaire-app)
 
-  (defvar *basic-server*)
+  (defvar *basic-server* nil)
 
   (defun start-server ()
     (setf *basic-server* (make-instance 'hunchentoot:easy-acceptor :name "basic-server" :port 8080))
@@ -118,7 +118,11 @@ different types of Bootstrap questionnaires.
   (defun restart-server (server)
     (stop-server server)
     (start-server))
+
+  (hunchentoot:define-easy-handler (submit :uri "/submit")
+      ((data :parameter-type :post))
+    (format nil "Hello, ~a!" data))
 #+end_src
 
 #+RESULTS:
-: RESTART-SERVER
+: SUBMIT
