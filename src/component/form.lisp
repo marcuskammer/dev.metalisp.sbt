@@ -65,8 +65,10 @@
 
 ;;; form
 
-(defmacro form ((&optional (attr nil)) &body body)
-  "Generates HTML form elements using Spinneret library.
+(defmacro form (legend &optional attr &body body)
+  "Generates HTML form element.
+
+LEGEND: Add text for <legend>. A short description for forms.
 
 ATTR: A list of form attributes like :action, :name and :method. If not provided,
 defaults to an empty action, \"html-form\" as name and \"post\" as method.
@@ -74,10 +76,11 @@ defaults to an empty action, \"html-form\" as name and \"post\" as method.
 BODY: The body of the form, which generally includes form elements such as input
 fields, checkboxes, radio buttons, etc."
   `(spinneret:with-html
-     (:form ,@(if (listp attr)
+     (:form ,@(if (not (null attr))
                   attr
                   (list :action "" :name "html-form" :method "post"))
-       (:fieldset ,@body))))
+         (:fieldset (:legend ,legend)
+                    ,@body))))
 
 ;;; checkable
 
