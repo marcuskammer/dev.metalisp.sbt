@@ -66,6 +66,13 @@
 ;;; form
 
 (defmacro form ((&optional (attr nil)) &body body)
+  "Generates HTML form elements using Spinneret library.
+
+ATTR: A list of form attributes like :action, :name and :method. If not provided,
+defaults to an empty action, \"html-form\" as name and \"post\" as method.
+
+BODY: The body of the form, which generally includes form elements such as input
+fields, checkboxes, radio buttons, etc."
   `(spinneret:with-html
      (:form ,@(if (listp attr)
                   attr
