@@ -63,6 +63,15 @@
 
 (in-package :dev.metalisp.sbt/component/form)
 
+;;; form
+
+(defmacro form ((&optional (attr nil)) &body body)
+  `(spinneret:with-html
+     (:form ,@(if (listp attr)
+                  attr
+                  (list :action "" :name "html-form" :method "post"))
+       (:fieldset ,@body))))
+
 ;;; checkable
 
 (defvar checkable-elements
