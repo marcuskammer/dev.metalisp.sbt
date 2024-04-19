@@ -63,6 +63,8 @@
 
 (in-package :dev.metalisp.sbt/component/form)
 
+;;; checkable
+
 (defvar checkable-elements
   '("radio" "checkbox")
   "List of checkable specific input elements ")
@@ -117,6 +119,8 @@ checkable macros."
              collect `(define-checkable ,type))))
 
 (define-checkables)
+
+;;; ctrl
 
 (defvar ctrl-elements
   '("button" "checkbox" "color" "date" "datetime-local" "email" "file" "hidden"
@@ -182,6 +186,8 @@ checkable macros."
 
 (define-ctrls)
 
+;;; combo
+
 (defmacro combo ((&key size multiple) &body body)
   "This macro generates a Bootstrap select dropdown menu.
 
@@ -234,6 +240,8 @@ macros."
              collect `(define-combo ,size))))
 
 (define-combos)
+
+;;; other
 
 (defun search-form ()
   "This function generates a general-purpose search form.
