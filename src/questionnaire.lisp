@@ -312,7 +312,7 @@ Example German:
               (btn-primary (:type "submit")
                 (find-l10n "submit" spinneret:*html-lang* *l10n*))))))
 
-(defmacro questionnaire (action &body body)
+(defmacro questionnaire (action &optional list-style-type &body body)
   "This macro generates an HTML form composed of multiple questions.
 
 ACTION: Specifies the URL where the form will be submitted. This should be a
@@ -357,10 +357,11 @@ Example German:
          ,@(loop for q in body
                  for (ask group choices) = (multiple-value-list (extract-question-components q))
                  collect `(:fieldset (:legend ,ask)
-                                     (:ol ,@(loop for choice in (split-list-by-keyword choices)
+                                     (:ol ,@(when list-style-type (list :style (format nil "list-style-type: ~a" list-style-type)))
+                                          ,@(loop for choice in (split-list-by-keyword choices)
                                                   for (type values) = (multiple-value-list (resolve-input-and-choice choice))
-                                                  collect `(:li ,@(loop for value in values
-                                                                        collect `(apply-input-form ,type ,group ,value)))))))
+                                                  collect `(progn ,@(loop for value in values
+                                                                          collect `(:li (apply-input-form ,type ,group ,value))))))))
 
          (btn-primary (:type "submit")
            (find-l10n "submit" spinneret:*html-lang* *l10n*))))))
