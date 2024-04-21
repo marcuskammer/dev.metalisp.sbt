@@ -1,9 +1,9 @@
-(defpackage dev.metalisp.sbt/component/tbl
+(defpackage dev.metalisp.sbt/tbl
   (:use :cl)
   (:export
    :table))
 
-(in-package :dev.metalisp.sbt/component/tbl)
+(in-package :dev.metalisp.sbt/tbl)
 
 (defmacro table (&body body)
   `(spinneret:with-html

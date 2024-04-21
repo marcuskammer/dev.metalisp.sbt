@@ -35,7 +35,7 @@
 ;; richness. From mobile to desktop, the grid system will scale up
 ;; appropriately to ensure your designs are fully responsive.
 
-(defpackage dev.metalisp.sbt/layout/grid
+(defpackage dev.metalisp.sbt/grid
   (:use :cl)
   (:import-from
    :dev.metalisp.sbt/utility
@@ -45,7 +45,7 @@
    :row
    :col))
 
-(in-package :dev.metalisp.sbt/layout/grid)
+(in-package :dev.metalisp.sbt/grid)
 
 (defun string-clean (str)
   (string-trim " " (string-downcase str)))

@@ -1,13 +1,13 @@
 ;;;; -*- mode: lisp; coding: utf-8; tab-width: 4; fill-column: 100; indent-tabs-mode: nil; -*-
 ;;;; accordion.lisp
 ;;;; This file defines a package for generating Bootstrap accordion components using Common Lisp macros.
-(defpackage dev.metalisp.sbt/component/accordion
+(defpackage dev.metalisp.sbt/accordion
   (:documentation "A package for generating Bootstrap accordions.")
   (:use :cl)
   (:export
    :accordion))
 
-(in-package :dev.metalisp.sbt/component/accordion)
+(in-package :dev.metalisp.sbt/accordion)
 
 (defmacro accordion ((&key (id "accordionExample") flush) &body body)
   "This macro generates an accordion-style collapsible list.
