@@ -65,7 +65,7 @@
 
 ;;; form
 
-(defmacro form (legend &optional attr &body body)
+(defmacro form (&optional attr &body body)
   "Generates HTML form element.
 
 LEGEND: Add text for <legend>. A short description for forms.
@@ -79,8 +79,7 @@ fields, checkboxes, radio buttons, etc."
      (:form ,@(if (null attr)
                   (list :action "" :name "html-form" :method "post")
                   attr)
-         (:fieldset (:legend ,legend)
-                    ,@body))))
+         ,@body)))
 
 ;;; checkable
 
