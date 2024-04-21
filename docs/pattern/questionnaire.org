@@ -1,7 +1,7 @@
 #+title: Creating a Questionnaire using dev.metalisp.sbt/component/questionnaire Macros in a Web Application
 #+author: Marcus Kammer
 #+email: marcus.kammer@mailbox.org
-#+date: [2024-04-17 09:36]
+#+date: [2024-04-21 18:55]
 * Introduction
 
 Questionnaires are powerful tools for gathering information and insights from
@@ -39,7 +39,7 @@ required for different types of questions in a questionnaire.
   (defpackage my-web-questionnaire-app
     (:use :cl)
     (:import-from :dev.metalisp.sbt :with-page)
-    (:import-from :dev.metalisp.sbt/pattern/questionnaire :questionnaire)
+    (:import-from :dev.metalisp.sbt/questionnaire :questionnaire)
     (:export :generate-questionnaire-page))
 #+end_src
 
@@ -54,14 +54,14 @@ required for different types of questions in a questionnaire.
     "Generates an HTML page with questionnaires using questionnaire macros."
     (with-output-to-string (spinneret:*html*)
       (with-page (:title "Questionnaire Example" :main-con t)
-        (questionnaire "/submit"
+        (questionnaire "#" "none"
           (:ask "How old are you?"
            :group "age"
            :choices (:radio "18-24" "25-34" "35-44" "45-54" "55+"))
 
           (:ask "Gender"
            :group "gender"
-           :choices (:radio "Male" "Female" "Non-binary" "Prefer not to say" "Other" :text "Other"))
+           :choices (:radio "Male" "Female" "Non-binary" "Prefer not to say" "Other" :text "Please specify"))
 
           (:ask "How many hours per day, on average, do you spend browsing the internet?"
            :group "webbrowsing"
@@ -69,7 +69,7 @@ required for different types of questions in a questionnaire.
 
           (:ask "What are your favorite brands?"
            :group "brands"
-           :choices (:checkbox "Brand A" "Brand B" "Brand C" "None" :text "Other"))
+           :choices (:checkbox "Brand A" "Brand B" "Brand C" "None" "Other" :text "Please specify"))
 
           (:ask "How often do you shop online?"
            :group "shopping"
@@ -85,7 +85,7 @@ required for different types of questions in a questionnaire.
 
           (:ask "Which social media platforms do you use regularly?"
            :group "socialmedia"
-           :choices (:checkbox "Facebook" "Twitter" "Instagram" "LinkedIn" "TikTok" "None" :text "Other"))
+           :choices (:checkbox "Facebook" "Twitter" "Instagram" "LinkedIn" "TikTok" "None" "Other" :text "Please specify"))
 
           (:ask "How do you usually consume news?"
            :group "newsconsumption"

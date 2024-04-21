@@ -10,10 +10,10 @@
  <body>
   <h1 class=visually-hidden>Questionnaire Example</h1>
   <main class=container>
-   <form class=py-5 action=/submit method=post>
+   <form class=py-5 action=# method=post>
     <fieldset>
      <legend>How old are you?</legend>
-     <ol>
+     <ol style="list-style-type: none">
       <li>
        <!-- FORM/CHECKABLE -->
 <div class=form-check>
@@ -50,11 +50,10 @@
                 id=group-age-55> 55+</label>
        </div>
      </ol>
-     <hr class=my-4>
     </fieldset>
     <fieldset>
      <legend>Gender</legend>
-     <ol>
+     <ol style="list-style-type: none">
       <li>
        <!-- FORM/CHECKABLE -->
 <div class=form-check>
@@ -93,18 +92,18 @@
                 value=other id=group-gender-other> Other</label>
        </div>
       <li>
-       <!-- FORM/CTRL -->
+       <!-- FORM/CTRL text gender -->
 <div class=mb-3>
-        <label class="form-label group-gender" for=group-gender-other>Other</label>
-        <input class=form-control id=group-gender-other type=text
+        <label class="form-label group-gender"
+               for=group-gender-pleasespecify>Please specify</label>
+        <input class=form-control id=group-gender-pleasespecify type=text
                name=group-gender>
        </div>
      </ol>
-     <hr class=my-4>
     </fieldset>
     <fieldset>
      <legend>How many hours per day, on average, do you spend browsing the internet?</legend>
-     <ol>
+     <ol style="list-style-type: none">
       <li>
        <!-- FORM/CHECKABLE -->
 <div class=form-check>
@@ -138,11 +137,10 @@
                 value=5+-hours id=group-webbrowsing-5hours> 5+ hours</label>
        </div>
      </ol>
-     <hr class=my-4>
     </fieldset>
     <fieldset>
      <legend>What are your favorite brands?</legend>
-     <ol>
+     <ol style="list-style-type: none">
       <li>
        <!-- FORM/CHECKABLE -->
 <div class=form-check>
@@ -172,18 +170,25 @@
                 value=none id=group-brands-none> None</label>
        </div>
       <li>
-       <!-- FORM/CTRL -->
+       <!-- FORM/CHECKABLE -->
+<div class=form-check>
+        <label class="form-check-label group-brands" for=group-brands-other>
+         <input class=form-check-input type=checkbox name=group-brands
+                value=other id=group-brands-other> Other</label>
+       </div>
+      <li>
+       <!-- FORM/CTRL text brands -->
 <div class=mb-3>
-        <label class="form-label group-brands" for=group-brands-other>Other</label>
-        <input class=form-control id=group-brands-other type=text
+        <label class="form-label group-brands"
+               for=group-brands-pleasespecify>Please specify</label>
+        <input class=form-control id=group-brands-pleasespecify type=text
                name=group-brands>
        </div>
      </ol>
-     <hr class=my-4>
     </fieldset>
     <fieldset>
      <legend>How often do you shop online?</legend>
-     <ol>
+     <ol style="list-style-type: none">
       <li>
        <!-- FORM/CHECKABLE -->
 <div class=form-check>
@@ -225,11 +230,10 @@
                 value=never id=group-shopping-never> Never</label>
        </div>
      </ol>
-     <hr class=my-4>
     </fieldset>
     <fieldset>
      <legend>Which of the following devices do you own?</legend>
-     <ol>
+     <ol style="list-style-type: none">
       <li>
        <!-- FORM/CHECKABLE -->
 <div class=form-check>
@@ -270,11 +274,10 @@
                 value=none id=group-devices-none> None</label>
        </div>
      </ol>
-     <hr class=my-4>
     </fieldset>
     <fieldset>
      <legend>What is your preferred method of payment for online purchases?</legend>
-     <ol>
+     <ol style="list-style-type: none">
       <li>
        <!-- FORM/CHECKABLE -->
 <div class=form-check>
@@ -316,11 +319,10 @@
                 value=cryptocurrency id=group-payment-cryptocurrency> Cryptocurrency</label>
        </div>
      </ol>
-     <hr class=my-4>
     </fieldset>
     <fieldset>
      <legend>Which social media platforms do you use regularly?</legend>
-     <ol>
+     <ol style="list-style-type: none">
       <li>
        <!-- FORM/CHECKABLE -->
 <div class=form-check>
@@ -370,19 +372,26 @@
                 value=none id=group-socialmedia-none> None</label>
        </div>
       <li>
-       <!-- FORM/CTRL -->
+       <!-- FORM/CHECKABLE -->
+<div class=form-check>
+        <label class="form-check-label group-socialmedia"
+               for=group-socialmedia-other>
+         <input class=form-check-input type=checkbox name=group-socialmedia
+                value=other id=group-socialmedia-other> Other</label>
+       </div>
+      <li>
+       <!-- FORM/CTRL text socialmedia -->
 <div class=mb-3>
         <label class="form-label group-socialmedia"
-               for=group-socialmedia-other>Other</label>
-        <input class=form-control id=group-socialmedia-other type=text
-               name=group-socialmedia>
+               for=group-socialmedia-pleasespecify>Please specify</label>
+        <input class=form-control id=group-socialmedia-pleasespecify
+               type=text name=group-socialmedia>
        </div>
      </ol>
-     <hr class=my-4>
     </fieldset>
     <fieldset>
      <legend>How do you usually consume news?</legend>
-     <ol>
+     <ol style="list-style-type: none">
       <li>
        <!-- FORM/CHECKABLE -->
 <div class=form-check>
@@ -434,7 +443,6 @@
                 value=none id=group-newsconsumption-none> None</label>
        </div>
      </ol>
-     <hr class=my-4>
     </fieldset>
     <button class="btn btn-primary" type=submit>Submit</button>
    </form>
