@@ -185,7 +185,7 @@ BODY: A list of strings starting with a keyword representing the different
 answers available for selection. See `choicesp'
 
 Example 1:
-  (question  \"How old are you?\"  \"age\" (:radio \"18-24\" \"25-34\" \"35-44\"))
+  (question \"How old are you?\" \"age\" (:radio \"18-24\" \"25-34\" \"35-44\"))
 
 Example 2:
   (question \"How old are you?\" \"age\" (:single \"18-24\" \"25-34\" \"35-44\"))
@@ -194,7 +194,7 @@ Example 3:
   (question \"Which social media platforms do you use regularly?\" \"age\" (:multiple \"Facebook\" \"Twitter\" \"Instagram\"))
 
 Example 4:
-  (question \"Which social media platforms do you use regularly?\" \"age\" (:multiple \"Facebook\" \"Twitter\" \"Instagram\" (:text \"Others\")))"
+  (question \"Which social media platforms do you use regularly?\" \"age\" (:multiple \"Facebook\" \"Twitter\" \"Instagram\") (:text \"Others\"))"
   `(spinneret:with-html
      (:fieldset (:legend ,ask)
                 (:ol ,@(loop for choice in body
