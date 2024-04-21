@@ -2,7 +2,12 @@
   (:use
    :cl
    :dev.metalisp.sbt/grid
-   :rove))
+   :rove)
+  (:import-from
+   :dev.metalisp.sbt/grid
+   :make-con-class
+   :make-row-class
+   :make-col-class))
 
 (in-package :dev.metalisp.sbt/tests/grid)
 
@@ -101,7 +106,7 @@
       (ok (search "<div class=\"container container-md\"></div>" result)))))
 
 (deftest test-con-text
-  (let ((result (spinneret:with-html-string (con (:text (:alignment "center"))))))
+  (let ((result (with-output-to-string (spinneret:*html*) (con (:text (:alignment "center"))))))
     (testing "Generates correct HTML for container with text utilities"
       (ok (search "<div class=\"container text-center\"></div>" result)))))
 
