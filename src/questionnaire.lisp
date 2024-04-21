@@ -24,6 +24,7 @@
    :spacing)
   (:import-from
    :dev.metalisp.sbt/form
+   :form
    :checkable
    :checkable-element
    :ctrl
@@ -258,7 +259,7 @@ Returns multiple values:
   (let ((splitted-list (split-list-by-keyword question)))
     (apply #'values (mapcar (lambda (x) (nth 1 x)) splitted-list))))
 
-(defmacro questionnaire (action &body body)
+(defmacro questionnaire-1 (action &body body)
   "This macro generates an HTML form composed of multiple questions, each rendered using the `question' macro.
 
 ACTION: Specifies the URL where the form will be submitted. This should be a
@@ -310,3 +311,56 @@ Example German:
                                  ,@(split-list-by-keyword choices)))
               (btn-primary (:type "submit")
                 (find-l10n "submit" spinneret:*html-lang* *l10n*))))))
+
+(defmacro questionnaire (action &body body)
+  "This macro generates an HTML form composed of multiple questions.
+
+ACTION: Specifies the URL where the form will be submitted. This should be a
+string representing the URL path.
+
+BODY: A series of questions. Each question should contain the keys :ask,
+:group, and :choices. The first element of :choices should be a keyword
+specifying the type of input elements (e.g. :radio), followed by a list of
+answer options.
+
+Example 1:
+  (questionnaire \"/submit\"
+                 (:ask \"How old are you?\"
+                  :group \"age\"
+                  :choices (:radio \"18-24\" \"25-34\" \"35-44\")))
+Example 2:
+  (questionnaire \"/submit\"
+                 (:ask \"How old are you?\"
+                  :group \"age\"
+                  :choices (:single \"18-24\" \"25-34\" \"35-44\")))
+Example 3:
+  (questionnaire \"/submit\"
+                 (:ask \"Which social media platforms do you use regularly?\"
+                  :group \"socialmedia\"
+                  :choices (:multiple \"Facebook\" \"Twitter\" \"Instagram\")))
+Example 4:
+  (questionnaire \"/submit\"
+                 (:ask \"Which social media platforms do you use regularly?\"
+                  :group \"socialmedia\"
+                  :choices (:multiple \"Facebook\" \"Twitter\" \"Instagram\" :text \"Others\")))
+
+It is also possible to write the keys in another language:
+Example German:
+  (questionnaire \"/submit\"
+                 (:frage \"Welche Social Media-Plattformen nutzen Sie regelmäßig?\"
+                  :gruppe \"sozialemedien\"
+                  :auswahl (:multiple \"Facebook\" \"Twitter\" \"Instagram\" :text \"Andere\")))"
+  (let ((class-string (spacing :property "p" :side "y" :size 5)))
+    `(spinneret:with-html
+       (form (:class ,class-string :action ,action :method "post")
+
+         ,@(loop for q in body
+                 for (ask group choices) = (multiple-value-list (extract-question-components q))
+                 collect `(:fieldset (:legend ,ask)
+                                     (:ol ,@(loop for choice in (split-list-by-keyword choices)
+                                                  for (type values) = (multiple-value-list (resolve-input-and-choice choice))
+                                                  collect `(:li ,@(loop for value in values
+                                                                        collect `(apply-input-form ,type ,group ,value)))))))
+
+         (btn-primary (:type "submit")
+           (find-l10n "submit" spinneret:*html-lang* *l10n*))))))
