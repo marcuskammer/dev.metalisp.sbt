@@ -76,9 +76,9 @@ defaults to an empty action, \"html-form\" as name and \"post\" as method.
 BODY: The body of the form, which generally includes form elements such as input
 fields, checkboxes, radio buttons, etc."
   `(spinneret:with-html
-     (:form ,@(if (not (null attr))
-                  attr
-                  (list :action "" :name "html-form" :method "post"))
+     (:form ,@(if (null attr)
+                  (list :action "" :name "html-form" :method "post")
+                  attr)
          (:fieldset (:legend ,legend)
                     ,@body))))
 
