@@ -7,7 +7,8 @@
    :dev.metalisp.sbt/grid
    :make-con-class
    :make-row-class
-   :make-col-class))
+   :make-col-class
+   :breakpoint-class))
 
 (in-package :dev.metalisp.sbt/tests/grid)
 
