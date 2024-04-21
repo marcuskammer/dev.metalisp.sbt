@@ -1,10 +1,10 @@
-(defpackage dev.metalisp.sbt/tests/component/alert
+(defpackage dev.metalisp.sbt/tests/alert
   (:use
    :cl
-   :dev.metalisp.sbt/component/alert
+   :dev.metalisp.sbt/alert
    :rove))
 
-(in-package :dev.metalisp.sbt/tests/component/alert)
+(in-package :dev.metalisp.sbt/tests/alert)
 
 (deftest test-btn-macro
   (testing "Testing btn macro"

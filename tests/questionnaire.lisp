@@ -1,19 +1,8 @@
 (defpackage dev.metalisp.sbt/tests/questionnaire
   (:use
    :cl
-   :dev.metalisp.sbt
-   :rove)
-  (:import-from
-   :dev.metalisp.sbt/pattern/questionnaire
-   :choicep
-   :choicesp
-   :questionp
-   :choice
-   :question
-   :resolve-input-type
-   :resolve-input-and-choice
-   :extract-question-components
-   :questionnaire))
+   :dev.metalisp.sbt/questionnaire
+   :rove))
 
 (in-package :dev.metalisp.sbt/tests/questionnaire)
 

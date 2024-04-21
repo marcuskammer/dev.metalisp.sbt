@@ -1,10 +1,10 @@
-(defpackage dev.metalisp.sbt/tests/component/accordion
+(defpackage dev.metalisp.sbt/tests/accordion
   (:use
    :cl
-   :dev.metalisp.sbt/component/accordion
+   :dev.metalisp.sbt/accordion
    :rove))
 
-(in-package :dev.metalisp.sbt/tests/component/accordion)
+(in-package :dev.metalisp.sbt/tests/accordion)
 
 (deftest test-accordion-correct-classes
   (let ((result (with-output-to-string (spinneret:*html*) (accordion (:id "accordionExample" :flush t) "Accordion Item #1" "Accordion Content #1" "Accordion Item #2" "Accordion Content #2" "Accordion Item #3" "Accordion Content #3"))))
