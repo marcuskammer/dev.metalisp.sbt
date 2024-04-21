@@ -17,13 +17,13 @@
    :*l10n*
    :find-l10n)
   (:import-from
-   :dev.metalisp.sbt/component/btn
+   :dev.metalisp.sbt/btn
    :btn-primary)
   (:import-from
    :dev.metalisp.sbt/utility
    :spacing)
   (:import-from
-   :dev.metalisp.sbt/component/form
+   :dev.metalisp.sbt/form
    :checkable
    :checkable-element
    :ctrl

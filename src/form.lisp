@@ -20,7 +20,7 @@
    :build-str-class
    :build-str-id)
   (:import-from
-   :dev.metalisp.sbt/component/btn
+   :dev.metalisp.sbt/btn
    :btn-outline-success
    :btn-primary)
   (:import-from

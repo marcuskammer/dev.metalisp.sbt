@@ -28,10 +28,10 @@
 (defpackage dev.metalisp.sbt/navbar
   (:use :cl)
   (:import-from
-   :dev.metalisp.sbt/component/btn
+   :dev.metalisp.sbt/btn
    :btn-outline-success)
   (:import-from
-   :dev.metalisp.sbt/layout/grid
+   :dev.metalisp.sbt/grid
    :con
    :row)
   (:export
