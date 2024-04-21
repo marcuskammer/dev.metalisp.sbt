@@ -37,13 +37,9 @@
   :components ((:module "tests"
                 :components
                 ((:file "main")
-                 (:file "utility")))
-               (:module "tests/layout"
-                :components
-                ((:file "grid")))
-               (:module "tests/component"
-                :components
-                ((:file "accordion")
+                 (:file "utility")
+                 (:file "grid")
+                 (:file "accordion")
                  (:file "alert")
                  (:file "badge")
                  (:file "button")
@@ -52,9 +48,7 @@
                  (:file "list-group")
                  (:file "navbar")
                  (:file "nav-tab")
-                 (:file "form")))
-               (:module "tests/pattern"
-                :components
-                ((:file "questionnaire"))))
+                 (:file "form")
+                 (:file "questionnaire"))))
   :description "Test system for dev.metalisp.sbt"
   :perform (test-op (op c) (symbol-call :rove :run c)))
