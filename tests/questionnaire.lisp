@@ -2,7 +2,16 @@
   (:use
    :cl
    :dev.metalisp.sbt/questionnaire
-   :rove))
+   :rove)
+  (:import-from
+   :dev.metalisp.sbt/questionnaire
+   :choice
+   :choicep
+   :choicesp
+   :questionp
+   :resolve-input-and-choice
+   :resolve-input-type
+   :extract-question-components))
 
 (in-package :dev.metalisp.sbt/tests/questionnaire)
 
