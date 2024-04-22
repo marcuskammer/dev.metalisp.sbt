@@ -475,15 +475,16 @@ specifying the type of input elements (e.g. :radio), followed by a list of
 answer options.
 
 Example 1:
-  (form \"/submit\"
-                 (:ask \"How old are you?\"
-                  :group \"age\"
-                  :choices (:radio \"18-24\" \"25-34\" \"35-44\")))
+  (form \"/submit\" nil
+        (:ask \"How old are you?\"
+         :group \"age\"
+         :choices (:radio \"18-24\" \"25-34\" \"35-44\")))
+
 Example 2:
-  (form \"/submit\"
-                 (:ask \"How old are you?\"
-                  :group \"age\"
-                  :choices (:single \"18-24\" \"25-34\" \"35-44\")))"
+  (form \"/submit\" nil
+        (:ask \"How old are you?\"
+         :group \"age\"
+         :choices (:single \"18-24\" \"25-34\" \"35-44\")))"
   (let ((class-string (spacing :property "p" :side "y" :size 5)))
     `(spinneret:with-html
        (root (:class ,class-string :action ,action :method "post")
