@@ -24,7 +24,7 @@
    :spacing)
   (:import-from
    :dev.metalisp.sbt/form
-   :form
+   :root
    :checkable
    :checkable-element
    :ctrl
@@ -352,7 +352,7 @@ Example German:
                   :auswahl (:multiple \"Facebook\" \"Twitter\" \"Instagram\" :text \"Andere\")))"
   (let ((class-string (spacing :property "p" :side "y" :size 5)))
     `(spinneret:with-html
-       (form (:class ,class-string :action ,action :method "post")
+       (root (:class ,class-string :action ,action :method "post")
 
          ,@(loop for q in body
                  for (ask group choices) = (multiple-value-list (extract-question-components q))
