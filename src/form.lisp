@@ -65,7 +65,7 @@
 
 (in-package :dev.metalisp.sbt/form)
 
-;;; form
+;;; root
 
 (defmacro root (&optional attr &body body)
   "Generates HTML form element.
@@ -288,6 +288,8 @@ Example usage:
 ;;; TODO input groups
 
 ;;; form DSL
+
+;;; form
 
 (deftype composite-list ()
   "Represents a composite list that can either be a valid `choices` or `question`.
