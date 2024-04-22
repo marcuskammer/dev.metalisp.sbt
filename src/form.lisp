@@ -402,21 +402,6 @@ Returns:
     ;; Return the reversed result list
     (nreverse result)))
 
-(defun resolve-input-type (type)
-  "Resolve the given input TYPE keyword to the corresponding HTML input type.
-
-The function maps specific keywords to HTML input types. For example, it maps
-\"single\" to \"radio\" and \"multiple\" to \"checkbox\". If the input TYPE
-does not match these special cases, it is returned as-is.
-
-TYPE: The input type keyword to resolve.
-
-Returns:
-  The corresponding HTML input type string."
-  (cond ((string= type "single") "radio")
-        ((string= type "multiple") "checkbox")
-        (t type)))
-
 (declaim (ftype (function (choice) (values string list)) resolve-input-and-choice))
 (defun resolve-input-and-choice (choice)
   "Separate the input-type keyword from the remaining CHOICE in a list.
@@ -462,6 +447,21 @@ Returns:
     (checkable-element #'checkable)
     (ctrl-element #'ctrl)
     (otherwise (error "Unknown type ~A" type))))
+
+(defun resolve-input-type (type)
+  "Resolve the given input TYPE keyword to the corresponding HTML input type.
+
+The function maps specific keywords to HTML input types. For example, it maps
+\"single\" to \"radio\" and \"multiple\" to \"checkbox\". If the input TYPE
+does not match these special cases, it is returned as-is.
+
+TYPE: The input type keyword to resolve.
+
+Returns:
+  The corresponding HTML input type string."
+  (cond ((string= type "single") "radio")
+        ((string= type "multiple") "checkbox")
+        (t type)))
 
 (defmacro form (action &optional list-style-type &body body)
   "This macro generates an HTML form composed of multiple questions.
