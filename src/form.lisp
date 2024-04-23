@@ -492,22 +492,23 @@ Example 2:
         (method (or (getf attr :method) "post"))
         (list-style-type (or (getf attr :list-style-type) nil)))
 
-    `(spinneret:with-html
-       (root (:class ,class :action ,action :method ,method)
+    `(root (:class ,class :action ,action :method ,method)
 
-         ,@(loop for q in body
-                 ;; (:ask "" :group "" :choices ())
-                 for (ask group choices) = (multiple-value-list (extract-question-components q))
-                 collect `(:fieldset (:legend ,ask)
-                                     (:ol ,@(when list-style-type (list :style (format nil "list-style-type: ~a" list-style-type)))
+       ,@(loop for q in body
+               ;; (:ask "" :group "" :choices ())
+               for (ask group choices) = (multiple-value-list (extract-question-components q))
+               collect `(:fieldset (:legend ,ask)
+                                   (:ol ,@(when list-style-type (list :style (format nil "list-style-type: ~a" list-style-type)))
 
-                                          ,@(loop for choice in (split-list-by-keyword choices)
-                                                  ;; (:radio "" :text) -> ((:radio "") (:text ""))
-                                                  for (type values) = (multiple-value-list (resolve-input-and-choice choice))
-                                                  collect `(progn
+                                        ,@(loop for choice in (split-list-by-keyword choices)
+                                                ;; (:radio "" :text) -> ((:radio "") (:text ""))
+                                                for (type values) = (multiple-value-list (resolve-input-and-choice choice))
+                                                collect `(progn
+                                                           ,(if (string= type "combo")
+                                                                `(:li (:select ,@(loop for value in values
+                                                                                       collect `(:option ,value))))
+                                                                `(progn ,@(loop for value in values
+                                                                                collect `(:li (apply-input-form ,type ,group ,value))))))))))
 
-                                                             ,@(loop for value in values
-                                                                     collect `(:li (apply-input-form ,type ,group ,value))))))))
-
-         (btn-primary (:type "submit")
-           (find-l10n "submit" spinneret:*html-lang* *l10n*))))))
+       (btn-primary (:type "submit")
+         (find-l10n "submit" spinneret:*html-lang* *l10n*)))))
