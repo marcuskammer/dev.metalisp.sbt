@@ -463,16 +463,18 @@ Returns:
         ((string= type "multiple") "checkbox")
         (t type)))
 
-(defmacro form (action &optional list-style-type &body body)
+(defmacro form (attr &body body)
   "This macro generates an HTML form composed of multiple questions.
 
-ACTION: Specifies the URL where the form will be submitted. This should be a
-string representing the URL path.
+ATTR: A property list specifying the properties of the form, like :action which
+specifies the URL where the form will be submitted, :method which sets the method to
+be used when submitting the form, :class defining the CSS class of the form and
+:list-style-type for the style of the list. If none are provided, default values are
+used.
 
-BODY: A series of questions. Each question should contain the keys :ask,
-:group, and :choices. The first element of :choices should be a keyword
-specifying the type of input elements (e.g. :radio), followed by a list of
-answer options.
+BODY: A series of questions. Each question should contain the keys :ask, :group, and
+:choices. The first element of :choices should be a keyword specifying the type of
+input elements (e.g. :radio), followed by a list of answer options.
 
 Example 1:
   (form \"/submit\" nil
@@ -485,18 +487,27 @@ Example 2:
         (:ask \"How old are you?\"
          :group \"age\"
          :choices (:single \"18-24\" \"25-34\" \"35-44\")))"
-  (let ((class-string (spacing :property "p" :side "y" :size 5)))
+  (let ((class (or (getf attr :class) (spacing :property "p" :side "y" :size 5)))
+        (action (or (getf attr :action) "#"))
+        (method (or (getf attr :method) "post"))
+        (list-style-type (or (getf attr :list-style-type) nil)))
+
     `(spinneret:with-html
-       (root (:class ,class-string :action ,action :method "post")
+       (root (:class ,class :action ,action :method ,method)
 
          ,@(loop for q in body
+                 ;; (:ask "" :group "" :choices ())
                  for (ask group choices) = (multiple-value-list (extract-question-components q))
                  collect `(:fieldset (:legend ,ask)
                                      (:ol ,@(when list-style-type (list :style (format nil "list-style-type: ~a" list-style-type)))
+
                                           ,@(loop for choice in (split-list-by-keyword choices)
+                                                  ;; (:radio "" :text) -> ((:radio "") (:text ""))
                                                   for (type values) = (multiple-value-list (resolve-input-and-choice choice))
-                                                  collect `(progn ,@(loop for value in values
-                                                                          collect `(:li (apply-input-form ,type ,group ,value))))))))
+                                                  collect `(progn
+
+                                                             ,@(loop for value in values
+                                                                     collect `(:li (apply-input-form ,type ,group ,value))))))))
 
          (btn-primary (:type "submit")
            (find-l10n "submit" spinneret:*html-lang* *l10n*))))))
