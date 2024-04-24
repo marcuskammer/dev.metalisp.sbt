@@ -460,52 +460,32 @@ Returns:
         ((string= type "multiple") "checkbox")
         (t type)))
 
-(defmacro form (attr &body body)
-  "This macro generates an HTML form composed of multiple questions.
+(defmacro multi-form (&body body)
+  "This macro generates an HTML form composed of multiple parts.
 
-ATTR: A property list specifying the properties of the form, like :action which
-specifies the URL where the form will be submitted, :method which sets the method to
-be used when submitting the form, :class defining the CSS class of the form and
-:list-style-type for the style of the list. If none are provided, default values are
-used.
-
-BODY: A series of questions. Each question should contain the keys :ask, :group, and
+BODY: A series of parts. Each part should contain the keys :ask, :group, :style and
 :choices. The first element of :choices should be a keyword specifying the type of
 input elements (e.g. :radio), followed by a list of answer options.
 
 Example 1:
-  (form \"/submit\" nil
+  (multi-form
         (:ask \"How old are you?\"
          :group \"age\"
-         :choices (:radio \"18-24\" \"25-34\" \"35-44\")))
+         :style nil
+         :choices (:radio \"18-24\" \"25-34\" \"35-44\")))"
+  `(spinneret:with-html
+     ,@(loop for q in body
+             for (ask group style choices) = (multiple-value-list (extract-question-components q))
+             collect `(:fieldset (:legend ,ask)
+                                 (:ol ,@(when style (list :style (format nil "list-style-type: ~a" style)))
+                                      ,@(loop for choice in (split-list-by-keyword choices)
+                                              for (type values) = (multiple-value-list (resolve-input-and-choice choice))
+                                              collect `(progn
+                                                         ,(if (string= type "combo")
+                                                              `(:li (:select ,@(loop for value in values
+                                                                                     collect `(:option ,value))))
+                                                              `(progn ,@(loop for value in values
+                                                                              collect `(:li (apply-input-form ,type ,group ,value))))))))))
 
-Example 2:
-  (form \"/submit\" nil
-        (:ask \"How old are you?\"
-         :group \"age\"
-         :choices (:single \"18-24\" \"25-34\" \"35-44\")))"
-  (let ((class (or (getf attr :class) (spacing :property "p" :side "y" :size 5)))
-        (action (or (getf attr :action) "#"))
-        (method (or (getf attr :method) "post"))
-        (list-style-type (or (getf attr :list-style-type) nil)))
-
-    `(root (:class ,class :action ,action :method ,method)
-
-       ,@(loop for q in body
-               ;; (:ask "" :group "" :choices ())
-               for (ask group choices) = (multiple-value-list (extract-question-components q))
-               collect `(:fieldset (:legend ,ask)
-                                   (:ol ,@(when list-style-type (list :style (format nil "list-style-type: ~a" list-style-type)))
-
-                                        ,@(loop for choice in (split-list-by-keyword choices)
-                                                ;; (:radio "" :text) -> ((:radio "") (:text ""))
-                                                for (type values) = (multiple-value-list (resolve-input-and-choice choice))
-                                                collect `(progn
-                                                           ,(if (string= type "combo")
-                                                                `(:li (:select ,@(loop for value in values
-                                                                                       collect `(:option ,value))))
-                                                                `(progn ,@(loop for value in values
-                                                                                collect `(:li (apply-input-form ,type ,group ,value))))))))))
-
-       (btn-primary (:type "submit")
-         (find-l10n "submit" spinneret:*html-lang* *l10n*)))))
+     (btn-primary (:type "submit")
+       (find-l10n "submit" spinneret:*html-lang* *l10n*))))
