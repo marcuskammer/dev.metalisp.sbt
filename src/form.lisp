@@ -67,7 +67,7 @@
 
 ;;; root
 
-(defmacro root (&optional attr &body body)
+(defmacro root (action method &body body)
   "Generates HTML form element.
 
 LEGEND: Add text for <legend>. A short description for forms.
