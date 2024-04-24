@@ -330,7 +330,7 @@ A valid question is a list of alternating keywords and either strings or lists
 satisfying `choicesp`.
 
 Returns T if it's a valid question, otherwise NIL."
-  (if (= (length lst) 6)
+  (if (= (length lst) 8)
       (loop for i from 0 below (length lst)
             for elem = (nth i lst)
             always (if (evenp i)
