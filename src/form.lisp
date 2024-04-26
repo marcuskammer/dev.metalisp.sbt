@@ -28,7 +28,7 @@
    :spacing)
   (:export
    :root
-   :form
+   :multi-form
    :checkable
    :checkable-radio
    :checkable-checkbox
@@ -477,7 +477,7 @@ Example 1:
      ,@(loop for q in body
              for (ask group style choices) = (multiple-value-list (extract-question-components q))
              collect `(:fieldset (:legend ,ask)
-                                 (:ol ,@(when style (list :style (format nil "list-style-type: ~a" style)))
+                                 (:ol ,@(when style (list :style style))
                                       ,@(loop for choice in (split-list-by-keyword choices)
                                               for (type values) = (multiple-value-list (resolve-input-and-choice choice))
                                               collect `(progn
@@ -485,7 +485,4 @@ Example 1:
                                                               `(:li (:select ,@(loop for value in values
                                                                                      collect `(:option ,value))))
                                                               `(progn ,@(loop for value in values
-                                                                              collect `(:li (apply-input-form ,type ,group ,value))))))))))
-
-     (btn-primary (:type "submit")
-       (find-l10n "submit" spinneret:*html-lang* *l10n*))))
+                                                                              collect `(:li (apply-input-form ,type ,group ,value))))))))))))
