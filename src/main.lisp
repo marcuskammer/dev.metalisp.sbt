@@ -8,10 +8,10 @@
    :*l10n*
    :find-l10n
    :*use-cdn*
-   :*cdn-css-url*
-   :*cdn-js-url*
+   :*cdn-url-css*
+   :*cdn-url-js*
    :*local-css-url*
-   :*local-js-url*
+   :*local-url-js*
    :*bs-version*
    :*color-theme*
    :download-bs-css
@@ -34,13 +34,13 @@
 
 (defparameter *use-cdn* t)
 
-(defparameter *cdn-css-url*
+(defparameter *cdn-url-css*
   (concatenate 'string
                "https://cdn.jsdelivr.net/npm/bootstrap@"
                *bs-version*
                "/dist/css/bootstrap.min.css"))
 
-(defparameter *cdn-js-url*
+(defparameter *cdn-url-js*
   (concatenate 'string
                "https://cdn.jsdelivr.net/npm/bootstrap@"
                *bs-version*
@@ -52,12 +52,12 @@
                *bs-version*
                "/"))
 
-(defparameter *local-css-url*
+(defparameter *local-url-css*
   (concatenate 'string
                *bs-path*
                "bootstrap.min.css"))
 
-(defparameter *local-js-url*
+(defparameter *local-url-js*
   (concatenate 'string
                *bs-path*
                "bootstrap.bundle.min.js"))
@@ -66,13 +66,13 @@
 
 (defun bs-css-url ()
   (if *use-cdn*
-      *cdn-css-url*
-      *local-css-url*))
+      *cdn-url-css*
+      *local-url-css*))
 
 (defun bs-js-url ()
   (if *use-cdn*
-      *cdn-js-url*
-      *local-js-url*))
+      *cdn-url-js*
+      *local-url-js*))
 
 (defun download-file (url directory)
   "Downloads a file from a given URL and saves it to the specified directory."
@@ -91,8 +91,8 @@
   `(defun ,name (&optional (directory ,directory))
      (download-file ,url directory)))
 
-(define-download-function download-bs-css *cdn-css-url* *bs-path*)
-(define-download-function download-bs-js *cdn-js-url* *bs-path*)
+(define-download-function download-bs-css *cdn-url-css* *bs-path*)
+(define-download-function download-bs-js *cdn-url-js* *bs-path*)
 
 (defun write-html-str-to-file (filename string
                                &key (lang "en") (style :tree) (fc 120))
