@@ -124,7 +124,7 @@ BODY: Denotes the markup for the body of the web page.
 
 Example usage:
    (with-page (:meta (:author \"John Doe\") :title \"My Page\" :main-con t) \"foo\")"
-  `(spinneret:with-html
+  `(spinneret:with-html-string
      (:doctype)
      (:html :data-bs-theme ,*color-theme*
             (:head (:meta :charset "utf-8")
