@@ -252,12 +252,8 @@
 #+begin_src lisp :package :sus :tangle sus-survey.cl
   (in-package #:sus)
   (defstruct survey-app
-    response-file
+    response
     acceptor)
-
-  (defvar *app1* (make-survey-app :response-file #P"survey-db.cl"
-                                  :acceptor (handle-acceptor (make-instance 'easy-acceptor
-                                                                            :port 8080))))
 
   (defun handle-acceptor (acceptor)
     (lambda (action)
@@ -267,19 +263,23 @@
         (restart (progn (hunchentoot:stop acceptor)
                         (hunchentoot:start acceptor))))))
 
+  (defvar *app1* (make-survey-app :response #P"survey-db.cl"
+                                  :acceptor (handle-acceptor (make-instance 'easy-acceptor
+                                                                            :port 8080))))
+
   (defun generate-response-id ()
     (format nil "~D" (random most-positive-fixnum)))
 
-  (defun read-response-file (app)
-    (with-open-file (stream (survey-app-response-file app)
+  (defun load-response (app)
+    (with-open-file (stream (survey-app-response app)
                             :direction :input
                             :if-does-not-exist :create)
       (if (= (file-length stream) 0)
           '()
           (read stream))))
 
-  (defun store-response-file (app responses)
-    (with-open-file (stream (survey-app-response-file app)
+  (defun store-response (app responses)
+    (with-open-file (stream (survey-app-response app)
                             :direction :output
                             :if-exists :supersede)
       (princ responses stream)))
@@ -288,15 +288,14 @@
 
   (define-easy-handler (submit :uri "/submit") nil
     (setf (content-type*) "text/plain")
-
     (let ((post-params (post-parameters* *request*))
           (response-id (generate-response-id))
-          (responses (read-response-file *app1*)))
+          (stored-response (load-response *app1*)))
       (if (= (length post-params) 10)
-          (progn
-            (push (list response-id post-params) responses)
-            (store-response-file *app1* (reverse responses))
-            (format nil "~A" responses))
+          (let ((response stored-response))
+            (push (list response-id post-params) response)
+            (store-response *app1* (reverse response))
+            (format nil "~A" response))
           (format nil "Please fill out all forms"))))
 #+end_src
 
