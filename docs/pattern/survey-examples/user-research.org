@@ -165,21 +165,28 @@
 
 * System Usability Scale
 
-#+name: example-sus-form-en
-#+caption: Lisp code to generate a SUS form in HTML.
-#+begin_src lisp :results output file :file-ext html
+#+begin_src lisp :package :sus :tangle sus-survey.cl
+  (ql:quickload :dev.metalisp.sbt)
   (defpackage sus
     (:use #:cl)
-    (:import-from hunchentoot #:define-easy-handler #:easy-acceptor)
+    (:import-from hunchentoot #:define-easy-handler)
+    (:import-from hunchentoot #:easy-acceptor)
+    (:import-from hunchentoot #:post-parameters*)
+    (:import-from hunchentoot #:content-type*)
+    (:import-from hunchentoot #:*request*)
     (:import-from spinneret #:*html*)
     (:import-from dev.metalisp.sbt/form #:multi-form)
     (:import-from dev.metalisp.sbt #:with-page)
     (:import-from dev.metalisp.sbt #:find-l10n)
     (:import-from dev.metalisp.sbt #:*l10n*)
     (:import-from dev.metalisp.sbt/btn #:btn-primary))
+#+end_src
 
+#+RESULTS:
+: #<PACKAGE "SUS">
+
+#+begin_src lisp :package :sus :tangle sus-survey.cl
   (in-package #:sus)
-
   (defun sus-form ()
     (with-page (:title "SUS Form" :main-con t)
       (:form :action "/submit"
@@ -237,29 +244,75 @@
 
              (btn-primary (:type "submit")
                (find-l10n "submit" spinneret:*html-lang* *l10n*)))))
+#+end_src
 
-  (defun handle-server (server)
+#+RESULTS:
+: SUS-FORM
+
+#+begin_src lisp :package :sus :tangle sus-survey.cl
+  (in-package #:sus)
+  (defstruct survey-app
+    response-file
+    acceptor)
+
+  (defvar *app1* (make-survey-app :response-file #P"survey-db.cl"
+                                  :acceptor (handle-acceptor (make-instance 'easy-acceptor
+                                                                            :port 8080))))
+
+  (defun handle-acceptor (acceptor)
     (lambda (action)
       (case action
-        (start (hunchentoot:start server))
-        (stop (hunchentoot:stop server)))))
+        (start (hunchentoot:start acceptor))
+        (stop (hunchentoot:stop acceptor))
+        (restart (progn (hunchentoot:stop acceptor)
+                        (hunchentoot:start acceptor))))))
 
-  (defparameter *sus*
-    (handle-server (make-instance 'easy-acceptor :port 8080)))
+  (defun generate-response-id ()
+    (format nil "~D" (random most-positive-fixnum)))
 
-  (define-easy-handler (sus :uri "/") ()
-    (sus-form))
+  (defun read-response-file (app)
+    (with-open-file (stream (survey-app-response-file app)
+                            :direction :input
+                            :if-does-not-exist :create)
+      (if (= (file-length stream) 0)
+          '()
+          (read stream))))
 
-  (define-easy-handler (submit :uri "/submit") ()
-    (setf (hunchentoot:content-type*) "text/plain")
-    (format nil "Handled POST parameters: ~a" (hunchentoot:post-parameters* hunchentoot:*request*)))
+  (defun store-response-file (app responses)
+    (with-open-file (stream (survey-app-response-file app)
+                            :direction :output
+                            :if-exists :supersede)
+      (princ responses stream)))
 
+  (define-easy-handler (sus :uri "/") nil (sus-form))
+
+  (define-easy-handler (submit :uri "/submit") nil
+    (setf (content-type*) "text/plain")
+
+    (let ((post-params (post-parameters* *request*))
+          (response-id (generate-response-id))
+          (responses (read-response-file *app1*)))
+      (if (= (length post-params) 10)
+          (progn
+            (push (list response-id post-params) responses)
+            (store-response-file *app1* (reverse responses))
+            (format nil "~A" responses))
+          (format nil "Please fill out all forms"))))
+#+end_src
+
+#+RESULTS:
+: SUBMIT
+
+#+name: example-sus-form-en
+#+begin_src lisp :results output file :file-ext html :package :sus
   (format t (sus-form))
 #+end_src
 
 #+RESULTS: example-sus-form-en
 [[file:example-sus-form-en.html]]
 
-#+begin_src shell :results raw
+#+begin_src shell :results output
 curl -X POST -d "arg1=value1&arg2=value2" http://localhost:8080/submit
 #+end_src
+
+#+RESULTS:
