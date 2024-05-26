@@ -177,3 +177,48 @@ Example:
                              "container-fluid"
                              "container")
                  ,@body))))
+
+(defun navbar*-class-str (expand spacing)
+  (concatenate 'string
+               "navbar bg-body-tertiary"
+               " "
+               "navbar-expand-"
+               expand
+               " "
+               (if spacing
+                   (apply #'dev.metalisp.sbt/utility:spacing spacing)
+                   (dev.metalisp.sbt/utility:spacing :property "m" :side "b" :size 5))))
+
+(defmacro navbar* (expand (&key spacing) &body body)
+  (let ((class-str (navbar*-class-str expand spacing)))
+    `(spinneret:with-html
+       (:nav :class ,class-str
+             (:div :class "container-fluid"
+                   ,(if (listp (first body))
+                        `(:a :class "navbar-brand"
+                             :href ,(getf (first body) :url)
+                             (:img :src ,(getf (first body) :src)
+                                   :alt "Company Logo"
+                                   :width ,(getf (first body) :width)))
+                        nil)
+                   ,(if (stringp (second body))
+                        `(:button :class "navbar-toggler"
+                                  :type "button"
+                                  :data-bs-toggle "collapse"
+                                  :data-bs-target ,(second body)
+                                  :aria-controls ,(second body)
+                                  :aria-expanded "false"
+                                  :aria-label "Toggle Navigation"
+                                  (:span :class "navbar-toggler-icon"))
+                        nil)
+                   ,(if (listp (third body))
+                        `(:div :class "collapse navbar-collapse"
+                               ,@(when (second body) (list :id (second body)))
+                               (:ul :class "navbar-nav"
+                                    ,@(loop for navitem in (third body)
+                                            collect
+                                            `(:li :class "nav-item"
+                                                  (:a :class "nav-link"
+                                                      :href ,(getf navitem :url)
+                                                      ,(getf navitem :name))))))
+                        nil))))))
