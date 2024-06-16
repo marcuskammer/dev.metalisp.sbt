@@ -28,6 +28,10 @@
 
 (in-package :dev.metalisp.sbt)
 
+(defparameter *document-root-dir*
+  "public/"
+  "Defines directory name for use in document-root to serve static files.")
+
 (defparameter spinneret:*fill-column* 120)
 
 (defparameter *bs-version* "5.3.2")
@@ -48,21 +52,23 @@
 
 (defparameter *bs-path*
   (concatenate 'string
-               "public/"
+               "/"
                *bs-version*
                "/"))
 
 (defparameter *local-url-css*
   (concatenate 'string
                *bs-path*
-               "bootstrap.min.css"))
+               "bootstrap.min.css")
+  "Constructs path for HTML to load local bootstrap css from disk.")
 
 (defparameter *local-url-js*
   (concatenate 'string
                *bs-path*
-               "bootstrap.bundle.min.js"))
+               "bootstrap.bundle.min.js")
+  "Constructs path for HTML to load local bootstrap js from disk.")
 
-(defparameter *color-theme* "dark")
+(defparameter *color-theme* "light")
 
 (defun bs-url-css ()
   (if *use-cdn*
@@ -73,6 +79,9 @@
   (if *use-cdn*
       *cdn-url-js*
       *local-url-js*))
+
+(defun bs-download-full-path ()
+  (truename (concatenate 'string *document-root-dir* *bs-version*)))
 
 (defun download-file (url directory)
   "Downloads a file from a given URL and saves it to the specified directory."
@@ -91,8 +100,8 @@
   `(defun ,name (&optional (directory ,directory))
      (download-file ,url directory)))
 
-(define-download-function download-bs-css *cdn-url-css* *bs-path*)
-(define-download-function download-bs-js *cdn-url-js* *bs-path*)
+(define-download-function download-bs-css *cdn-url-css* (bs-download-full-path))
+(define-download-function download-bs-js *cdn-url-js* (bs-download-full-path))
 
 (defun write-html-str-to-file (filename string
                                &key (lang "en") (style :tree) (fc 120))
