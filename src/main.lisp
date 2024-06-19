@@ -15,6 +15,8 @@
    :*local-url-js*
    :*bs-version*
    :*color-theme*
+   :bs-url-css
+   :bs-url-js
    :download-bs-css
    :download-bs-js
    :write-html-to-file
