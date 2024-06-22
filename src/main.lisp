@@ -21,6 +21,8 @@
    :download-bs-js
    :write-html-to-file
    :with-page
+   :body-header
+   :body-main
    :remove-special-chars
    :clean-form-str
    :build-str-name
