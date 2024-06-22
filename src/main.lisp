@@ -153,20 +153,28 @@ Example usage:
                    ,@(loop for url in add-css-urls
                            collect `(:link :type "text/css"
                                       :rel "stylesheet" :href ,url)))
-            (:body
+            (:body ,@body)
 
-              (:div :class "container text-center py-3"
-                    (:a :href "#main-content"
-                        :class "skip-link"
-                        (find-l10n "skip-link" *html-lang* *l10n*)))
+            (:script :src ,(bs-url-js))
+            ,@(loop for url in add-js-urls
+                    collect `(:script :src ,url)))))
 
-              (:h1 :class "visually-hidden" ,title)
-              (:main :id "main-content"
-                     ,@(if main-con (list :class "container") nil) ,@body)
+(defmacro body-header (main-heading &body body)
+  `(spinneret:with-html
+     (:header
+       (:div :class "container text-center py-3"
+             (:a :href "#main-content"
+                 :class "skip-link"
+                 (find-l10n "skip-link" *html-lang* *l10n*)))
+       ,@body
+       (:h1 ,main-heading))))
 
-              (:script :src ,(bs-url-js))
-              ,@(loop for url in add-js-urls
-                      collect `(:script :src ,url))))))
+(defmacro body-main (&optional main-con &body body)
+  `(spinneret:with-html
+       (:main :id "main-content"
+              ,@(when main-con (list :class "container"))
+              ,@body)))
+
 
 (defun remove-special-chars (str)
   "Removes all special characters from the string STR except numbers and alphabets.
