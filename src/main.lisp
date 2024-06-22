@@ -169,7 +169,7 @@ Example usage:
                  :class "skip-link"
                  (find-l10n "skip-link" *html-lang* *l10n*)))
        ,@body
-       (:h1 ,main-heading))))
+       (:h1 :class "container" ,main-heading))))
 
 (defmacro body-main (&optional main-con &body body)
   `(spinneret:with-html
