@@ -4,6 +4,7 @@
 
 (defpackage dev.metalisp.sbt
   (:use :cl)
+  (:import-from #:spinneret #:*html-lang*)
   (:export
    :*l10n*
    :find-l10n
@@ -14,6 +15,8 @@
    :*local-url-js*
    :*bs-version*
    :*color-theme*
+   :bs-url-css
+   :bs-url-js
    :download-bs-css
    :download-bs-js
    :write-html-to-file
@@ -149,13 +152,21 @@ Example usage:
                    (:link :type "text/css" :rel "stylesheet" :href ,(bs-url-css))
                    ,@(loop for url in add-css-urls
                            collect `(:link :type "text/css"
-                                           :rel "stylesheet" :href ,url)))
+                                      :rel "stylesheet" :href ,url)))
+            (:body
 
-            (:body ,@body)
+              (:div :class "container text-center py-3"
+                    (:a :href "#main-content"
+                        :class "skip-link"
+                        (find-l10n "skip-link" *html-lang* *l10n*)))
 
-            (:script :src ,(bs-url-js))
-            ,@(loop for url in add-js-urls
-                    collect `(:script :src ,url)))))
+              (:h1 :class "visually-hidden" ,title)
+              (:main :id "main-content"
+                     ,@(if main-con (list :class "container") nil) ,@body)
+
+              (:script :src ,(bs-url-js))
+              ,@(loop for url in add-js-urls
+                      collect `(:script :src ,url))))))
 
 (defun remove-special-chars (str)
   "Removes all special characters from the string STR except numbers and alphabets.

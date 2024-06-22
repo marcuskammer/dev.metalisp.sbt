@@ -70,7 +70,8 @@
     ("subscribe" ("en" "Subscribe" "de" "Abonnieren" "fr" "S'abonner"))
     ("unsubscribe" ("en" "Unsubscribe" "de" "Abbestellen" "fr" "Se désabonner"))
     ("see-more" ("en" "See More" "de" "Mehr sehen" "fr" "Voir plus"))
-    ("see-less" ("en" "See Less" "de" "Weniger sehen" "fr" "Voir moins")))
+    ("see-less" ("en" "See Less" "de" "Weniger sehen" "fr" "Voir moins"))
+    ("skip-link" ("en" "Skip to main content" "de" "Zum Hauptinhalt springen" "fr" "Aller au contenu principal")))
   "Localization (l10n) settings for multi-language support.")
 
 (declaim (ftype (function (string string dict) string) find-l10n))
