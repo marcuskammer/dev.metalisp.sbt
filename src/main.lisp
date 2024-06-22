@@ -151,12 +151,11 @@ Example usage:
                            collect `(:link :type "text/css"
                                            :rel "stylesheet" :href ,url)))
 
-            (:body (:h1 :class "visually-hidden" ,title)
-                   (:main ,@(if main-con (list :class "container") nil) ,@body)
+            (:body ,@body)
 
-                   (:script :src ,(bs-url-js))
-                   ,@(loop for url in add-js-urls
-                           collect `(:script :src ,url))))))
+            (:script :src ,(bs-url-js))
+            ,@(loop for url in add-js-urls
+                    collect `(:script :src ,url)))))
 
 (defun remove-special-chars (str)
   "Removes all special characters from the string STR except numbers and alphabets.
