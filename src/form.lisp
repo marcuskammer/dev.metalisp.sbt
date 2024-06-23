@@ -488,21 +488,21 @@ Example 1:
                                                               `(progn ,@(loop for value in values
                                                                               collect `(:li (apply-input-form ,type ,group ,value))))))))))))
 
-(defmacro with-form (&body body)
+(defmacro with-form (&optional action lang &body body)
   "Create a standardized HTML form wrapped in a <main> tag with a pre-defined
-class and structure, using the Spinneret library. The form is designed to be
-used within a web application served by Hunchentoot, utilizing common layout
-and localization practices. The macro automatically sets the form’s action to
-the current request URI and expects certain functions and variables to be
-available in its environment for full functionality."
+class and structure, using the Spinneret library.
+
+ACTION: Form action.
+
+LANG: Language for l10n."
   `(spinneret:with-html
     (:main :id "main-content"
            :class "container my-5"
            (:p "Please fill out the following forms and press the submit button.")
            ;; action is defined as hunchentoot:request-uri* function
-           (:form :action (request-uri*)
+           (:form :action ,action
                   :method "post"
                   :class (spacing :property "m" :side "y" :size 5)
                   ,@body
                   (btn-primary (:type "submit")
-                    (find-l10n "submit" ml-survey:*html-lang* *l10n*))))))
+                    (find-l10n "submit" lang *l10n*))))))
