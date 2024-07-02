@@ -1,6 +1,6 @@
 (in-package :dev.metalisp.sbt)
 
-(defparameter *l10n*
+(defparameter *l10n-table*
   '(("submit" ("en" "Submit" "de" "Absenden" "fr" "Soumettre"))
     ("cancel" ("en" "Cancel" "de" "Abbrechen" "fr" "Annuler"))
     ("upload" ("en" "Upload" "de" "Hochladen" "fr" "Télécharger"))
@@ -63,17 +63,27 @@
     ("skip-link" ("en" "Skip to main content" "de" "Zum Hauptinhalt springen" "fr" "Aller au contenu principal")))
   "Localization (l10n) settings for multi-language support.")
 
-(defparameter *l10n-hash* (make-hash-table :test 'equal))
+(defparameter *l10n* (make-hash-table :test 'equal))
 
 (defun add-translation (key translations)
-  (setf (gethash key *l10n-hash*) (make-hash-table :test 'equal))
+  (setf (gethash key *l10n*) (make-hash-table :test 'equal))
   (loop for (lang translation) on translations by #'cddr
-        do (setf (gethash lang (gethash key *l10n-hash*)) translation)))
+        do (setf (gethash lang (gethash key *l10n*)) translation)))
 
-(when (zerop (hash-table-count *l10n-hash*))
-  (dolist (entry *l10n*)
+(when (zerop (hash-table-count *l10n*))
+  (dolist (entry *l10n-table*)
     (add-translation (first entry) (first (rest entry)))))
 
 (defun get-translation (key lang)
   "Fetch a translation for KEY in the language LANG."
   (gethash lang (gethash key *l10n*)))
+
+(defun find-l10n (key lang dict)
+  "Finds the localized string for a given key and language."
+  (let ((entry (gethash key dict)))
+    (if entry
+        (let ((term (gethash lang entry)))
+          (if term
+              term
+              "Translation not found"))
+        "Key not found")))
