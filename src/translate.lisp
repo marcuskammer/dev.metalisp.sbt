@@ -1,16 +1,5 @@
 (in-package :dev.metalisp.sbt)
 
-(defun dictp (lst)
-  (loop for entry in lst always
-        (and (listp entry)
-             (= (length entry) 2)
-             (stringp (first entry))
-             (every #'stringp (second entry)))))
-
-(deftype dict ()
-  '(and list (satisfies dictp)))
-
-(declaim (type dict *l10n*))
 (defparameter *l10n*
   '(("submit" ("en" "Submit" "de" "Absenden" "fr" "Soumettre"))
     ("cancel" ("en" "Cancel" "de" "Abbrechen" "fr" "Annuler"))
@@ -74,13 +63,16 @@
     ("skip-link" ("en" "Skip to main content" "de" "Zum Hauptinhalt springen" "fr" "Aller au contenu principal")))
   "Localization (l10n) settings for multi-language support.")
 
-(declaim (ftype (function (string string dict) string) find-l10n))
-(defun find-l10n (key lang dict)
-  "Finds the localized string for a given key and language."
-  (let ((entry (cadr (assoc key dict :test #'string=))))
-    (if entry
-        (let ((term (cadr (member lang entry :test #'string=))))
-          (if term
-              term
-              "Translation not found"))
-        "Key not found")))
+(defparameter *l10n-hash* (make-hash-table :test 'equal))
+
+(defun add-translation (key translations)
+  (setf (gethash key *l10n-hash*) (make-hash-table :test 'equal))
+  (loop for (lang translation) on translations by #'cddr
+        do (setf (gethash lang (gethash key *l10n-hash*)) translation)))
+
+(dolist (entry *l10n*)
+  (add-translation (first entry) (rest entry)))
+
+(defun get-translation (key lang)
+  "Fetch a translation for KEY in the language LANG."
+  (gethash lang (gethash key *l10n*)))
