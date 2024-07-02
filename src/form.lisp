@@ -345,7 +345,6 @@ Returns T if it's a valid question, otherwise NIL."
 A question list is expected to satisfy the `questionp` predicate."
   '(and list (satisfies questionp)))
 
-(declaim (ftype (function (question) (values string string list)) extract-question-components))
 (defun extract-question-components (question)
   "Extracts components of a question stored as a plist.
 
@@ -354,6 +353,7 @@ QUESTION: A plist representing a question.
 Returns multiple values:
   - The question text (ASK)
   - The group name (GROUP)
+  - The style (STYLE)
   - The choices (CHOICES)"
   (let ((splitted-list (split-list-by-keyword question)))
     (apply #'values (mapcar (lambda (x) (nth 1 x)) splitted-list))))
@@ -417,7 +417,6 @@ Returns two values:
         (values (resolve-input-type (string-downcase input-type-keyword)) (rest choice))
         (error "A choice always starts with a input-type keyword"))))
 
-(declaim (ftype (function (string string string) function) apply-input-form))
 (defun apply-input-form (type group item)
   "Apply the chosen input form function to generate HTML for a single form element.
 
