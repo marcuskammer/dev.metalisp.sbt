@@ -70,8 +70,9 @@
   (loop for (lang translation) on translations by #'cddr
         do (setf (gethash lang (gethash key *l10n-hash*)) translation)))
 
-(dolist (entry *l10n*)
-  (add-translation (first entry) (rest entry)))
+(when (zerop (hash-table-count *l10n-hash*))
+  (dolist (entry *l10n*)
+    (add-translation (first entry) (first (rest entry)))))
 
 (defun get-translation (key lang)
   "Fetch a translation for KEY in the language LANG."
