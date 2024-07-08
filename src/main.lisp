@@ -117,7 +117,8 @@
       (write-string string stream))))
 
 (defmacro with-page ((&key
-                        meta (title "Web page")
+                        meta
+                        (title "Web page")
                         main-con
                         add-css-urls
                         add-js-urls)
@@ -169,7 +170,8 @@ Example usage:
                  :class "skip-link"
                  (find-l10n "skip-link" *html-lang* *l10n*)))
        ,@body
-       (:h1 :class "container" ,main-heading))))
+       (:div :class "container"
+             (:h1 ,main-heading)))))
 
 (defmacro body-main (&optional main-con &body body)
   `(spinneret:with-html
