@@ -75,6 +75,8 @@
 
 (defparameter *color-theme* "light")
 
+(defparameter *print-css-url* "/print.css")
+
 (defun bs-url-css ()
   (if *use-cdn*
       *cdn-url-css*
@@ -152,6 +154,7 @@ Example usage:
 
                    (:title ,title)
 
+                   (:link :type "text/css" :rel "stylesheet" :href ,*print-css-url*)
                    (:link :type "text/css" :rel "stylesheet" :href ,(bs-url-css))
                    ,@(loop for url in add-css-urls
                            collect `(:link :type "text/css"
