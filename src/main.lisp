@@ -159,7 +159,7 @@ Example usage:
                    ,@(loop for url in add-css-urls
                            collect `(:link :type "text/css"
                                       :rel "stylesheet" :href ,url)))
-            (:body ,@body)
+            (:body :class "py-3" ,@body)
 
             (:script :src ,(bs-url-js))
             ,@(loop for url in add-js-urls
