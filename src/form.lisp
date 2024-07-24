@@ -504,4 +504,4 @@ LANG: Language for l10n."
                   :class (spacing :property "m" :side "y" :size 5)
                   ,@body
                   (btn-primary (:type "submit")
-                    (find-l10n "submit" lang *l10n*))))))
+                    (find-l10n "submit" ,lang *l10n*))))))
