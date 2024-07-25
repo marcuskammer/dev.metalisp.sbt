@@ -487,7 +487,7 @@ Example 1:
                                                               `(progn ,@(loop for value in values
                                                                               collect `(:li (apply-input-form ,type ,group ,value))))))))))))
 
-(defmacro with-form (&optional action lang &body body)
+(defmacro with-form (&optional action lang intro &body body)
   "Create a standardized HTML form wrapped in a <main> tag with a pre-defined
 class and structure, using the Spinneret library.
 
@@ -495,13 +495,12 @@ ACTION: Form action.
 
 LANG: Language for l10n."
   `(spinneret:with-html
-    (:main :id "main-content"
-           :class "container my-5"
-           (:p "Please fill out the following forms and press the submit button.")
+     (:div :class (spacing :property "m" :side "y" :size 5)
+           (when ,intro (:p ,intro))
            ;; action is defined as hunchentoot:request-uri* function
            (:form :action ,action
                   :method "post"
-                  :class (spacing :property "m" :side "y" :size 5)
+                  :class (spacing :property "m" :side "y" :size 1)
                   ,@body
                   (btn-primary (:type "submit")
                     (find-l10n "submit" ,lang *l10n*))))))
