@@ -60,7 +60,8 @@
    :btn-outline-info-sm
    :btn-outline-light-sm
    :btn-outline-dark-sm
-   :btn-outline-link-sm))
+   :btn-outline-link-sm
+   :with-btn-group))
 
 (in-package :dev.metalisp.sbt/btn)
 
@@ -131,3 +132,11 @@ button of the corresponding type, size, and outline style."
                         (define-btn ,color-name nil "sm")))))
 
 (define-btns (primary secondary success danger warning info light dark link))
+
+(defmacro with-btn-group (&rest buttons)
+  `(spinneret:with-html
+     (:div :class "d-flex justify-content-between"
+           ,@(loop for (label url) on buttons by #'cddr
+                   collect `(:a :class "btn btn-primary"
+                                :href ,url
+                                ,label)))))
