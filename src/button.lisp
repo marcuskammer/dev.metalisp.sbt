@@ -61,7 +61,16 @@
    :btn-outline-light-sm
    :btn-outline-dark-sm
    :btn-outline-link-sm
-   :with-btn-group))
+   :with-btn-group
+   :with-btn-group-primary
+   :with-btn-group-secondary
+   :with-btn-group-success
+   :with-btn-group-danger
+   :with-btn-group-warning
+   :with-btn-group-info
+   :with-btn-group-light
+   :with-btn-group-dark
+   :with-btn-group-link))
 
 (in-package :dev.metalisp.sbt/btn)
 
@@ -133,10 +142,25 @@ button of the corresponding type, size, and outline style."
 
 (define-btns (primary secondary success danger warning info light dark link))
 
-(defmacro with-btn-group (&rest buttons)
+(defmacro with-btn-group ((&key (color "primary")) &rest buttons)
   `(spinneret:with-html
      (:div :class "d-flex justify-content-between"
            ,@(loop for (label url) on buttons by #'cddr
-                   collect `(:a :class "btn btn-primary"
+                   collect `(:a :class ,(format nil "btn btn-~a" color)
                                 :href ,url
                                 ,label)))))
+
+(defmacro define-btn-group (style)
+  (let ((macro-name (intern (string-upcase (format nil "WITH-BTN-GROUP-~A" style)))))
+    `(defmacro ,macro-name (&rest buttons)
+       `(with-btn-group (:color ,,style) ,@buttons))))
+
+(define-btn-group primary)
+(define-btn-group secondary)
+(define-btn-group success)
+(define-btn-group danger)
+(define-btn-group warning)
+(define-btn-group info)
+(define-btn-group light)
+(define-btn-group dark)
+(define-btn-group link)
