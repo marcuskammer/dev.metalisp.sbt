@@ -35,6 +35,7 @@
    :con
    :row)
   (:export
+   :with-navbar
    :navbar
    :brand
    :nav
@@ -222,3 +223,32 @@ Example:
                                                       :href ,(getf navitem :url)
                                                       ,(getf navitem :name))))))
                         nil))))))
+
+
+(defmacro with-navbar ((&key (brand "My Brand") (brand-url "/") active-item) &rest items)
+  "Creates a Bootstrap navigation bar.
+
+BRAND: The brand name to display (default: \"My Brand\")
+
+BRAND-URL: The URL for the brand link (default: \"/\")
+
+ACTIVE-ITEM: The key of the currently active item
+
+ITEMS: A plist of nav items in the form of :key \"url\" pairs"
+  `(spinneret:with-html
+     (:nav :class "navbar navbar-expand-lg"
+           (:div :class "container"
+                 (:a :class "navbar-brand" :href ,brand-url ,brand)
+                 (:button :class "navbar-toggler" :type "button"
+                          :data-bs-toggle "collapse" :data-bs-target "#navbarNav"
+                          :aria-controls "navbarNav" :aria-expanded "false" :aria-label "Toggle navigation"
+                          (:span :class "navbar-toggler-icon"))
+                 (:div :class "collapse navbar-collapse" :id "navbarNav"
+                       (:ul :class "navbar-nav"
+                            ,@(loop for (key url) on items by #'cddr
+                                    collect `(:li :class "nav-item"
+                                                  (:a :class ,(if (eq key active-item)
+                                                                  "nav-link active"
+                                                                  "nav-link")
+                                                      :href ,url
+                                                      ,(string-capitalize (symbol-name key)))))))))))
