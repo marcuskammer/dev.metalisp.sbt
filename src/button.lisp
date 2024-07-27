@@ -143,6 +143,17 @@ button of the corresponding type, size, and outline style."
 (define-btns (primary secondary success danger warning info light dark link))
 
 (defmacro with-btn-group ((&key (color "primary")) &rest buttons)
+  "Generate HTML for a group of Bootstrap buttons.
+
+COLOR: A string specifying the Bootstrap color class (default: \"primary\").
+BUTTONS: A series of alternating label and URL pairs for each button.
+
+Example:
+  (with-btn-group (:color \"success\")
+    \"Start\" \"/start\"
+    \"Stop\" \"/stop\")
+
+Returns HTML for a flexbox div containing styled anchor tags as buttons."
   `(spinneret:with-html
      (:div :class "d-flex justify-content-between"
            ,@(loop for (label url) on buttons by #'cddr
@@ -151,16 +162,32 @@ button of the corresponding type, size, and outline style."
                                 ,label)))))
 
 (defmacro define-btn-group (style)
+  "Define a new macro for creating a button group with a specific style.
+
+STYLE: A string specifying the Bootstrap button style (e.g., \"primary\", \"danger\").
+
+Creates a new macro named WITH-BTN-GROUP-<STYLE> (upcased) that generates
+a button group with the specified style.
+
+Example:
+  (define-btn-group \"success\") ; Creates a macro named WITH-BTN-GROUP-SUCCESS"
   (let ((macro-name (intern (string-upcase (format nil "WITH-BTN-GROUP-~A" style)))))
     `(defmacro ,macro-name (&rest buttons)
        `(with-btn-group (:color ,,style) ,@buttons))))
 
-(define-btn-group primary)
-(define-btn-group secondary)
-(define-btn-group success)
-(define-btn-group danger)
-(define-btn-group warning)
-(define-btn-group info)
-(define-btn-group light)
-(define-btn-group dark)
-(define-btn-group link)
+(defmacro define-btn-groups (colors)
+ "Define multiple button group macros at once.
+
+COLORS: A list of symbols representing Bootstrap color classes.
+
+For each color in COLORS, creates a new macro using DEFINE-BTN-GROUP.
+
+Example:
+  (define-btn-groups (primary secondary success))
+  ; Creates macros WITH-BTN-GROUP-PRIMARY, WITH-BTN-GROUP-SECONDARY, WITH-BTN-GROUP-SUCCESS"
+  `(progn
+     ,@(loop for color in colors
+             for color-name = (string-downcase (string color))
+             collect `(define-btn-group ,color-name))))
+
+(define-btn-group (primary secondary success danger warning info light dark link))
