@@ -461,18 +461,27 @@ Returns:
         (t type)))
 
 (defmacro multi-form (&body body)
-  "This macro generates an HTML form composed of multiple parts.
+  "Generates an HTML form with multiple parts.
 
-BODY: A series of parts. Each part should contain the keys :ask, :group, :style and
-:choices. The first element of :choices should be a keyword specifying the type of
-input elements (e.g. :radio), followed by a list of answer options.
+Each part of the form is defined by a list with the following keywords:
+:ask      - The question or instruction for this part (string)
+:group    - The name of the group for the input elements (string)
+:style    - Optional CSS for this part (string or NIL)
+:choices  - List starting with a keyword for the input type,
+            followed by the choice options
 
-Example 1:
-  (multi-form
-        (:ask \"How old are you?\"
-         :group \"age\"
-         :style nil
-         :choices (:radio \"18-24\" \"25-34\" \"35-44\")))"
+Example with required field:
+(multi-form
+  (:ask \"What is your name?\"
+   :group \"name\"
+   :style nil
+   :choices (:text \"Full Name\"))
+  (:ask \"Select your age group\"
+   :group \"age\"
+   :style nil
+   :choices (:radio \"18-24\" \"25-34\" \"35-44\")))
+
+See also: extract-question-components, split-list-by-keyword, resolve-input-and-choice, apply-input-form"
   `(spinneret:with-html
      ,@(loop for q in body
              for (ask group style choices) = (multiple-value-list (extract-question-components q))
