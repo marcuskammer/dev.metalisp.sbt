@@ -190,4 +190,4 @@ Example:
              for color-name = (string-downcase (string color))
              collect `(define-btn-group ,color-name))))
 
-(define-btn-group (primary secondary success danger warning info light dark link))
+(define-btn-group (primary outline-primary secondary outline-secondary success outline-success danger outline-danger warning outline-warning info outline-info light outline-light dark outline-dark link outline-link))
