@@ -506,7 +506,7 @@ LANG: Language for l10n."
   `(spinneret:with-html
      (:div :class (spacing :property "m" :side "y" :size 5)
            (when ,intro (:p ,intro))
-           (:form :action (unless ,action (hunchentoot:request-uri*))
+           (:form :action (unless ,action "/")
                   :method "post"
                   :class (spacing :property "m" :side "y" :size 1)
                   ,@body
