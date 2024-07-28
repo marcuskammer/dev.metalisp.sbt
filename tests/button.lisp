@@ -1,10 +1,10 @@
-(defpackage dev.metalisp.sbt/tests/btn
+(defpackage ml-sbt/tests/btn
   (:use
    :cl
-   :dev.metalisp.sbt/btn
+   :ml-sbt/btn
    :rove))
 
-(in-package :dev.metalisp.sbt/tests/btn)
+(in-package :ml-sbt/btn)
 
 (deftest test-btn-macro
   (testing "Testing btn macro"
