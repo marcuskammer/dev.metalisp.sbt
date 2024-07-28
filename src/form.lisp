@@ -5,7 +5,7 @@
 ;;;; functions, macros, and HTML templates for generating Bootstrap-formatted
 ;;;; forms.
 
-(defpackage dev.metalisp.sbt/form
+(defpackage ml-sbt/form
   (:use
    :cl)
   (:import-from
@@ -64,7 +64,7 @@
    :search-form
    :with-form))
 
-(in-package :dev.metalisp.sbt/form)
+(in-package :ml-sbt/form)
 
 ;;; root
 

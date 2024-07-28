@@ -1,9 +1,9 @@
-(defpackage dev.metalisp.sbt/tests/form
+(defpackage ml-sbt/tests/form
   (:use :cl
-        :dev.metalisp.sbt/form
+        :ml-sbt/form
         :rove))
 
-(in-package :dev.metalisp.sbt/tests/form)
+(in-package :ml-sbt/tests/form)
 
 (deftest test-ctrl-number
   (let ((result (spinneret:with-html-string (ctrl "number" "testform" "Birth Date"))))
