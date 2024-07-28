@@ -2,7 +2,7 @@
 ;;;; main.lisp
 ;;;; Provide general functions.
 
-(defpackage dev.metalisp.sbt
+(defpackage ml-sbt
   (:use :cl)
   (:import-from #:spinneret #:*html-lang*)
   (:export
@@ -31,7 +31,7 @@
    :build-str-class
    :build-str-id))
 
-(in-package :dev.metalisp.sbt)
+(in-package :ml-sbt)
 
 (defparameter *document-root-dir*
   "public/"
