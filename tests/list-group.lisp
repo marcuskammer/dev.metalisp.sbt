@@ -1,10 +1,10 @@
-(defpackage dev.metalisp.sbt/tests/list-group
+(defpackage ml-sbt/tests/list-group
   (:use
    :cl
-   :dev.metalisp.sbt/list-group
+   :ml-sbt/list-group
    :rove))
 
-(in-package :dev.metalisp.sbt/tests/list-group)
+(in-package :ml-sbt/tests/list-group)
 
 (deftest test-item
   (let ((result (spinneret:with-html-string (item "Item 1"))))
