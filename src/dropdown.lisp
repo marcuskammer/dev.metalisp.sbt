@@ -24,14 +24,14 @@
 ;; class .dropdown-item. Additionally, dropdowns can be made to expand
 ;; upwards (instead of downwards) by adding the .dropup class.
 
-(defpackage dev.metalisp.sbt/dropdown
+(defpackage ml-sbt/dropdown
   (:use :cl)
   (:export
    :menu
    :item
    :dropdown))
 
-(in-package :dev.metalisp.sbt/dropdown)
+(in-package :ml-sbt/dropdown)
 
 (defmacro menu (&body body)
   "This macro generates a Bootstrap dropdown menu.
