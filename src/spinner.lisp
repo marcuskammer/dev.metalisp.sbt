@@ -15,7 +15,7 @@
 ;; 'danger', 'warning', 'info', 'light', 'dark'. You can also control the size
 ;; of the spinner through size classes.
 
-(defpackage dev.metalisp.sbt/spinner
+(defpackage ml-sbt/spinner
   (:use :cl)
   (:export
    :spinner
@@ -53,7 +53,7 @@
    :spinner-grow-dark-sm)
   (:documentation "This package provides a set of macros to generate Bootstrap Spinner components."))
 
-(in-package :dev.metalisp.sbt/spinner)
+(in-package :ml-sbt/spinner)
 
 (defmacro spinner ((&key (type "border") (color "primary") (size nil)))
   "This macro generates a Bootstrap spinner with a specified type, color, and size.
