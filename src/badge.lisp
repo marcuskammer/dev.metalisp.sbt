@@ -3,7 +3,7 @@
 ;;;; This file constitutes the Common Lisp package for generating Bootstrap badges,
 ;;;; a lightweight and versatile component used to add contextual highlights or emphasis.
 
-(defpackage dev.metalisp.sbt/badge
+(defpackage ml-sbt/badge
   (:documentation "A package for generating Bootstrap badges.")
   (:use :cl)
   (:export
@@ -27,7 +27,7 @@
    :badge-pill-dark
    :badge-pill-link))
 
-(in-package :dev.metalisp.sbt/badge)
+(in-package :ml-sbt/badge)
 
 (defmacro badge ((&key (color "primary") (pill nil)) &body body)
   "This macro generates a Bootstrap badge.
