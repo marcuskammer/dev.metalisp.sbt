@@ -1,10 +1,10 @@
-(defpackage dev.metalisp.sbt/tests/nav
+(defpackage ml-sbt/tests/nav
   (:use
    :cl
-   :dev.metalisp.sbt/nav
+   :ml-sbt/nav
    :rove))
 
-(in-package :dev.metalisp.sbt/tests/nav)
+(in-package :ml-sbt/tests/nav)
 
 (deftest test-item
   (let ((result (spinneret:with-html-string (item "foo" t "#"))))
