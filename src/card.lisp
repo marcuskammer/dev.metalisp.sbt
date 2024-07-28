@@ -29,7 +29,7 @@
 ;; and flexbox, along with optional headers and footers. They offer a lot of
 ;; flexibility and can be used in a wide range of designs and layouts.
 
-(defpackage dev.metalisp.sbt/card
+(defpackage ml-sbt/card
   (:use :cl)
   (:export
    :title
@@ -44,7 +44,7 @@
    :card-group)
   (:documentation "A Common Lisp package for generating Bootstrap Card components."))
 
-(in-package :dev.metalisp.sbt/card)
+(in-package :ml-sbt/card)
 
 (defmacro title (&body body)
   "This macro generates a Bootstrap card title.
