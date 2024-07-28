@@ -1,7 +1,7 @@
 ;;;; -*- mode: lisp; coding: utf-8; fill-column: 84; indent-tabs-mode: nil; -*-
 ;;;; form.lisp
 
-;;;; This file is part of the dev.metalisp.sbt project and defines utility
+;;;; This file is part of the ml-sbt project and defines utility
 ;;;; functions, macros, and HTML templates for generating Bootstrap-formatted
 ;;;; forms.
 
@@ -9,7 +9,7 @@
   (:use
    :cl)
   (:import-from
-   :dev.metalisp.sbt
+   :ml-sbt
    :*l10n*
    :find-l10n
    :remove-special-chars
@@ -20,11 +20,11 @@
    :build-str-class
    :build-str-id)
   (:import-from
-   :dev.metalisp.sbt/btn
+   :ml-sbt/btn
    :btn-outline-success
    :btn-primary)
   (:import-from
-   :dev.metalisp.sbt/utility
+   :ml-sbt/utility
    :spacing)
   (:export
    :root

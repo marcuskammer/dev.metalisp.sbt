@@ -28,10 +28,10 @@
 (defpackage ml-sbt/navbar
   (:use :cl)
   (:import-from
-   :dev.metalisp.sbt/btn
+   :ml-sbt/btn
    :btn-outline-success)
   (:import-from
-   :dev.metalisp.sbt/grid
+   :ml-sbt/grid
    :con
    :row)
   (:export
@@ -187,8 +187,8 @@ Example:
                expand
                " "
                (if spacing
-                   (apply #'dev.metalisp.sbt/utility:spacing spacing)
-                   (dev.metalisp.sbt/utility:spacing :property "m" :side "b" :size 5))))
+                   (apply #'ml-sbt/utility:spacing spacing)
+                   (ml-sbt/utility:spacing :property "m" :side "b" :size 5))))
 
 (defmacro navbar* (expand (&key spacing) &body body)
   (let ((class-str (navbar*-class-str expand spacing)))
