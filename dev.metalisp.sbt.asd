@@ -24,8 +24,7 @@
                  (:file "pagination")
                  (:file "table")
                  (:file "spinner")
-                 (:file "form")
-                 (:file "questionnaire"))))
+                 (:file "form"))))
   :description "A Common Lisp library for generating Bootstrap-based HTML markup. It provides macros to easily create Bootstrap components such as accordions, alerts, badges, buttons, cards, dropdowns, headers, list groups, navbars, nav-tabs, pagination, and tables. This library is dependent on the Spinneret library for HTML generation."
   :in-order-to ((test-op (test-op "dev.metalisp.sbt/tests"))))
 
@@ -48,7 +47,6 @@
                  (:file "list-group")
                  (:file "navbar")
                  (:file "nav-tab")
-                 (:file "form")
-                 (:file "questionnaire"))))
+                 (:file "form"))))
   :description "Test system for dev.metalisp.sbt"
   :perform (test-op (op c) (symbol-call :rove :run c)))
