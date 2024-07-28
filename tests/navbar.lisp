@@ -1,10 +1,10 @@
-(defpackage dev.metalisp.sbt/tests/navbar
+(defpackage ml-sbt/tests/navbar
   (:use
    :cl
-   :dev.metalisp.sbt/navbar
+   :ml-sbt/navbar
    :rove))
 
-(in-package :dev.metalisp.sbt/tests/navbar)
+(in-package :ml-sbt/tests/navbar)
 
 (deftest test-brand-logo
   (let ((result (spinneret:with-html-string (brand-logo (:src "logo.png" :alt "My Logo" :width 50 :height 50 :classes "logo-class")))))
