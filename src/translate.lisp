@@ -1,4 +1,4 @@
-(in-package :dev.metalisp.sbt)
+(in-package :ml-sbt)
 
 (defparameter *l10n-table*
   '(("submit" ("en" "Submit" "de" "Absenden" "fr" "Soumettre"))
