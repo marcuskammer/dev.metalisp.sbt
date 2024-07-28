@@ -1,4 +1,4 @@
-(in-package :dev.metalisp.sbt)
+(in-package :ml-sbt)
 
 (defvar header-contact-examples
   '(("Follow on Twitter" . "foo")
