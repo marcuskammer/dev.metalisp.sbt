@@ -1,16 +1,10 @@
-(defpackage dev.metalisp.sbt/tests/grid
+(defpackage ml-sbt/tests/grid
   (:use
    :cl
-   :dev.metalisp.sbt/grid
-   :rove)
-  (:import-from
-   :dev.metalisp.sbt/grid
-   :make-con-class
-   :make-row-class
-   :make-col-class
-   :breakpoint-class))
+   :ml-sbt/grid
+   :rove))
 
-(in-package :dev.metalisp.sbt/tests/grid)
+(in-package :ml-sbt/tests/grid)
 
 (deftest test-make-con-class-no-value
   (testing "Generates an empty string when value is NIL"

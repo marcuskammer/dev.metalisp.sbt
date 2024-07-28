@@ -35,17 +35,17 @@
 ;; richness. From mobile to desktop, the grid system will scale up
 ;; appropriately to ensure your designs are fully responsive.
 
-(defpackage dev.metalisp.sbt/grid
+(defpackage ml-sbt/grid
   (:use :cl)
   (:import-from
-   :dev.metalisp.sbt/utility
+   :ml-sbt/utility
    :*breakpoints*)
   (:export
    :con
    :row
    :col))
 
-(in-package :dev.metalisp.sbt/grid)
+(in-package :ml-sbt/grid)
 
 (defun string-clean (str)
   (string-trim " " (string-downcase str)))
