@@ -38,7 +38,7 @@
 ;; elements, allowing for easy adjustments to visibility and layout across
 ;; different screen sizes.
 
-(defpackage :dev.metalisp.sbt/utility
+(defpackage ml-sbt/utility
   (:use :cl)
   (:export
    :*colors*
@@ -54,7 +54,7 @@
    :valign)
   (:documentation "A module for generating Bootstrap utility classes."))
 
-(in-package :dev.metalisp.sbt/utility)
+(in-package :ml-sbt/utility)
 
 (defparameter *colors*
   '("body" "secondary" "tertiary" "emphasis" "border" "primary" "success" "danger" "warning" "info" "light" "dark" )

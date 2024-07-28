@@ -1,20 +1,11 @@
-(defpackage dev.metalisp.sbt/tests/utility
+(defpackage ml-sbt/tests/utility
   (:use
    :cl
-   :dev.metalisp.sbt
-   :rove)
-  (:import-from
-   :dev.metalisp.sbt/utility
-   :background
-   :color
-   :opacity
-   :overflow
-   :sizing
-   :spacing
-   :text
-   :valign))
+   :ml-sbt
+   :ml-sbt/utility
+   :rove))
 
-(in-package :dev.metalisp.sbt/tests/utility)
+(in-package :ml-sbt/tests/utility)
 
 (deftest test-background-color
   (testing "Generates correct background class with color"
