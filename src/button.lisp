@@ -74,7 +74,7 @@
 
 (in-package :ml-sbt/btn)
 
-(defmacro btn ((&key (id nil) (type "button") (color "primary") (size "")) &body body)
+(defmacro btn ((&key (id nil) (type "button") (color "primary") (size "") url) &body body)
   "This macro generates a Bootstrap button.
 
 ID: (optional) The HTML id attribute for the button.
@@ -86,16 +86,21 @@ SIZE: (optional) The size of the button ('lg' for large, 'sm' for small).
 BODY: The contents of the button.
 
 Example:
-  (btn (:type \"danger\" :size \"lg\") \"Delete\")"
+  (btn (:color \"danger\" :size \"lg\") \"Delete\")"
   (let ((class-str (concatenate 'string
                                 "btn"
                                 (format nil " btn-~a" color)
-                                (if (string-equal size "") nil (format nil " btn~a" size)))))
+                                (if (string-equal size "") nil (format nil " btn-~a" size)))))
     `(spinneret:with-html
-       (:button :type ,type
-                :class ,class-str
-                ,@(when (stringp id) (list :id id))
-                ,@body))))
+       (if ,url
+           (:a :class ,class-str
+               :href ,url
+               ,@(when (stringp id) (list :id id))
+               ,@body)
+           (:button :type ,type
+                    :class ,class-str
+                    ,@(when (stringp id) (list :id id))
+                    ,@body)))))
 
 (defmacro define-btn (color &optional (outline nil) (size nil))
   "This macro defines a new macro for creating a Bootstrap button of a specific

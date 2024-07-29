@@ -236,7 +236,7 @@ ACTIVE-ITEM: The key of the currently active item
 
 ITEMS: A plist of nav items in the form of :key \"url\" pairs"
   `(spinneret:with-html
-     (:nav :class "navbar navbar-expand-lg"
+     (:nav :class "navbar navbar-expand-lg bg-body-tertiary"
            (:div :class "container"
                  (:a :class "navbar-brand" :href ,brand-url ,brand)
                  (:button :class "navbar-toggler" :type "button"

@@ -162,7 +162,7 @@ Example usage:
 
                    (:script (:raw "(()=>{'use strict';const getStoredTheme=()=>localStorage.getItem('theme');const getPreferredTheme=()=>{const storedTheme=getStoredTheme();if(storedTheme){return storedTheme}return window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'};const setTheme=theme=>{if(theme==='auto'){document.documentElement.setAttribute('data-bs-theme',(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))}else{document.documentElement.setAttribute('data-bs-theme',theme)}};setTheme(getPreferredTheme())})();")))
 
-            (:body :class "py-3" ,@body)
+            (:body ,@body)
 
             (:script :src ,(bs-url-js))
             ,@(loop for url in add-js-urls
@@ -171,20 +171,20 @@ Example usage:
 (defmacro body-header (main-heading &body body)
   `(spinneret:with-html
      (:header
-       (:div :class "container text-center py-3"
+       (:div :class "skippy visually-hidden-focusable overflow-hidden"
              (:a :href "#main-content"
-                 :class "skip-link"
+                 :class "d-inline-flex p-2 m-1"
                  (find-l10n "skip-link" *html-lang* *l10n*)))
        ,@body
-       (:div :class "container"
+       (:div :class "container pt-3"
              (:h1 ,main-heading)))))
 
 (defmacro body-main (&optional main-con &body body)
-  `(spinneret:with-html
+  (let ((class-str (concatenate 'string "py-5 " (when main-con "container"))))
+    `(spinneret:with-html
        (:main :id "main-content"
-              ,@(when main-con (list :class "container"))
-              ,@body)))
-
+              :class ,class-str
+              ,@body))))
 
 (defun remove-special-chars (str)
   "Removes all special characters from the string STR except numbers and alphabets.

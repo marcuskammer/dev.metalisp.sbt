@@ -31,6 +31,8 @@
 
 (defpackage ml-sbt/card
   (:use :cl)
+  (:import-from :ml-sbt/list-group
+                :with-list-group)
   (:export
    :title
    :subtitle
@@ -41,7 +43,8 @@
    :body
    :card-with-img
    :card
-   :card-group)
+   :card-group
+   :with-card)
   (:documentation "A Common Lisp package for generating Bootstrap Card components."))
 
 (in-package :ml-sbt/card)
@@ -185,3 +188,13 @@ Example:
                            (:content "A third item"))
         (body (card-link "Card Link")
               (card-link "Another Link"))))
+
+(defmacro with-card (header &optional items &body body)
+  "Creates a Bootstrap card with a header, optional list items, and additional content."
+  `(spinneret:with-html
+     (:div :class "col-4 mb-4"
+           (:div :class "card"
+                 (:h5 :class "card-header" ,header)
+                 (with-list-group ,items)
+                 (:div :class "card-body"
+                       ,@body)))))

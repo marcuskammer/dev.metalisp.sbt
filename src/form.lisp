@@ -496,19 +496,19 @@ See also: extract-question-components, split-list-by-keyword, resolve-input-and-
                                                               `(progn ,@(loop for value in values
                                                                               collect `(:li (apply-input-form ,type ,group ,value))))))))))))
 
-(defmacro with-form ((&optional action lang intro) &body body)
-  "Create a standardized HTML form wrapped in a <main> tag with a pre-defined
+(defmacro with-form ((&key action lang intro) &body body)
+  "Create a standardized HTML form wrapped in a <div> tag with a pre-defined
 class and structure, using the Spinneret library.
 
 ACTION: Form action.
 
 LANG: Language for l10n."
   `(spinneret:with-html
-     (:div :class (spacing :property "m" :side "y" :size 5)
-           (when ,intro (:p ,intro))
-           (:form :action (unless ,action "/")
-                  :method "post"
-                  :class (spacing :property "m" :side "y" :size 1)
-                  ,@body
-                  (btn-primary (:type "submit")
-                    (find-l10n "submit" ,lang *l10n*))))))
+     (:div
+      (when ,intro (:p ,intro))
+      (:form :action (unless ,action "/")
+             :method "post"
+             :class (spacing :property "m" :side "y" :size 1)
+             ,@body
+             (btn-primary (:type "submit")
+               (find-l10n "submit" ,lang *l10n*))))))

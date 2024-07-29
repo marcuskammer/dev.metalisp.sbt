@@ -21,7 +21,7 @@
   (:use :cl)
   (:export
    :item
-   :list-group)
+   :with-list-group)
 (:documentation "A Common Lisp package for generating Bootstrap List Group components."))
 
 (in-package :ml-sbt/list-group)
@@ -38,7 +38,7 @@ Example:
   `(spinneret:with-html
      (:li :class "list-group-item" ,@body)))
 
-(defmacro list-group (&rest rest)
+(defmacro with-list-group (items)
   "This macro generates a Bootstrap list group.
 
 REST: A sequence of items to be included in the list group. Each item is a
@@ -49,6 +49,10 @@ Example:
   (list-group (:content \"First item\") (:content \"Second item\"))"
   `(spinneret:with-html
      (:ul :class "list-group list-group-flush"
-          ,@(loop for item in rest
-	          collect (destructuring-bind (&key content) item
-	        	    `(item ,content))))))
+          ,@(if (and (listp items) (eq (car items) 'quote))
+                ;; If items is a quoted list, use it directly
+                (loop for item in (cadr items)
+                      collect `(:li :class "list-group-item" ,item))
+                ;; Otherwise, assume it's a variable and use it at runtime
+                `((loop for item in ,items
+                        do (:li :class "list-group-item" item)))))))
