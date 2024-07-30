@@ -174,21 +174,6 @@ Example:
                                             (text ,body-text)
                                             (link (:href ,link-href) ,link-label))))))))
 
-;; Kitchen sink
-;; Mix and match multiple content types to create the card you need, or throw
-;; everything in there. Shown below are image styles, blocks, text styles, and a
-;; list group—all wrapped in a fixed-width card.
-
-(defun card-kitchen-sink ()
-  (card (img (:src "..."))
-        (body (card-title "Card title")
-              (card-text "Some quick example text to build on the card title and make up the bulk of the card's content."))
-        (dev.metalisp.sbt-list-group (:content "An item")
-                           (:content "A second item")
-                           (:content "A third item"))
-        (body (card-link "Card Link")
-              (card-link "Another Link"))))
-
 (defmacro with-card (header &optional items &body body)
   "Creates a Bootstrap card with a header, optional list items, and additional content."
   `(spinneret:with-html
