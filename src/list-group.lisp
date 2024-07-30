@@ -41,19 +41,19 @@ Example:
 (defmacro with-list-group (items &optional flush)
   "This macro generates a Bootstrap list group.
 
-REST: A sequence of items to be included in the list group. Each item is a
-keyword-value pair, where the keyword is ':content' and the value is the
-content of the item.
+ITEMS: A list of items to be included in the list group.
 
-Example:
-  (list-group (:content \"First item\") (:content \"Second item\"))"
-  (let ((class-str (concatenate 'string "list-group " (when flush "list-group-flush"))))
+FLUSH: If true, adds the 'list-group-flush' class."
+  (let ((class-str (concatenate 'string "list-group" (when flush " list-group-flush"))))
     `(spinneret:with-html
        (:ul :class ,class-str
             ,@(if (and (listp items) (eq (car items) 'quote))
                   ;; If items is a quoted list, use it directly
                   (loop for item in (cadr items)
                         collect `(:li :class "list-group-item" ,item))
-                  ;; Otherwise, assume it's a variable and use it at runtime
+                  ;; Otherwise, assume it's a variable and generate code to be evaluated at runtime
+                  ;; FUCK YOU COMMON LISP! I really don't understand how this works. :(
+                  ;; If you are able to understand it, and able to explain it to me, please send me an email:
+                  ;; marcus.kammer@mailbox.org
                   `((loop for item in ,items
                           do (:li :class "list-group-item" item))))))))
