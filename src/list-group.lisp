@@ -38,7 +38,7 @@ Example:
   `(spinneret:with-html
      (:li :class "list-group-item" ,@body)))
 
-(defmacro with-list-group (items)
+(defmacro with-list-group (items &optional flush)
   "This macro generates a Bootstrap list group.
 
 REST: A sequence of items to be included in the list group. Each item is a
@@ -47,12 +47,13 @@ content of the item.
 
 Example:
   (list-group (:content \"First item\") (:content \"Second item\"))"
-  `(spinneret:with-html
-     (:ul :class "list-group list-group-flush"
-          ,@(if (and (listp items) (eq (car items) 'quote))
-                ;; If items is a quoted list, use it directly
-                (loop for item in (cadr items)
-                      collect `(:li :class "list-group-item" ,item))
-                ;; Otherwise, assume it's a variable and use it at runtime
-                `((loop for item in ,items
-                        do (:li :class "list-group-item" item)))))))
+  (let ((class-str (concatenate 'string "list-group " (when flush "list-group-flush"))))
+    `(spinneret:with-html
+       (:ul :class ,class-str
+            ,@(if (and (listp items) (eq (car items) 'quote))
+                  ;; If items is a quoted list, use it directly
+                  (loop for item in (cadr items)
+                        collect `(:li :class "list-group-item" ,item))
+                  ;; Otherwise, assume it's a variable and use it at runtime
+                  `((loop for item in ,items
+                          do (:li :class "list-group-item" item))))))))
