@@ -176,7 +176,7 @@ Example usage:
                  :class "d-inline-flex p-2 m-1"
                  (find-l10n "skip-link" *html-lang* *l10n*)))
        ,@body
-       (:div :class "container pt-3"
+       (:div :class "container"
              (:h1 ,main-heading)))))
 
 (defmacro body-main (&optional main-con &body body)
