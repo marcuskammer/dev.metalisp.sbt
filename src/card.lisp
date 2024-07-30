@@ -195,6 +195,6 @@ Example:
      (:div :class "col-4 mb-4"
            (:div :class "card"
                  (:h5 :class "card-header" ,header)
-                 (with-list-group ,items)
+                 (with-list-group ,items t)
                  (:div :class "card-body"
                        ,@body)))))
