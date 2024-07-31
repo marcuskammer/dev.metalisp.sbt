@@ -147,6 +147,8 @@ Example usage:
             (:head (:meta :charset "utf-8")
                    (:meta :name "viewport"
                           :content "width=device-width, initial-scale=1")
+                   (:meta :http-equiv "Content-Security-Policy"
+                          :content "upgrade-insecure-requests")
                    ,@(loop for (key value) on meta by #'cddr
                            collect `(:meta :name
                                            ,(string-downcase (symbol-name key))
@@ -170,7 +172,7 @@ Example usage:
 
 (defmacro body-header (main-heading &body body)
   `(spinneret:with-html
-     (:header
+     (:header :class "mb-3"
        (:div :class "skippy visually-hidden-focusable overflow-hidden"
              (:a :href "#main-content"
                  :class "d-inline-flex p-2 m-1"
@@ -180,7 +182,7 @@ Example usage:
              (:h1 ,main-heading)))))
 
 (defmacro body-main (&optional main-con &body body)
-  (let ((class-str (concatenate 'string "py-5 " (when main-con "container"))))
+  (let ((class-str (concatenate 'string "" (when main-con " container"))))
     `(spinneret:with-html
        (:main :id "main-content"
               :class ,class-str

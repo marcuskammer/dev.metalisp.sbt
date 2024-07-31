@@ -177,7 +177,7 @@ Example:
 (defmacro with-card (header &optional items &body body)
   "Creates a Bootstrap card with a header, optional list items, and additional content."
   `(spinneret:with-html
-     (:div :class "col-4 mb-4"
+     (:div :class "col-12 col-md-4 mb-4"
            (:div :class "card"
                  (:h5 :class "card-header" ,header)
                  ,@(when items
