@@ -224,7 +224,6 @@ Example:
                                                       ,(getf navitem :name))))))
                         nil))))))
 
-
 (defmacro with-navbar ((&key (brand "My Brand") (brand-url "/") active-item) &rest items)
   "Creates a Bootstrap navigation bar.
 
@@ -246,10 +245,11 @@ ITEMS: A plist of nav items in the form of :key \"url\" pairs"
                           (:span :class "navbar-toggler-icon"))
                  (:div :class "collapse navbar-collapse" :id "navbarNav"
                        (:ul :class "navbar-nav"
-                            ,@(loop for (key url) on items by #'cddr
+                            ,@(loop for (label url) on items by #'cddr
                                     collect `(:li :class "nav-item"
-                                                  (:a :class ,(if (eq key active-item)
+                                                  (:a :class ,(if (string= label active-item)
                                                                   "nav-link active"
                                                                   "nav-link")
+                                                      ,@(when (string= label active-item) '(:aria-current "page"))
                                                       :href ,url
-                                                      ,(string-capitalize (symbol-name key)))))))))))
+                                                      ,label)))))))))
