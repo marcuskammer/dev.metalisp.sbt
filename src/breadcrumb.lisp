@@ -4,6 +4,8 @@
   (:use :cl)
   (:export :with-breadcrumb))
 
+(in-package :ml-sbt/breadcrumb)
+
 (defmacro with-breadcrumb (&rest items)
   "Creates a Bootstrap breadcrumb navigation.
 
