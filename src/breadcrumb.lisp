@@ -14,12 +14,13 @@ Example usage:
     \"Home\" \"/\"
     \"Library\" \"/library\"
     \"Data\" nil)"
-  `(spinneret:with-html
-     (:nav :class "container"
-           :aria-label "breadcrumb"
-           (:ol :class "breadcrumb"
-                ,@(loop for (label url) on items by #'cddr
-                        for i from 1
-                        collect (if (= i (/ (length items) 2))
-                                    `(:li :class "breadcrumb-item active" :aria-current "page" ,label)
-                                    `(:li :class "breadcrumb-item" (:a :href ,url ,label))))))))
+  (let ((items-length (/ (length items) 2)))
+    `(spinneret:with-html
+       (:nav :class "container"
+             :aria-label "breadcrumb"
+             (:ol :class "breadcrumb"
+                  ,@(loop for (label url) on items by #'cddr
+                          for i from 1
+                          collect (if (= i items-length)
+                                      `(:li :class "breadcrumb-item active" :aria-current "page" ,label)
+                                      `(:li :class "breadcrumb-item" (:a :href ,url ,label)))))))))
