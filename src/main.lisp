@@ -130,8 +130,6 @@ META: The meta-information for the web page.
 
 TITLE: Specifies the title of the web page. Defaults to 'Web page'.
 
-MAIN-CON: If t add css class `container` to <main>.
-
 ADD-CSS-URLS: An optional parameter for additional CSS file URLs.
 
 ADD-JS-URLS: An optional parameter for additional JavaScript file URLs.
@@ -169,22 +167,27 @@ Example usage:
             ,@(loop for url in add-js-urls
                     collect `(:script :src ,url)))))
 
-(defmacro body-header (main-heading &body body)
-  `(spinneret:with-html
-     (:header :class "mb-3"
-       (:div :class "skippy visually-hidden-focusable overflow-hidden"
-             (:a :href "#main-content"
-                 :class "d-inline-flex p-2 m-1"
-                 (find-l10n "skip-link" *html-lang* *l10n*)))
-       ,@body
-       (:div :class "container"
-             (:h1 ,main-heading)))))
+(defmacro body-header (container main-heading &body body)
+  (let  ((class (cond ((eq container t) "container")
+                      ((stringp container) (format nil "container-~a" container))
+                      (t ""))))
+    `(spinneret:with-html
+       (:header :class "mb-3"
+         (:div :class "skippy visually-hidden-focusable overflow-hidden"
+               (:a :href "#main-content"
+                   :class "d-inline-flex p-2 m-1"
+                   (find-l10n "skip-link" *html-lang* *l10n*)))
+         ,@body
+         (:div ,@(when (not (string= class "")) `(:class ,class))
+               (:h1 ,main-heading))))))
 
-(defmacro body-main (&optional main-con &body body)
-  (let ((class-str (concatenate 'string "" (when main-con " container"))))
+(defmacro body-main (container &body body)
+  (let ((class (cond ((eq container t) "container")
+                     ((stringp container) (format nil "container-~a" container))
+                     (t ""))))
     `(spinneret:with-html
        (:main :id "main-content"
-              :class ,class-str
+              ,@(when (not (string= class "")) `(:class ,class))
               ,@body))))
 
 (defun remove-special-chars (str)
