@@ -119,9 +119,8 @@
       (write-string string stream))))
 
 (defmacro with-page ((&key
+                        title
                         meta
-                        (title "Web page")
-                        main-con
                         add-css-urls
                         add-js-urls)
                      &body body)
