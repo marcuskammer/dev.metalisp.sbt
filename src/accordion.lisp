@@ -9,7 +9,7 @@
 
 (in-package :ml-sbt/accordion)
 
-(defmacro with-accordion ((&key (id "accordionExample") flush) &body body)
+(defmacro with-accordion ((&key (id "accordionExample") flush) &rest items)
   "This macro generates an accordion-style collapsible list.
 
 ID: Specifies a unique identifier for the accordion. Defaults to 'accordionExample'.
@@ -29,7 +29,7 @@ Example usage:
     `(spinneret:with-html
        (:div :class ,class
              :id ,id
-             ,@(loop for (title content) on body by #'cddr
+             ,@(loop for (title content) on items by #'cddr
                      for counter from 1
                      for collapse-id = (format nil "collapse-~a-~a" id counter)
                      for collapse-class = (concatenate 'string "accordion-collapse collapse" (when (= counter 1) " show"))
