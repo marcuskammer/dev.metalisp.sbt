@@ -2,7 +2,8 @@
 
 (defpackage ml-sbt/section
   (:use :cl)
-  (:export :with-section
+  (:export
+   :with-section
    :with-title-bar))
 
 (in-package :ml-sbt/section)
